@@ -10,7 +10,7 @@
       <li v-if="$auth.$state.loggedIn">
         <nuxt-link to="/profile">Profile</nuxt-link>
       </li>
-      <li v-if="$auth.$state.user.iUserAdmin">
+      <li v-if="$auth.$state.loggedIn && $auth.$state.user.iUserAdmin">
         <nuxt-link to="/admin">Admin</nuxt-link>
       </li>
       <li v-if="$auth.$state.loggedIn">
