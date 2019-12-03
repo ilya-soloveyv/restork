@@ -45,7 +45,7 @@ export default {
   data() {
     return {
       error: null,
-      phone: '79037876601',
+      phone: '79031111111',
       password: 'qwerty'
     }
   },
