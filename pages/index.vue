@@ -1,7 +1,11 @@
 <template>
   <div id="restork">
     Restork
-    <nuxt-link to="/admin">administrator</nuxt-link>
+    <nuxt-link v-if="!$auth.$state.loggedIn" to="/login">Login</nuxt-link>
+    <nuxt-link v-if="$auth.$state.loggedIn" to="/admin">Admin</nuxt-link>
+    <a v-if="$auth.$state.loggedIn" @click.prevent="$auth.logout()" href="#">
+      {{ $auth.$state.user.sUserPhone }} Logout
+    </a>
   </div>
 </template>
 

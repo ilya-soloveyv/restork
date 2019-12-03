@@ -7,6 +7,24 @@ const app = express()
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
 
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+const jwt = require('express-jwt')
+app.use(
+  jwt({
+    secret: 'dummy',
+    credentialsRequired: false
+  }).unless({
+    path: [
+      '/auth/login',
+    ]
+  })
+)
+
+app.use('/api/auth', require('./routes/auth'))
+
 async function start() {
   // Init Nuxt.js
   const nuxt = new Nuxt(config)
