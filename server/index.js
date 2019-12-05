@@ -24,6 +24,7 @@ app.use(
 )
 
 app.use('/api/auth', require('./routes/auth'))
+app.use('/api/hotels', require('./routes/hotels'))
 
 async function start() {
   // Init Nuxt.js
