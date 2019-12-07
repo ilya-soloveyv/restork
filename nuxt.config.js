@@ -16,9 +16,7 @@ module.exports = {
   loading: { color: '#fff' },
   css: [],
   plugins: [],
-  buildModules: [
-    '@nuxtjs/eslint-module'
-  ],
+  buildModules: ['@nuxtjs/eslint-module'],
   modules: [
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',

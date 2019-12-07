@@ -3,29 +3,26 @@ const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
 
-// Import and Set Nuxt.js options
-const config = require('../nuxt.config.js')
-config.dev = process.env.NODE_ENV !== 'production'
-
-const bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-
 const jwt = require('express-jwt')
 app.use(
   jwt({
     secret: 'dummy',
     credentialsRequired: false
   }).unless({
-    path: [
-      '/auth/login',
-    ]
+    path: ['/auth/login']
   })
 )
 
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+const config = require('../nuxt.config.js')
+config.dev = process.env.NODE_ENV !== 'production'
+
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/hotels', require('./routes/hotels'))
-app.use('/api/hoteltypes', require('./routes/hotelTypes'))
+app.use('/api/hotel_type', require('./routes/hotel_type'))
 
 async function start() {
   // Init Nuxt.js

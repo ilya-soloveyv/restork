@@ -6,7 +6,7 @@ const md5 = require('md5')
 const User = require('../../models').user
 
 router.post('/login', async (req, res, next) => {
-  var user = await User.findOne({
+  const user = await User.findOne({
     where: {
       sUserPhone: req.body.phone
     }
@@ -29,8 +29,7 @@ router.post('/login', async (req, res, next) => {
         accessToken
       }
     })
-  }
-  else {
+  } else {
     res.status(401).json({ message: 'Bad credentials' })
   }
 })
