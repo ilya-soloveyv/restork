@@ -1,4 +1,5 @@
-'use strict';
+'use strict'
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('user', {
@@ -34,9 +35,9 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: 0
       }
-    });
+    })
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('user');
+    return queryInterface.dropTable('user')
   }
-};
+}
