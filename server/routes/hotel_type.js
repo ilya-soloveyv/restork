@@ -1,13 +1,11 @@
 const { Router } = require('express')
 const router = Router()
-const hotelType = require('../../models').hotelType
 
-// /api/hoteltypes
+const Hotel_type = require('../../models').hotel_type
+
 router.get('/', async (req, res, next) => {
-  const hotelTypes = await hotelType.findAll()
-  // console.log("ObjTypes:", objtypes)
-  res.json(hotelTypes)
-  // res.json({message: 'hello'})
+  const types = await Hotel_type.findAll()
+  res.json(types)
 })
 
 module.exports = router
