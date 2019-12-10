@@ -10,6 +10,9 @@
           <b-nav-item to="/admin/users" active-class="active">
             Users
           </b-nav-item>
+          <b-nav-item to="/admin/libraries/hotel_types" active-class="active">
+            Hotel types
+          </b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item-dropdown right>
