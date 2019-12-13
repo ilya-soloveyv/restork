@@ -1,5 +1,7 @@
 'use strict'
 
+const sequelizePaginate = require('sequelize-paginate')
+
 module.exports = (sequelize, DataTypes) => {
   const hotelType = sequelize.define(
     'hotel_type',
@@ -29,5 +31,6 @@ module.exports = (sequelize, DataTypes) => {
   hotelType.associate = function(models) {
     // associations can be defined here
   }
+  sequelizePaginate.paginate(hotelType)
   return hotelType
 }
