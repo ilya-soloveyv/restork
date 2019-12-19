@@ -29,7 +29,9 @@ module.exports = {
     '@nuxtjs/auth',
     '@nuxtjs/dotenv'
   ],
-  axios: {},
+  axios: {
+    baseURL: env.DOMAIN
+  },
   auth: {
     strategies: {
       local: {
