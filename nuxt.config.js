@@ -1,3 +1,5 @@
+const env = require("dotenv").config()
+
 module.exports = {
   mode: 'universal',
   head: {
@@ -14,11 +16,11 @@ module.exports = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   server: {
-    host: 'localhost',
-    port: 3006
+    host: env.HOST,
+    port: env.PORT
   },
-  loading: { color: '#fff' },
-  css: [],
+  loading: { color: '#007bff' },
+  css: ['~/assets/scss/main.scss'],
   plugins: [],
   buildModules: ['@nuxtjs/eslint-module'],
   modules: [

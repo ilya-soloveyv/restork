@@ -32,7 +32,7 @@ router.put('/type', async (req, res, next) => {
 
 router.delete('/type', async (req, res, next) => {
   const type = await HotelType.destroy({
-    where: { iHotelTypeID: req.body.iHotelTypeID } 
+    where: { iHotelTypeID: req.body.iHotelTypeID }
   })
   res.json(type)
 })
