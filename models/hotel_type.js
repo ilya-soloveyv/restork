@@ -1,9 +1,7 @@
 'use strict'
 
-const sequelizePaginate = require('sequelize-paginate')
-
 module.exports = (sequelize, DataTypes) => {
-  const hotelType = sequelize.define(
+  const HotelType = sequelize.define(
     'hotel_type',
     {
       iHotelTypeID: {
@@ -12,14 +10,18 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      sHotelTypeName: {
+      sHotelTypeTitle: {
         allowNull: false,
         type: DataTypes.STRING
       },
-      iHotelTypeDeactivated: {
-        // удален ли тип размещения?
+      iHotelTypeSort: {
+        allowNull: false,
         type: DataTypes.INTEGER,
-        defaultValue: 0
+        defaultValue: 9999
+      },
+      iHotelTypeActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
       }
     },
     {
@@ -28,9 +30,8 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'hotel_type'
     }
   )
-  hotelType.associate = function(models) {
+  HotelType.associate = function(models) {
     // associations can be defined here
   }
-  sequelizePaginate.paginate(hotelType)
-  return hotelType
+  return HotelType
 }

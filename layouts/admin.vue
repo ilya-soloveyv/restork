@@ -6,18 +6,21 @@
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
+            <b-nav-item to="/admin/application" active-class="active">
+              Заявки
+            </b-nav-item>
             <b-nav-item to="/admin/hotels" active-class="active">
               Отели
             </b-nav-item>
             <b-nav-item to="/admin/users" active-class="active">
               Пользователи
             </b-nav-item>
-            <b-nav-item-dropdown text="Библиотеки">
+            <b-nav-item-dropdown text="Библиотека">
               <b-dropdown-item
-                to="/admin/libraries/hotel_types"
+                to="/admin/libraries/hotel_type"
                 active-class="active"
               >
-                Типы отелей
+                Виды объектов
               </b-dropdown-item>
               <b-dropdown-item
                 to="/admin/libraries/hotel_options"

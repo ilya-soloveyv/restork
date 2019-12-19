@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const router = Router()
+
 const HotelOption = require('../../models').hotel_option
 
 router.post('/get', async (req, res, next) => {

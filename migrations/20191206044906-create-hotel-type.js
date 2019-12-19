@@ -9,14 +9,18 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      sHotelTypeName: {
+      sHotelTypeTitle: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      iHotelTypeDeactivated: {
-        // удален ли тип размещения?
+      iHotelTypeSort: {
+        allowNull: false,
         type: Sequelize.INTEGER,
-        defaultValue: 0
+        defaultValue: 9999
+      },
+      iHotelTypeActive: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
       }
     })
   },
