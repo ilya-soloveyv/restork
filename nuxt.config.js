@@ -35,7 +35,10 @@ module.exports = {
       version: '2.1'
     }]
   ],
-  axios: {},
+  axios: {
+    proxy: true,
+    baseURL: env.DOMAIN
+  },
   auth: {
     strategies: {
       local: {
