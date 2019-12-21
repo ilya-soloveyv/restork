@@ -62,7 +62,11 @@ router.post('/get_edit', async (req, res, next) => {
 router.post('/update', async (req, res, next) => {
   var iHotelID = req.body.iHotelID || false
   let sHotelTitle = req.body.sHotelTitle || false
-  let aHotelCoordinate = req.body.aHotelCoordinate || null
+  var aHotelCoordinate = null
+  if (req.body.aHotelCoordinate.coordinates[0] && req.body.aHotelCoordinate.coordinates[1]) {
+    var aHotelCoordinate = req.body.aHotelCoordinate
+  }
+  
   if (aHotelCoordinate) {
     aHotelCoordinate = Sequelize.fn('ST_GeomFromText', 'POINT(' + aHotelCoordinate.coordinates[0] + ' ' + aHotelCoordinate.coordinates[1] + ')')
   }
