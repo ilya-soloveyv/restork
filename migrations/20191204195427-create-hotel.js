@@ -13,48 +13,51 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      // Добавить поле Вид объекта
-      iHotelFloorNumber: {
+      aHotelCoordinate: {
+        type: Sequelize.GEOMETRY('POINT')
+      },
+      iHotelTypeID: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      iHotelFloor: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 1
+      },
+      iHotelGuestID: {
         type: Sequelize.INTEGER,
         defaultValue: 1
       },
-      iHotelGuestOnly: {
-        // согласен ли путешественник делить объект размещения с другими путешественниками
+      iHotelBedroom: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         defaultValue: 1
       },
-      iHotelBedroomNumber: {
-        // число спален
+      iHotelBed: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         defaultValue: 1
       },
-      iHotelBedNumber: {
-        // число кроватей
+      iHotelPlace: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         defaultValue: 1
       },
-      iHotelPlaceNumber: {
-        // число спальных мест
-        type: Sequelize.INTEGER,
-        defaultValue: 1
-      },
-      iHotelPlaceAuxiliary: {
-        // дополнительное спальное место
+      iHotelPlaceDop: {
         type: Sequelize.INTEGER,
         defaultValue: 0
       },
-      // Добавить поле Адрес
-      // Добавить поле Географические координаты
-      // Добавить поле Дополнительные удобства
-      iHotelDeactivated: {
-        // удален ли отель?
-        type: Sequelize.INTEGER,
-        defaultValue: 0
+      sHotelAddress: {
+        type: Sequelize.STRING
       },
-      iHotelVerified: {
-        // прошел ли отель модерацию?
-        type: Sequelize.INTEGER,
-        defaultValue: 0
+      iHotelActive: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
+      },
+      iHotelVerification: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       }
     })
   },

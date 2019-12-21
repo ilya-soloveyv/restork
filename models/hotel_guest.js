@@ -1,25 +1,25 @@
 'use strict'
 
 module.exports = (sequelize, DataTypes) => {
-  const RoomOption = sequelize.define(
-    'room_option',
+  const HotelGuest = sequelize.define(
+    'hotel_guest',
     {
-      iRoomOptionID: {
+      iHotelGuestID: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      sRoomOptionTitle: {
+      sHotelGuestTitle: {
         allowNull: false,
         type: DataTypes.STRING
       },
-      iRoomOptionSort: {
+      iHotelGuestSort: {
         allowNull: false,
         type: DataTypes.INTEGER,
         defaultValue: 9999
       },
-      iRoomOptionActive: {
+      iHotelGuestActive: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
       }
@@ -27,23 +27,23 @@ module.exports = (sequelize, DataTypes) => {
     {
       timestamps: false,
       freezeTableName: true,
-      tableName: 'room_option'
+      tableName: 'hotel_guest'
     }
   )
-  RoomOption.associate = function(models) {
+  HotelGuest.associate = function(models) {
     // associations can be defined here
   }
 
-  RoomOption.getOptions = async function () {
-    var options = await RoomOption.findAll({
+  HotelGuest.getGuests = async function () {
+    var guests = await HotelGuest.findAll({
       order: [
-        ['iRoomOptionActive', 'DESC'],
-        ['iRoomOptionSort', 'ASC'],
-        ['iRoomOptionID', 'ASC']
+        ['iHotelGuestActive', 'DESC'],
+        ['iHotelGuestSort', 'ASC'],
+        ['iHotelGuestID', 'ASC']
       ]
     })
-    return options
+    return guests
   }
   
-  return RoomOption
+  return HotelGuest
 }

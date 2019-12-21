@@ -33,5 +33,17 @@ module.exports = (sequelize, DataTypes) => {
   HotelType.associate = function(models) {
     // associations can be defined here
   }
+
+  HotelType.getTypes = async function () {
+    var types = await HotelType.findAll({
+      order: [
+        ['iHotelTypeActive', 'DESC'],
+        ['iHotelTypeSort', 'ASC'],
+        ['iHotelTypeID', 'ASC']
+      ]
+    })
+    return types
+  }
+  
   return HotelType
 }

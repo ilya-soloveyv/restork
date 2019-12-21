@@ -27,7 +27,13 @@ module.exports = {
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    ['vue-yandex-maps/nuxt', {
+      apiKey: env.YANDEX_MAP_KEY,
+      lang: 'ru_RU',
+      coordorder: 'latlong',
+      version: '2.1'
+    }]
   ],
   axios: {},
   auth: {

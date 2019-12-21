@@ -9,8 +9,8 @@
             <b-nav-item to="/admin/application" active-class="active">
               Заявки
             </b-nav-item>
-            <b-nav-item to="/admin/hotels" active-class="active">
-              Отели
+            <b-nav-item to="/admin/hotel" active-class="active">
+              Объекты
             </b-nav-item>
             <b-nav-item to="/admin/users" active-class="active">
               Пользователи
@@ -33,6 +33,12 @@
                 active-class="active"
               >
                 Опции комнат
+              </b-dropdown-item>
+              <b-dropdown-item
+                to="/admin/libraries/hotel_guest"
+                active-class="active"
+              >
+                Только для гостей
               </b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>

@@ -24,9 +24,12 @@
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.2.1",
     "mysql2": "^2.0.1",
+    "node-geocoder": "^3.25.0",
     "nuxt": "^2.0.0",
+    "nuxt-dropzone": "^1.0.4",
     "sequelize": "^5.21.2",
-    "sequelize-paginate": "^1.1.6"
+    "sequelize-paginate": "^1.1.6",
+    "vue-yandex-maps": "^0.10.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.0.1",

@@ -5,7 +5,7 @@
 <script>
 export default {
   middleware({ store, redirect }) {
-    return redirect('/admin/hotels')
+    return redirect('/admin/application')
   },
   layout: 'admin'
 }

@@ -21,7 +21,8 @@ const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
 
 app.use('/api/auth', require('./routes/auth'))
-app.use('/api/hotels', require('./routes/hotels'))
+app.use('/api/hotel', require('./routes/hotel'))
+app.use('/api/hotel_guest', require('./routes/hotel_guest'))
 app.use('/api/hotel_type', require('./routes/hotel_type'))
 app.use('/api/hotel_option', require('./routes/hotel_option'))
 app.use('/api/room_option', require('./routes/room_option'))
