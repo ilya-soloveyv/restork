@@ -37,7 +37,7 @@ module.exports = {
   ],
   axios: {
     proxy: true,
-    baseURL: env.DOMAIN
+    // baseURL: env.DOMAIN
   },
   auth: {
     strategies: {
