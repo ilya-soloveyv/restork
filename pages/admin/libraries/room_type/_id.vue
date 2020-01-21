@@ -7,8 +7,8 @@
     </div>
     <b-container>
       <h1 class="title">
-        <span v-if="option.sRoomOptionTitle">
-          {{ option.sRoomOptionTitle }}
+        <span v-if="type.sRoomTypeTitle">
+          {{ type.sRoomTypeTitle }}
         </span>
         <span v-else class="text-secondary">Название опции</span>
       </h1>
@@ -16,43 +16,43 @@
         <b-col cols="12" sm="6" md="6" lg="4" xl="3">
           <b-form @submit.prevent="update">
             <b-form-group
-              id="label-sRoomOptionTitle"
+              id="label-sRoomTypeTitle"
               label="Название"
-              label-for="input-sRoomOptionTitle"
+              label-for="input-sRoomTypeTitle"
             >
               <b-form-input
-                id="input-sRoomOptionTitle"
-                v-model="option.sRoomOptionTitle"
+                id="input-sRoomTypeTitle"
+                v-model="type.sRoomTypeTitle"
                 type="text"
                 required
               />
             </b-form-group>
             <b-form-group
-              id="label-iRoomOptionSort"
+              id="label-iRoomTypeSort"
               label="Сортировка"
-              label-for="input-iRoomOptionSort"
+              label-for="input-iRoomTypeSort"
             >
               <b-form-input
-                id="input-iRoomOptionSort"
-                v-model.number="option.iRoomOptionSort"
+                id="input-iRoomTypeSort"
+                v-model.number="type.iRoomTypeSort"
                 type="text"
                 placeholder="9999"
               />
             </b-form-group>
             <b-form-group
-              id="label-iRoomOptionActive"
+              id="label-iRoomTypeActive"
               label="Публикация"
-              label-for="input-iRoomOptionActive"
+              label-for="input-iRoomTypeActive"
             >
               <b-form-checkbox
-                id="input-iRoomOptionActive"
-                v-model="option.iRoomOptionActive"
+                id="input-iRoomTypeActive"
+                v-model="type.iRoomTypeActive"
                 switch
               >
-                <template v-if="option.iRoomOptionActive">
+                <template v-if="type.iRoomTypeActive">
                   Опубликовано
                 </template>
-                <template v-if="!option.iRoomOptionActive">
+                <template v-if="!type.iRoomTypeActive">
                   Скрыто
                 </template>
               </b-form-checkbox>
@@ -71,23 +71,23 @@ export default {
   layout: 'admin',
   data() {
     return {
-      option: {}
+      type: {}
     }
   },
   async asyncData({ params, $axios }) {
-    const { data } = await $axios.post('/api/room_option/get', params)
+    const { data } = await $axios.post('/api/room_type/get', params)
     return {
-      option: data || {},
+      type: data || {},
       breadcrumbs: [
         {
           text: 'Справочники'
         },
         {
-          text: 'Опции номеров',
-          to: '/admin/libraries/room_options'
+          text: 'Категории номеров',
+          to: '/admin/libraries/room_type'
         },
         {
-          text: data ? data.sRoomOptionTitle : 'Новая опция номеров',
+          text: data ? data.sRoomTypeTitle : 'Новая опция номеров',
           active: true
         }
       ]
@@ -96,10 +96,10 @@ export default {
   methods: {
     async update() {
       const { data } = await this.$axios.post(
-        '/api/room_option/update',
-        this.option
+        '/api/room_type/update',
+        this.type
       )
-      this.$set(this, 'option', data)
+      this.$set(this, 'type', data)
       this.$bvToast.toast('Успешно сохранено', {
         title: 'Статус',
         variant: 'success',

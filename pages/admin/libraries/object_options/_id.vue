@@ -7,8 +7,8 @@
     </div>
     <b-container>
       <h1 class="title">
-        <span v-if="option.sRoomOptionTitle">
-          {{ option.sRoomOptionTitle }}
+        <span v-if="option.sObjectOptionTitle">
+          {{ option.sObjectOptionTitle }}
         </span>
         <span v-else class="text-secondary">Название опции</span>
       </h1>
@@ -16,43 +16,43 @@
         <b-col cols="12" sm="6" md="6" lg="4" xl="3">
           <b-form @submit.prevent="update">
             <b-form-group
-              id="label-sRoomOptionTitle"
+              id="label-sObjectOptionTitle"
               label="Название"
-              label-for="input-sRoomOptionTitle"
+              label-for="input-sObjectOptionTitle"
             >
               <b-form-input
-                id="input-sRoomOptionTitle"
-                v-model="option.sRoomOptionTitle"
+                id="input-sObjectOptionTitle"
+                v-model="option.sObjectOptionTitle"
                 type="text"
                 required
               />
             </b-form-group>
             <b-form-group
-              id="label-iRoomOptionSort"
+              id="label-iObjectOptionSort"
               label="Сортировка"
-              label-for="input-iRoomOptionSort"
+              label-for="input-iObjectOptionSort"
             >
               <b-form-input
-                id="input-iRoomOptionSort"
-                v-model.number="option.iRoomOptionSort"
+                id="input-iObjectOptionSort"
+                v-model.number="option.iObjectOptionSort"
                 type="text"
                 placeholder="9999"
               />
             </b-form-group>
             <b-form-group
-              id="label-iRoomOptionActive"
+              id="label-iObjectOptionActive"
               label="Публикация"
-              label-for="input-iRoomOptionActive"
+              label-for="input-iObjectOptionActive"
             >
               <b-form-checkbox
-                id="input-iRoomOptionActive"
-                v-model="option.iRoomOptionActive"
+                id="input-iObjectOptionActive"
+                v-model="option.iObjectOptionActive"
                 switch
               >
-                <template v-if="option.iRoomOptionActive">
+                <template v-if="option.iObjectOptionActive">
                   Опубликовано
                 </template>
-                <template v-if="!option.iRoomOptionActive">
+                <template v-if="!option.iObjectOptionActive">
                   Скрыто
                 </template>
               </b-form-checkbox>
@@ -75,7 +75,7 @@ export default {
     }
   },
   async asyncData({ params, $axios }) {
-    const { data } = await $axios.post('/api/room_option/get', params)
+    const { data } = await $axios.post('/api/object_option/get', params)
     return {
       option: data || {},
       breadcrumbs: [
@@ -83,11 +83,11 @@ export default {
           text: 'Справочники'
         },
         {
-          text: 'Опции номеров',
-          to: '/admin/libraries/room_options'
+          text: 'Опции отеля',
+          to: '/admin/libraries/object_options'
         },
         {
-          text: data ? data.sRoomOptionTitle : 'Новая опция номеров',
+          text: data ? data.sObjectOptionTitle : 'Новая опция отеля',
           active: true
         }
       ]
@@ -96,7 +96,7 @@ export default {
   methods: {
     async update() {
       const { data } = await this.$axios.post(
-        '/api/room_option/update',
+        '/api/object_option/update',
         this.option
       )
       this.$set(this, 'option', data)

@@ -21,11 +21,12 @@ const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
 
 app.use('/api/auth', require('./routes/auth'))
-app.use('/api/hotel', require('./routes/hotel'))
-app.use('/api/hotel_guest', require('./routes/hotel_guest'))
-app.use('/api/hotel_type', require('./routes/hotel_type'))
-app.use('/api/hotel_option', require('./routes/hotel_option'))
+app.use('/api/user', require('./routes/user'))
+app.use('/api/object', require('./routes/object'))
+app.use('/api/object_type', require('./routes/object_type'))
+app.use('/api/object_option', require('./routes/object_option'))
 app.use('/api/room_option', require('./routes/room_option'))
+app.use('/api/room_type', require('./routes/room_type'))
 
 async function start() {
   const nuxt = new Nuxt(config)

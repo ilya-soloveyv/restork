@@ -7,53 +7,71 @@
     </div>
     <b-container>
       <h1 class="title">
-        <span v-if="option.sRoomOptionTitle">
-          {{ option.sRoomOptionTitle }}
+        <span v-if="type.sObjectTypeTitle">
+          {{ type.sObjectTypeTitle }}
         </span>
-        <span v-else class="text-secondary">Название опции</span>
+        <span v-else class="text-secondary">Название вида объекта</span>
       </h1>
       <b-row>
         <b-col cols="12" sm="6" md="6" lg="4" xl="3">
           <b-form @submit.prevent="update">
             <b-form-group
-              id="label-sRoomOptionTitle"
+              id="label-sObjectTypeTitle"
               label="Название"
-              label-for="input-sRoomOptionTitle"
+              label-for="input-sObjectTypeTitle"
             >
               <b-form-input
-                id="input-sRoomOptionTitle"
-                v-model="option.sRoomOptionTitle"
+                id="input-sObjectTypeTitle"
+                v-model="type.sObjectTypeTitle"
                 type="text"
                 required
               />
             </b-form-group>
             <b-form-group
-              id="label-iRoomOptionSort"
+              id="label-iObjectTypeSort"
               label="Сортировка"
-              label-for="input-iRoomOptionSort"
+              label-for="input-iObjectTypeSort"
             >
               <b-form-input
-                id="input-iRoomOptionSort"
-                v-model.number="option.iRoomOptionSort"
+                id="input-iObjectTypeSort"
+                v-model.number="type.iObjectTypeSort"
                 type="text"
                 placeholder="9999"
               />
             </b-form-group>
             <b-form-group
-              id="label-iRoomOptionActive"
+              id="label-iObjectTypeActive"
               label="Публикация"
-              label-for="input-iRoomOptionActive"
+              label-for="input-iObjectTypeActive"
             >
               <b-form-checkbox
-                id="input-iRoomOptionActive"
-                v-model="option.iRoomOptionActive"
+                id="input-iObjectTypeActive"
+                v-model="type.iObjectTypeActive"
                 switch
               >
-                <template v-if="option.iRoomOptionActive">
+                <template v-if="type.iObjectTypeActive">
                   Опубликовано
                 </template>
-                <template v-if="!option.iRoomOptionActive">
+                <template v-if="!type.iObjectTypeActive">
                   Скрыто
+                </template>
+              </b-form-checkbox>
+            </b-form-group>
+            <b-form-group
+              id="label-iRoomPermission"
+              label="Возможность добавлять номера"
+              label-for="input-iRoomPermission"
+            >
+              <b-form-checkbox
+                id="input-iRoomPermission"
+                v-model="type.iRoomPermission"
+                switch
+              >
+                <template v-if="type.iRoomPermission">
+                  Одобрено
+                </template>
+                <template v-if="!type.iRoomPermission">
+                  Заблокировано
                 </template>
               </b-form-checkbox>
             </b-form-group>
@@ -71,23 +89,23 @@ export default {
   layout: 'admin',
   data() {
     return {
-      option: {}
+      type: {}
     }
   },
   async asyncData({ params, $axios }) {
-    const { data } = await $axios.post('/api/room_option/get', params)
+    const { data } = await $axios.post('/api/object_type/get', params)
     return {
-      option: data || {},
+      type: data || {},
       breadcrumbs: [
         {
           text: 'Справочники'
         },
         {
-          text: 'Опции номеров',
-          to: '/admin/libraries/room_options'
+          text: 'Виды объекта',
+          to: '/admin/libraries/object_type'
         },
         {
-          text: data ? data.sRoomOptionTitle : 'Новая опция номеров',
+          text: data ? data.sObjectTypeTitle : 'Новый вид объекта',
           active: true
         }
       ]
@@ -96,10 +114,10 @@ export default {
   methods: {
     async update() {
       const { data } = await this.$axios.post(
-        '/api/room_option/update',
-        this.option
+        '/api/object_type/update',
+        this.type
       )
-      this.$set(this, 'option', data)
+      this.$set(this, 'type', data)
       this.$bvToast.toast('Успешно сохранено', {
         title: 'Статус',
         variant: 'success',

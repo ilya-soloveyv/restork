@@ -7,30 +7,30 @@
     </div>
     <b-container>
       <h1 class="title">
-        <span>Опции номеров</span>
+        <span>Категории номеров</span>
         <b-button-group>
           <b-button
             size="sm"
             variant="primary"
-            to="/admin/libraries/room_options/0"
+            to="/admin/libraries/room_type/0"
           >
             Добавить
           </b-button>
         </b-button-group>
       </h1>
       <b-table
-        id="room-option-list"
-        :items="roomOption"
+        id="room-type-list"
+        :items="roomType"
         :fields="table_fields"
         @row-clicked="use"
         striped
         hover
       >
-        <template v-slot:cell(iRoomOptionActive)="{ item }">
-          <b-badge v-if="!item.iRoomOptionActive" variant="secondary">
+        <template v-slot:cell(iRoomTypeActive)="{ item }">
+          <b-badge v-if="!item.iRoomTypeActive" variant="secondary">
             Выключено
           </b-badge>
-          <b-badge v-if="item.iRoomOptionActive" variant="success">
+          <b-badge v-if="item.iRoomTypeActive" variant="success">
             Включено
           </b-badge>
         </template>
@@ -50,49 +50,49 @@ export default {
           text: 'Справочники'
         },
         {
-          text: 'Опции номеров',
+          text: 'Категории номеров',
           active: true
         }
       ],
       table_fields: [
         {
-          key: 'iRoomOptionID',
+          key: 'iRoomTypeID',
           label: 'ID',
-          tdClass: 'iRoomOptionID'
+          tdClass: 'iRoomTypeID'
         },
         {
-          key: 'sRoomOptionTitle',
+          key: 'sRoomTypeTitle',
           label: 'Название'
         },
         {
-          key: 'iRoomOptionActive',
+          key: 'iRoomTypeActive',
           label: 'Статус',
-          tdClass: 'iRoomOptionActive'
+          tdClass: 'iRoomTypeActive'
         }
       ],
-      roomOption: []
+      roomType: []
     }
   },
   async asyncData({ params, $axios }) {
-    const { data } = await $axios.post('/api/room_option/get')
-    return { roomOption: data }
+    const { data } = await $axios.post('/api/room_type/get')
+    return { roomType: data }
   },
   methods: {
-    use(option) {
-      this.$router.push('/admin/libraries/room_options/' + option.iRoomOptionID)
+    use(type) {
+      this.$router.push('/admin/libraries/room_type/' + type.iRoomTypeID)
     }
   }
 }
 </script>
 
 <style lang="scss">
-table#room-option-list {
+table#room-type-list {
   td {
     cursor: pointer;
-    &.iRoomOptionID {
+    &.iRoomTypeID {
       width: 55px;
     }
-    &.iRoomOptionActive {
+    &.iRoomTypeActive {
       width: 105px;
     }
   }

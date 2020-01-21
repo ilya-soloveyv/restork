@@ -9,21 +9,21 @@
             <b-nav-item to="/admin/application" active-class="active">
               Заявки
             </b-nav-item>
-            <b-nav-item to="/admin/hotel" active-class="active">
+            <b-nav-item to="/admin/object" active-class="active">
               Объекты
             </b-nav-item>
             <b-nav-item to="/admin/users" active-class="active">
               Пользователи
             </b-nav-item>
-            <b-nav-item-dropdown text="Библиотека">
+            <b-nav-item-dropdown text="Справочники">
               <b-dropdown-item
-                to="/admin/libraries/hotel_type"
+                to="/admin/libraries/object_type"
                 active-class="active"
               >
                 Виды объектов
               </b-dropdown-item>
               <b-dropdown-item
-                to="/admin/libraries/hotel_options"
+                to="/admin/libraries/object_options"
                 active-class="active"
               >
                 Опции отеля
@@ -35,10 +35,10 @@
                 Опции комнат
               </b-dropdown-item>
               <b-dropdown-item
-                to="/admin/libraries/hotel_guest"
+                to="/admin/libraries/room_type"
                 active-class="active"
               >
-                Только для гостей
+                Категории номеров
               </b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>

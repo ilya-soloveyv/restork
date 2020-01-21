@@ -1,5 +1,8 @@
 'use strict'
 
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     'user',
@@ -44,5 +47,53 @@ module.exports = (sequelize, DataTypes) => {
     }
   )
   User.associate = function(models) {}
+
+  User.searchUsers = async function (search) {
+    // search = search.split(' ')
+
+    // search.forEach(item => {
+
+    //   where[Sequelize.or()].push(
+    //     Sequelize.or({
+    //       sUserLastName: {
+    //         [Op.substring]: item
+    //       }
+    //     })
+    //   )
+
+    // })
+
+    // console.log(search)
+    const users = await User.findAll({
+      attributes: [
+        'iUserID',
+        'sUserLastName',
+        'sUserMiddleName',
+        'sUserFirstName',
+        'sUserPhone',
+        'iUserAdmin'
+      ],
+      where: Sequelize.or(
+        Sequelize.or({
+          sUserLastName: {
+            [Op.substring]: search
+          }
+        }),
+        Sequelize.or({
+          sUserMiddleName: {
+            [Op.substring]: search
+          }
+        }),
+        Sequelize.or({
+          sUserFirstName: {
+            [Op.substring]: search
+          }
+        })
+      )
+    })
+    return users
+  }
+
+
   return User
 }
