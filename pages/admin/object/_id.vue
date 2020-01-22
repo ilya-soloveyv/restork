@@ -390,6 +390,7 @@
                             <b-select
                               :id="'input-iRoomTypeID_' + roomIndex"
                               v-model="room.iRoomTypeID"
+                              required
                             >
                               <option
                                 v-for="(type, typeIndex) in room_type"
