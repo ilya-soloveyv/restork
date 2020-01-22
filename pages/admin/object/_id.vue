@@ -348,7 +348,183 @@
             ></dropzone>
           </b-tab>
           <b-tab v-if="iRoomPermission" title="Номера">
-            333
+            <b-card
+              v-for="(room, roomIndex) in object.rooms"
+              :key="roomIndex"
+              tag="article"
+              class="mb-3"
+            >
+              <template v-slot:header>
+                <b-form-checkbox
+                  :id="'input-iRoomActive_' + roomIndex"
+                  v-model="room.iRoomActive"
+                  class="float-right"
+                  switch
+                >
+                  <template v-if="room.iRoomActive">
+                    Опубликовано
+                  </template>
+                  <template v-if="!room.iRoomActive">
+                    Скрыто
+                  </template>
+                </b-form-checkbox>
+                <h6 class="mb-0">
+                  <template v-if="room.iRoomID">
+                    Номер #{{ room.iRoomID }}
+                  </template>
+                  <template v-else>Новый номер</template>
+                </h6>
+              </template>
+              <b-card-text>
+                <client-only>
+                  <b-row>
+                    <b-col cols="5">
+                      <b-row>
+                        <b-col>
+                          <b-form-group
+                            v-if="room_type"
+                            :id="'label-iRoomTypeID_' + roomIndex"
+                            :label-for="'input-iRoomTypeID_' + roomIndex"
+                            label="Категория"
+                          >
+                            <b-select
+                              :id="'input-iRoomTypeID_' + roomIndex"
+                              v-model="room.iRoomTypeID"
+                            >
+                              <option
+                                v-for="(type, typeIndex) in room_type"
+                                :key="typeIndex"
+                                :value="type.iRoomTypeID"
+                              >
+                                {{ type.sRoomTypeTitle }}
+                              </option>
+                            </b-select>
+                          </b-form-group>
+                        </b-col>
+                        <b-col>
+                          <b-form-group
+                            :id="'label-iRoomArea_' + roomIndex"
+                            :label-for="'input-iRoomArea_' + roomIndex"
+                            label="Площадь"
+                          >
+                            <b-form-input
+                              :id="'input-iRoomArea_' + roomIndex"
+                              v-model.number="room.iRoomArea"
+                              type="text"
+                            />
+                          </b-form-group>
+                        </b-col>
+                        <b-col>
+                          <b-form-group
+                            :id="'label-iRoomCount_' + roomIndex"
+                            :label-for="'input-iRoomCount_' + roomIndex"
+                            label="Кол-во комнат"
+                          >
+                            <b-form-input
+                              :id="'input-iRoomCount_' + roomIndex"
+                              v-model.number="room.iRoomCount"
+                              type="text"
+                            />
+                          </b-form-group>
+                        </b-col>
+                      </b-row>
+                      <b-row>
+                        <b-col>
+                          <b-form-group
+                            :id="'label-iRoomBed_' + roomIndex"
+                            :label-for="'input-iRoomBed_' + roomIndex"
+                            label="Кол-во кров."
+                          >
+                            <b-form-input
+                              :id="'input-iRoomBed_' + roomIndex"
+                              v-model.number="room.iRoomBed"
+                              type="text"
+                            />
+                          </b-form-group>
+                        </b-col>
+                        <b-col>
+                          <b-form-group
+                            :id="'label-iRoomPlace_' + roomIndex"
+                            :label-for="'input-iRoomPlace_' + roomIndex"
+                            label="Кол-во спал. м"
+                          >
+                            <b-form-input
+                              :id="'input-iRoomPlace_' + roomIndex"
+                              v-model.number="room.iRoomPlace"
+                              type="text"
+                            />
+                          </b-form-group>
+                        </b-col>
+                        <b-col>
+                          <b-form-group
+                            :id="'label-iRoomPlaceDop_' + roomIndex"
+                            :label-for="'input-iRoomPlaceDop_' + roomIndex"
+                            label="Кол-во доп. м"
+                          >
+                            <b-form-input
+                              :id="'input-iRoomPlaceDop_' + roomIndex"
+                              v-model.number="room.iRoomPlaceDop"
+                              type="text"
+                            />
+                          </b-form-group>
+                        </b-col>
+                      </b-row>
+                      <b-form-group
+                        :id="'label-tRoomDesc_' + roomIndex"
+                        :label-for="'input-tRoomDesc_' + roomIndex"
+                        label="Комментарий к номеру"
+                        class="mb-0"
+                      >
+                        <b-form-textarea
+                          :id="'input-tRoomDesc_' + roomIndex"
+                          v-model="room.tRoomDesc"
+                          placeholder="Комментарий к номеру"
+                          rows="2"
+                          max-rows="3"
+                        />
+                      </b-form-group>
+                    </b-col>
+                    <b-col cols="3">
+                      <b-form-group
+                        :id="'label-iRoomOptionID_' + roomIndex"
+                        label="Опции номера"
+                      >
+                        <b-form-checkbox
+                          v-for="option in room_option"
+                          :key="option.iRoomOptionID"
+                          v-model="room.room_room_options_array"
+                          :value="option.iRoomOptionID"
+                        >
+                          {{ option.sRoomOptionTitle }}
+                        </b-form-checkbox>
+                      </b-form-group>
+                    </b-col>
+                    <b-col class="dropzone-room">
+                      <b-form-group
+                        :id="'label-tRoomDesc_' + roomIndex"
+                        :label-for="'input-tRoomDesc_' + roomIndex"
+                        label="Фотографии"
+                        class="mb-0"
+                      >
+                        <dropzone
+                          :id="'myVueDropzone_room_' + roomIndex"
+                          :ref="'myVueDropzone_room_' + roomIndex"
+                          :options="options"
+                          :destroyDropzone="true"
+                        />
+                      </b-form-group>
+                    </b-col>
+                  </b-row>
+                </client-only>
+                <!-- {{ room }} -->
+              </b-card-text>
+            </b-card>
+            <b-form-group>
+              <b-button @click="addRoom" variant="secondary">
+                Добавить номер
+              </b-button>
+            </b-form-group>
+            <!-- <pre>{{ object.rooms }}</pre> -->
           </b-tab>
         </b-tabs>
         <b-form-group>
@@ -359,6 +535,7 @@
       <!-- <pre>{{ object_type }}</pre> -->
       <!-- <pre>{{ object_option }}</pre> -->
       <!-- <pre>{{ room_option }}</pre> -->
+      <!-- <pre>{{ room_type }}</pre> -->
     </b-container>
   </div>
 </template>

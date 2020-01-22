@@ -92,6 +92,9 @@ module.exports = (sequelize, DataTypes) => {
     Object.hasMany(models.object_image, {
       foreignKey: 'iObjectID'
     })
+    Object.hasMany(models.room, {
+      foreignKey: 'iObjectID'
+    })
   }
 
   Object.getObject = async function (iObjectID) {
@@ -119,7 +122,21 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
           model: sequelize.models.object_image
+        },
+        {
+          model: sequelize.models.room,
+          include: [
+            {
+              model: sequelize.models.room_type
+            },
+            {
+              model: sequelize.models.room_room_option
+            }
+          ]
         }
+      ],
+      order: [
+        [ sequelize.models.room, 'iRoomID', 'ASC' ]
       ]
     })
 
@@ -127,6 +144,7 @@ module.exports = (sequelize, DataTypes) => {
 
     object.object_object_options = object.object_object_options || []
     object.object_room_options = object.object_room_options || []
+    object.rooms = object.rooms || []
 
     object.sObjectAddress = object.sObjectAddress || ''
 

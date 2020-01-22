@@ -16,6 +16,7 @@ export default {
       object_type: [],
       object_option: [],
       room_option: [],
+      room_type: [],
       options: {
         url: '/api/object/upload'
       },
@@ -81,11 +82,18 @@ export default {
     data.object.object_room_options.forEach((option) => {
       data.object.object_room_options_array.push(option.iRoomOptionID)
     })
+    data.object.rooms.forEach((room) => {
+      room.room_room_options_array = []
+      room.room_room_options.forEach((option) => {
+        room.room_room_options_array.push(option.iRoomOptionID)
+      })
+    })
     return {
       object: data.object,
       object_type: data.object_type,
       object_option: data.object_option,
       room_option: data.room_option,
+      room_type: data.room_type,
       breadcrumbs: [
         {
           text: 'Объекты',
@@ -125,6 +133,12 @@ export default {
       data.object.object_room_options_array = []
       data.object.object_room_options.forEach((option) => {
         data.object.object_room_options_array.push(option.iRoomOptionID)
+      })
+      data.object.rooms.forEach((room) => {
+        room.room_room_options_array = []
+        room.room_room_options.forEach((option) => {
+          room.room_room_options_array.push(option.iRoomOptionID)
+        })
       })
       this.$set(this, 'object', data.object)
       this.$bvToast.toast('Успешно сохранено', {
@@ -180,6 +194,11 @@ export default {
     onItemRemoveUser() {
       this.$set(this.object, 'iUserID', null)
       this.$set(this.object, 'user', {})
+    },
+    addRoom() {
+      this.object.rooms.push({
+        room_room_options_array: []
+      })
     }
   }
 }

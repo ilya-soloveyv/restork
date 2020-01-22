@@ -16,11 +16,14 @@ const multer  = require('multer')
 const upload = multer({ dest: 'static/upload/' })
 
 const Object = require('../../models').object
+const Room = require('../../models').room
 const Object_type = require('../../models').object_type
 const Object_option = require('../../models').object_option
 const Room_option = require('../../models').room_option
 const Object_object_option = require('../../models').object_object_option
 const Object_room_option = require('../../models').object_room_option
+const Room_type = require('../../models').room_type
+const Room_room_option = require('../../models').room_room_option
 
 router.post('/get', async (req, res, next) => {
   const iObjectID = req.body.id
@@ -56,6 +59,7 @@ router.post('/get_edit', async (req, res, next) => {
   response.object_type = await Object_type.getTypes()
   response.object_option = await Object_option.getOptions()
   response.room_option = await Room_option.getOptions()
+  response.room_type = await Room_type.getTypes()
 
   res.json(response)
 })
@@ -84,6 +88,8 @@ router.post('/update', async (req, res, next) => {
 
   let object_object_options_array = req.body.object_object_options_array || []
   let object_room_options_array = req.body.object_room_options_array || []
+
+  let rooms = req.body.rooms || []
 
   var response = {}
 
@@ -160,6 +166,69 @@ router.post('/update', async (req, res, next) => {
     }
   }
   await object_room_option_action()
+
+  const room_room_option_action = async (iRoomID, options) => {
+    await Room_room_option.destroy({
+      where: {
+        iRoomID
+      }
+    })
+    for (const iRoomOptionID of options) {
+      await Room_room_option.create({
+        iRoomID,
+        iRoomOptionID
+      })
+    }
+  }
+
+  const rooms_action = async () => {
+    for (const room of rooms) {
+      var iRoomID = room.iRoomID || false
+      let iRoomTypeID = room.iRoomTypeID || false
+      let iRoomArea = room.iRoomArea || null
+      let iRoomCount = room.iRoomCount || null
+      let iRoomBed = room.iRoomBed || 1
+      let iRoomPlace = room.iRoomPlace || 1
+      let iRoomPlaceDop = room.iRoomPlaceDop || 0
+      let tRoomDesc = room.tRoomDesc || null
+      let iRoomActive = room.iRoomActive || false
+      let room_room_options_array = room.room_room_options_array || []
+      
+      if (iRoomID) {
+        await Room.update({
+          iRoomTypeID,
+          iRoomArea,
+          iRoomCount,
+          iRoomBed,
+          iRoomPlace,
+          iRoomPlaceDop,
+          tRoomDesc,
+          iRoomActive
+        }, {
+          where: {
+            iRoomID
+          }
+        })
+      } else {
+        var { iRoomID } = await Room.create({
+          iObjectID,
+          iRoomTypeID,
+          iRoomArea,
+          iRoomCount,
+          iRoomBed,
+          iRoomPlace,
+          iRoomPlaceDop,
+          tRoomDesc,
+          iRoomActive
+        })
+      }
+
+      await room_room_option_action(iRoomID, room_room_options_array)
+    }
+  }
+  await rooms_action()
+
+  console.log('---------------------')
 
   response.object = await Object.getObject(iObjectID)
 

@@ -49,3 +49,35 @@ ul.nav-tabs {
     }
   }
 }
+.dropzone-room {
+  .dropzone {
+    height: 234px;
+    margin-bottom: 0;
+    grid-template: repeat(1, 1fr) / repeat(1, 1fr);
+    &.dz-started {
+      grid-template: repeat(1, 1fr) / repeat(4, 1fr);
+    }
+    .dz-preview {
+      .dz-image {
+        img {
+
+        }
+      }
+      .dz-details {
+        display: none;
+      }
+      .dz-progress {
+        display: none;
+      }
+      .dz-error-message {
+        display: none;
+      }
+      .dz-success-mark {
+        display: none;
+      }
+      .dz-error-mark {
+        display: none;
+      }
+    }
+  }
+}
