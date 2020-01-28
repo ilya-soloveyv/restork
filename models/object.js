@@ -44,28 +44,28 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: 1
       },
-      iObjectPlaceDop: { // Кол-во дополнительных мест
+      iObjectPlaceDop: {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 0
       },
-      sObjectAddress: { // Адрес
+      sObjectAddress: {
         type: DataTypes.STRING,
         allowNull: true
       },
-      aObjectCoordinate: { // Координаты объекта
+      aObjectCoordinate: {
         type: DataTypes.GEOMETRY('POINT'),
         allowNull: true
       },
-      tObjectDesc: { // Описание объекта
+      tObjectDesc: {
         type: DataTypes.TEXT,
         allowNull: true
       },
-      iObjectActive: { // Активность объекта
+      iObjectActive: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
       },
-      iObjectVerification: { // Верификация объекта
+      iObjectVerification: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
       }
@@ -97,8 +97,8 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
-  Object.getObject = async function (iObjectID) {
-    var object = await Object.findByPk(iObjectID, {
+  Object.getObject = async function(iObjectID) {
+    let object = await Object.findByPk(iObjectID, {
       include: [
         {
           model: sequelize.models.user,
@@ -135,9 +135,7 @@ module.exports = (sequelize, DataTypes) => {
           ]
         }
       ],
-      order: [
-        [ sequelize.models.room, 'iRoomID', 'ASC' ]
-      ]
+      order: [[sequelize.models.room, 'iRoomID', 'ASC']]
     })
 
     object = object || {}
@@ -156,7 +154,6 @@ module.exports = (sequelize, DataTypes) => {
 
     return object
   }
-
 
   sequelizePaginate.paginate(Object)
   return Object

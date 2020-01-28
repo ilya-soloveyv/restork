@@ -56,7 +56,7 @@ module.exports = {
           iUserAdmin: 0
         },
         {
-          iUserID: 6 ,
+          iUserID: 6,
           sUserLastName: 'Бунин',
           sUserMiddleName: 'Алексеевич',
           sUserFirstName: 'Иван',

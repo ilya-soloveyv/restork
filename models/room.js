@@ -82,8 +82,8 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
-  Room.getRoom = async function (iRoomID) {
-    var room = await Room.findByPk(iRoomID)
+  Room.getRoom = async function(iRoomID) {
+    const room = await Room.findByPk(iRoomID)
     return room
   }
 

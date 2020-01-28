@@ -18,7 +18,8 @@ export default {
       room_option: [],
       room_type: [],
       options: {
-        url: '/api/object/upload'
+        url: '/api/object/upload',
+        dictDefaultMessage: 'Выберите файл или перетащите его сюда'
       },
       suggestionsOptions: {
         inputClass: 'form-control',

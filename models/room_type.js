@@ -34,8 +34,8 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
   }
 
-  RoomType.getTypes = async function () {
-    var types = await RoomType.findAll({
+  RoomType.getTypes = async function() {
+    const types = await RoomType.findAll({
       order: [
         ['iRoomTypeActive', 'DESC'],
         ['iRoomTypeSort', 'ASC'],
@@ -44,6 +44,6 @@ module.exports = (sequelize, DataTypes) => {
     })
     return types
   }
-  
+
   return RoomType
 }

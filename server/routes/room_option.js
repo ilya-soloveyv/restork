@@ -8,8 +8,7 @@ router.post('/get', async (req, res, next) => {
   let response = null
   if (iRoomOptionID) {
     response = await RoomOption.findByPk(iRoomOptionID)
-  }
-  else {
+  } else {
     response = await RoomOption.findAll({
       order: [
         ['iRoomOptionActive', 'DESC'],
@@ -22,11 +21,11 @@ router.post('/get', async (req, res, next) => {
 })
 
 router.post('/update', async (req, res, next) => {
-  let iRoomOptionID = req.body.iRoomOptionID || false
-  let sRoomOptionTitle = req.body.sRoomOptionTitle || false
-  let iRoomOptionSort = req.body.iRoomOptionSort || 9999
-  let iRoomOptionActive = req.body.iRoomOptionActive || false
-  var response = {}
+  const iRoomOptionID = req.body.iRoomOptionID || false
+  const sRoomOptionTitle = req.body.sRoomOptionTitle || false
+  const iRoomOptionSort = req.body.iRoomOptionSort || 9999
+  const iRoomOptionActive = req.body.iRoomOptionActive || false
+  let response = {}
 
   if (iRoomOptionID) {
     await RoomOption.update(
@@ -42,15 +41,12 @@ router.post('/update', async (req, res, next) => {
       }
     )
     response = await RoomOption.findByPk(iRoomOptionID)
-  }
-  else {
-    response = await RoomOption.create(
-      {
-        sRoomOptionTitle,
-        iRoomOptionSort,
-        iRoomOptionActive
-      }
-    )
+  } else {
+    response = await RoomOption.create({
+      sRoomOptionTitle,
+      iRoomOptionSort,
+      iRoomOptionActive
+    })
   }
 
   res.json(response)

@@ -118,6 +118,7 @@ export default {
         this.type
       )
       this.$set(this, 'type', data)
+      this.$router.push('/admin/libraries/object_type/' + data.iObjectTypeID)
       this.$bvToast.toast('Успешно сохранено', {
         title: 'Статус',
         variant: 'success',

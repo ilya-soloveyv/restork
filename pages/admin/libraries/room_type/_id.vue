@@ -100,6 +100,7 @@ export default {
         this.type
       )
       this.$set(this, 'type', data)
+      this.$router.push('/admin/libraries/room_type/' + data.iRoomTypeID)
       this.$bvToast.toast('Успешно сохранено', {
         title: 'Статус',
         variant: 'success',

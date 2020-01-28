@@ -34,8 +34,8 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
   }
 
-  ObjectOption.getOptions = async function () {
-    var options = await ObjectOption.findAll({
+  ObjectOption.getOptions = async function() {
+    const options = await ObjectOption.findAll({
       order: [
         ['iObjectOptionActive', 'DESC'],
         ['iObjectOptionSort', 'ASC'],
@@ -44,6 +44,6 @@ module.exports = (sequelize, DataTypes) => {
     })
     return options
   }
-  
+
   return ObjectOption
 }

@@ -1,4 +1,4 @@
-const env = require("dotenv").config()
+const env = require('dotenv').config()
 
 module.exports = {
   mode: 'universal',
@@ -28,16 +28,18 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/auth',
     '@nuxtjs/dotenv',
-    ['vue-yandex-maps/nuxt', {
-      apiKey: env.YANDEX_MAP_KEY,
-      lang: 'ru_RU',
-      coordorder: 'latlong',
-      version: '2.1'
-    }]
+    [
+      'vue-yandex-maps/nuxt',
+      {
+        apiKey: env.YANDEX_MAP_KEY,
+        lang: 'ru_RU',
+        coordorder: 'latlong',
+        version: '2.1'
+      }
+    ]
   ],
   axios: {
-    proxy: true,
-    // baseURL: env.DOMAIN
+    proxy: true
   },
   auth: {
     strategies: {

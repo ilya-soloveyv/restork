@@ -38,8 +38,8 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
   }
 
-  ObjectType.getTypes = async function () {
-    var types = await ObjectType.findAll({
+  ObjectType.getTypes = async function() {
+    const types = await ObjectType.findAll({
       order: [
         ['iObjectTypeActive', 'DESC'],
         ['iObjectTypeSort', 'ASC'],
@@ -48,6 +48,6 @@ module.exports = (sequelize, DataTypes) => {
     })
     return types
   }
-  
+
   return ObjectType
 }

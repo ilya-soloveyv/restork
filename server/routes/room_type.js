@@ -8,8 +8,7 @@ router.post('/get', async (req, res, next) => {
   let response = null
   if (iRoomTypeID) {
     response = await RoomType.findByPk(iRoomTypeID)
-  }
-  else {
+  } else {
     response = await RoomType.findAll({
       order: [
         ['iRoomTypeActive', 'DESC'],
@@ -22,11 +21,11 @@ router.post('/get', async (req, res, next) => {
 })
 
 router.post('/update', async (req, res, next) => {
-  let iRoomTypeID = req.body.iRoomTypeID || false
-  let sRoomTypeTitle = req.body.sRoomTypeTitle || false
-  let iRoomTypeSort = req.body.iRoomTypeSort || 9999
-  let iRoomTypeActive = req.body.iRoomTypeActive || false
-  var response = {}
+  const iRoomTypeID = req.body.iRoomTypeID || false
+  const sRoomTypeTitle = req.body.sRoomTypeTitle || false
+  const iRoomTypeSort = req.body.iRoomTypeSort || 9999
+  const iRoomTypeActive = req.body.iRoomTypeActive || false
+  let response = {}
 
   if (iRoomTypeID) {
     await RoomType.update(
@@ -42,15 +41,12 @@ router.post('/update', async (req, res, next) => {
       }
     )
     response = await RoomType.findByPk(iRoomTypeID)
-  }
-  else {
-    response = await RoomType.create(
-      {
-        sRoomTypeTitle,
-        iRoomTypeSort,
-        iRoomTypeActive
-      }
-    )
+  } else {
+    response = await RoomType.create({
+      sRoomTypeTitle,
+      iRoomTypeSort,
+      iRoomTypeActive
+    })
   }
 
   res.json(response)

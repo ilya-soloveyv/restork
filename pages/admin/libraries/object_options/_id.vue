@@ -100,6 +100,9 @@ export default {
         this.option
       )
       this.$set(this, 'option', data)
+      this.$router.push(
+        '/admin/libraries/object_options/' + data.iObjectOptionID
+      )
       this.$bvToast.toast('Успешно сохранено', {
         title: 'Статус',
         variant: 'success',

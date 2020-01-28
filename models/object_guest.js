@@ -34,8 +34,8 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
   }
 
-  ObjectGuest.getGuests = async function () {
-    var guests = await ObjectGuest.findAll({
+  ObjectGuest.getGuests = async function() {
+    const guests = await ObjectGuest.findAll({
       order: [
         ['iObjectGuestActive', 'DESC'],
         ['iObjectGuestSort', 'ASC'],
@@ -44,6 +44,6 @@ module.exports = (sequelize, DataTypes) => {
     })
     return guests
   }
-  
+
   return ObjectGuest
 }

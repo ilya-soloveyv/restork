@@ -100,6 +100,7 @@ export default {
         this.option
       )
       this.$set(this, 'option', data)
+      this.$router.push('/admin/libraries/room_options/' + data.iRoomOptionID)
       this.$bvToast.toast('Успешно сохранено', {
         title: 'Статус',
         variant: 'success',

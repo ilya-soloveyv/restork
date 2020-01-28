@@ -1,10 +1,10 @@
 const { Router } = require('express')
 const router = Router()
-const env = require("dotenv").config()
+require('dotenv').config()
 const Sequelize = require('sequelize')
 
 const NodeGeocoder = require('node-geocoder')
-var NodeGeocoderOptions = {
+const NodeGeocoderOptions = {
   provider: 'yandex',
   httpAdapter: 'https',
   apiKey: process.env.YANDEX_MAP_KEY,
@@ -12,18 +12,18 @@ var NodeGeocoderOptions = {
 }
 const geocoder = NodeGeocoder(NodeGeocoderOptions)
 
-const multer  = require('multer')
+const multer = require('multer')
 const upload = multer({ dest: 'static/upload/' })
 
 const Object = require('../../models').object
 const Room = require('../../models').room
-const Object_type = require('../../models').object_type
-const Object_option = require('../../models').object_option
-const Room_option = require('../../models').room_option
-const Object_object_option = require('../../models').object_object_option
-const Object_room_option = require('../../models').object_room_option
-const Room_type = require('../../models').room_type
-const Room_room_option = require('../../models').room_room_option
+const ObjectType = require('../../models').object_type
+const ObjectOption = require('../../models').object_option
+const RoomOption = require('../../models').room_option
+const ObjectObjectOption = require('../../models').object_object_option
+const ObjectRoomOption = require('../../models').object_room_option
+const RoomType = require('../../models').room_type
+const RoomRoomOption = require('../../models').room_room_option
 
 router.post('/get', async (req, res, next) => {
   const iObjectID = req.body.id
@@ -32,19 +32,16 @@ router.post('/get', async (req, res, next) => {
     response = await Object.findByPk(iObjectID, {
       include: [
         {
-          model: Object_type
+          model: ObjectType
         }
       ]
     })
-  }
-  else {
+  } else {
     response = await Object.paginate({
-      order: [
-        ['iObjectID', 'DESC']
-      ],
+      order: [['iObjectID', 'DESC']],
       include: [
         {
-          model: Object_type
+          model: ObjectType
         }
       ]
     })
@@ -56,42 +53,52 @@ router.post('/get_edit', async (req, res, next) => {
   const iObjectID = req.body.id
   const response = {}
   response.object = await Object.getObject(iObjectID)
-  response.object_type = await Object_type.getTypes()
-  response.object_option = await Object_option.getOptions()
-  response.room_option = await Room_option.getOptions()
-  response.room_type = await Room_type.getTypes()
+  response.object_type = await ObjectType.getTypes()
+  response.object_option = await ObjectOption.getOptions()
+  response.room_option = await RoomOption.getOptions()
+  response.room_type = await RoomType.getTypes()
 
   res.json(response)
 })
 
 router.post('/update', async (req, res, next) => {
-  var iObjectID = req.body.iObjectID || false
-  let iUserID = req.body.iUserID || false
-  let iObjectTypeID = req.body.iObjectTypeID || 1
-  let sObjectTitle = req.body.sObjectTitle || false
-  let iObjectArea = req.body.iObjectArea || null
-  let iObjectRoomCount = req.body.iObjectRoomCount || null
-  let iObjectBed = req.body.iObjectBed || 1
-  let iObjectPlace = req.body.iObjectPlace || 1
-  let iObjectPlaceDop = req.body.iObjectPlaceDop || 0
-  let sObjectAddress = req.body.sObjectAddress || null
-  var aObjectCoordinate = null
-  if (req.body.aObjectCoordinate.coordinates[0] && req.body.aObjectCoordinate.coordinates[1]) {
-    var aObjectCoordinate = req.body.aObjectCoordinate
+  let iObjectID = req.body.iObjectID || false
+  const iUserID = req.body.iUserID || false
+  const iObjectTypeID = req.body.iObjectTypeID || 1
+  const sObjectTitle = req.body.sObjectTitle || false
+  const iObjectArea = req.body.iObjectArea || null
+  const iObjectRoomCount = req.body.iObjectRoomCount || null
+  const iObjectBed = req.body.iObjectBed || 1
+  const iObjectPlace = req.body.iObjectPlace || 1
+  const iObjectPlaceDop = req.body.iObjectPlaceDop || 0
+  const sObjectAddress = req.body.sObjectAddress || null
+  let aObjectCoordinate = null
+  if (
+    req.body.aObjectCoordinate.coordinates[0] &&
+    req.body.aObjectCoordinate.coordinates[1]
+  ) {
+    aObjectCoordinate = req.body.aObjectCoordinate
   }
   if (aObjectCoordinate) {
-    aObjectCoordinate = Sequelize.fn('ST_GeomFromText', 'POINT(' + aObjectCoordinate.coordinates[0] + ' ' + aObjectCoordinate.coordinates[1] + ')')
+    aObjectCoordinate = Sequelize.fn(
+      'ST_GeomFromText',
+      'POINT(' +
+        aObjectCoordinate.coordinates[0] +
+        ' ' +
+        aObjectCoordinate.coordinates[1] +
+        ')'
+    )
   }
-  let tObjectDesc = req.body.tObjectDesc || null
-  let iObjectActive = req.body.iObjectActive || false
-  let iObjectVerification = req.body.iObjectVerification || false
+  const tObjectDesc = req.body.tObjectDesc || null
+  const iObjectActive = req.body.iObjectActive || false
+  const iObjectVerification = req.body.iObjectVerification || false
 
-  let object_object_options_array = req.body.object_object_options_array || []
-  let object_room_options_array = req.body.object_room_options_array || []
+  const objectObjectOptionsArray = req.body.object_object_options_array || []
+  const objectRoomOptionsArray = req.body.object_room_options_array || []
 
-  let rooms = req.body.rooms || []
+  const rooms = req.body.rooms || []
 
-  var response = {}
+  const response = {}
 
   if (iObjectID) {
     await Object.update(
@@ -116,101 +123,102 @@ router.post('/update', async (req, res, next) => {
         }
       }
     )
-  }
-  else {
-    var { iObjectID } = await Object.create(
-      {
-        iUserID,
-        iObjectTypeID,
-        sObjectTitle,
-        iObjectArea,
-        iObjectRoomCount,
-        iObjectBed,
-        iObjectPlace,
-        iObjectPlaceDop,
-        sObjectAddress,
-        aObjectCoordinate,
-        tObjectDesc,
-        iObjectActive,
-        iObjectVerification
-      }
-    )
+  } else {
+    const create = await Object.create({
+      iUserID,
+      iObjectTypeID,
+      sObjectTitle,
+      iObjectArea,
+      iObjectRoomCount,
+      iObjectBed,
+      iObjectPlace,
+      iObjectPlaceDop,
+      sObjectAddress,
+      aObjectCoordinate,
+      tObjectDesc,
+      iObjectActive,
+      iObjectVerification
+    })
+    iObjectID = create.iObjectID
   }
 
-  const object_object_option_action = async () => {
-    await Object_object_option.destroy({
+  const objectObjectOptionAction = async () => {
+    await ObjectObjectOption.destroy({
       where: {
         iObjectID
       }
     })
-    for (const iObjectOptionID of object_object_options_array) {
-      await Object_object_option.create({
+    for (const iObjectOptionID of objectObjectOptionsArray) {
+      await ObjectObjectOption.create({
         iObjectID,
         iObjectOptionID
       })
     }
   }
-  await object_object_option_action()
+  await objectObjectOptionAction()
 
-  const object_room_option_action = async () => {
-    await Object_room_option.destroy({
+  const objectRoomOptionAction = async () => {
+    await ObjectRoomOption.destroy({
       where: {
         iObjectID
       }
     })
-    for (const iRoomOptionID of object_room_options_array) {
-      await Object_room_option.create({
+    for (const iRoomOptionID of objectRoomOptionsArray) {
+      await ObjectRoomOption.create({
         iObjectID,
         iRoomOptionID
       })
     }
   }
-  await object_room_option_action()
+  await objectRoomOptionAction()
 
-  const room_room_option_action = async (iRoomID, options) => {
-    await Room_room_option.destroy({
+  const roomRoomOptionAction = async (iRoomID, options) => {
+    await RoomRoomOption.destroy({
       where: {
         iRoomID
       }
     })
     for (const iRoomOptionID of options) {
-      await Room_room_option.create({
+      await RoomRoomOption.create({
         iRoomID,
         iRoomOptionID
       })
     }
   }
 
-  const rooms_action = async () => {
+  const roomsAction = async () => {
     for (const room of rooms) {
-      var iRoomID = room.iRoomID || false
-      let iRoomTypeID = room.iRoomTypeID || false
-      let iRoomArea = room.iRoomArea || null
-      let iRoomCount = room.iRoomCount || null
-      let iRoomBed = room.iRoomBed || 1
-      let iRoomPlace = room.iRoomPlace || 1
-      let iRoomPlaceDop = room.iRoomPlaceDop || 0
-      let tRoomDesc = room.tRoomDesc || null
-      let iRoomActive = room.iRoomActive || false
-      let room_room_options_array = room.room_room_options_array || []
-      
+      let iRoomID = room.iRoomID || false
+      const iRoomTypeID = room.iRoomTypeID || false
+      const iRoomArea = room.iRoomArea || null
+      const iRoomCount = room.iRoomCount || null
+      const iRoomBed = room.iRoomBed || 1
+      const iRoomPlace = room.iRoomPlace || 1
+      const iRoomPlaceDop = room.iRoomPlaceDop || 0
+      const tRoomDesc = room.tRoomDesc || null
+      const iRoomActive = room.iRoomActive || false
+      const roomRoomOptionsArray = room.room_room_options_array || []
+
       if (iRoomID) {
-        await Room.update({
-          iRoomTypeID,
-          iRoomArea,
-          iRoomCount,
-          iRoomBed,
-          iRoomPlace,
-          iRoomPlaceDop,
-          tRoomDesc,
-          iRoomActive
-        }, {
-          where: {
-            iRoomID
+        await Room.update(
+          {
+            iRoomTypeID,
+            iRoomArea,
+            iRoomCount,
+            iRoomBed,
+            iRoomPlace,
+            iRoomPlaceDop,
+            tRoomDesc,
+            iRoomActive
+          },
+          {
+            where: {
+              iRoomID
+            }
           }
-        })
+        )
       } else {
-        var { iRoomID } = await Room.create({
+        const create = await Room.create({
           iObjectID,
           iRoomTypeID,
           iRoomArea,
@@ -221,14 +229,13 @@ router.post('/update', async (req, res, next) => {
           tRoomDesc,
           iRoomActive
         })
+        iRoomID = create.iRoomID
       }
 
-      await room_room_option_action(iRoomID, room_room_options_array)
+      await roomRoomOptionAction(iRoomID, roomRoomOptionsArray)
     }
   }
-  await rooms_action()
-
-  console.log('---------------------')
+  await roomsAction()
 
   response.object = await Object.getObject(iObjectID)
 
@@ -255,8 +262,6 @@ router.post('/upload', upload.single('file'), (req, res, next) => {
   // upload(req, res, function (err, responce) {
   //     res.json(req.file)
   // })
-
-
 
   // console.log(req.file)
   // upload(req, res, function (err, responce) {

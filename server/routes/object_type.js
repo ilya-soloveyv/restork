@@ -8,8 +8,7 @@ router.post('/get', async (req, res, next) => {
   let response = null
   if (iObjectTypeID) {
     response = await ObjectType.findByPk(iObjectTypeID)
-  }
-  else {
+  } else {
     response = await ObjectType.findAll({
       order: [
         ['iObjectTypeActive', 'DESC'],
@@ -22,12 +21,12 @@ router.post('/get', async (req, res, next) => {
 })
 
 router.post('/update', async (req, res, next) => {
-  let iObjectTypeID = req.body.iObjectTypeID || false
-  let sObjectTypeTitle = req.body.sObjectTypeTitle || false
-  let iObjectTypeSort = req.body.iObjectTypeSort || 9999
-  let iObjectTypeActive = req.body.iObjectTypeActive || false
-  let iRoomPermission = req.body.iRoomPermission || false
-  var response = {}
+  const iObjectTypeID = req.body.iObjectTypeID || false
+  const sObjectTypeTitle = req.body.sObjectTypeTitle || false
+  const iObjectTypeSort = req.body.iObjectTypeSort || 9999
+  const iObjectTypeActive = req.body.iObjectTypeActive || false
+  const iRoomPermission = req.body.iRoomPermission || false
+  let response = {}
 
   if (iObjectTypeID) {
     await ObjectType.update(
@@ -44,16 +43,13 @@ router.post('/update', async (req, res, next) => {
       }
     )
     response = await ObjectType.findByPk(iObjectTypeID)
-  }
-  else {
-    response = await ObjectType.create(
-      {
-        sObjectTypeTitle,
-        iObjectTypeSort,
-        iObjectTypeActive,
-        iRoomPermission
-      }
-    )
+  } else {
+    response = await ObjectType.create({
+      sObjectTypeTitle,
+      iObjectTypeSort,
+      iObjectTypeActive,
+      iRoomPermission
+    })
   }
 
   res.json(response)

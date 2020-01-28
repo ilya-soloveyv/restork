@@ -1,7 +1,7 @@
 'use strict'
 
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
   )
   User.associate = function(models) {}
 
-  User.searchUsers = async function (search) {
+  User.searchUsers = async function(search) {
     // search = search.split(' ')
 
     // search.forEach(item => {
@@ -93,7 +93,6 @@ module.exports = (sequelize, DataTypes) => {
     })
     return users
   }
-
 
   return User
 }

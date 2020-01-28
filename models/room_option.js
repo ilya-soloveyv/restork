@@ -34,8 +34,8 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
   }
 
-  RoomOption.getOptions = async function () {
-    var options = await RoomOption.findAll({
+  RoomOption.getOptions = async function() {
+    const options = await RoomOption.findAll({
       order: [
         ['iRoomOptionActive', 'DESC'],
         ['iRoomOptionSort', 'ASC'],
@@ -44,6 +44,6 @@ module.exports = (sequelize, DataTypes) => {
     })
     return options
   }
-  
+
   return RoomOption
 }
