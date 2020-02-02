@@ -19,7 +19,9 @@ const Object = require('../../models').object
 const Room = require('../../models').room
 const ObjectType = require('../../models').object_type
 const ObjectOption = require('../../models').object_option
+const ObjectImage = require('../../models').object_image
 const RoomOption = require('../../models').room_option
+const RoomImage = require('../../models').room_image
 const ObjectObjectOption = require('../../models').object_object_option
 const ObjectRoomOption = require('../../models').object_room_option
 const RoomType = require('../../models').room_type
@@ -242,33 +244,63 @@ router.post('/update', async (req, res, next) => {
   res.json(response)
 })
 
-router.post('/upload', upload.single('file'), (req, res, next) => {
+router.post('/uploadObjectImages', upload.any(), async (req, res, next) => {
+  const response = {}
+  const iObjectID = req.body.iObjectID
+
+  await ObjectImage.upload(iObjectID, req.files)
+
+  response.objectImages = await ObjectImage.findAll({
+    where: {
+      iObjectID
+    }
+  })
+
+  res.json(response)
+})
+
+router.post('/removeObjectImage', async (req, res, next) => {
   const response = {}
 
-  response.file = req.file
-  // var filename = randomString() + '.' + req.headers.extension
+  const image = req.body.image
+  await ObjectImage.remove(image)
 
-  // var storage = multer.diskStorage({
-  //     destination: function (req, file, cb) {
-  //         cb(null, 'static/upload/')
-  //     },
-  //     filename: function (req, file, cb) {
-  //         cb(null, filename)
-  //     }
-  // })
+  response.objectImages = await ObjectImage.findAll({
+    where: {
+      iObjectID: image.iObjectID
+    }
+  })
 
-  // var upload = multer({ storage: storage }).single('file')
+  res.json(response)
+})
 
-  // upload(req, res, function (err, responce) {
-  //     res.json(req.file)
-  // })
+router.post('/uploadRoomImages', upload.any(), async (req, res, next) => {
+  const response = {}
+  const iRoomID = req.body.iRoomID
 
-  // console.log(req.file)
-  // upload(req, res, function (err, responce) {
-  //   res.json(req.file)
-  // })
-  // req.files is array of `photos` files
-  // req.body will contain the text fields, if there were any
+  await RoomImage.upload(iRoomID, req.files)
+
+  response.roomImages = await RoomImage.findAll({
+    where: {
+      iRoomID
+    }
+  })
+
+  res.json(response)
+})
+
+router.post('/removeRoomImage', async (req, res, next) => {
+  const response = {}
+
+  const image = req.body.image
+  await RoomImage.remove(image)
+
+  response.roomImages = await RoomImage.findAll({
+    where: {
+      iRoomID: image.iRoomID
+    }
+  })
+
   res.json(response)
 })
 

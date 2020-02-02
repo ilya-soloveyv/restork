@@ -131,6 +131,9 @@ module.exports = (sequelize, DataTypes) => {
             },
             {
               model: sequelize.models.room_room_option
+            },
+            {
+              model: sequelize.models.room_image
             }
           ]
         }

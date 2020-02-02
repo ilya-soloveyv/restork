@@ -80,6 +80,9 @@ module.exports = (sequelize, DataTypes) => {
     Room.hasMany(models.room_room_option, {
       foreignKey: 'iRoomID'
     })
+    Room.hasMany(models.room_image, {
+      foreignKey: 'iRoomID'
+    })
   }
 
   Room.getRoom = async function(iRoomID) {

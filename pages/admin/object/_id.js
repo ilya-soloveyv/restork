@@ -1,7 +1,8 @@
 import Dropzone from 'nuxt-dropzone'
-import 'nuxt-dropzone/dropzone.css'
+// import 'nuxt-dropzone/dropzone.css'
 import Suggestions from 'v-suggestions'
 import 'v-suggestions/dist/v-suggestions.css'
+import '~/assets/scss/dropzone.scss'
 
 export default {
   middleware: 'admin',
@@ -17,10 +18,46 @@ export default {
       object_option: [],
       room_option: [],
       room_type: [],
-      options: {
-        url: '/api/object/upload',
-        dictDefaultMessage: 'Выберите файл или перетащите его сюда'
+      objectDropzoneOptions: {
+        url: '/api/object/uploadObjectImages',
+        dictDefaultMessage: 'Выберите файл или перетащите его сюда',
+        uploadMultiple: true,
+        parallelUploads: 64,
+        paramName: 'files',
+        createImageThumbnails: false,
+        addedfile: (file) => {},
+        processingmultiple: () => {
+          this.$set(this, 'dropzoneLoading', true)
+        },
+        sendingmultiple: (file, xhr, formData) => {
+          formData.append('iObjectID', this.object.iObjectID)
+        },
+        successmultiple: (file, data) => {
+          this.$set(this.object, 'object_images', data.objectImages)
+          this.$set(this, 'dropzoneLoading', false)
+        }
       },
+      dropzoneLoading: false,
+      roomDropzoneOptions: {
+        url: '/api/object/uploadRoomImages',
+        dictDefaultMessage: 'Выберите файл или перетащите его сюда',
+        uploadMultiple: true,
+        parallelUploads: 64,
+        paramName: 'files',
+        createImageThumbnails: false,
+        addedfile: (file) => {},
+        processingmultiple: () => {
+          this.$set(this, 'dropzoneLoading', true)
+        },
+        sendingmultiple: (file, xhr, formData) => {
+          formData.append('iRoomID', this.iRoomID)
+        },
+        successmultiple: (file, data) => {
+          this.$set(this.room, 'room_images', data.roomImages)
+          this.$set(this, 'dropzoneLoading', false)
+        }
+      },
+      roomIndexActive: false,
       suggestionsOptions: {
         inputClass: 'form-control',
         // debounce: 250,
@@ -48,6 +85,20 @@ export default {
     }
   },
   computed: {
+    dropzoneRoomID() {
+      return this.dropzoneRoomIndex
+        ? this.object.rooms[this.dropzoneRoomIndex].iRoomID
+        : false
+    },
+    SELECTEL_HOST() {
+      return process.env.SELECTEL_HOST
+    },
+    SELECTEL_CONTAINER() {
+      return process.env.SELECTEL_CONTAINER
+    },
+    SELECTEL_WEB() {
+      return process.env.SELECTEL_WEB
+    },
     sUserFullName() {
       const sUserFullName = []
       if (this.object.user.sUserLastName) {
@@ -70,6 +121,14 @@ export default {
     },
     tabHash() {
       return this.$route.hash
+    },
+    room() {
+      return this.roomIndexActive !== false && this.object.rooms
+        ? this.object.rooms[this.roomIndexActive]
+        : false
+    },
+    iRoomID() {
+      return this.room.iRoomID
     }
   },
   async asyncData({ params, $axios }) {
@@ -105,19 +164,6 @@ export default {
           active: true
         }
       ]
-    }
-  },
-  mounted() {
-    if (this.object.object_images) {
-      this.object.object_images.forEach((image) => {
-        this.$refs.myVueDropzone.manuallyAddFile(
-          {
-            size: 123,
-            type: 'image/jpg'
-          },
-          '/upload/object/100_100/' + image.sObjectImage
-        )
-      })
     }
   },
   methods: {
@@ -200,6 +246,23 @@ export default {
       this.object.rooms.push({
         room_room_options_array: []
       })
+      const roomIndexActive = this.object.rooms.length - 1
+      this.$set(this, 'roomIndexActive', roomIndexActive)
+    },
+    async removeObjectImage(image) {
+      const { data } = await this.$axios.post('/api/object/removeObjectImage', {
+        image
+      })
+      this.$set(this.object, 'object_images', data.objectImages)
+    },
+    async removeRoomImage(image) {
+      const { data } = await this.$axios.post('/api/object/removeRoomImage', {
+        image
+      })
+      this.$set(this.room, 'room_images', data.roomImages)
+    },
+    useRoom(roomIndex) {
+      this.$set(this, 'roomIndexActive', roomIndex)
     }
   }
 }
