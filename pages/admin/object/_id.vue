@@ -610,7 +610,7 @@
           <b-button type="submit" variant="success">Сохранить</b-button>
         </b-form-group>
       </b-form>
-      <pre>{{ iRoomID }}</pre>
+      <!-- <pre>{{ iRoomID }}</pre> -->
       <!-- <pre>{{ object }}</pre> -->
       <!-- <pre>{{ object_type }}</pre> -->
       <!-- <pre>{{ object_option }}</pre> -->
