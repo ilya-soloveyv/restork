@@ -20,7 +20,7 @@ module.exports = {
     port: env.PORT
   },
   loading: { color: '#007bff' },
-  css: ['~/assets/scss/main.scss'],
+  css: ['~/assets/scss/main.scss', '~/assets/scss/admin/admin.scss'],
   plugins: [],
   buildModules: ['@nuxtjs/eslint-module'],
   modules: [
@@ -28,6 +28,7 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/auth',
     '@nuxtjs/dotenv',
+    '@nuxtjs/svg',
     [
       'vue-yandex-maps/nuxt',
       {

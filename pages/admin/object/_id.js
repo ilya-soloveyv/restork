@@ -2,7 +2,7 @@ import Dropzone from 'nuxt-dropzone'
 // import 'nuxt-dropzone/dropzone.css'
 import Suggestions from 'v-suggestions'
 import 'v-suggestions/dist/v-suggestions.css'
-import '~/assets/scss/dropzone.scss'
+import '~/assets/scss/admin/dropzone.scss'
 
 export default {
   middleware: 'admin',

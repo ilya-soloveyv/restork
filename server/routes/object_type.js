@@ -55,4 +55,11 @@ router.post('/update', async (req, res, next) => {
   res.json(response)
 })
 
+router.post('/list', async (req, res, next) => {
+  const response = {}
+  const params = req.body
+  response.objectType = await ObjectType.findAll({ where: params })
+  res.json(response)
+})
+
 module.exports = router

@@ -76,6 +76,7 @@ router.post('/update', async (req, res, next) => {
   const sObjectAddress = req.body.sObjectAddress || null
   let aObjectCoordinate = null
   if (
+    req.body.aObjectCoordinate &&
     req.body.aObjectCoordinate.coordinates[0] &&
     req.body.aObjectCoordinate.coordinates[1]
   ) {
@@ -96,6 +97,9 @@ router.post('/update', async (req, res, next) => {
   const iObjectVerification = req.body.iObjectVerification || false
 
   const objectObjectOptionsArray = req.body.object_object_options_array || []
+  console.log('------------------------')
+  console.log(objectObjectOptionsArray)
+  console.log('------------------------')
   const objectRoomOptionsArray = req.body.object_room_options_array || []
 
   const rooms = req.body.rooms || []
@@ -314,6 +318,19 @@ router.post('/search_address', async (req, res, next) => {
     response.list = await geocoder.geocode(search)
   }
 
+  res.json(response)
+})
+
+router.post('/list', async (req, res, next) => {
+  const response = {}
+  const iUserID = req.body.iUserID
+  response.objects = await Object.getList({ iUserID })
+  res.json(response)
+})
+
+router.post('/item', async (req, res, next) => {
+  const response = {}
+  response.object = await Object.getObject(req.body.id)
   res.json(response)
 })
 

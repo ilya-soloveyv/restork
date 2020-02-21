@@ -1,37 +1,13 @@
 <template>
   <div id="login">
-    <b-form @submit.prevent="login" autocomplete="off">
-      <b-form-group
-        id="label-phone"
-        label="Мобильный телефон"
-        label-for="input-phone"
-      >
-        <b-input
-          id="input-phone"
-          v-model.number.trim="phone"
-          class="form-control"
-          required
-        ></b-input>
-      </b-form-group>
-      <b-form-group
-        id="label-password"
-        label="Пароль"
-        label-for="input-password"
-      >
-        <b-input
-          id="input-password"
-          v-model="password"
-          type="password"
-          required
-        ></b-input>
-      </b-form-group>
-      <b-alert v-if="error" variant="warning" class="mb-3" show>
-        {{ error }}
-      </b-alert>
-      <b-button :disabled="$auth.busy" type="submit" variant="primary">
+    <form @submit.prevent="login" autocomplete="off">
+      <input id="input-phone" v-model.number.trim="phone" required />
+      <input id="input-password" v-model="password" type="password" required />
+      <div v-if="error">{{ error }}</div>
+      <button :disabled="$auth.busy" type="submit">
         Войти
-      </b-button>
-    </b-form>
+      </button>
+    </form>
   </div>
 </template>
 

@@ -158,6 +158,15 @@ module.exports = (sequelize, DataTypes) => {
     return object
   }
 
+  Object.getList = async (params) => {
+    const objects = await Object.findAll({
+      where: {
+        iUserID: params.iUserID
+      }
+    })
+    return objects
+  }
+
   sequelizePaginate.paginate(Object)
   return Object
 }

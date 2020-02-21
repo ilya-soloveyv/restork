@@ -1,0 +1,143 @@
+.full-page {
+  min-height: calc(100vh - 105px);
+  background: #fff url('~assets/images/breas.jpg') no-repeat center bottom;
+  padding-top: 80px;
+  padding-bottom: 296px;
+}
+
+.sign {  
+  &-form {
+    position: relative;    
+    width: 100%;
+    max-width: 370px;
+    margin: 0 auto;
+    background: rgb(255, 255, 255);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0px 0px 12.09px 0.91px rgba(0, 0, 0, 0.13);
+    @media screen and (max-width: 576px){
+      padding: 20px;
+    }
+    .form-title {
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 43px;
+    }    
+    .form-group {
+      position: relative;
+      input {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #bcbcbc;
+        padding: 6px 10px 10px;
+        margin-bottom: 27px;
+        transition: border .25s;
+        background: transparent;
+        &.datepicker-here {
+          margin-bottom: 0;
+        }
+        &:hover {
+          border-bottom: 1px solid $accent;
+        }
+        &:focus {
+          border-bottom: 1px solid $accent;
+          &+label {
+            top: -12px;
+            font-size: 12px;
+            color: #000;
+            font-weight: 600;
+          }
+        }
+        &[type="password"] {
+          padding: 0 10px;
+          height: 32px;
+          font-size: 25px;
+          overflow: hidden;
+          margin-bottom: 27px;
+          &.password {
+            margin-bottom: 27px;
+          }
+        }                             
+      }      
+      label {
+        position: absolute;
+        top: 6px;
+        left: 10px;
+        font-size: 14px;
+        color: #bcbcbc;
+        pointer-events: none;
+        transition: all .25s;
+        span {
+          color: red;
+          margin-left: 2px;
+        }
+      }
+      .eye {
+        position: absolute;
+        top: 7px;
+        right: 8px;
+        border: none;
+        background: transparent;
+        opacity: 0.7;
+        cursor: pointer;
+        &.active {
+          opacity: 1;
+        }
+      }
+    }    
+    .scheck {
+      display: none;
+      &:checked {
+        &+label:before {
+          background: #06b4ff;
+        }
+      }
+      &+label {
+        position: relative;        
+        padding: 11px;
+        padding-left: 25px;
+        font-size: 12px;
+        cursor: pointer;
+        @media screen and (max-width: 576px){
+          width: 200px;          
+        }           
+        &:before {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          width: 16px;
+          height: 16px;
+          border: 4px solid #434343;
+          background: #fff;
+          box-sizing: border-box;
+          cursor: pointer;
+          transition: .25s;               
+        }
+        &:hover:before {
+          border: 4px solid #000;
+        }
+      }
+    } 
+    .sign_btn {
+      width: 150px;      
+      margin: 0 auto;
+      margin-top: 29px;
+    }
+    .reg_btn {
+      margin-top: 0;
+    }
+    .to-reg {
+      margin-top: 15px;
+      text-align: center;
+      a {
+        color: #0098da;
+        padding-bottom: 1px;
+        border-bottom: 1px solid #0098da;
+      }
+    }
+  }
+}
