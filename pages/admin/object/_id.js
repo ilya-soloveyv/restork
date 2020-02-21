@@ -24,6 +24,7 @@ export default {
         uploadMultiple: true,
         parallelUploads: 64,
         paramName: 'files',
+        timeout: 5 * 60 * 1000,
         createImageThumbnails: false,
         addedfile: (file) => {},
         processingmultiple: () => {
@@ -44,6 +45,7 @@ export default {
         uploadMultiple: true,
         parallelUploads: 64,
         paramName: 'files',
+        timeout: 5 * 60 * 1000,
         createImageThumbnails: false,
         addedfile: (file) => {},
         processingmultiple: () => {
