@@ -14,7 +14,7 @@ const getters = {
         redirect = '/dashboard/object/' + iObjectID + '/adress'
       }
     } else {
-      redirect = '/dashboard/object'
+      // redirect = '/dashboard/object'
     }
     return redirect
   }
@@ -31,6 +31,12 @@ const mutations = {
         object.object_object_options_array.push(option.iObjectOptionID)
       })
     }
+    if (object.object_room_options) {
+      object.object_room_options_array = []
+      object.object_room_options.forEach((option) => {
+        object.object_room_options_array.push(option.iRoomOptionID)
+      })
+    }
     state.item = object
   },
   UPDATE_sObjectTitle(state, sObjectTitle) {
@@ -42,11 +48,20 @@ const mutations = {
   UPDATE_objectObjectOptionsArray(state, params) {
     state.item.object_object_options_array = params
   },
+  UPDATE_objectRoomOptionsArray(state, params) {
+    state.item.object_room_options_array = params
+  },
   UPDATE_MARKER_COORDINATES(state, params) {
     state.item.aObjectCoordinate.coordinates = params
   },
   UPDATE_sObjectAddress(state, sObjectAddress) {
     state.item.sObjectAddress = sObjectAddress
+  },
+  SET_OBJECT_IMAGES(state, { objectImages }) {
+    state.item.object_images = objectImages
+  },
+  UPDATE_tObjectDesc(state, { tObjectDesc }) {
+    state.item.tObjectDesc = tObjectDesc
   }
 }
 
@@ -84,6 +99,12 @@ const actions = {
     // const { object } = await this.$axios.$post('/api/object/update', state.item)
     // commit('SET_ITEM', object)
   },
+  UPDATE_objectRoomOptionsArray({ state, commit }, params) {
+    commit('UPDATE_objectRoomOptionsArray', params)
+    // console.log(state.item)
+    // const { object } = await this.$axios.$post('/api/object/update', state.item)
+    // commit('SET_ITEM', object)
+  },
   async UPDATE({ state, commit }) {
     const { object } = await this.$axios.$post('/api/object/update', state.item)
     commit('SET_ITEM', object)
@@ -93,6 +114,21 @@ const actions = {
   },
   UPDATE_sObjectAddress({ state, commit }, sObjectAddress) {
     commit('UPDATE_sObjectAddress', sObjectAddress)
+  },
+  async REMOVE_IMAGE({ state, commit }, params) {
+    const { objectImages } = await this.$axios.$post(
+      '/api/object/removeObjectImage',
+      params
+    )
+    commit('SET_OBJECT_IMAGES', { objectImages })
+    // console.log(objectImages)
+  },
+  SET_OBJECT_IMAGES({ state, commit }, { objectImages }) {
+    console.log(objectImages)
+    commit('SET_OBJECT_IMAGES', { objectImages })
+  },
+  UPDATE_tObjectDesc({ state, commit }, { tObjectDesc }) {
+    commit('UPDATE_tObjectDesc', { tObjectDesc })
   }
 }
 

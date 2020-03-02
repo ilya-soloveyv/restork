@@ -92,12 +92,13 @@ module.exports = (sequelize, DataTypes) => {
         iObjectImageID: image.iObjectImageID
       }
     })
-    selectel.deleteFile(sObjectImagePathOriginal, (err, data) => () => {
-      if (err) throw err
-    })
-    selectel.deleteFile(sObjectImagePathPreview, (err, data) => () => {
-      if (err) throw err
-    })
+    await selectel.auth(
+      process.env.SELECTEL_USER,
+      process.env.SELECTEL_PASSWORD
+    )
+    await selectel.deleteFile(sObjectImagePathOriginal)
+    await selectel.deleteFile(sObjectImagePathPreview)
+    return true
   }
 
   return ObjectImage
