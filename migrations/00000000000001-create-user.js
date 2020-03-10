@@ -23,6 +23,15 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      sUserEmail: {
+        type: Sequelize.STRING
+      },
+      dUserBirthday: {
+        type: Sequelize.DATEONLY
+      },
+      sUserAvatar: {
+        type: Sequelize.STRING
+      },
       sUserPassword: {
         type: Sequelize.STRING,
         allowNull: false

@@ -12,6 +12,9 @@ module.exports = {
           sUserFirstName: 'Шелдон',
           sUserPhone: '79031111111',
           sUserPassword: '3fc0a7acf087f549ac2b266baf94b8b1', // qwerty
+          sUserEmail: null,
+          dUserBirthday: null,
+          sUserAvatar: null,
           iUserKey: 123,
           iUserAdmin: 1
         },
@@ -22,6 +25,9 @@ module.exports = {
           sUserFirstName: 'Леонард',
           sUserPhone: '79032222222',
           sUserPassword: '3fc0a7acf087f549ac2b266baf94b8b1', // qwerty
+          sUserEmail: null,
+          dUserBirthday: null,
+          sUserAvatar: null,
           iUserKey: 123,
           iUserAdmin: 0
         },
@@ -32,6 +38,9 @@ module.exports = {
           sUserFirstName: 'Александр',
           sUserPhone: '79033333333',
           sUserPassword: '3fc0a7acf087f549ac2b266baf94b8b1', // qwerty
+          sUserEmail: null,
+          dUserBirthday: null,
+          sUserAvatar: null,
           iUserKey: 123,
           iUserAdmin: 0
         },
@@ -42,6 +51,9 @@ module.exports = {
           sUserFirstName: 'Фёдор',
           sUserPhone: '79034444444',
           sUserPassword: '3fc0a7acf087f549ac2b266baf94b8b1', // qwerty
+          sUserEmail: null,
+          dUserBirthday: null,
+          sUserAvatar: null,
           iUserKey: 123,
           iUserAdmin: 0
         },
@@ -52,6 +64,9 @@ module.exports = {
           sUserFirstName: 'Николaй',
           sUserPhone: '79035555555',
           sUserPassword: '3fc0a7acf087f549ac2b266baf94b8b1', // qwerty
+          sUserEmail: null,
+          dUserBirthday: null,
+          sUserAvatar: null,
           iUserKey: 123,
           iUserAdmin: 0
         },
@@ -62,6 +77,9 @@ module.exports = {
           sUserFirstName: 'Иван',
           sUserPhone: '79036666666',
           sUserPassword: '3fc0a7acf087f549ac2b266baf94b8b1', // qwerty
+          sUserEmail: null,
+          dUserBirthday: null,
+          sUserAvatar: null,
           iUserKey: 123,
           iUserAdmin: 0
         },
@@ -72,6 +90,9 @@ module.exports = {
           sUserFirstName: 'Александр',
           sUserPhone: '79037777777',
           sUserPassword: '3fc0a7acf087f549ac2b266baf94b8b1', // qwerty
+          sUserEmail: null,
+          dUserBirthday: null,
+          sUserAvatar: null,
           iUserKey: 123,
           iUserAdmin: 0
         }

@@ -86,7 +86,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 ul.objectImage {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

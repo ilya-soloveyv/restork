@@ -15,9 +15,20 @@
         <b-navbar-nav class="ml-auto">
           <template v-if="$auth.$state.loggedIn">
             <div class="restorkUser">
-              <img src="~assets/images/user.svg" alt="" />
+              <template v-if="$auth.user.sUserAvatar">
+                <img
+                  :src="
+                    SELECTEL_WEB + '/user/preview/' + $auth.user.sUserAvatar
+                  "
+                />
+              </template>
+              <template v-else>
+                <div class="empty">
+                  <img src="~/static/user.svg" />
+                </div>
+              </template>
             </div>
-            <b-nav-item to="/dashboard">Dashboard</b-nav-item>
+            <b-nav-item to="/dashboard">Личный кабинет</b-nav-item>
             <b-nav-item @click.prevent="$auth.logout()" to="/">
               Выйти
             </b-nav-item>
@@ -31,6 +42,16 @@
     </b-container>
   </b-navbar>
 </template>
+
+<script>
+export default {
+  computed: {
+    SELECTEL_WEB() {
+      return process.env.SELECTEL_WEB
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .navbar {
@@ -58,18 +79,29 @@
   }
   .restorkUser {
     background: linear-gradient(0deg, #05f 0, #00c9ff 100%);
-    border-radius: 50%;
-    padding: 0.5rem;
+    // padding: 0.5rem;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 40px;
     height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
     img {
       fill: white;
       width: 100%;
       height: 100%;
       object-fit: contain;
+    }
+    .empty {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 60%;
+        height: 60%;
+      }
     }
   }
 }
