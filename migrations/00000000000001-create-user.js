@@ -21,7 +21,11 @@ module.exports = {
       },
       sUserPhone: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
+      },
+      sUserPhoneKod: {
+        type: Sequelize.STRING
       },
       sUserEmail: {
         type: Sequelize.STRING

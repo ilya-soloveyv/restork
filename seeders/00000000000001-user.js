@@ -10,7 +10,8 @@ module.exports = {
           sUserLastName: null,
           sUserMiddleName: null,
           sUserFirstName: 'Шелдон',
-          sUserPhone: '79031111111',
+          sUserPhone: '9031111111',
+          sUserPhoneKod: null,
           sUserPassword: '3fc0a7acf087f549ac2b266baf94b8b1', // qwerty
           sUserEmail: null,
           dUserBirthday: null,
@@ -23,7 +24,8 @@ module.exports = {
           sUserLastName: null,
           sUserMiddleName: null,
           sUserFirstName: 'Леонард',
-          sUserPhone: '79032222222',
+          sUserPhone: '9032222222',
+          sUserPhoneKod: null,
           sUserPassword: '3fc0a7acf087f549ac2b266baf94b8b1', // qwerty
           sUserEmail: null,
           dUserBirthday: null,
@@ -36,7 +38,8 @@ module.exports = {
           sUserLastName: 'Пушкин',
           sUserMiddleName: 'Сергеевич',
           sUserFirstName: 'Александр',
-          sUserPhone: '79033333333',
+          sUserPhone: '9033333333',
+          sUserPhoneKod: null,
           sUserPassword: '3fc0a7acf087f549ac2b266baf94b8b1', // qwerty
           sUserEmail: null,
           dUserBirthday: null,
@@ -49,7 +52,8 @@ module.exports = {
           sUserLastName: 'Достоевский',
           sUserMiddleName: 'Михайлович',
           sUserFirstName: 'Фёдор',
-          sUserPhone: '79034444444',
+          sUserPhone: '9034444444',
+          sUserPhoneKod: null,
           sUserPassword: '3fc0a7acf087f549ac2b266baf94b8b1', // qwerty
           sUserEmail: null,
           dUserBirthday: null,
@@ -62,7 +66,8 @@ module.exports = {
           sUserLastName: 'Гоголь',
           sUserMiddleName: 'Васильевич',
           sUserFirstName: 'Николaй',
-          sUserPhone: '79035555555',
+          sUserPhone: '9035555555',
+          sUserPhoneKod: null,
           sUserPassword: '3fc0a7acf087f549ac2b266baf94b8b1', // qwerty
           sUserEmail: null,
           dUserBirthday: null,
@@ -75,7 +80,8 @@ module.exports = {
           sUserLastName: 'Бунин',
           sUserMiddleName: 'Алексеевич',
           sUserFirstName: 'Иван',
-          sUserPhone: '79036666666',
+          sUserPhone: '9036666666',
+          sUserPhoneKod: null,
           sUserPassword: '3fc0a7acf087f549ac2b266baf94b8b1', // qwerty
           sUserEmail: null,
           dUserBirthday: null,
@@ -88,7 +94,8 @@ module.exports = {
           sUserLastName: 'Куприн',
           sUserMiddleName: 'Иванович',
           sUserFirstName: 'Александр',
-          sUserPhone: '79037777777',
+          sUserPhone: '9037777777',
+          sUserPhoneKod: null,
           sUserPassword: '3fc0a7acf087f549ac2b266baf94b8b1', // qwerty
           sUserEmail: null,
           dUserBirthday: null,

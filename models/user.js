@@ -6,6 +6,12 @@ const fs = require('fs')
 const selectel = require('selectel-storage-promise')
 const fileExtension = require('file-extension')
 const Jimp = require('jimp')
+const jsonwebtoken = require('jsonwebtoken')
+const md5 = require('md5')
+const validator = require('validator')
+const randomstring = require('randomstring')
+const axios = require('axios')
+const urlencode = require('urlencode')
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
@@ -29,7 +35,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       sUserPhone: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
+      },
+      sUserPhoneKod: {
+        type: DataTypes.STRING
       },
       sUserEmail: {
         type: DataTypes.STRING
@@ -160,6 +170,182 @@ module.exports = (sequelize, DataTypes) => {
       .catch((err) => {
         return err
       })
+  }
+
+  User.signin = async function(sUserPhone, sUserPassword) {
+    const sUserPhoneValidate = User.sUserPhoneValidate(sUserPhone)
+    if (!sUserPhoneValidate) {
+      return {
+        error: {
+          ref: 'sUserPhone',
+          message: 'Неверный формат мобильного телефона'
+        }
+      }
+    }
+    const sUserPasswordValidate = User.sUserPasswordValidate(sUserPassword)
+    if (!sUserPasswordValidate) {
+      return {
+        error: {
+          ref: 'sUserPassword',
+          message: 'Неверный формат пароля'
+        }
+      }
+    }
+    const user = await User.findOne({
+      where: {
+        sUserPhone
+      }
+    })
+    if (user === null) {
+      return {
+        error: {
+          ref: 'sUserPhone',
+          message: 'Пользователь не зарегистрирован'
+        }
+      }
+    }
+    const iUserKey = user.iUserKey
+    const sUserPasswordHash = user.sUserPassword
+    const sUserPasswordHashReq = md5(sUserPassword + iUserKey)
+    const checkSignIn = sUserPasswordHash === sUserPasswordHashReq
+    if (!checkSignIn) {
+      return {
+        error: {
+          ref: 'sUserPassword',
+          message: 'Логин или пароль не совпадают'
+        }
+      }
+    }
+    const accessToken = jsonwebtoken.sign(
+      {
+        iUserID: user.iUserID,
+        sUserLastName: user.sUserLastName,
+        sUserMiddleName: user.sUserMiddleName,
+        sUserFirstName: user.sUserFirstName,
+        sUserPhone: user.sUserPhone,
+        sUserPhoneKod: user.sUserPhoneKod,
+        sUserEmail: user.sUserEmail,
+        dUserBirthday: user.dUserBirthday,
+        sUserAvatar: user.sUserAvatar,
+        iUserAdmin: user.iUserAdmin
+      },
+      'dummy'
+    )
+    return {
+      accessToken
+    }
+  }
+
+  User.signup = async function(sUserFirstName, sUserPhone, sUserPassword) {
+    const sUserFirstNameValidate = User.sUserFirstNameValidate(sUserFirstName)
+    if (!sUserFirstNameValidate) {
+      return {
+        error: {
+          ref: 'sUserFirstName',
+          message: 'Необходимо ввести Ваше имя'
+        }
+      }
+    }
+    const sUserPhoneValidate = User.sUserPhoneValidate(sUserPhone)
+    if (!sUserPhoneValidate) {
+      return {
+        error: {
+          ref: 'sUserPhone',
+          message: 'Неверный формат мобильного телефона'
+        }
+      }
+    }
+    const sUserPasswordValidate = User.sUserPasswordValidate(sUserPassword)
+    if (!sUserPasswordValidate) {
+      return {
+        error: {
+          ref: 'sUserPassword',
+          message: 'Неверный формат пароля'
+        }
+      }
+    }
+    const user = await User.findOne({
+      where: {
+        sUserPhone
+      }
+    })
+    if (user !== null) {
+      return {
+        error: {
+          ref: 'sUserPhone',
+          message: 'Пользователь уже зарегистрирован'
+        }
+      }
+    }
+    const iUserKey = randomstring.generate({
+      length: 3,
+      charset: 'numeric'
+    })
+    const sUserPhoneKod = randomstring.generate({
+      length: 4,
+      charset: 'numeric'
+    })
+    const smsText = urlencode('Код подтверждения: ' + sUserPhoneKod)
+    const sUserPasswordHash = md5(sUserPassword + iUserKey)
+    await User.create({
+      sUserFirstName,
+      sUserPhone,
+      sUserPassword: sUserPasswordHash,
+      iUserKey,
+      sUserPhoneKod
+    })
+    axios.get(
+      process.env.SMS_HOST +
+        '?user=' +
+        process.env.SMS_USER +
+        '&pwd=' +
+        process.env.SMS_PASS +
+        '&dadr=' +
+        '7' +
+        sUserPhone +
+        '&text=' +
+        smsText +
+        '&sadr=' +
+        process.env.SMS_SADR
+    )
+    return true
+  }
+
+  User.sUserPhoneValidate = function(sUserPhone) {
+    if (
+      !validator.isEmpty(sUserPhone) &&
+      validator.isNumeric(sUserPhone) &&
+      validator.isLength(sUserPhone, {
+        min: 10,
+        max: 10
+      })
+    ) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  User.sUserPasswordValidate = function(sUserPassword) {
+    if (
+      !validator.isEmpty(sUserPassword) &&
+      validator.isLength(sUserPassword, { min: 6, max: 24 })
+    ) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  User.sUserFirstNameValidate = function(sUserFirstName) {
+    if (
+      !validator.isEmpty(sUserFirstName) &&
+      validator.isLength(sUserFirstName, { min: 2 })
+    ) {
+      return true
+    } else {
+      return false
+    }
   }
 
   return User

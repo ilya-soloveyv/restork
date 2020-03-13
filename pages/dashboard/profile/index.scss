@@ -84,10 +84,27 @@
     }
   }
   .userData {
-    // border-bottom: 1px solid #d9d9d9;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #d9d9d9;
   }
   .userPassword {
     // background-color: orange;
     // padding: 1rem;
+  }
+}
+.viewPassword {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-left: none;
+  border-color: #ced4da;
+  &.viewPasswordActive {
+    svg {
+      stroke: #007BFF;
+    }
+  }
+  svg {
+    stroke: #cccccc;
   }
 }

@@ -14,6 +14,7 @@ export default {
   },
   data() {
     return {
+      error: null,
       ru,
       updateData: false,
       userAvatarDropzoneOptions: {
@@ -37,14 +38,38 @@ export default {
           this.$set(this, 'dropzoneLoading', false)
         }
       },
-      dropzoneLoading: false
+      dropzoneLoading: false,
+      oldPassword: '',
+      newPassword: '',
+      repeatPassword: '',
+      oldPasswordView: false,
+      newPasswordView: false,
+      updatePasswordSuccess: false
     }
   },
   computed: {
     SELECTEL_WEB() {
       return process.env.SELECTEL_WEB
     },
-    user: ({ $store }) => Object.assign({}, $store.state.auth.user)
+    user: ({ $store }) => Object.assign({}, $store.state.auth.user),
+    updateDataPassword() {
+      if (
+        this.newPasswordView &&
+        this.oldPassword.length &&
+        this.newPassword.length
+      ) {
+        return true
+      } else if (
+        this.oldPassword.length &&
+        this.newPassword.length &&
+        this.repeatPassword.length &&
+        this.newPassword === this.repeatPassword
+      ) {
+        return true
+      } else {
+        return false
+      }
+    }
   },
   methods: {
     async update() {
@@ -59,6 +84,34 @@ export default {
       await this.$axios.$post('/api/auth/update', { user: this.user })
       await this.$auth.fetchUser()
       this.$set(this, 'updateData', false)
+    },
+    async updatePassword() {
+      this.$set(this, 'updatePasswordSuccess', false)
+      this.$set(this, 'error', null)
+      this.$set(this, 'updateData', true)
+      const response = await this.$axios
+        .$post('/api/auth/updatePassword', {
+          oldPassword: this.oldPassword,
+          newPassword: this.newPassword
+        })
+        .catch((e) => {
+          this.$set(this, 'error', e.response.data.error)
+          this.$refs[this.error.ref].$el.focus()
+        })
+      this.$set(this, 'updateData', false)
+      if (response) {
+        await this.$auth.fetchUser()
+        this.$set(this, 'oldPassword', '')
+        this.$set(this, 'newPassword', '')
+        this.$set(this, 'repeatPassword', '')
+        this.$set(this, 'updatePasswordSuccess', true)
+      }
+    },
+    oldPasswordToggle() {
+      this.$set(this, 'oldPasswordView', !this.oldPasswordView || false)
+    },
+    newPasswordToggle() {
+      this.$set(this, 'newPasswordView', !this.newPasswordView || false)
     }
   }
 }

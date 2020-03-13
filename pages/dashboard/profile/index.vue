@@ -137,7 +137,139 @@
           </b-row>
         </b-form>
       </div>
-      <div class="userPassword"></div>
+      <div class="userPassword">
+        <b-form @submit.prevent="updatePassword">
+          <div class="row">
+            <div class="col">
+              <h2>Изменить пароль:</h2>
+            </div>
+          </div>
+          <b-row>
+            <b-col cols="4">
+              <b-form-group
+                id="oldPasswordLabel"
+                label="Старый пароль"
+                label-for="oldPasswordInput"
+              >
+                <b-input-group>
+                  <b-form-input
+                    id="oldPasswordInput"
+                    ref="oldPassword"
+                    v-model.trim="oldPassword"
+                    :class="{
+                      'is-invalid': error && error.ref === 'oldPassword'
+                    }"
+                    :type="oldPasswordView ? 'text' : 'password'"
+                  />
+                  <b-input-group-append>
+                    <b-button
+                      :class="{ viewPasswordActive: oldPasswordView }"
+                      @click="oldPasswordToggle"
+                      type="button"
+                      class="viewPassword"
+                      variant="secondary"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke-width="2"
+                        stroke-linecap="square"
+                        stroke-linejoin="arcs"
+                      >
+                        <path
+                          d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                        ></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                    </b-button>
+                  </b-input-group-append>
+                  <b-form-invalid-feedback v-if="error && error.message">
+                    {{ error.message }}
+                  </b-form-invalid-feedback>
+                </b-input-group>
+              </b-form-group>
+            </b-col>
+            <b-col cols="4">
+              <b-form-group
+                id="newPasswordLabel"
+                label="Новый пароль"
+                label-for="newPasswordInput"
+              >
+                <b-input-group>
+                  <b-form-input
+                    id="newPasswordInput"
+                    ref="newPassword"
+                    v-model.trim="newPassword"
+                    :class="{
+                      'is-invalid': error && error.ref === 'newPassword'
+                    }"
+                    :type="newPasswordView ? 'text' : 'password'"
+                  ></b-form-input>
+                  <b-input-group-append>
+                    <b-button
+                      :class="{ viewPasswordActive: newPasswordView }"
+                      @click="newPasswordToggle"
+                      type="button"
+                      class="viewPassword"
+                      variant="secondary"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke-width="2"
+                        stroke-linecap="square"
+                        stroke-linejoin="arcs"
+                      >
+                        <path
+                          d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                        ></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                    </b-button>
+                  </b-input-group-append>
+                  <b-form-invalid-feedback v-if="error && error.message">
+                    {{ error.message }}
+                  </b-form-invalid-feedback>
+                </b-input-group>
+              </b-form-group>
+            </b-col>
+            <b-col v-if="!newPasswordView" cols="4">
+              <b-form-group
+                id="repeatPasswordLabel"
+                label="Подтверждение пароля"
+                label-for="repeatPasswordInput"
+              >
+                <b-form-input
+                  id="repeatPasswordInput"
+                  ref="repeatPassword"
+                  v-model.trim="repeatPassword"
+                  type="password"
+                ></b-form-input>
+              </b-form-group>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col>
+              <b-button
+                :disabled="updateData || !updateDataPassword"
+                type="submit"
+                variant="primary"
+              >
+                Обновить пароль
+              </b-button>
+              <small v-if="updatePasswordSuccess">
+                <span class="text-success">Ваш пароль успешно обновлен</span>
+              </small>
+            </b-col>
+          </b-row>
+        </b-form>
+      </div>
     </div>
     <!-- <pre>{{ $auth.user }}</pre> -->
     <!-- <pre>{{ user }}</pre> -->

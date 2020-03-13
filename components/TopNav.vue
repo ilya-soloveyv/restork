@@ -34,8 +34,8 @@
             </b-nav-item>
           </template>
           <template v-else>
-            <b-nav-item to="/login">Войти</b-nav-item>
-            <b-nav-item to="/reg">Регистрация</b-nav-item>
+            <b-nav-item to="/signin">Войти</b-nav-item>
+            <b-nav-item to="/signup">Регистрация</b-nav-item>
           </template>
         </b-navbar-nav>
       </b-collapse>

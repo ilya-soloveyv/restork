@@ -1,41 +1,20 @@
 const { Router } = require('express')
 const router = Router()
-const jsonwebtoken = require('jsonwebtoken')
-const md5 = require('md5')
 const multer = require('multer')
 const upload = multer({ dest: 'static/upload/' })
 
 const User = require('../../models').user
 
 router.post('/login', async (req, res, next) => {
-  const user = await User.findOne({
-    where: {
-      sUserPhone: req.body.phone
-    }
-  })
-
-  if (user && user.sUserPassword === md5(req.body.password + user.iUserKey)) {
-    const accessToken = jsonwebtoken.sign(
-      {
-        iUserID: user.iUserID,
-        sUserLastName: user.sUserLastName,
-        sUserMiddleName: user.sUserMiddleName,
-        sUserFirstName: user.sUserFirstName,
-        sUserPhone: user.sUserPhone,
-        sUserEmail: user.sUserEmail,
-        dUserBirthday: user.dUserBirthday,
-        sUserAvatar: user.sUserAvatar,
-        iUserAdmin: user.iUserAdmin
-      },
-      'dummy'
-    )
+  const signin = await User.signin(req.body.sUserPhone, req.body.sUserPassword)
+  if (signin.error) {
+    res.status(401).json(signin)
+  } else {
     res.json({
       token: {
-        accessToken
+        accessToken: signin.accessToken
       }
     })
-  } else {
-    res.status(401).json({ message: 'Bad credentials' })
   }
 })
 
@@ -84,10 +63,69 @@ router.post('/update', async (req, res, next) => {
   res.json(response)
 })
 
+router.post('/updatePassword', async (req, res, next) => {
+  const md5 = require('md5')
+  const randomstring = require('randomstring')
+
+  const response = {}
+  const iUserID = req.user.iUserID
+  const oldPassword = req.body.oldPassword
+  const newPassword = req.body.newPassword
+  const user = await User.findByPk(iUserID)
+  const sUserPassword = user.sUserPassword
+  const iUserKey = user.iUserKey
+  if (md5(oldPassword + iUserKey) !== sUserPassword) {
+    response.error = {
+      ref: 'oldPassword',
+      message: 'Вы ввели неверный пароль'
+    }
+    return res.status(401).json(response)
+  }
+  const sUserPasswordValidate = User.sUserPasswordValidate(newPassword)
+  if (!sUserPasswordValidate) {
+    response.error = {
+      ref: 'newPassword',
+      message: 'Неверный формат пароля'
+    }
+    return res.status(401).json(response)
+  }
+  const iUserKeyNew = randomstring.generate({
+    length: 3,
+    charset: 'numeric'
+  })
+  const sUserPasswordNewHash = md5(newPassword + iUserKeyNew)
+  response.update = await User.update(
+    {
+      sUserPassword: sUserPasswordNewHash,
+      iUserKey: iUserKeyNew
+    },
+    {
+      where: {
+        iUserID
+      }
+    }
+  )
+
+  res.json(response)
+})
+
 router.post('/upload', upload.single('file'), async (req, res, next) => {
   const response = {}
   response.upload = await User.uploadAvatar(req.body.iUserID, req.file)
   res.json(response)
+})
+
+router.post('/singup', async (req, res, next) => {
+  const signup = await User.signup(
+    req.body.sUserFirstName,
+    req.body.sUserPhone,
+    req.body.sUserPassword
+  )
+  if (signup.error) {
+    res.status(401).json(signup)
+  } else {
+    res.json({ status: true })
+  }
 })
 
 module.exports = router
