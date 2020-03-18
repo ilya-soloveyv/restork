@@ -128,4 +128,61 @@ router.post('/singup', async (req, res, next) => {
   }
 })
 
+router.post('/confirmPhone', async (req, res, next) => {
+  const response = {}
+
+  const iUserID = req.user.iUserID
+  const sUserPhoneKod = req.body.sUserPhoneKod
+
+  const user = await User.findOne({
+    where: {
+      iUserID,
+      sUserPhoneKod
+    }
+  })
+
+  if (user === null) {
+    response.error = {
+      ref: 'sUserPhoneKod',
+      message: 'Код подтверждения неверный'
+    }
+    return res.status(401).json(response)
+  }
+
+  await User.update(
+    {
+      sUserPhoneKod: null
+    },
+    {
+      where: {
+        iUserID
+      }
+    }
+  )
+
+  res.json(response)
+})
+
+router.post('/resendKod', async (req, res, next) => {
+  const randomstring = require('randomstring')
+  const response = {}
+  const iUserID = req.user.iUserID
+  const sUserPhoneKod = randomstring.generate({
+    length: 4,
+    charset: 'numeric'
+  })
+  await User.update(
+    {
+      sUserPhoneKod
+    },
+    {
+      where: {
+        iUserID
+      }
+    }
+  )
+  User.sendSMSKod(req.user.sUserPhone, sUserPhoneKod)
+  res.json(response)
+})
+
 module.exports = router

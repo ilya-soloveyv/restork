@@ -49,6 +49,9 @@ module.exports = {
           login: { propertyName: 'token.accessToken' }
         }
       }
+    },
+    redirect: {
+      home: '/dashboard'
     }
   },
   build: {

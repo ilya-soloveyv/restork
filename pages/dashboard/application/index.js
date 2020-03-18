@@ -1,10 +1,3 @@
-<template>
-  <div>
-    Application
-  </div>
-</template>
-
-<script>
 export default {
   middleware: 'auth',
   layout: 'dashboard',
@@ -14,4 +7,3 @@ export default {
     }
   }
 }
-</script>

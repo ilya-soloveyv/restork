@@ -285,7 +285,6 @@ module.exports = (sequelize, DataTypes) => {
       length: 4,
       charset: 'numeric'
     })
-    const smsText = urlencode('Код подтверждения: ' + sUserPhoneKod)
     const sUserPasswordHash = md5(sUserPassword + iUserKey)
     await User.create({
       sUserFirstName,
@@ -294,20 +293,7 @@ module.exports = (sequelize, DataTypes) => {
       iUserKey,
       sUserPhoneKod
     })
-    axios.get(
-      process.env.SMS_HOST +
-        '?user=' +
-        process.env.SMS_USER +
-        '&pwd=' +
-        process.env.SMS_PASS +
-        '&dadr=' +
-        '7' +
-        sUserPhone +
-        '&text=' +
-        smsText +
-        '&sadr=' +
-        process.env.SMS_SADR
-    )
+    User.sendSMSKod(sUserPhone, sUserPhoneKod)
     return true
   }
 
@@ -346,6 +332,24 @@ module.exports = (sequelize, DataTypes) => {
     } else {
       return false
     }
+  }
+
+  User.sendSMSKod = function(sUserPhone, sUserPhoneKod) {
+    const smsText = urlencode('Код подтверждения: ' + sUserPhoneKod)
+    axios.get(
+      process.env.SMS_HOST +
+        '?user=' +
+        process.env.SMS_USER +
+        '&pwd=' +
+        process.env.SMS_PASS +
+        '&dadr=' +
+        '7' +
+        sUserPhone +
+        '&text=' +
+        smsText +
+        '&sadr=' +
+        process.env.SMS_SADR
+    )
   }
 
   return User

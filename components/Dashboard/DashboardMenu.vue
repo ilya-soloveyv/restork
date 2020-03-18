@@ -38,8 +38,8 @@
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link to="/dashboard/application" active-class="active" exact>
-          Мои отправленные заявки
+        <nuxt-link to="/dashboard/application" active-class="active">
+          Мои заявки
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
