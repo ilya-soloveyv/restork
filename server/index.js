@@ -27,6 +27,7 @@ app.use('/api/object_type', require('./routes/object_type'))
 app.use('/api/object_option', require('./routes/object_option'))
 app.use('/api/room_option', require('./routes/room_option'))
 app.use('/api/room_type', require('./routes/room_type'))
+app.use('/api/application', require('./routes/application'))
 
 async function start() {
   const nuxt = new Nuxt(config)

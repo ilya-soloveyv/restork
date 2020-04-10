@@ -167,6 +167,37 @@ module.exports = (sequelize, DataTypes) => {
     return objects
   }
 
+  Object.get = async (coo0, coo1, radius) => {
+    // const response = await sequelize.query('SELECT * FROM object')
+
+    // SET @pt1 = ST_GeomFromText('POINT(43.6617826 40.315748)');
+    // SELECT * from (SELECT * ,(ST_Distance_Sphere(@pt1, aObjectCoordinate, 6373)) AS distance FROM object ORDER BY distance) x WHERE x.distance <= 5;
+    const query =
+      'SELECT * from (SELECT * ,(ST_Distance_Sphere(ST_GeomFromText("POINT(' +
+      coo0 +
+      ' ' +
+      coo1 +
+      ')"), aObjectCoordinate, 6373)) AS distance FROM object ORDER BY distance) x WHERE x.distance <= ' +
+      radius
+    const response = await sequelize.query(query)
+
+    return response
+    // SET @pt1 = ST_GeomFromText('POINT(43.6617826 40.315748)');
+    // SELECT * from (SELECT * ,(ST_Distance_Sphere(@pt1, aObjectCoordinate, 6373)) AS distance FROM object ORDER BY distance) x WHERE x.distance <= 5;
+    // const object = await Object.findAll({
+    //   where: sequelize.where(
+    //     sequelize.fn(
+    //       'ST_Distance_Sphere',
+    //       sequelize.col('aObjectCoordinate'),
+    //       sequelize.fn('ST_MakePoint', 43.6636072, 40.3143871),
+    //       10000
+    //     ),
+    //     true
+    //   )
+    // })
+    // return object
+  }
+
   sequelizePaginate.paginate(Object)
   return Object
 }
