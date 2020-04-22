@@ -95,6 +95,9 @@ module.exports = (sequelize, DataTypes) => {
     Object.hasMany(models.room, {
       foreignKey: 'iObjectID'
     })
+    Object.hasMany(models.application_object, {
+      foreignKey: 'iObjectID'
+    })
   }
 
   Object.getObject = async function(iObjectID) {
@@ -162,7 +165,12 @@ module.exports = (sequelize, DataTypes) => {
     const objects = await Object.findAll({
       where: {
         iUserID: params.iUserID
-      }
+      },
+      include: [
+        {
+          model: sequelize.models.application_object
+        }
+      ]
     })
     return objects
   }

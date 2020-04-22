@@ -18,6 +18,9 @@ export default {
         aApplicationCoordinate: {
           coordinates: [43.585525, 39.723062]
         },
+        sApplicationCountry: null,
+        sApplicationState: null,
+        sApplicationCity: null,
         dApplicationDateFrom: '2020-04-20',
         dApplicationDateTo: '2020-04-23',
         iApplicationAdult: 2,
@@ -75,8 +78,9 @@ export default {
         1,
         item.longitude
       )
-      // console.log(item.latitude)
-      // console.log(item.longitude)
+      this.$set(this.application, 'sApplicationCountry', item.country)
+      this.$set(this.application, 'sApplicationState', item.state)
+      this.$set(this.application, 'sApplicationCity', item.city)
     },
     async add() {
       const { application } = await this.$store.dispatch(

@@ -1,6 +1,11 @@
+import ListItem from '../../../components/Dashboard/application/ListItem'
+
 export default {
   middleware: 'auth',
   layout: 'dashboard',
+  components: {
+    ListItem
+  },
   head() {
     return {
       title: 'Application'

@@ -6,6 +6,19 @@
         <nuxt-link :to="'/dashboard/object/' + object.iObjectID">
           {{ object.sObjectTitle }}
         </nuxt-link>
+        <ul>
+          <li
+            v-for="(app, appIndex) in object.application_objects"
+            :key="appIndex"
+          >
+            <nuxt-link
+              :to="'/dashboard/object/application/' + app.iApplicationObjectID"
+            >
+              {{ app.iApplicationObjectID }}
+            </nuxt-link>
+          </li>
+        </ul>
+        <!-- <pre>{{ object }}</pre> -->
       </li>
     </ul>
     <b-button variant="primary" to="/dashboard/object/add">

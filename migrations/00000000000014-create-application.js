@@ -27,6 +27,15 @@ module.exports = {
         type: Sequelize.GEOMETRY('POINT'),
         allowNull: false
       },
+      sApplicationCountry: {
+        type: Sequelize.STRING
+      },
+      sApplicationState: {
+        type: Sequelize.STRING
+      },
+      sApplicationCity: {
+        type: Sequelize.STRING
+      },
       dApplicationDateFrom: {
         type: Sequelize.DATEONLY,
         allowNull: false
@@ -41,12 +50,25 @@ module.exports = {
       iApplicationChild: {
         type: Sequelize.INTEGER
       },
-      dApplicationDate: {
+      dDate: {
         type: Sequelize.DATEONLY,
         allowNull: false
       },
       iActive: {
         type: Sequelize.BOOLEAN
+      },
+      iObjectID: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'object',
+          key: 'iObjectID'
+        },
+        onUpdate: 'NO ACTION',
+        onDelete: 'CASCADE'
+      },
+      iSearchRadius: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       }
     })
   },
