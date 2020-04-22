@@ -7,7 +7,7 @@ const Application = require('../../models').application
 const job = new CronJob(
   '*/5 * * * * *',
   async function() {
-    // await Application.searchObject()
+    await Application.searchObject()
   },
   null,
   true,
