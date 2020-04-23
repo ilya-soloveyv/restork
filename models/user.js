@@ -334,9 +334,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
-  User.sendSMSKod = function(sUserPhone, sUserPhoneKod) {
+  User.sendSMSKod = async function(sUserPhone, sUserPhoneKod) {
     const smsText = urlencode('Код подтверждения: ' + sUserPhoneKod)
-    axios.get(
+    const result = await axios.get(
       process.env.SMS_HOST +
         '?user=' +
         process.env.SMS_USER +
@@ -350,6 +350,7 @@ module.exports = (sequelize, DataTypes) => {
         '&sadr=' +
         process.env.SMS_SADR
     )
+    return result
   }
 
   return User

@@ -181,7 +181,7 @@ router.post('/resendKod', async (req, res, next) => {
       }
     }
   )
-  User.sendSMSKod(req.user.sUserPhone, sUserPhoneKod)
+  response.sms = await User.sendSMSKod(req.user.sUserPhone, sUserPhoneKod)
   res.json(response)
 })
 
