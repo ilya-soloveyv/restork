@@ -335,22 +335,29 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   User.sendSMSKod = async function(sUserPhone, sUserPhoneKod) {
-    const smsText = urlencode('Код подтверждения: ' + sUserPhoneKod)
-    const result = await axios.get(
-      process.env.SMS_HOST +
-        '?user=' +
-        process.env.SMS_USER +
-        '&pwd=' +
-        process.env.SMS_PASS +
-        '&dadr=' +
-        '7' +
-        sUserPhone +
-        '&text=' +
-        smsText +
-        '&sadr=' +
-        process.env.SMS_SADR
-    )
-    return result
+    await axios
+      .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+      .then((response) => {
+        return response
+      })
+
+    // const smsText = urlencode('Код подтверждения: ' + sUserPhoneKod)
+    // const url =
+    //   process.env.SMS_HOST +
+    //   '?user=' +
+    //   process.env.SMS_USER +
+    //   '&pwd=' +
+    //   process.env.SMS_PASS +
+    //   '&dadr=' +
+    //   sUserPhone +
+    //   '&text=' +
+    //   smsText +
+    //   '&sadr=' +
+    //   process.env.SMS_SADR
+
+    // axios.get(url).then((data) => {
+    //   return data
+    // })
   }
 
   return User
