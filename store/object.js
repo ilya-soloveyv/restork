@@ -76,7 +76,6 @@ const actions = {
   },
   async GET_ITEM({ commit }, params) {
     let { object } = await this.$axios.$post('/api/object/item', params)
-    // console.log(object)
     object = object || {}
     commit('SET_ITEM', object)
   },
@@ -95,15 +94,9 @@ const actions = {
   },
   UPDATE_objectObjectOptionsArray({ state, commit }, params) {
     commit('UPDATE_objectObjectOptionsArray', params)
-    // console.log(state.item)
-    // const { object } = await this.$axios.$post('/api/object/update', state.item)
-    // commit('SET_ITEM', object)
   },
   UPDATE_objectRoomOptionsArray({ state, commit }, params) {
     commit('UPDATE_objectRoomOptionsArray', params)
-    // console.log(state.item)
-    // const { object } = await this.$axios.$post('/api/object/update', state.item)
-    // commit('SET_ITEM', object)
   },
   async UPDATE({ state, commit }) {
     const { object } = await this.$axios.$post('/api/object/update', state.item)
@@ -121,10 +114,8 @@ const actions = {
       params
     )
     commit('SET_OBJECT_IMAGES', { objectImages })
-    // console.log(objectImages)
   },
   SET_OBJECT_IMAGES({ state, commit }, { objectImages }) {
-    console.log(objectImages)
     commit('SET_OBJECT_IMAGES', { objectImages })
   },
   UPDATE_tObjectDesc({ state, commit }, { tObjectDesc }) {

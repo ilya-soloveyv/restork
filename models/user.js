@@ -1,8 +1,8 @@
 'use strict'
 
+const fs = require('fs')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
-const fs = require('fs')
 const selectel = require('selectel-storage-promise')
 const fileExtension = require('file-extension')
 const Jimp = require('jimp')
@@ -11,7 +11,7 @@ const md5 = require('md5')
 const validator = require('validator')
 const randomstring = require('randomstring')
 const axios = require('axios')
-const urlencode = require('urlencode')
+// const urlencode = require('urlencode')
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(

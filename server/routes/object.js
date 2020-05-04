@@ -97,9 +97,6 @@ router.post('/update', async (req, res, next) => {
   const iObjectVerification = req.body.iObjectVerification || false
 
   const objectObjectOptionsArray = req.body.object_object_options_array || []
-  console.log('------------------------')
-  console.log(objectObjectOptionsArray)
-  console.log('------------------------')
   const objectRoomOptionsArray = req.body.object_room_options_array || []
 
   const rooms = req.body.rooms || []

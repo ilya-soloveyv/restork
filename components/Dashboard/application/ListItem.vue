@@ -1,6 +1,6 @@
 <template>
   <div class="item">
-    <div class="meta" v-b-toggle="'accordion_' + application.iApplicationID">
+    <div v-b-toggle="'accordion_' + application.iApplicationID" class="meta">
       <div class="ico">
         <svg
           xmlns="http://www.w3.org/2000/svg"

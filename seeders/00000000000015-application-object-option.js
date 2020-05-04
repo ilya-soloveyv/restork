@@ -19,7 +19,7 @@ module.exports = {
           iApplicationObjectOptionID: 3,
           iApplicationID: 1,
           iObjectOptionID: 5
-        },
+        }
       ],
       {}
     )

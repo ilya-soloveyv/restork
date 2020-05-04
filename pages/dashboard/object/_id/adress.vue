@@ -72,7 +72,7 @@ export default {
         return this.$store.state.object.item.aObjectCoordinate.coordinates
       },
       set(coordinates) {
-        console.log(coordinates)
+        // console.log(coordinates)
       }
     },
     sObjectAddress: {
@@ -97,8 +97,8 @@ export default {
       // this.$set(this.coordinates, 'coordinates', coords)
     },
     dragMarker(event) {
-      console.log('dragMarker')
-      console.log(event)
+      // console.log('dragMarker')
+      // console.log(event)
     },
     onInputChange(query) {
       // console.log(query)

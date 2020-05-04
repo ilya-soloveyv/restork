@@ -166,7 +166,6 @@ router.post('/confirmPhone', async (req, res, next) => {
 router.post('/resendKod', async (req, res, next) => {
   const axios = require('axios')
   const randomstring = require('randomstring')
-  // const urlencode = require('urlencode')
 
   const iUserID = req.user.iUserID
   const sUserPhone = req.user.sUserPhone
@@ -185,36 +184,19 @@ router.post('/resendKod', async (req, res, next) => {
     }
   )
 
-  const smsText = sUserPhoneKod + ' - код подтверждения'
-  // const url =
-  //   process.env.SMS_HOST +
-  //   '?user=' +
-  //   process.env.SMS_USER +
-  //   '&pwd=' +
-  //   process.env.SMS_PASS +
-  //   '&dadr=' +
-  //   sUserPhone +
-  //   '&text=' +
-  //   smsText +
-  //   '&sadr=' +
-  //   process.env.SMS_SADR
-
   axios
     .get(process.env.SMS_HOST, {
       params: {
         user: process.env.SMS_USER,
         pwd: process.env.SMS_PASS,
         dadr: sUserPhone,
-        text: smsText,
+        text: sUserPhoneKod + ' - код подтверждения',
         sadr: process.env.SMS_SADR
       }
     })
     .then(({ data }) => {
       return res.json(data)
     })
-
-  // response.sms = await User.sendSMSKod(req.user.sUserPhone, sUserPhoneKod)
-  // res.json(response)
 })
 
 module.exports = router
