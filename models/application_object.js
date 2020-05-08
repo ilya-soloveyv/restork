@@ -95,6 +95,7 @@ module.exports = (sequelize, DataTypes) => {
       iApplicationObjectID
     )
     if (
+      applicationObject !== undefined &&
       !applicationObject.iObjectView &&
       applicationObject.iObjectView === false
     ) {

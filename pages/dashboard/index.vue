@@ -1,65 +1,89 @@
 <template>
   <div>
     <h1>Здавствуйте, {{ $auth.user.sUserFirstName }}!</h1>
-    <h2>Информация по заявкам:</h2>
-    <div class="statBlock statBlockApp">
-      <div class="item">
-        <div class="count">
-          <div class="num">0</div>
-        </div>
-        <div class="desc">
-          <span>Количество отправленных вами заявок на проживание</span>
-          <div class="link">
-            <nuxt-link to="/dashboard/application">Посмотреть</nuxt-link>
+    <p>Присоеденяйтесь к нам - открывайте мир с нами!</p>
+    <p>
+      Выбирите место для своего следующего посещения и хозяева сами отправят вам
+      лучшее предложение
+    </p>
+    <template v-if="applications.length">
+      <p>
+        У Вас есть <b>{{ countApplicationsString }}:</b>
+      </p>
+      <div
+        v-for="(application, applicationIndex) in applications"
+        :key="applicationIndex"
+        class="pb-3"
+      >
+        Заявка:
+        <b>
+          {{ application.sApplicationCity }} c
+          {{ application.dApplicationDateFrom }} по
+          {{ application.dApplicationDateTo }}
+        </b>
+        <template v-if="application.application_objects.length">
+          <div
+            v-for="(object, objectIndex) in application.application_objects"
+            :key="objectIndex"
+          >
+            <div>
+              <template v-if="object.object.object_images.length">
+                <img
+                  :src="
+                    SELECTEL_WEB +
+                      '/object/' +
+                      object.object.iObjectID +
+                      '/preview/' +
+                      object.object.object_images[0].sObjectImage
+                  "
+                  height="75"
+                />
+              </template>
+              {{ object.object.sObjectTitle }}
+              <nuxt-link
+                :to="'/dashboard/application/' + object.iApplicationObjectID"
+              >
+                Посмотреть предложение
+              </nuxt-link>
+            </div>
           </div>
-        </div>
+        </template>
+        <template v-else>
+          <div>По текущей заявке еще нет предложений</div>
+        </template>
       </div>
-      <div class="item">
-        <div class="count">
-          <div class="num">0</div>
-        </div>
-        <div class="desc">
-          <span>Количество новых ответов на заявки для вашего размещения</span>
-          <div class="link"><nuxt-link to="#">Посмотреть</nuxt-link></div>
-        </div>
+      <div class="buttons">
+        <b-button variant="primary" to="/dashboard/application/add">
+          Отправить новую заявку
+        </b-button>
       </div>
-      <div class="button">
-        <b-button to="/dashboard/application/add" variant="primary">
+    </template>
+    <template v-else>
+      <h2>Начнём!</h2>
+      <div class="buttons">
+        <b-button variant="primary" to="/dashboard/application/add">
           Отправить заявку
         </b-button>
       </div>
+    </template>
+    <hr />
+    <p>Вы можете стать лучшим хозяином!</p>
+    <p>
+      Добавьте свой объект, принимайте гостей, зарабатывайте и дарите улыбки
+      людям.
+    </p>
+    <div class="buttons">
+      <b-button variant="primary" to="/dashboard/object/add">
+        Добавить объект
+      </b-button>
     </div>
-    <h2>Информация по объектам:</h2>
-    <div class="statBlock statBlockObj">
-      <div class="item">
-        <div class="count">
-          <div class="num">0</div>
-        </div>
-        <div class="desc">
-          <span>
-            Количество принадлежащих вам объектов размещения Количество
-            принадлежащих вам объектов размещения
-          </span>
-          <div class="link"><nuxt-link to="#">Посмотреть</nuxt-link></div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="count">
-          <div class="num">0</div>
-        </div>
-        <div class="desc">
-          <span>Количество новых заявок, подходящих для ваших объектов</span>
-          <div class="link"><nuxt-link to="#">Посмотреть</nuxt-link></div>
-        </div>
-      </div>
-      <div class="button">
-        <b-button to="#" variant="primary">Отправить заявку</b-button>
-      </div>
-    </div>
+    <!-- <pre>{{ applications }}</pre> -->
   </div>
 </template>
 
 <script>
+import moment from 'moment'
+moment.locale('ru')
 export default {
   middleware: 'auth',
   layout: 'dashboard',
@@ -67,68 +91,71 @@ export default {
     return {
       title: 'Dashboard'
     }
+  },
+  computed: {
+    applications({ $store }) {
+      const response = []
+      const applications = $store.state.application.list
+      applications.forEach((application) => {
+        const app = {
+          iApplicationID: application.iApplicationID,
+          sApplicationCity: application.sApplicationCity,
+          dApplicationDateFrom: moment(application.dApplicationDateFrom).format(
+            'D MMMM'
+          ),
+          dApplicationDateTo: moment(application.dApplicationDateTo).format(
+            'D MMMM'
+          ),
+          application_objects: []
+        }
+        if (!application.object) {
+          app.application_objects = application.application_objects.filter(
+            (object) =>
+              object.iObjectPrice !== null && object.iUserView === false
+          )
+          response.push(app)
+        }
+      })
+      return response
+    },
+    countApplicationsString() {
+      return (
+        this.applications.length +
+        ' ' +
+        this.declOfNum(this.applications.length, [
+          'открытая заявка',
+          'открытых заявок',
+          'открытых заявок'
+        ])
+      )
+    },
+    SELECTEL_WEB() {
+      return process.env.SELECTEL_WEB
+    }
+  },
+  async asyncData({ store, $axios, params }) {
+    await store.dispatch('application/GET_LIST')
+  },
+  methods: {
+    declOfNum(n, a) {
+      const c = [2, 0, 1, 1, 1, 2]
+      return a[n % 100 > 4 && n % 100 < 20 ? 2 : c[n % 10 < 5 ? n % 10 : 5]]
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 h2 {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 600;
-  margin-bottom: 2rem;
+  margin: 5rem 0 2rem;
+  text-align: center;
 }
-.statBlockApp {
-  border-bottom: 1px solid #d9d9d9;
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
+.buttons {
+  text-align: center;
 }
-.statBlockObj {
-  color: firebrick;
-}
-.statBlock {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 1rem;
-  .item {
-    display: grid;
-    grid-template-columns: 100px 1fr;
-    grid-gap: 1rem;
-    .count {
-      .num {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        background: linear-gradient(0deg, #05f 0, #00c9ff 100%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        font-size: 56px;
-        font-weight: 700;
-      }
-    }
-    .desc {
-      display: flex;
-      flex-direction: column;
-      font-size: 14px;
-      justify-content: center;
-      span {
-        padding: 0 0 0.25rem;
-        color: #2e2e2e;
-      }
-      a {
-        color: #0098da;
-        border-bottom: 1px solid #0098da;
-        text-decoration: none;
-      }
-    }
-  }
-  .button {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    display: flex;
-    justify-content: center;
-    padding-top: 1rem;
-  }
+.btn {
+  margin: 0 auto 2rem;
 }
 </style>

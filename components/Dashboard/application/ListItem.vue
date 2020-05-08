@@ -79,7 +79,7 @@
 <script>
 import moment from 'moment'
 import ListItemObject from '../../../components/Dashboard/application/ListItemObject'
-moment.lang('ru')
+moment.locale('ru')
 
 export default {
   components: {

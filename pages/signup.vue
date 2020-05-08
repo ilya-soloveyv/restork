@@ -107,7 +107,7 @@ export default {
           this.$set(this, 'error', e.response.data.error)
           this.$refs[this.error.ref].$el.focus()
         })
-      if (response.status) {
+      if (response !== undefined) {
         return this.$auth.loginWith('local', {
           data: {
             sUserPhone: this.sUserPhone,

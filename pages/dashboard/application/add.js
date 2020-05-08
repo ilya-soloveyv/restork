@@ -1,5 +1,7 @@
 import Suggestions from 'v-suggestions'
+import moment from 'moment'
 import 'v-suggestions/dist/v-suggestions.css'
+moment.locale('ru')
 export default {
   middleware: 'auth',
   layout: 'dashboard',
@@ -14,15 +16,19 @@ export default {
   data() {
     return {
       application: {
-        sApplicationAddress: 'Россия, Краснодарский край, Сочи',
+        sApplicationAddress: '',
         aApplicationCoordinate: {
-          coordinates: [43.585525, 39.723062]
+          coordinates: []
         },
         sApplicationCountry: null,
         sApplicationState: null,
         sApplicationCity: null,
-        dApplicationDateFrom: '2020-04-20',
-        dApplicationDateTo: '2020-04-23',
+        dApplicationDateFrom: moment()
+          .add(1, 'day')
+          .format('YYYY-MM-DD'),
+        dApplicationDateTo: moment()
+          .add(4, 'day')
+          .format('YYYY-MM-DD'),
         iApplicationAdult: 2,
         iApplicationChild: 0,
         objectOption: [2, 1],
@@ -83,13 +89,8 @@ export default {
       this.$set(this.application, 'sApplicationCity', item.city)
     },
     async add() {
-      const { application } = await this.$store.dispatch(
-        'application/ADD',
-        this.application
-      )
-      this.$router.push(
-        '/dashboard/application/' + application.application.iApplicationID
-      )
+      await this.$store.dispatch('application/ADD', this.application)
+      this.$router.push('/dashboard/application/')
     }
   }
 }

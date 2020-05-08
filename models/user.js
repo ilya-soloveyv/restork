@@ -286,14 +286,14 @@ module.exports = (sequelize, DataTypes) => {
       charset: 'numeric'
     })
     const sUserPasswordHash = md5(sUserPassword + iUserKey)
-    await User.create({
+    const { iUserID } = await User.create({
       sUserFirstName,
       sUserPhone,
       sUserPassword: sUserPasswordHash,
       iUserKey,
       sUserPhoneKod
     })
-    User.sendSMSKod(sUserPhone, sUserPhoneKod)
+    User.sendSMSKod({ iUserID })
     return true
   }
 
@@ -334,30 +334,41 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
-  User.sendSMSKod = async function(sUserPhone, sUserPhoneKod) {
-    await axios
-      .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-      .then((response) => {
-        return response
+  User.sendSMSKod = async function({ iUserID }) {
+    const { sUserPhone } = await User.findOne({
+      where: {
+        iUserID
+      }
+    })
+    const sUserPhoneKod = randomstring.generate({
+      length: 4,
+      charset: 'numeric'
+    })
+
+    await User.update(
+      {
+        sUserPhoneKod
+      },
+      {
+        where: {
+          iUserID
+        }
+      }
+    )
+
+    axios
+      .get(process.env.SMS_HOST, {
+        params: {
+          user: process.env.SMS_USER,
+          pwd: process.env.SMS_PASS,
+          dadr: sUserPhone,
+          text: sUserPhoneKod + ' - код подтверждения',
+          sadr: process.env.SMS_SADR
+        }
       })
-
-    // const smsText = urlencode('Код подтверждения: ' + sUserPhoneKod)
-    // const url =
-    //   process.env.SMS_HOST +
-    //   '?user=' +
-    //   process.env.SMS_USER +
-    //   '&pwd=' +
-    //   process.env.SMS_PASS +
-    //   '&dadr=' +
-    //   sUserPhone +
-    //   '&text=' +
-    //   smsText +
-    //   '&sadr=' +
-    //   process.env.SMS_SADR
-
-    // axios.get(url).then((data) => {
-    //   return data
-    // })
+      .then(({ data }) => {
+        return data
+      })
   }
 
   return User
