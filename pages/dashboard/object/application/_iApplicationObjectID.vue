@@ -1,29 +1,76 @@
 <template>
   <div>
-    <h1>ApplicationObject #{{ applicationObject.iApplicationObjectID }}</h1>
-    <div>
-      <b-form @submit.prevent="update">
-        <b-form-group
-          id="iObjectPriceLabel"
-          label="iObjectPrice:"
-          label-for="iObjectPrice"
-        >
-          <b-form-input
-            id="iObjectPrice"
-            v-model="iObjectPrice"
-            required
-          ></b-form-input>
-        </b-form-group>
-        <b-button type="submit" variant="primary">
+    <h1>Заявка от {{ dApplicationDate }}г.</h1>
+    <div class="row">
+      <div class="col">Имя:</div>
+      <div class="col">
+        {{ applicationObject.application.user.sUserFirstName }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">Период размещения:</div>
+      <div class="col">
+        {{ applicationObject.application.dApplicationDateFrom }} -
+        {{ applicationObject.application.dApplicationDateTo }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">Направление:</div>
+      <div class="col">
+        {{ applicationObject.application.sApplicationState }},
+        {{ applicationObject.application.sApplicationCity }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">Кол-во взрослых:</div>
+      <div class="col">
+        {{ applicationObject.application.iApplicationAdult }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">Кол-во детей:</div>
+      <div class="col">
+        {{ applicationObject.application.iApplicationChild }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">Требования по объекту:</div>
+      <div class="col">
+        {{ applicationObjectOption }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">Требования по номеру:</div>
+      <div class="col">
+        {{ applicationRoomOption }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <b-form id="applicationObjectForm" @submit.prevent="update">
+          <b-form-group id="iObjectPriceLabel" label-for="iObjectPrice">
+            <b-form-input
+              id="iObjectPrice"
+              v-model="iObjectPrice"
+              placeholder="Введите сумму"
+              required
+            ></b-form-input>
+          </b-form-group>
+        </b-form>
+      </div>
+      <div class="col">
+        <b-button type="submit" variant="primary" form="applicationObjectForm">
           Отправить предложение
         </b-button>
-      </b-form>
+      </div>
     </div>
     <pre>{{ applicationObject }}</pre>
   </div>
 </template>
 
 <script>
+import moment from 'moment'
+moment.locale('ru')
 export default {
   middleware: 'auth',
   layout: 'dashboard',
@@ -46,6 +93,27 @@ export default {
       set(iObjectPrice) {
         this.$store.commit('application_object/SET_iObjectPrice', iObjectPrice)
       }
+    },
+    dApplicationDate() {
+      return moment(this.applicationObject.application.dDate).format(
+        'DD MMMM YYYY'
+      )
+    },
+    applicationObjectOption() {
+      const applicationObjectOption = this.applicationObject.application.applicationObjectOptions.map(
+        (option) => {
+          return option.object_option.sObjectOptionTitle
+        }
+      )
+      return applicationObjectOption.join(', ')
+    },
+    applicationRoomOption() {
+      const applicationRoomOption = this.applicationObject.application.applicationRoomOptions.map(
+        (option) => {
+          return option.room_option.sRoomOptionTitle
+        }
+      )
+      return applicationRoomOption.join(', ')
     }
   },
   async asyncData({ store, $axios, params }) {

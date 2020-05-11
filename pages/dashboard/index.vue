@@ -67,16 +67,34 @@
       </div>
     </template>
     <hr />
-    <p>Вы можете стать лучшим хозяином!</p>
-    <p>
-      Добавьте свой объект, принимайте гостей, зарабатывайте и дарите улыбки
-      людям.
-    </p>
-    <div class="buttons">
-      <b-button variant="primary" to="/dashboard/object/add">
-        Добавить объект
-      </b-button>
-    </div>
+    <template v-if="objectCount">
+      <div class="objectInfo">
+        <h2>Информация по вашим объетам:</h2>
+        <div class="cols">
+          <div class="item">
+            <div class="num">{{ objectCount }}</div>
+            <div class="desc">Столько объектов зарегистрировано вами</div>
+          </div>
+          <div class="item">
+            <div class="num">{{ applicationObjectCount }}</div>
+            <div class="desc">Столько заявок ждет вашего ответа</div>
+          </div>
+        </div>
+      </div>
+    </template>
+    <template v-else>
+      <p>Вы можете стать лучшим хозяином!</p>
+      <p>
+        Добавьте свой объект, принимайте гостей, зарабатывайте и дарите улыбки
+        людям.
+      </p>
+      <div class="buttons">
+        <b-button variant="primary" to="/dashboard/object/add">
+          Добавить объект
+        </b-button>
+      </div>
+    </template>
+    <!-- <pre>{{ objects }}</pre> -->
     <!-- <pre>{{ applications }}</pre> -->
   </div>
 </template>
@@ -131,10 +149,29 @@ export default {
     },
     SELECTEL_WEB() {
       return process.env.SELECTEL_WEB
+    },
+    objects({ $store }) {
+      const objects = $store.state.object.list
+      return objects
+    },
+    objectCount() {
+      return this.objects.length
+    },
+    applicationObjectCount() {
+      let applicationObjectCount = 0
+      this.objects.forEach((object) => {
+        object.application_objects.forEach((applicationObject) => {
+          if (applicationObject.iObjectPrice === null) {
+            applicationObjectCount++
+          }
+        })
+      })
+      return applicationObjectCount
     }
   },
   async asyncData({ store, $axios, params }) {
     await store.dispatch('application/GET_LIST')
+    await store.dispatch('object/GET_LIST')
   },
   methods: {
     declOfNum(n, a) {
@@ -151,6 +188,46 @@ h2 {
   font-weight: 600;
   margin: 5rem 0 2rem;
   text-align: center;
+}
+.objectInfo {
+  h2 {
+    margin: 2rem 0;
+    font-size: 20px;
+    text-align: left;
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    .item {
+      display: flex;
+      .num {
+        flex-shrink: 0;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 48px;
+        font-weight: 500;
+        background: rgb(24, 192, 255);
+        background: linear-gradient(
+          0deg,
+          rgba(0, 50, 255, 1) 0%,
+          rgba(24, 192, 255, 1) 100%
+        );
+      }
+      .desc {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: left;
+        padding: 0 1rem;
+        font-size: 14px;
+      }
+    }
+  }
 }
 .buttons {
   text-align: center;

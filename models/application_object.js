@@ -66,6 +66,9 @@ module.exports = (sequelize, DataTypes) => {
     ApplicationObject.belongsTo(models.object, {
       foreignKey: 'iObjectID'
     })
+    ApplicationObject.belongsTo(models.application, {
+      foreignKey: 'iApplicationID'
+    })
   }
 
   ApplicationObject.get = async function({ iApplicationObjectID }) {
@@ -74,7 +77,52 @@ module.exports = (sequelize, DataTypes) => {
       {
         include: [
           {
-            model: sequelize.models.object
+            model: sequelize.models.object,
+            include: [
+              {
+                model: sequelize.models.user,
+                attributes: {
+                  exclude: [
+                    'sUserPhoneKod',
+                    'sUserPassword',
+                    'iUserKey',
+                    'iUserAdmin'
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            model: sequelize.models.application,
+            include: [
+              {
+                model: sequelize.models.applicationObjectOption,
+                include: [
+                  {
+                    model: sequelize.models.object_option
+                  }
+                ]
+              },
+              {
+                model: sequelize.models.applicationRoomOption,
+                include: [
+                  {
+                    model: sequelize.models.room_option
+                  }
+                ]
+              },
+              {
+                model: sequelize.models.user,
+                attributes: {
+                  exclude: [
+                    'sUserPhoneKod',
+                    'sUserPassword',
+                    'iUserKey',
+                    'iUserAdmin'
+                  ]
+                }
+              }
+            ]
           }
         ]
       }
@@ -90,14 +138,18 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
-  ApplicationObject.objectView = async function({ iApplicationObjectID }) {
-    const applicationObject = await ApplicationObject.findByPk(
+  ApplicationObject.objectView = async function({
+    iApplicationObjectID,
+    iUserID
+  }) {
+    const applicationObject = await ApplicationObject.get({
       iApplicationObjectID
-    )
+    })
     if (
       applicationObject !== undefined &&
       !applicationObject.iObjectView &&
-      applicationObject.iObjectView === false
+      applicationObject.iObjectView === false &&
+      applicationObject.object.iUserID === iUserID
     ) {
       await ApplicationObject.update(
         {
@@ -115,11 +167,19 @@ module.exports = (sequelize, DataTypes) => {
     return false
   }
 
-  ApplicationObject.userView = async function({ iApplicationObjectID }) {
-    const applicationObject = await ApplicationObject.findByPk(
+  ApplicationObject.userView = async function({
+    iApplicationObjectID,
+    iUserID
+  }) {
+    const applicationObject = await ApplicationObject.get({
       iApplicationObjectID
-    )
-    if (!applicationObject.iUserView && applicationObject.iUserView === null) {
+    })
+    if (
+      applicationObject.iObjectView !== null &&
+      applicationObject.iObjectPrice !== null &&
+      applicationObject.iUserView === false &&
+      applicationObject.application.iUserID === iUserID
+    ) {
       await ApplicationObject.update(
         {
           iUserView: true,
@@ -137,6 +197,7 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   ApplicationObject.updateApplicationObject = async function({
+    iApplicationID,
     iApplicationObjectID,
     iObjectPrice
   }) {
@@ -150,6 +211,9 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     )
+    await sequelize.models.application.searchObjectInApplication({
+      iApplicationID
+    })
     return update
   }
 

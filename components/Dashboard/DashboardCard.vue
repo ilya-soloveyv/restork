@@ -42,10 +42,10 @@ export default {
     sUserFullName() {
       const arr = []
       if (this.$auth.user.sUserLastName) arr.push(this.$auth.user.sUserLastName)
-      if (this.$auth.user.sUserMiddleName)
-        arr.push(this.$auth.user.sUserMiddleName)
       if (this.$auth.user.sUserFirstName)
         arr.push(this.$auth.user.sUserFirstName)
+      if (this.$auth.user.sUserMiddleName)
+        arr.push(this.$auth.user.sUserMiddleName)
       return arr.join(' ')
     }
   }

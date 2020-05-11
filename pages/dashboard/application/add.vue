@@ -10,6 +10,7 @@
       >
         <suggestions
           id="input-sApplicationAddress"
+          ref="input-sApplicationAddress"
           v-model="application.sApplicationAddress"
           :options="suggestionsOptions"
           :onInputChange="onInputChange"

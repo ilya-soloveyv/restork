@@ -5,16 +5,21 @@ const ApplicationObject = require('../../models').application_object
 
 router.post('/get', async (req, res, next) => {
   const iApplicationObjectID = req.body.iApplicationObjectID
-  await ApplicationObject.objectView({ iApplicationObjectID })
-  await ApplicationObject.userView({ iApplicationObjectID })
+  await ApplicationObject.objectView({
+    iApplicationObjectID,
+    iUserID: req.user.iUserID
+  })
+  await ApplicationObject.userView({
+    iApplicationObjectID,
+    iUserID: req.user.iUserID
+  })
   const response = await ApplicationObject.get({ iApplicationObjectID })
   res.json(response)
 })
 
 router.post('/update', async (req, res, next) => {
   const response = {}
-  const applicationObject = req.body.applicationObject
-  await ApplicationObject.updateApplicationObject(applicationObject)
+  await ApplicationObject.updateApplicationObject(req.body.applicationObject)
   res.json(response)
 })
 
