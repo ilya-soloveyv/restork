@@ -89,6 +89,15 @@ module.exports = (sequelize, DataTypes) => {
                     'iUserAdmin'
                   ]
                 }
+              },
+              {
+                model: sequelize.models.object_image
+              },
+              {
+                model: sequelize.models.object_object_option
+              },
+              {
+                model: sequelize.models.object_room_option
               }
             ]
           },
@@ -196,14 +205,18 @@ module.exports = (sequelize, DataTypes) => {
     return false
   }
 
-  ApplicationObject.updateApplicationObject = async function({
+  ApplicationObject.up = async function({
     iApplicationID,
     iApplicationObjectID,
-    iObjectPrice
+    iObjectPrice,
+    iUserCancel,
+    dUserCancelDate
   }) {
     const update = await ApplicationObject.update(
       {
-        iObjectPrice
+        iObjectPrice,
+        iUserCancel,
+        dUserCancelDate
       },
       {
         where: {

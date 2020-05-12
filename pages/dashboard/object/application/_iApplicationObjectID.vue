@@ -54,6 +54,7 @@
               v-model="iObjectPrice"
               placeholder="Введите сумму"
               required
+              autocomplete="off"
             ></b-form-input>
           </b-form-group>
         </b-form>

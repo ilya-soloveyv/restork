@@ -5,11 +5,17 @@ const ObjectOption = require('../../models').object_option
 
 router.post('/get', async (req, res, next) => {
   const iObjectOptionID = req.body.id
+  const iObjectOptionActive = req.body.iObjectOptionActive
   let response = null
   if (iObjectOptionID) {
     response = await ObjectOption.findByPk(iObjectOptionID)
   } else {
+    const where = {}
+    if (iObjectOptionActive !== undefined) {
+      where.iObjectOptionActive = iObjectOptionActive
+    }
     response = await ObjectOption.findAll({
+      where,
       order: [
         ['iObjectOptionActive', 'DESC'],
         ['iObjectOptionSort', 'ASC'],

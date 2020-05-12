@@ -19,7 +19,7 @@ router.post('/get', async (req, res, next) => {
 
 router.post('/update', async (req, res, next) => {
   const response = {}
-  await ApplicationObject.updateApplicationObject(req.body.applicationObject)
+  await ApplicationObject.up(req.body.applicationObject)
   res.json(response)
 })
 

@@ -1,7 +1,5 @@
 'use strict'
 
-const consola = require('consola')
-const { Op } = require('sequelize')
 const sequelizePaginate = require('sequelize-paginate')
 const _ = require('lodash')
 const moment = require('moment')
@@ -305,86 +303,6 @@ module.exports = (sequelize, DataTypes) => {
     return response
   }
 
-  // Application.searchObject = async function() {
-  //   const response = {}
-  //   response.applications = await Application.findAll({
-  //     attributes: ['iApplicationID', 'aApplicationCoordinate', 'iSearchRadius'],
-  //     where: {
-  //       iActive: true,
-  //       dApplicationDateFrom: {
-  //         [Op.gte]: new Date()
-  //       },
-  //       iObjectID: null,
-  //       iSearchRadius: {
-  //         [Op.lt]: 10
-  //       }
-  //     },
-  //     include: [
-  //       {
-  //         model: sequelize.models.application_object
-  //       }
-  //     ]
-  //   })
-  //   for (const application of response.applications) {
-  //     await Application.addRadius(application)
-  //     await Application.searchGetObjectList(application)
-  //   }
-  //   return response
-  // }
-
-  // Application.searchGetObjectList = async function({
-  //   iApplicationID,
-  //   aApplicationCoordinate,
-  //   iSearchRadius,
-  //   application_objects
-  // }) {
-  //   const iObjectIDArray = application_objects.map((object) => {
-  //     return object.iObjectID
-  //   })
-  //   let whereNotInObject = ''
-  //   consola.log(iObjectIDArray)
-  //   const iObjectIDString = _.join(iObjectIDArray, ',')
-  //   consola.log(iObjectIDString)
-  //   if (iObjectIDString) {
-  //     whereNotInObject = 'WHERE iObjectID NOT IN (' + iObjectIDString + ')'
-  //   }
-
-  //   const count = 10 - application_objects.length
-  //   const query =
-  //     'SELECT * from (SELECT * ,(ST_Distance_Sphere(ST_GeomFromText("POINT(' +
-  //     aApplicationCoordinate.coordinates[0] +
-  //     ' ' +
-  //     aApplicationCoordinate.coordinates[1] +
-  //     ')"), aObjectCoordinate, 6373)) AS distance FROM object ' +
-  //     whereNotInObject +
-  //     ' ORDER BY distance) x WHERE x.distance <= ' +
-  //     iSearchRadius +
-  //     ' LIMIT ' +
-  //     count
-  //   const objects = await sequelize.query(query)
-  //   for (const object of objects[0]) {
-  //     await sequelize.models.application_object.add({
-  //       iApplicationID,
-  //       iObjectID: object.iObjectID
-  //     })
-  //   }
-  //   return true
-  // }
-
-  // Application.addRadius = async ({ iApplicationID, iSearchRadius }) => {
-  //   await Application.update(
-  //     {
-  //       iSearchRadius: iSearchRadius + 1
-  //     },
-  //     {
-  //       where: {
-  //         iApplicationID
-  //       }
-  //     }
-  //   )
-  //   return true
-  // }
-
   Application.searchObjectInApplication = async ({ iApplicationID }) => {
     const application = await Application.get({ iApplicationID })
 
@@ -396,7 +314,8 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     const iObjectIDArray = objectsID.map((object) => object.iObjectID)
-    let count = objectsID.filter((object) => object.iObjectPrice === null).length
+    let count = objectsID.filter((object) => object.iObjectPrice === null)
+      .length
 
     let whereNotInObject = ''
     const iObjectIDString = _.join(iObjectIDArray, ',')

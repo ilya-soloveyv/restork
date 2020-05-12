@@ -46,28 +46,34 @@ module.exports = (sequelize, DataTypes) => {
       const localPathOriginal = localPath + file.filename
       const sObjectImage = file.filename + '.' + ext
       const localPathPreview = localPath + sObjectImage
+      const localPathInterface = localPath + sObjectImage
       const container = process.env.SELECTEL_CONTAINER
       const sObjectImagePathOriginal =
         '/' + container + '/object/' + iObjectID + '/original/' + sObjectImage
       const sObjectImagePathPreview =
         '/' + container + '/object/' + iObjectID + '/preview/' + sObjectImage
-      await ObjectImage.resize(file)
+      const sObjectImagePathInterface =
+        '/' + container + '/object/' + iObjectID + '/interface/' + sObjectImage
       await selectel.uploadFile(localPathOriginal, sObjectImagePathOriginal)
+      await ObjectImage.resize(file, 300, 300)
       await selectel.uploadFile(localPathPreview, sObjectImagePathPreview)
-      fs.unlinkSync(localPathOriginal)
       fs.unlinkSync(localPathPreview)
+      await ObjectImage.resize(file, 600, 400)
+      await selectel.uploadFile(localPathInterface, sObjectImagePathInterface)
+      fs.unlinkSync(localPathInterface)
+      fs.unlinkSync(localPathOriginal)
       await ObjectImage.create({ iObjectID, sObjectImage })
     }
     return response
   }
 
-  ObjectImage.resize = function(file) {
+  ObjectImage.resize = function(file, width, height) {
     const ext = fileExtension(file.originalname)
     const sObjectImage = file.filename + '.' + ext
     return Jimp.read(file.path)
       .then((preview) => {
         return preview
-          .cover(300, 300)
+          .cover(width, height)
           .quality(90)
           .write('static/upload/' + sObjectImage, () => {
             return sObjectImage
@@ -87,6 +93,8 @@ module.exports = (sequelize, DataTypes) => {
       selectelContainer + '/object/' + iObjectID + '/original/' + sObjectImage
     const sObjectImagePathPreview =
       selectelContainer + '/object/' + iObjectID + '/preview/' + sObjectImage
+    const sObjectImagePathInterface =
+      selectelContainer + '/object/' + iObjectID + '/interface/' + sObjectImage
     await ObjectImage.destroy({
       where: {
         iObjectImageID: image.iObjectImageID
@@ -98,6 +106,7 @@ module.exports = (sequelize, DataTypes) => {
     )
     await selectel.deleteFile(sObjectImagePathOriginal)
     await selectel.deleteFile(sObjectImagePathPreview)
+    await selectel.deleteFile(sObjectImagePathInterface)
     return true
   }
 

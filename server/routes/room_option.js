@@ -5,11 +5,17 @@ const RoomOption = require('../../models').room_option
 
 router.post('/get', async (req, res, next) => {
   const iRoomOptionID = req.body.id
+  const iRoomOptionActive = req.body.iRoomOptionActive
   let response = null
   if (iRoomOptionID) {
     response = await RoomOption.findByPk(iRoomOptionID)
   } else {
+    const where = {}
+    if (iRoomOptionActive !== undefined) {
+      where.iRoomOptionActive = iRoomOptionActive
+    }
     response = await RoomOption.findAll({
+      where,
       order: [
         ['iRoomOptionActive', 'DESC'],
         ['iRoomOptionSort', 'ASC'],
