@@ -29,6 +29,7 @@ module.exports = {
     '@nuxtjs/auth',
     '@nuxtjs/dotenv',
     '@nuxtjs/svg',
+    '~/io',
     [
       'vue-yandex-maps/nuxt',
       {
