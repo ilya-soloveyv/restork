@@ -15,9 +15,6 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-const config = require('../nuxt.config.js')
-config.dev = !isProd
-
 const jwt = require('express-jwt')
 app.use(
   jwt({
@@ -27,6 +24,9 @@ app.use(
     path: ['/auth/login']
   })
 )
+
+const config = require('../nuxt.config.js')
+config.dev = !isProd
 
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/user', require('./routes/user'))
@@ -49,13 +49,14 @@ app.use(nuxt.render)
 server.listen(port, 'localhost')
 consola.log('Server listening on localhost:' + port)
 
-// Socket.io
 const messages = []
 io.on('connection', (socket) => {
   socket.on('last-messages', function(fn) {
+    consola.info('last-messages')
     fn(messages.slice(-50))
   })
   socket.on('send-message', function(message) {
+    consola.info('send-message')
     messages.push(message)
     socket.broadcast.emit('new-message', message)
   })

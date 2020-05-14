@@ -16,14 +16,14 @@ h1 {
   display: flex;
   flex-direction: column;
   background-color: #dddddd;
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 1rem;
   ul.messages {
-    margin: 1rem 1rem 0 1rem;
+    margin: 1rem 1rem 1rem 1rem;
     padding: 0;
     list-style: none;
     flex-grow: 1;
     overflow: auto;
-    background-color: #cccccc;
+    // background-color: #cccccc;
     &::-webkit-scrollbar {
       width: 6px;
     }
@@ -43,7 +43,7 @@ h1 {
   input {
     flex-shrink: 0;
     border: none;
-    background-color: green;
+    background-color: #cccccc;
     margin: 0;
     padding: 1rem;
     border-radius: 0 0 1rem 1rem;
