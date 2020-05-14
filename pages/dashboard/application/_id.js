@@ -39,7 +39,7 @@ export default {
     })
     await store.dispatch('objectOption/GET_LIST')
     await store.dispatch('roomOption/GET_LIST')
-    socket.emit('last-messages', function(messages) {
+    await socket.emit('last-messages', function(messages) {
       callback(null, {
         messages,
         message: ''
