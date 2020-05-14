@@ -43,9 +43,9 @@
           <b-button :disabled="$auth.busy" type="submit" variant="primary">
             Войти
           </b-button>
-          <!-- <small class="float-right pt-2 pb-2">
+          <small class="float-right pt-2 pb-2">
             <nuxt-link to="/recovery">Восстановить пароль</nuxt-link>
-          </small> -->
+          </small>
         </b-form>
       </b-col>
     </b-row>
