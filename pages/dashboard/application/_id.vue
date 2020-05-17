@@ -1,10 +1,15 @@
 <template>
   <div>
     <h1>Здравствуйте, {{ $auth.user.sUserFirstName }}!</h1>
-    <div class="row">
-      <div class="col">
+    <b-row>
+      <b-col md="12" lg="6">
         <div id="objectCarousel">
-          <b-carousel :interval="0" controls indicators>
+          <b-carousel
+            v-if="applicationObject.object.object_images.length"
+            :interval="0"
+            controls
+            indicators
+          >
             <b-carousel-slide
               v-for="(image, index) in applicationObject.object.object_images"
               :key="index"
@@ -17,10 +22,13 @@
               "
             />
           </b-carousel>
+          <span v-else class="noPhoto">
+            К сожалению, объект еще не разместил свои фотографии
+          </span>
         </div>
-        <div class="row">
-          <div class="col">
-            Удобства отеля
+        <b-row class="objectParams">
+          <b-col cols="12" sm="6">
+            <span class="title">Удобства отеля</span>
             <ul>
               <li
                 v-for="(option, optionIndex) in objectOptionWithSelected"
@@ -54,13 +62,13 @@
                 >
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
-                {{ option.sObjectOptionTitle }}
+                <span>{{ option.sObjectOptionTitle }}</span>
               </li>
             </ul>
             <!-- <pre>{{ objectOption }}</pre> -->
-          </div>
-          <div class="col">
-            Удобства в номере
+          </b-col>
+          <b-col cols="12" sm="6">
+            <span class="title titleRoom">Удобства в номере</span>
             <ul>
               <li
                 v-for="(option, optionIndex) in roomOptionWithSelected"
@@ -94,75 +102,117 @@
                 >
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
-                {{ option.sRoomOptionTitle }}
+                <span>{{ option.sRoomOptionTitle }}</span>
               </li>
             </ul>
             <!-- <pre>{{ roomOptionWithSelected }}</pre> -->
-          </div>
+          </b-col>
+        </b-row>
+      </b-col>
+      <b-col md="12" lg="6">
+        <div class="dApplicationDate">
+          Заявка на проживание от {{ dApplicationDate }}
         </div>
-      </div>
-      <div class="col">
-        <div>Заявка на проживание от 01.08.2019</div>
-        <div>{{ applicationObject.object.sObjectTitle }}</div>
-        <div>Параметры Вашей заявки</div>
-        <div class="row">
-          <div class="col">Промежуток проживания:</div>
-          <div class="col">{{ applicationDateRange }}</div>
+        <div class="sObjectTitle">
+          {{ applicationObject.object.sObjectTitle }}
+          <span>
+            {{ applicationObject.object.object_type.sObjectTypeTitle }}
+          </span>
         </div>
-        <div class="row">
-          <div class="col">Количество взрослых:</div>
-          <div class="col">
+        <div class="paramsTitle">Параметры вашей заявки</div>
+        <b-row class="paramsRow">
+          <b-col cols="5" sm="6" class="paramLabel">
+            Промежуток проживания:
+          </b-col>
+          <b-col cols="7" sm="6" class="paramData">
+            {{ applicationDateRange }}
+          </b-col>
+        </b-row>
+        <b-row class="paramsRow">
+          <b-col cols="5" sm="6" class="paramLabel">
+            Количество взрослых:
+          </b-col>
+          <b-col cols="7" sm="6" class="paramData">
             {{ applicationObject.application.iApplicationAdult }}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">Количество детей:</div>
-          <div class="col">
+          </b-col>
+        </b-row>
+        <b-row class="paramsRow">
+          <b-col cols="5" sm="6" class="paramLabel">
+            Количество детей:
+          </b-col>
+          <b-col cols="7" sm="6" class="paramData">
             {{ applicationObject.application.iApplicationChild }}
+          </b-col>
+        </b-row>
+        <b-row class="paramsRow">
+          <b-col cols="5" sm="6" class="paramLabel">
+            Удобства отеля:
+          </b-col>
+          <b-col cols="7" sm="6" class="paramData">
+            {{ applicationObjectOptionsString }}
+          </b-col>
+        </b-row>
+        <b-row class="paramsRow">
+          <b-col cols="5" sm="6" class="paramLabel">
+            Удобства номера:
+          </b-col>
+          <b-col cols="7" sm="6" class="paramData">
+            {{ applicationRoomOptionsString }}
+          </b-col>
+        </b-row>
+        <template v-if="applicationObject.iUserCancel">
+          <div class="alertUserCancel">
+            Вы откзались от этого предложения
           </div>
-        </div>
-        <div class="row">
-          <div class="col">Доп. параметры:</div>
-          <div class="col">{{ applicationObjectOptionsString }}</div>
-        </div>
-        <div class="row">
-          <div class="col">Доп. параметры:</div>
-          <div class="col">{{ applicationRoomOptionsString }}</div>
-        </div>
-        <div v-if="applicationObject.iObjectPrice" class="row">
-          <div class="col">
-            <div>
-              Предложение отеля: {{ applicationObject.iObjectPrice }} рублей
-            </div>
-            <div>(Стоимость указана за весь период проживания)</div>
+        </template>
+        <template v-else-if="applicationObject.iUserSelected">
+          <div class="alertUserSelected">
+            Вы выбрали это предложение<br />
+            Стоимость проживания: {{ applicationObject.iObjectPrice }}₽
           </div>
-        </div>
-        <div v-else class="row">
-          <div class="col">
+        </template>
+        <template v-else-if="!applicationObject.iObjectPrice">
+          <div class="alertNoPrice">
             По данному предложению пока нет цены. Мы уведомим Вас, когда отельер
             предложит свою стоимость
           </div>
-        </div>
-        <div v-if="!applicationObject.iUserCancel" class="row">
+        </template>
+        <template v-else>
+          <div class="iObjectPrice">
+            Предложение отеля:
+            <span>{{ applicationObject.iObjectPrice }}₽</span>
+            <div>Стоимость указана за весь период проживания</div>
+          </div>
+        </template>
+        <div
+          v-if="
+            !applicationObject.iUserCancel && !applicationObject.iUserSelected
+          "
+          class="row"
+        >
           <div class="col">
-            Мне не подходит это предложение
-            <b-button
-              @click="cancelApplicationObject"
-              variant="outline-danger"
-              size="sm"
-            >
-              Отказать
-            </b-button>
+            <div class="buttonCancel">
+              <span>Мне не подходит это предложение</span>
+              <b-button
+                @click="cancelApplicationObject"
+                variant="outline-danger"
+                size="sm"
+              >
+                Отказать
+              </b-button>
+            </div>
           </div>
           <div v-if="applicationObject.iObjectPrice" class="col">
-            Я готов выбрать это предложение
-            <b-button
-              @click="selectelApplicationObject"
-              variant="success"
-              size="sm"
-            >
-              Оплатить
-            </b-button>
+            <div class="buttonCancel">
+              <span>Я готов выбрать это предложение</span>
+              <b-button
+                @click="selectelApplicationObject"
+                variant="success"
+                size="sm"
+              >
+                Выбрать
+              </b-button>
+            </div>
           </div>
         </div>
         <div class="row">
@@ -170,10 +220,10 @@
             <div id="chat">
               <ul ref="messages" class="messages">
                 <li v-for="(message, index) in messages" :key="index">
-                  <i :title="message.date">
+                  <!-- <i :title="message.date">
                     {{ message.date.split('T')[1].slice(0, -2) }}
-                  </i>
-                  <span>: {{ message.text }}</span>
+                  </i> -->
+                  <span>{{ message.text }}</span>
                 </li>
               </ul>
               <input
@@ -185,9 +235,9 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <pre>{{ applicationObject }}</pre>
+      </b-col>
+    </b-row>
+    <!-- <pre>{{ applicationObject }}</pre> -->
   </div>
 </template>
 

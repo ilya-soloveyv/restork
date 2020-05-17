@@ -1,5 +1,7 @@
 import { mapGetters } from 'vuex'
 import socket from '~/plugins/socket.io.js'
+import moment from 'moment'
+moment.locale('ru')
 
 export default {
   middleware: 'auth',
@@ -31,6 +33,11 @@ export default {
     },
     roomOption({ $store }) {
       return $store.state.roomOption.list
+    },
+    dApplicationDate() {
+      return moment(this.applicationObject.application.dDate).format(
+        'D MMMM YYYY'
+      )
     }
   },
   async asyncData({ store, $axios, params }, callback) {
@@ -62,7 +69,7 @@ export default {
       this.$store.dispatch('application_object/SET_CANCEL')
     },
     selectelApplicationObject() {
-      alert('selectelApplicationObject')
+      this.$store.dispatch('application_object/SET_SELECTED')
     },
     sendMessage() {
       if (!this.message.trim()) {

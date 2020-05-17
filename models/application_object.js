@@ -98,6 +98,9 @@ module.exports = (sequelize, DataTypes) => {
               },
               {
                 model: sequelize.models.object_room_option
+              },
+              {
+                model: sequelize.models.object_type
               }
             ]
           },
@@ -206,17 +209,21 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   ApplicationObject.up = async function({
-    iApplicationID,
-    iApplicationObjectID,
-    iObjectPrice,
-    iUserCancel,
-    dUserCancelDate
+    iApplicationID = false,
+    iApplicationObjectID = false,
+    iObjectPrice = null,
+    iUserCancel = false,
+    dUserCancelDate = null,
+    iUserSelected = false,
+    dUserSelectedDate = null
   }) {
     const update = await ApplicationObject.update(
       {
         iObjectPrice,
         iUserCancel,
-        dUserCancelDate
+        dUserCancelDate,
+        iUserSelected,
+        dUserSelectedDate
       },
       {
         where: {

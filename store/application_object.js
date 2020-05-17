@@ -73,6 +73,10 @@ const mutations = {
   SET_CANCEL(state) {
     state.item.iUserCancel = true
     state.item.dUserCancelDate = moment()
+  },
+  SET_SELECTED(state) {
+    state.item.iUserSelected = true
+    state.item.dUserSelectedDate = moment()
   }
 }
 
@@ -96,6 +100,10 @@ const actions = {
   },
   async SET_CANCEL({ state, commit, dispatch }) {
     commit('SET_CANCEL')
+    await dispatch('UPDATE')
+  },
+  async SET_SELECTED({ state, commit, dispatch }) {
+    commit('SET_SELECTED')
     await dispatch('UPDATE')
   }
 }
