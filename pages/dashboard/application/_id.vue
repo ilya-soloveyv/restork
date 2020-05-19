@@ -27,7 +27,7 @@
           </span>
         </div>
         <b-row class="objectParams">
-          <b-col cols="12" sm="6">
+          <b-col cols="6">
             <span class="title">Удобства отеля</span>
             <ul>
               <li
@@ -67,7 +67,7 @@
             </ul>
             <!-- <pre>{{ objectOption }}</pre> -->
           </b-col>
-          <b-col cols="12" sm="6">
+          <b-col cols="6">
             <span class="title titleRoom">Удобства в номере</span>
             <ul>
               <li
@@ -234,6 +234,28 @@
               />
             </div>
           </div>
+        </div>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <div id="map">
+          <client-only>
+            <yandex-map
+              :coords="applicationObject.object.aObjectCoordinate.coordinates"
+              :zoom="15"
+              :scroll-zoom="false"
+              :init-without-markers="false"
+              :controls="yandexMapControls"
+              ymap-class="map"
+            >
+              <ymap-marker
+                :marker-id="1"
+                :coords="applicationObject.object.aObjectCoordinate.coordinates"
+                marker-type="placemark"
+              />
+            </yandex-map>
+          </client-only>
         </div>
       </b-col>
     </b-row>

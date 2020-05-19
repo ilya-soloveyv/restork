@@ -12,7 +12,9 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      yandexMapControls: ['zoomControl', 'fullscreenControl']
+    }
   },
   computed: {
     ...mapGetters('application_object', [

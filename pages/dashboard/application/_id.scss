@@ -2,6 +2,9 @@ h1 {
   padding-top: 4rem;
   font-size: 18px;
   font-weight: 500;
+  @media (max-width: 575px) {
+    padding-top: 2rem;
+  }
 }
 #objectCarousel {
   margin-bottom: 2rem;
@@ -37,6 +40,7 @@ h1 {
   background-color: #dddddd;
   border-radius: 0.5rem;
   margin-bottom: 2rem;
+  display: none;
   ul.messages {
     margin: 1rem 1rem 1rem 1rem;
     padding: 0;
@@ -152,9 +156,7 @@ h1 {
     font-weight: 700;
     display: block;
     @media (max-width: 575px) {
-      &.titleRoom {
-        padding-top: 1rem;
-      }
+      font-size: 14px;
     }
   }
   ul {
@@ -164,12 +166,19 @@ h1 {
     li {
       display: flex;
       padding-top: 0.75rem;
+      @media (max-width: 575px) {
+        padding-top: 0.5rem;
+      }
       svg {
         flex-shrink: 0;
       }
       span {
         flex-grow: 1;
         padding-left: 0.75rem;
+        @media (max-width: 575px) {
+          padding-left: 0.5rem;
+          font-size: 14px;
+        }
       }
     }
   }

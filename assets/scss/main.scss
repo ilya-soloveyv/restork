@@ -24,3 +24,18 @@ h1 {
   text-align: center;
   margin-bottom: 2rem;
 }
+#map {
+  height: 400px;
+  box-shadow: 0 0 31.15px 3.85px rgba(0,0,0,.15);
+  margin: 4rem 0;
+  overflow: hidden;
+  @media (max-width: 575px) {
+    margin: 3rem 0;
+  }
+  section.ymap-container {
+    height: 100%;
+    .map {
+      height: 100%;
+    }
+  }
+}

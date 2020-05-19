@@ -58,6 +58,10 @@ export default {
   box-shadow: 0 8px 14.72px 1.28px rgba(0, 0, 0, 0.3);
   padding-top: 2rem;
   padding-bottom: 2rem;
+  @media (max-width: 991px) {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
   &.navbar-expand-lg {
     #nav-collapse {
       // position: fixed;
