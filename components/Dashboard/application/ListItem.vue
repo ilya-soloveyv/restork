@@ -19,60 +19,99 @@
           <line x1="3" y1="10" x2="21" y2="10" />
         </svg>
       </div>
-      <div class="date">Заявка от {{ dDate }}</div>
-      <div class="direction">
-        Направление: {{ application.sApplicationCountry }},
-        {{ application.sApplicationState }},
-        {{ application.sApplicationCity }}
-      </div>
-      <div class="dates">
-        {{ application.dApplicationDateFrom }} -
-        {{ application.dApplicationDateTo }}
+      <div class="data">
+        <div class="date">
+          <span>Заявка от:</span>
+          {{ dDate }}
+        </div>
+        <div class="direction">
+          <span>Направление:</span>
+          {{ application.sApplicationState }},
+          {{ application.sApplicationCity }}
+        </div>
+        <div class="dates">
+          <span>Период проживания:</span>
+          {{ dApplicationDateFromTo }}
+        </div>
       </div>
       <div class="count">
-        {{ applicationObjectNew.length + applicationObjectView.length }} /
-        {{ application.application_objects.length }}
+        <span>
+          Ответов:
+          {{ applicationObjectNew.length + applicationObjectView.length }} /
+          {{ application.application_objects.length }}
+        </span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icoOpen"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#000000"
+          stroke-width="2"
+          stroke-linecap="square"
+          stroke-linejoin="arcs"
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icoClose"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#000000"
+          stroke-width="2"
+          stroke-linecap="square"
+          stroke-linejoin="arcs"
+        >
+          <path d="M18 15l-6-6-6 6" />
+        </svg>
       </div>
     </div>
-    <b-collapse
-      :id="'accordion_' + application.iApplicationID"
-      role="tabpanel"
-      accordion="accordionApplicationObject"
-    >
-      <div
-        v-if="
-          !applicationObjectWait.length &&
-            !applicationObjectNew.length &&
-            !applicationObjectView.length
-        "
+    <div class="appliactionObjectList">
+      <b-collapse
+        :id="'accordion_' + application.iApplicationID"
+        role="tabpanel"
+        accordion="accordionApplicationObject"
       >
-        Идет подбор предложений...
-      </div>
-      <div v-if="applicationObjectWait.length">
-        <b>Ожидаем предложения</b>
-        <ListItemObject
-          v-for="(app, index) in applicationObjectWait"
-          :key="index"
-          :app="app"
-        />
-      </div>
-      <div v-if="applicationObjectNew.length">
-        <b>Новые предложения</b>
-        <ListItemObject
-          v-for="(app, index) in applicationObjectNew"
-          :key="index"
-          :app="app"
-        />
-      </div>
-      <div v-if="applicationObjectView.length">
-        <b>Просмотренные предложения</b>
-        <ListItemObject
-          v-for="(app, index) in applicationObjectView"
-          :key="index"
-          :app="app"
-        />
-      </div>
-    </b-collapse>
+        <div
+          v-if="
+            !applicationObjectWait.length &&
+              !applicationObjectNew.length &&
+              !applicationObjectView.length
+          "
+          class="line"
+        >
+          Идет подбор предложений...
+        </div>
+        <div v-if="applicationObjectWait.length" class="line">
+          <b>Ожидаем предложения</b>
+          <ListItemObject
+            v-for="(app, index) in applicationObjectWait"
+            :key="index"
+            :app="app"
+          />
+        </div>
+        <div v-if="applicationObjectNew.length" class="line">
+          <b>Новые предложения</b>
+          <ListItemObject
+            v-for="(app, index) in applicationObjectNew"
+            :key="index"
+            :app="app"
+          />
+        </div>
+        <div v-if="applicationObjectView.length" class="line">
+          <b>Просмотренные предложения</b>
+          <ListItemObject
+            v-for="(app, index) in applicationObjectView"
+            :key="index"
+            :app="app"
+          />
+        </div>
+      </b-collapse>
+    </div>
   </div>
 </template>
 
@@ -110,6 +149,14 @@ export default {
       return this.application.application_objects.filter(
         (application) => application.iUserView
       )
+    },
+    dApplicationDateFromTo() {
+      return (
+        'c ' +
+        moment(this.dApplicationDateFrom).format('DD MMMM YYYY') +
+        ' по ' +
+        moment(this.dApplicationDateTo).format('DD MMMM YYYY')
+      )
     }
   }
 }
@@ -118,7 +165,76 @@ export default {
 <style lang="scss" scoped>
 .item {
   border-bottom: 1px solid #d9d9d9;
+  // padding-bottom: 1rem;
   cursor: pointer;
-  padding: 1rem 0;
+  // padding: 1rem 0;
+  .meta {
+    display: flex;
+    // background: red;
+    padding: 1rem 0 0;
+    font-size: 16px;
+    &.collapsed {
+      .count {
+        svg.icoClose {
+          display: none;
+        }
+        svg.icoOpen {
+          display: inline-block;
+        }
+      }
+    }
+    .ico {
+      flex-basis: 24px;
+      flex-shrink: 0;
+      margin-right: 1rem;
+    }
+    .data {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      .date {
+      }
+      .dates {
+      }
+      .direction {
+      }
+      span {
+        color: #999999;
+      }
+    }
+    .count {
+      flex-basis: 170px;
+      flex-shrink: 0;
+      text-align: right;
+      line-height: 24px;
+      display: flex;
+      span {
+        flex-grow: 1;
+        padding-right: 0.75rem;
+      }
+      svg {
+        flex-basis: 24px;
+        flex-shrink: 0;
+      }
+      svg.icoOpen {
+        display: none;
+      }
+    }
+  }
+  .appliactionObjectList {
+    padding-left: 40px;
+    padding: 0 0 1rem 40px;
+    cursor: default;
+    .line {
+      padding-top: 1rem;
+    }
+    .collapse {
+      b {
+        display: block;
+        text-decoration: underline;
+        // margin-top: 1rem;
+      }
+    }
+  }
 }
 </style>
