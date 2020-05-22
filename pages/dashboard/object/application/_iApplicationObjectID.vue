@@ -1,46 +1,45 @@
 <template>
-  <div>
+  <div class="dashboardObjectApplication">
     <h1>Заявка от {{ dApplicationDate }}г.</h1>
-    <div class="row">
-      <div class="col">Имя:</div>
+    <div class="row line">
+      <div class="col"><b>Имя:</b></div>
       <div class="col">
         {{ applicationObject.application.user.sUserFirstName }}
       </div>
     </div>
-    <div class="row">
-      <div class="col">Период размещения:</div>
+    <div class="row line">
+      <div class="col"><b>Период размещения:</b></div>
       <div class="col">
-        {{ applicationObject.application.dApplicationDateFrom }} -
-        {{ applicationObject.application.dApplicationDateTo }}
+        {{ dApplicationDateFromTo }}
       </div>
     </div>
-    <div class="row">
-      <div class="col">Направление:</div>
+    <div class="row line">
+      <div class="col"><b>Направление:</b></div>
       <div class="col">
         {{ applicationObject.application.sApplicationState }},
         {{ applicationObject.application.sApplicationCity }}
       </div>
     </div>
-    <div class="row">
-      <div class="col">Кол-во взрослых:</div>
+    <div class="row line">
+      <div class="col"><b>Кол-во взрослых:</b></div>
       <div class="col">
         {{ applicationObject.application.iApplicationAdult }}
       </div>
     </div>
-    <div class="row">
-      <div class="col">Кол-во детей:</div>
+    <div class="row line">
+      <div class="col"><b>Кол-во детей:</b></div>
       <div class="col">
         {{ applicationObject.application.iApplicationChild }}
       </div>
     </div>
-    <div class="row">
-      <div class="col">Требования по объекту:</div>
+    <div class="row line">
+      <div class="col"><b>Параметры по объекту:</b></div>
       <div class="col">
         {{ applicationObjectOption }}
       </div>
     </div>
-    <div class="row">
-      <div class="col">Требования по номеру:</div>
+    <div class="row line">
+      <div class="col"><b>Параметры по номеру:</b></div>
       <div class="col">
         {{ applicationRoomOption }}
       </div>
@@ -65,7 +64,7 @@
         </b-button>
       </div>
     </div>
-    <pre>{{ applicationObject }}</pre>
+    <!-- <pre>{{ applicationObject }}</pre> -->
   </div>
 </template>
 
@@ -115,6 +114,20 @@ export default {
         }
       )
       return applicationRoomOption.join(', ')
+    },
+    dApplicationDateFromTo() {
+      return (
+        'c ' +
+        moment(this.applicationObject.application.dApplicationDateFrom).format(
+          'DD MMMM YYYY'
+        ) +
+        ' по ' +
+        moment(this.applicationObject.application.dApplicationDateTo).format(
+          'DD MMMM YYYY'
+        )
+      )
+      // {{  }} -
+      // {{ applicationObject.application.dApplicationDateTo }}
     }
   },
   async asyncData({ store, $axios, params }) {
@@ -130,3 +143,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.dashboardObjectApplication {
+  padding: 0 3rem 1rem;
+  .line {
+    padding-bottom: 1rem;
+    b {
+      font-weight: 500;
+    }
+  }
+}
+</style>

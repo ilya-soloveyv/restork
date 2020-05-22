@@ -92,6 +92,8 @@
         </nuxt-link>
       </li>
     </ul>
+    <!-- {{ objects }} -->
+    <!-- {{ isObjectUser }} -->
   </div>
 </template>
 
