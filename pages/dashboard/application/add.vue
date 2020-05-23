@@ -116,7 +116,7 @@
         </b-col>
       </b-row>
       <b-button type="submit" variant="primary">Создать заявку</b-button>
-      <pre>{{ application }}</pre>
+      <!-- <pre>{{ application }}</pre> -->
     </b-form>
   </div>
 </template>
