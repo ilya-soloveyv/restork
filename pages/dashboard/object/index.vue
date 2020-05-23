@@ -1,37 +1,25 @@
 <template>
   <div>
     <h1>Мои объекты размещения</h1>
-    <ul>
-      <li v-for="(object, objectIndex) in objects" :key="objectIndex">
-        <nuxt-link :to="'/dashboard/object/' + object.iObjectID">
-          {{ object.sObjectTitle }}
-        </nuxt-link>
-        <ul>
-          <li
-            v-for="(app, appIndex) in object.application_objects"
-            :key="appIndex"
-          >
-            <nuxt-link
-              :to="'/dashboard/object/application/' + app.iApplicationObjectID"
-            >
-              {{ app.iApplicationObjectID }}
-            </nuxt-link>
-          </li>
-        </ul>
-        <!-- <pre>{{ object }}</pre> -->
-      </li>
-    </ul>
-    <b-button variant="primary" to="/dashboard/object/add">
+    <ListItem
+      v-for="(object, objectIndex) in objects"
+      :key="objectIndex"
+      :object="object"
+    />
+    <b-button variant="primary" to="/dashboard/object/add" class="mt-3">
       Добавить новый объект
     </b-button>
-    <!-- {{ objects }} -->
   </div>
 </template>
 
 <script>
+import ListItem from '~/components/Dashboard/object/ListItem'
 export default {
   middleware: 'auth',
   layout: 'dashboard',
+  components: {
+    ListItem
+  },
   head() {
     return {
       title: 'Object'

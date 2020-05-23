@@ -168,7 +168,23 @@ module.exports = (sequelize, DataTypes) => {
       },
       include: [
         {
-          model: sequelize.models.application_object
+          model: sequelize.models.object_image
+        },
+        {
+          model: sequelize.models.application_object,
+          include: [
+            {
+              model: sequelize.models.application,
+              include: [
+                {
+                  model: sequelize.models.user
+                }
+              ]
+            }
+          ]
+        },
+        {
+          model: sequelize.models.object_type
         }
       ]
     })
