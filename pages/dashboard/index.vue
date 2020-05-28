@@ -198,8 +198,14 @@ h2 {
   .cols {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    @media (max-width: 991px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
     .item {
       display: flex;
+      @media (max-width: 991px) {
+        margin-bottom: 1rem;
+      }
       .num {
         flex-shrink: 0;
         width: 100px;

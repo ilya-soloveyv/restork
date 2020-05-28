@@ -65,7 +65,7 @@
       </div>
       <ListItemApplication
         v-for="(application, applicationIndex) in applicationObjectNoView"
-        :key="applicationIndex"
+        :key="'NoView' + applicationIndex"
         :application="application"
       />
       <div v-if="applicationObjectViewNoPrice.length" class="title">
@@ -73,7 +73,7 @@
       </div>
       <ListItemApplication
         v-for="(application, applicationIndex) in applicationObjectViewNoPrice"
-        :key="applicationIndex"
+        :key="'NoPrice' + applicationIndex"
         :application="application"
       />
       <div v-if="applicationObjectViewPrice.length" class="title">
@@ -81,7 +81,7 @@
       </div>
       <ListItemApplication
         v-for="(application, applicationIndex) in applicationObjectViewPrice"
-        :key="applicationIndex"
+        :key="'Price' + applicationIndex"
         :application="application"
       />
     </b-collapse>
@@ -142,6 +142,9 @@ export default {
   .head {
     display: flex;
     cursor: pointer;
+    @media (max-width: 991px) {
+      flex-direction: column;
+    }
     &.collapsed {
       .info {
         svg {

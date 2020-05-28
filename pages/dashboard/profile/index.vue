@@ -35,13 +35,13 @@
       </div>
       <div class="userData">
         <b-form @submit.prevent="update">
-          <div class="row">
-            <div class="col">
-              <h2>Личная информация:</h2>
-            </div>
-          </div>
           <b-row>
-            <b-col cols="4">
+            <b-col>
+              <h2>Личная информация:</h2>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col lg="4" md="12">
               <b-form-group
                 id="sUserLastNameLabel"
                 label="Фамилия"
@@ -54,7 +54,7 @@
                 ></b-form-input>
               </b-form-group>
             </b-col>
-            <b-col cols="4">
+            <b-col lg="4" md="12">
               <b-form-group
                 id="sUserFirstNameLabel"
                 label="Имя"
@@ -67,7 +67,7 @@
                 ></b-form-input>
               </b-form-group>
             </b-col>
-            <b-col cols="4">
+            <b-col lg="4" md="12">
               <b-form-group
                 id="sUserMiddleNameLabel"
                 label="Отчество"
@@ -80,7 +80,7 @@
                 ></b-form-input>
               </b-form-group>
             </b-col>
-            <b-col cols="4">
+            <b-col lg="4" md="12">
               <b-form-group
                 id="dUserBirthdayLabel"
                 label="Дата рождения"
@@ -99,7 +99,7 @@
                 </client-only>
               </b-form-group>
             </b-col>
-            <b-col cols="4">
+            <b-col lg="4" md="12">
               <b-form-group
                 id="sUserPhoneLabel"
                 label="Мобильный телефон"
@@ -114,7 +114,7 @@
                 ></b-form-input>
               </b-form-group>
             </b-col>
-            <b-col cols="4">
+            <b-col lg="4" md="12">
               <b-form-group
                 id="sUserEmailLabel"
                 label="Электронная почта"
@@ -145,7 +145,7 @@
             </div>
           </div>
           <b-row>
-            <b-col cols="4">
+            <b-col lg="4" md="12">
               <b-form-group
                 id="oldPasswordLabel"
                 label="Старый пароль"
@@ -192,7 +192,7 @@
                 </b-input-group>
               </b-form-group>
             </b-col>
-            <b-col cols="4">
+            <b-col lg="4" md="12">
               <b-form-group
                 id="newPasswordLabel"
                 label="Новый пароль"
@@ -239,7 +239,7 @@
                 </b-input-group>
               </b-form-group>
             </b-col>
-            <b-col v-if="!newPasswordView" cols="4">
+            <b-col v-if="!newPasswordView" lg="4" md="12">
               <b-form-group
                 id="repeatPasswordLabel"
                 label="Подтверждение пароля"

@@ -5,12 +5,12 @@
         <b-navbar-brand to="/">
           <img src="~assets/images/logo.svg" alt="" />
         </b-navbar-brand>
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-navbar-toggle target="nav-collapse" />
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
             <b-nav-item to="/">Подобрать жилье</b-nav-item>
             <b-nav-item to="/">Как это работает</b-nav-item>
-            <b-nav-item v-b-toggle.sidebar-1>О сервисе</b-nav-item>
+            <b-nav-item to="/">О сервисе</b-nav-item>
             <b-nav-item to="/">Подобрать жилье</b-nav-item>
           </b-navbar-nav>
           <b-navbar-nav class="ml-auto">
@@ -42,15 +42,6 @@
         </b-collapse>
       </b-container>
     </b-navbar>
-    <b-sidebar id="sidebar-1" title="Sidebar" shadow backdrop no-slide>
-      <div class="px-3 py-2">
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras mattis
-          consectetur purus sit amet fermentum. consectetur purus sit amet
-          fermentum.
-        </p>
-      </div>
-    </b-sidebar>
   </div>
 </template>
 
@@ -89,7 +80,7 @@ export default {
   }
   .navbar-brand {
     img {
-      width: 200px;
+      height: 30px;
     }
   }
   .restorkUser {

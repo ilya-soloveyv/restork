@@ -10,10 +10,11 @@
         </b-row>
         <b-row>
           <b-col xl="4" lg="4" md="6" sm="12">
+            <!-- <b-col class="d-none d-lg-block"> -->
             <DashboardCard />
             <DashboardMenu />
           </b-col>
-          <b-col xl="8" lg="8" md="6" sm="12">
+          <b-col xl="8" lg="8" md="12">
             <div class="data">
               <nuxt />
             </div>
@@ -47,6 +48,13 @@ export default {
     border-radius: 1rem;
     box-shadow: 0 0 1rem 1px rgba(0, 0, 0, 0.15);
     background: #fff;
+    @media (max-width: 991px) {
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+      background: none;
+      margin-bottom: 5rem;
+    }
   }
 }
 </style>
