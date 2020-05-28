@@ -51,6 +51,7 @@
 <script>
 export default {
   middleware: 'auth',
+  layout: 'dashboardFull',
   head() {
     return {
       title: 'Добавление объекта'

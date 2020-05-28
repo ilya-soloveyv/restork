@@ -173,6 +173,9 @@ export default {
     // background: red;
     padding: 1rem 0 0;
     font-size: 16px;
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
     &.collapsed {
       .count {
         svg.icoClose {
@@ -187,6 +190,9 @@ export default {
       flex-basis: 24px;
       flex-shrink: 0;
       margin-right: 1rem;
+      @media (max-width: 767px) {
+        display: none;
+      }
     }
     .data {
       flex-grow: 1;
@@ -208,6 +214,10 @@ export default {
       text-align: right;
       line-height: 24px;
       display: flex;
+      @media (max-width: 767px) {
+        flex-basis: auto;
+        text-align: left;
+      }
       span {
         flex-grow: 1;
         padding-right: 0.75rem;
@@ -222,9 +232,11 @@ export default {
     }
   }
   .appliactionObjectList {
-    padding-left: 40px;
     padding: 0 0 1rem 40px;
     cursor: default;
+    @media (max-width: 767px) {
+      padding: 0 0 1rem 0;
+    }
     .line {
       padding-top: 1rem;
     }

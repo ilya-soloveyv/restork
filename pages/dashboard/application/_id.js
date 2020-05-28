@@ -5,7 +5,7 @@ moment.locale('ru')
 
 export default {
   middleware: 'auth',
-  // layout: 'dashboard',
+  layout: 'dashboardFull',
   head() {
     return {
       title: 'Application Object Item'

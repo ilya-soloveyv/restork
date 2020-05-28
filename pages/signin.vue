@@ -1,55 +1,55 @@
 <template>
-  <div id="login">
-    <h1>Авторизация</h1>
-    <b-row class="justify-content-center">
-      <b-col lg="3">
-        <b-form @submit.prevent="login" autocomplete="off">
-          <b-form-group
-            id="sUserPhoneLabel"
-            label="Мобильный телефон"
-            label-for="sUserPhoneInput"
-          >
-            <the-mask
-              id="sUserPhoneInput"
-              ref="sUserPhone"
-              v-model="sUserPhone"
-              :class="{ 'is-invalid': error && error.ref === 'sUserPhone' }"
-              mask="+7 (###) ###-##-##"
-              type="text"
-              class="form-control"
-              autocomplete="off"
-            />
-            <b-form-invalid-feedback v-if="error && error.message">
-              {{ error.message }}
-            </b-form-invalid-feedback>
-          </b-form-group>
-          <b-form-group
-            id="sUserPasswordLabel"
-            label="Пароль"
-            label-for="sUserPasswordInput"
-          >
-            <b-form-input
-              id="sUserPasswordInput"
-              ref="sUserPassword"
-              v-model="sUserPassword"
-              :class="{ 'is-invalid': error && error.ref === 'sUserPassword' }"
-              type="password"
-              autocomplete="off"
-            />
-            <b-form-invalid-feedback v-if="error && error.message">
-              {{ error.message }}
-            </b-form-invalid-feedback>
-          </b-form-group>
-          <b-button :disabled="$auth.busy" type="submit" variant="primary">
-            Войти
-          </b-button>
-          <!-- <small class="float-right pt-2 pb-2">
-            <nuxt-link to="/recovery">Восстановить пароль</nuxt-link>
-          </small> -->
-        </b-form>
-      </b-col>
-    </b-row>
-  </div>
+  <b-container fluid>
+    <div id="login">
+      <h1>Авторизация</h1>
+      <b-form @submit.prevent="login" autocomplete="off">
+        <b-form-group
+          id="sUserPhoneLabel"
+          label="Мобильный телефон"
+          label-for="sUserPhoneInput"
+        >
+          <the-mask
+            id="sUserPhoneInput"
+            ref="sUserPhone"
+            v-model="sUserPhone"
+            :class="{ 'is-invalid': error && error.ref === 'sUserPhone' }"
+            mask="+7 (###) ###-##-##"
+            type="text"
+            class="form-control"
+            autocomplete="off"
+          />
+          <b-form-invalid-feedback v-if="error && error.message">
+            {{ error.message }}
+          </b-form-invalid-feedback>
+        </b-form-group>
+        <b-form-group
+          id="sUserPasswordLabel"
+          label="Пароль"
+          label-for="sUserPasswordInput"
+        >
+          <b-form-input
+            id="sUserPasswordInput"
+            ref="sUserPassword"
+            v-model="sUserPassword"
+            :class="{
+              'is-invalid': error && error.ref === 'sUserPassword'
+            }"
+            type="password"
+            autocomplete="off"
+          />
+          <b-form-invalid-feedback v-if="error && error.message">
+            {{ error.message }}
+          </b-form-invalid-feedback>
+        </b-form-group>
+        <b-button :disabled="$auth.busy" type="submit" variant="primary">
+          Войти
+        </b-button>
+        <!-- <small class="float-right pt-2 pb-2">
+          <nuxt-link to="/recovery">Восстановить пароль</nuxt-link>
+        </small> -->
+      </b-form>
+    </div>
+  </b-container>
 </template>
 
 <script>
@@ -91,9 +91,17 @@ export default {
 
 <style lang="scss" scoped>
 #login {
-  background: red;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // align-items: center;
+  width: 300px;
+  margin: 0 auto;
+  @media (max-width: 991px) {
+    width: auto;
+  }
   h1 {
-    margin-top: 1rem;
   }
 }
 </style>
