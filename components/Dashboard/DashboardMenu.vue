@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboardMenu">
+  <div v-if="$auth.$state.loggedIn" class="dashboardMenu">
     <ul>
       <li>
         <nuxt-link to="/dashboard" active-class="active" exact>
@@ -206,6 +206,7 @@
       flex-direction: row;
       border-radius: 0.5rem;
       background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0.5rem 1rem 1px rgba(0, 0, 0, 0.25);
     }
     li {
       display: flex;

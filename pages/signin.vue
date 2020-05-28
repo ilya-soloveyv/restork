@@ -2,7 +2,7 @@
   <div id="login">
     <h1>Авторизация</h1>
     <b-row class="justify-content-center">
-      <b-col cols="3">
+      <b-col lg="3">
         <b-form @submit.prevent="login" autocomplete="off">
           <b-form-group
             id="sUserPhoneLabel"
@@ -43,9 +43,9 @@
           <b-button :disabled="$auth.busy" type="submit" variant="primary">
             Войти
           </b-button>
-          <small class="float-right pt-2 pb-2">
+          <!-- <small class="float-right pt-2 pb-2">
             <nuxt-link to="/recovery">Восстановить пароль</nuxt-link>
-          </small>
+          </small> -->
         </b-form>
       </b-col>
     </b-row>
@@ -88,3 +88,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+#login {
+  background: red;
+  h1 {
+    margin-top: 1rem;
+  }
+}
+</style>

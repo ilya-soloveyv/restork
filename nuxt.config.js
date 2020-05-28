@@ -56,7 +56,8 @@ module.exports = {
       }
     },
     redirect: {
-      home: '/dashboard'
+      home: '/dashboard',
+      login: '/signin'
     }
   },
   build: {

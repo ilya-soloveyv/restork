@@ -6,19 +6,34 @@
         <nuxt />
       </b-container>
     </main>
-    <footer class="footer">
-      <div class="container">
-        <img src="~assets/images/logoWhite.svg" alt="" />
-      </div>
-    </footer>
+    <Footer />
+    <template class="dashboardMenu">
+      <DashboardMenu />
+    </template>
   </div>
 </template>
 
 <script>
 import TopNav from '~/components/TopNav'
+import Footer from '~/components/Footer'
+import DashboardMenu from '~/components/Dashboard/DashboardMenu'
 export default {
   components: {
-    TopNav
+    TopNav,
+    Footer,
+    DashboardMenu
+  },
+  head: {
+    script: [{ src: '/js/main.js' }]
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.dashboardMenu {
+  display: none;
+  @media (max-width: 991px) {
+    display: block;
+  }
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <TopNav />
     <div id="dashboard">
       <b-container>
@@ -22,20 +22,26 @@
         </b-row>
       </b-container>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import TopNav from '~/components/TopNav'
+import Footer from '~/components/Footer'
 import ConfirmPhone from '~/components/ConfirmPhone'
 import DashboardCard from '~/components/Dashboard/DashboardCard'
 import DashboardMenu from '~/components/Dashboard/DashboardMenu'
 export default {
   components: {
     TopNav,
+    Footer,
     ConfirmPhone,
     DashboardCard,
     DashboardMenu
+  },
+  head: {
+    script: [{ src: '/js/main.js' }]
   }
 }
 </script>
