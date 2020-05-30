@@ -1,0 +1,115 @@
+.current {
+    align-self: flex-start;
+    .lk-main__title {
+        @media screen and (max-width: 576px){
+            width: 200px;
+            margin: 0 auto;
+            margin-bottom: 25px;
+        }
+    }
+    &-wrap {
+        width: 80%;
+        margin: 0 auto;
+        @media screen and (max-width: 1200px){
+            width: 95%;
+        }
+    }
+    &-list {
+        
+    }
+    &-item {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 25px;
+        @media screen and (max-width: 576px){        
+            flex-direction: column; 
+        }
+        .current-name {
+            width: 240px;
+            flex-shrink: 0; 
+            font-size: 15px;
+            font-weight: 600;
+            @media screen and (max-width: 576px){        
+                font-size: 13px;
+                width: 145px;
+            }  
+            @media screen and (max-width: 576px){        
+                margin-bottom: 10px;
+            }
+        }
+        .current-desc {
+            flex-grow: 1;
+            font-size: 15px;
+            line-height: 1.4em;
+            @media screen and (max-width: 576px){        
+                font-size: 13px;
+            }
+        }
+    }
+    &-accept {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        @media screen and (max-width: 768px){        
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .form-group {
+            position: relative;
+            width: 48%;
+            @media screen and (max-width: 768px){        
+                width: 70%;    
+            }
+            @media screen and (max-width: 576px){        
+                width: 100%;
+            }
+            input {
+                width: 100%;
+                border: none;
+                border-bottom: 1px solid #bcbcbc;
+                padding: 6px 10px 10px;
+                transition: border .25s;
+                background: transparent;
+                &.datepicker-here {
+                  margin-bottom: 0;
+                }
+                &:hover {
+                  border-bottom: 1px solid $accent;
+                }
+                &:focus {
+                  border-bottom: 1px solid $accent;
+                  &+label {
+                    top: -12px;
+                    font-size: 12px;
+                    color: #000;
+                    font-weight: 600;
+                  }
+                }                          
+            }
+            label {
+                position: absolute;
+                top: 6px;
+                left: 10px;
+                font-size: 14px;
+                color: #bcbcbc;
+                pointer-events: none;
+                transition: all .25s;
+                span {
+                  color: red;
+                  margin-left: 2px;
+                }
+            }
+        }
+    }
+    &-btn {
+        width: 48%;
+        @media screen and (max-width: 768px){        
+            width: 70%;
+            margin-top: 15px;   
+        }
+        @media screen and (max-width: 576px){        
+            width: 100%;
+        }
+    }
+}

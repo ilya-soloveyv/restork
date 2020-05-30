@@ -1,0 +1,262 @@
+.lk {
+    background: #fff url('~assets/images/breas.jpg') no-repeat center bottom;
+}
+
+.aplications {
+    background: #fff;
+    width: calc(100% - 400px);
+    @media screen and (max-width: 992px) {
+        width: 100%;
+    }
+    &-wrapp {
+        
+    }
+    &-list {
+
+    }
+    &-item {        
+        border-bottom: 1px solid #d9d9d9;
+        padding-bottom: 15px;
+    }
+    &-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 24px;
+        padding-bottom: 9px;
+        cursor: pointer;
+        @media screen and (max-width: 576px) {
+            flex-direction: column;
+            padding-bottom: 0;
+            padding-top: 15px;
+        }
+        .info-text {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            font-size: 15px;
+            @media screen and (max-width: 576px) {
+                margin-bottom: 20px;
+            }
+            @media screen and (max-width: 576px) {
+                text-align: center;
+            }
+            img {
+                margin-right: 8px;
+                width: 22px;
+            }
+            span {
+                strong {
+                    font-weight: 500;
+                }
+            }
+            .fecility-img {
+                width: 145px;
+                border-radius: 10px;
+                overflow: hidden;
+                margin-right: 15px;
+                @media screen and (max-width: 576px) {
+                    margin-right: 0;
+                    margin-bottom: 10px;   
+                }
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .fecility-wrapp {
+                span {
+                    display: block;
+                    margin-bottom: 15px;
+                }
+                .redaction-link {
+                    color: #0098da;
+                    padding-bottom: 2px;
+                    border-bottom: 1px solid #0098da;
+                    font-weight: 700;
+                    font-size: 13px;
+                }
+            }
+        }
+        .info-answer {
+            position: relative;
+            font-size: 15px;
+            padding-left: 20px;
+            width: 160px;
+            @media screen and (max-width: 1200px) {
+                width: 180px;
+            }
+            @media screen and (max-width: 768px) {
+                width: 210px;
+            }
+            @media screen and (max-width: 576px) {
+                width: auto;
+            }
+            i {
+                font-size: 24px;
+                margin-left: 5px;
+                &.active {
+                    transform: rotate(180deg);
+                    transform-origin: 50% 70%;
+                }
+            }
+            &:before {
+                content: '';
+                display: block;
+                width: 1px;
+                height: calc(100% + 20px);
+                background: #d9d9d9;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                @media screen and (max-width: 576px) {
+                    width: 50px;
+                    height: 1px;
+                    top: -25%;
+                    left: 50%;
+                    transform: translate(-50%,-50% );
+                }
+            }
+        }
+    }
+
+    &-more {
+        display: none;
+        padding-right: 60px;
+        max-height: 300px;
+        overflow: auto;
+        margin-top: 15px;
+        @media screen and (max-width: 576px) {
+            margin-top: 15px;
+            padding-right: 30px;
+        }
+        &::-webkit-scrollbar { 
+            width: 5px;
+        }
+        &::-webkit-scrollbar-track {
+                background: #aaa;
+                border-radius: 5px;
+                margin-top: 30px;				
+        }
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+                background: #4c4c4c;
+                border-radius: 5px;	
+        }
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+                background: darken(#4c4c4c, 10%);
+        }
+    }
+    &-subtitle {
+        font-size: 15px;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+    &__sub-list {
+        margin-bottom: 12px;
+        margin-top: 12px;
+        &_old {
+            .aplications-name {
+                opacity: 0.7;
+            }
+        }
+    }
+    &__sub-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        @media screen and (max-width: 576px) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    &-name {
+        strong {
+            font-weight: 600;
+        }
+    }
+    &-link {
+        color: #0098da;
+        padding-bottom: 2px;
+        border-bottom: 1px solid #0098da;
+        font-weight: 600;
+        font-size: 13px;
+    }
+    &-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 30px;
+        @media screen and (max-width: 576px) {
+            flex-direction: column-reverse;            
+        }
+        .counter-block {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 150px;
+            .counter-arrow {
+                border:none;
+                background: transparent;
+                font-size: 24px;
+                cursor: pointer;
+            }
+            .counter {
+                font-size: 25px;
+                font-weight: 700;
+                .all-num {
+                    font-size: 15px;
+                    font-weight: 500;
+                    color: #969696;
+                }
+            }
+        }
+    }
+    &__btn {
+        width: 275px;
+        @media screen and (max-width: 576px) {
+            margin-top: 20px;           
+        }
+    }
+    .fecility-info {
+        .info-text {
+            @media screen and (max-width: 576px) {
+                flex-direction: column;     
+            }
+        }
+        .info-answer {
+            width: 165px;
+            @media screen and (max-width: 768px) {
+                width: 185px;          
+            }
+            @media screen and (max-width: 576px) {
+                width: auto;
+                padding-left: 0;       
+            }
+            &:before {
+                content: '';
+                display: block;
+                width: 1px;
+                height: calc(100% + 60px);
+                background: #d9d9d9;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                @media screen and (max-width: 576px) {
+                    width: 50px;
+                    height: 1px;
+                    top: -25%;
+                    left: 50%;
+                    transform: translate(-50%,-50% );
+                }
+            }
+        }
+    }
+}

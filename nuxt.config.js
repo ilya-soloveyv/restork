@@ -1,10 +1,16 @@
+const env = require('dotenv').config()
+
 module.exports = {
   mode: 'universal',
   head: {
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        name: 'viewport',
+        content:
+          'width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no'
+      },
       {
         hid: 'description',
         name: 'description',
@@ -13,17 +19,34 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
-  loading: { color: '#fff' },
-  css: [],
-  plugins: [],
+  server: {
+    host: env.HOST,
+    port: env.PORT
+  },
+  loading: { color: '#007bff' },
+  css: ['~/assets/scss/main.scss', '~/assets/scss/admin/admin.scss'],
+  plugins: [{ src: '~/plugins/datepicker', ssr: false }],
   buildModules: ['@nuxtjs/eslint-module'],
   modules: [
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/svg',
+    '~/io',
+    [
+      'vue-yandex-maps/nuxt',
+      {
+        apiKey: env.YANDEX_MAP_KEY,
+        lang: 'ru_RU',
+        coordorder: 'latlong',
+        version: '2.1'
+      }
+    ]
   ],
-  axios: {},
+  axios: {
+    proxy: true
+  },
   auth: {
     strategies: {
       local: {
@@ -31,6 +54,10 @@ module.exports = {
           login: { propertyName: 'token.accessToken' }
         }
       }
+    },
+    redirect: {
+      home: '/dashboard',
+      login: '/signin'
     }
   },
   build: {

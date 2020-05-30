@@ -1,0 +1,164 @@
+#map {
+  height: 297px;
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+  overflow: hidden;
+  .map {
+    width: 100%;
+    height: 295px;
+  }
+}
+ul.nav-tabs {
+  margin-bottom: 1rem;
+}
+.removeUser {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+// .dropzone {
+//   border-radius: 0.25rem;
+//   border: 1px solid #ced4da;
+//   padding: 0.5rem;
+//   display: grid;
+//   grid-template: repeat(1, 1fr) / repeat(1, 1fr);
+//   grid-gap: 0.5rem;
+//   margin-bottom: 1rem;
+//   &.dz-started {
+//     grid-template: repeat(1, 1fr) / repeat(5, 1fr);
+//   }
+//   .dz-message {
+//     margin: 0;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     span {
+//       display: block;
+//       text-transform: uppercase;
+//       font-size: 12px;
+//     }
+//   }
+//   .dz-preview {
+//     margin: 0;
+//     .dz-image {
+//       img {
+//         width: 100% !important;
+//         height: 100% !important;
+//         object-fit: cover !important;
+//       }
+//     }
+//   }
+// }
+.dropzone-room {
+  .dropzone {
+    height: 234px;
+    margin-bottom: 0;
+    grid-template: repeat(1, 1fr) / repeat(1, 1fr);
+    &.dz-started {
+      grid-template: repeat(1, 1fr) / repeat(4, 1fr);
+    }
+    .dz-preview {
+      .dz-image {
+        img {
+
+        }
+      }
+      .dz-details {
+        display: none;
+      }
+      .dz-progress {
+        display: none;
+      }
+      .dz-error-message {
+        display: none;
+      }
+      .dz-success-mark {
+        display: none;
+      }
+      .dz-error-mark {
+        display: none;
+      }
+    }
+  }
+}
+
+ul.objectPhoto {
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template: repeat(1, 1fr) / repeat(5, 1fr);
+  li {
+    position: relative;
+    padding-top: 100%;
+    overflow: hidden;
+    border-radius: 0.25rem;
+    .dropzone {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      padding: 0 1rem;
+      margin: 0;
+      .dz-message {
+        height: 100%;
+        font-size: 14px;
+      }
+    }
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .remove {
+      position: absolute;
+      top: 0.25rem;
+      right: 0.25rem;
+      padding: 0.5rem;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 2;
+      border-radius: 0.25rem;
+      overflow: hidden;
+      cursor: pointer;
+      svg {
+        display: block;
+      }
+    }
+    .dropzoneLoading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 1px dashed #DEE2E6;
+      background: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        position: relative;
+        width: auto;
+        height: auto;
+        object-fit: none;
+      }
+    }
+  }
+}
+
+ul.roomPhoto {
+  grid-template: repeat(1, 1fr) / repeat(3, 1fr);
+  li {
+    .dropzone {
+      padding: 0 .5rem;
+      .dz-message {
+        font-size: 12px;
+      }
+    }
+  }
+}

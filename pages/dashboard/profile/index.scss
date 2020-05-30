@@ -1,0 +1,110 @@
+.userEdit {
+  display: flex;
+  flex-direction: column;
+  h2 {
+    font-size: 24px;
+    margin: 0;
+    padding: 1rem 0;
+  }
+  .userAvatar {
+    border-bottom: 1px solid #d9d9d9;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding-bottom: 1rem;
+    cursor: pointer;
+    .dropzone {
+      padding: 1rem 0;
+      border-radius: 0.5rem;
+      border-color: white;
+      border-width: 1px;
+      border-style: dashed;
+      &.dz-drag-hover {
+        background-color: #ededed;
+        border-color: #cccccc;
+      }
+    }
+    .image {
+      height: 128px;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      position: relative;
+      .ico {
+        background-color: #ededed;
+        height: 100%;
+        width: 128px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        &.loading {
+          img {
+            opacity: 0.25;
+          }
+        }
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          &.empty {
+            width: 70%;
+            height: 70%;
+          }
+        }
+        .spinner {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        // .spinner-border {
+        //   position: absolute;
+        //   left: 50%;
+        //   top: 50%;
+        //   margin: -12px 0 0 -16px;
+        // }
+      }
+    }
+    .link {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      padding: 1rem 0 0;
+      span {
+        color: #0098da;
+        border-bottom: 1px dashed #0098da;
+      }
+    }
+  }
+  .userData {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #d9d9d9;
+  }
+  .userPassword {
+    // background-color: orange;
+    // padding: 1rem;
+  }
+}
+.viewPassword {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-left: none;
+  border-color: #ced4da;
+  &.viewPasswordActive {
+    svg {
+      stroke: #007BFF;
+    }
+  }
+  svg {
+    stroke: #cccccc;
+  }
+}

@@ -1,0 +1,6 @@
+[2019-10-28 23:35:56] layer "viki@gmail.com": Unsupported extension: com
+[2019-10-28 23:35:56] layer "viki@gmail.com": Unsupported extension: com
+[2019-10-28 23:35:56] layer "viki@gmail.com": Unsupported extension: com
+[2019-10-28 23:35:55] layer "+7 (918) 866-15-66": Expected Either a default asset specification or a layer asset specification but "+" found.
+[2019-10-28 23:35:55] layer "+7 (918) 866-15-66": Expected Either a default asset specification or a layer asset specification but "+" found.
+[2019-10-28 23:35:56] layer "+7 (918) 866-15-66": Expected Either a default asset specification or a layer asset specification but "+" found.

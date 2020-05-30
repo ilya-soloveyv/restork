@@ -4,7 +4,9 @@
 
 <script>
 export default {
-  middleware: 'admin',
+  middleware({ store, redirect }) {
+    return redirect('/admin/application')
+  },
   layout: 'admin'
 }
 </script>

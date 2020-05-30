@@ -1,0 +1,86 @@
+.contacts {
+  padding-top: 90px;
+  background: #fff url('~assets/images/breas.jpg') no-repeat center bottom;  
+  padding-bottom: 317px;
+  @media screen and (max-width: 992px){
+    padding-top: 65px;        
+  }
+  &-list {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 70%;
+    margin: 0 auto;
+    @media screen and (max-width: 1200px){
+      width: 100%;        
+    }
+    @media screen and (max-width: 768px){
+      flex-wrap: wrap;      
+    }
+  }
+  &-item {
+    display: flex;
+    align-items: flex-start;    
+    img {
+      margin-right: 18px;
+      transform: translateY(-5px);
+    }
+    @media screen and (max-width: 768px){
+      width: 40%;
+    }
+    @media screen and (max-width: 576px){
+      width: 100%;
+      margin-left: 10%;
+    }
+    &:last-child {
+      @media screen and (max-width: 768px){
+        margin-top: 25px;
+      }
+    }
+  }
+  &-subtitle {
+    font-size: 15px;
+    color: #565656;
+    font-weight: 500;
+    margin-bottom: 13px;    
+  }
+  &-info {
+    color: $text;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5em;
+  }
+  .requisite {
+    margin-top: 38px;
+    &-title {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    &-text {
+      font-size: 15px;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 10px;
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+    &-document {
+      margin-top: 23px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .photo-link {      
+        // box-shadow: 0px 0px 14.72px 1.28px rgba(0, 0, 0, 0.2);
+        &:first-child {
+          margin-right: 30px;
+        }
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }  
+}
