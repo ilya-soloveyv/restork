@@ -1,7 +1,7 @@
 <template>
   <div class="main mainDashboard">
     <main>
-      <TopNav />
+      <TopNav theme="white" />
       <b-container>
         <nuxt />
       </b-container>
