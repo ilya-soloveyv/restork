@@ -106,7 +106,7 @@
         </b-popover>
       </div>
       <div class="wrapButtom">
-        <b-button>Найти</b-button>
+        <b-button>Показать предложения</b-button>
       </div>
     </b-form>
   </div>
@@ -371,6 +371,14 @@ export default {
       }
       button {
         background-color: #007bff;
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+        border: none;
+        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.15);
+        &:focus {
+          box-shadow: inset 0 -3px 2px 1px rgba(0, 0, 0, 0.5);
+        }
       }
     }
   }
