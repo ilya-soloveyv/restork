@@ -96,7 +96,13 @@
         </div>
       </b-form-datepicker>
       <div class="dApplicationPeopleCount">
-        <b-button id="popover-button-variant" block href="#" tabindex="0">
+        <b-button
+          id="popover-people-count"
+          :class="{ open: popoverPeopleCountView }"
+          block
+          href="#"
+          tabindex="0"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -115,9 +121,34 @@
           </svg>
           <span>{{ peopleCount }}</span>
         </b-button>
-        <b-popover target="popover-button-variant" triggers="focus">
-          <template v-slot:title>Danger!</template>
-          Danger variant popover
+        <b-popover
+          target="popover-people-count"
+          placement="bottom"
+          triggers="focus hover"
+        >
+          <!-- <template v-slot:title>Danger!</template> -->
+          <div class="age">
+            <span>Взрослые</span>
+            <b-form-spinbutton
+              id="sb-inline"
+              v-model="iApplicationAdult"
+              inline
+              min="1"
+              max="10"
+            >
+              <template v-slot:button>Danger!</template>
+            </b-form-spinbutton>
+          </div>
+          <div class="age">
+            <span>Дети</span>
+            <b-form-spinbutton
+              id="sb-inline"
+              v-model="iApplicationChild"
+              inline
+              min="0"
+              max="10"
+            />
+          </div>
         </b-popover>
       </div>
       <div class="wrapButtom">
@@ -142,6 +173,7 @@ export default {
       dApplicationDateTo: null,
       iApplicationAdult: 1,
       iApplicationChild: 0,
+      popoverPeopleCountView: false,
       suggestionsOptions: {
         inputClass: 'form-control',
         // debounce: 250,
@@ -167,10 +199,29 @@ export default {
   },
   computed: {
     peopleCount() {
-      return this.iApplicationAdult + this.iApplicationChild + ' гость'
+      const count = this.iApplicationAdult + this.iApplicationChild
+      return count + ' ' + this.declOfNum(count, ['гость', 'гостя', 'гостей'])
     }
   },
+  mounted() {
+    this.$root.$on('bv::popover::show', (e) => {
+      const id = e.target.id
+      if (id === 'popover-people-count') {
+        this.popoverPeopleCountView = true
+      }
+    })
+    this.$root.$on('bv::popover::hide', (e) => {
+      const id = e.target.id
+      if (id === 'popover-people-count') {
+        this.popoverPeopleCountView = false
+      }
+    })
+  },
   methods: {
+    declOfNum(n, a) {
+      const c = [2, 0, 1, 1, 1, 2]
+      return a[n % 100 > 4 && n % 100 < 20 ? 2 : c[n % 10 < 5 ? n % 10 : 5]]
+    },
     onInputChange(query) {
       query = query.trim() || null
       if (query === null) return null
@@ -442,6 +493,12 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        &.open {
+          border-radius: 0 0.35rem 0 0;
+          @media (max-width: 991px) {
+            border-radius: 0;
+          }
+        }
         @media (max-width: 991px) {
           border-radius: 0 0 0.35rem 0;
         }
@@ -479,6 +536,48 @@ export default {
         box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.15);
         &:focus {
           box-shadow: inset 0 -3px 2px 1px rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+  }
+}
+.popover {
+  width: 210px;
+  top: -6px !important;
+  border: none;
+  border-radius: 0 0 0.35rem 0.35rem;
+  /deep/ .arrow {
+    display: none;
+  }
+  /deep/ .popover-body {
+    padding: 0.5rem 1rem;
+    .age {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.25rem 0;
+      span {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      .b-form-spinbutton {
+        // background-color: red;
+        border: none;
+        border-radius: 0;
+        height: auto;
+        button {
+          padding: 0;
+          width: 24px;
+          height: 24px;
+        }
+        output {
+          border: none !important;
+          bdi {
+            width: 2rem;
+            min-width: auto;
+            height: auto !important;
+            line-height: auto !important;
+          }
         }
       }
     }
