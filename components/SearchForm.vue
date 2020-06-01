@@ -7,6 +7,7 @@
           v-model="search"
           @focus="focused = true"
           @blur="focused = false"
+          :class="{ focus: focused }"
           placeholder="Куда Вы направляетесь?"
         ></b-input>
         <div v-if="focused" class="result">
@@ -374,6 +375,9 @@ export default {
         outline: none;
         @media (max-width: 991px) {
           border-radius: 0.35rem 0.35rem 0 0;
+        }
+        &.focus {
+          background-color: red;
         }
       }
       // /deep/ .v-autocomplete-input-group {
