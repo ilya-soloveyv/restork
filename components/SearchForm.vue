@@ -1,7 +1,22 @@
 <template>
   <div id="search">
     <b-form class="form" autocomplete="off">
-      <suggestions
+      <client-only>
+        <v-autocomplete
+          :min-len="2"
+          :auto-select-one-item="false"
+          :items="items"
+          v-model="search"
+          :wait="0"
+          :get-label="getLabel"
+          :component-item="template"
+          :input-attrs="{ placeholder: 'Введите поисковый запрос' }"
+          @update-items="updateItems"
+          class="sApplicationAddress"
+        >
+        </v-autocomplete>
+      </client-only>
+      <!-- <suggestions
         ref="sApplicationAddress"
         v-model="sApplicationAddress"
         :options="suggestionsOptions"
@@ -15,7 +30,7 @@
         <div slot="item" slot-scope="props">
           {{ props.item.formattedAddress }}
         </div>
-      </suggestions>
+      </suggestions> -->
       <b-form-datepicker
         v-model="dApplicationDateFrom"
         :hide-header="true"
@@ -113,11 +128,12 @@
 </template>
 
 <script>
-import Suggestions from 'v-suggestions'
-import 'v-suggestions/dist/v-suggestions.css'
+// import Suggestions from 'v-suggestions'
+// import 'v-suggestions/dist/v-suggestions.css'
+import AutocompleteItem from '~/components/AutocompleteItem'
 export default {
   components: {
-    Suggestions
+    // Suggestions
   },
   data() {
     return {
@@ -131,7 +147,22 @@ export default {
         // debounce: 250,
         placeholder: 'Куда Вы направляетесь?'
       },
-      locale: 'ru-RU'
+      locale: 'ru-RU',
+      item: {
+        city: 'Сочи',
+        country: 'Россия',
+        countryCode: 'RU',
+        formattedAddress: 'Россия, Краснодарский край, Сочи',
+        latitude: 43.585525,
+        longitude: 39.723062,
+        provider: 'yandex',
+        state: 'Краснодарский край',
+        streetName: null,
+        streetNumber: null
+      },
+      items: [],
+      template: AutocompleteItem,
+      search: 'мос'
     }
   },
   computed: {
@@ -158,6 +189,64 @@ export default {
     },
     checkApplicationAddress() {
       console.log('checkApplicationAddress')
+    },
+    getLabel(item) {
+      // this.item = null
+      console.log('getLabel', item)
+      // return item
+      // this.item = item
+      // console.log(item)
+      // return item.name
+    },
+    updateItems(text) {
+      console.log('updateItems', text)
+      this.$axios
+        .post('/api/object/search_address', {
+          search: text
+        })
+        .then((response) => {
+          this.items = response.data.list
+        })
+      // console.log(text)
+      // this.items = [
+      //   {
+      //     id: 1,
+      //     name: '111',
+      //     description: '111 111 111'
+      //   },
+      //   {
+      //     id: 2,
+      //     name: '222',
+      //     description: '222 222 222'
+      //   },
+      //   {
+      //     id: 3,
+      //     name: '333',
+      //     description: '333 333 333'
+      //   },
+      //   {
+      //     id: 4,
+      //     name: '444',
+      //     description: '444 444 444'
+      //   },
+      //   {
+      //     id: 5,
+      //     name: '555',
+      //     description: '555 555 555'
+      //   }
+      // ]
+      // this.item = text
+      // console.log(text)
+      // this.$axios
+      //   .post('/api/object/search_address', {
+      //     search: query
+      //   })
+      //   .then((response) => {
+      //     resolve(response.data.list)
+      //   })
+      // yourGetItemsMethod(text).then( (response) => {
+      //   this.items = response
+      // })
     }
   }
 }
@@ -202,21 +291,33 @@ export default {
         grid-column: 1 / 2;
         grid-row: 1 / 2;
       }
-      /deep/ input {
+      /deep/ .v-autocomplete-input-group {
         border: none;
-        background-color: white;
-        padding: 0 1rem;
-        height: 60px;
-        border-radius: 0.35rem 0 0 0.35rem;
-        &:focus {
-          // border-radius: 0.35rem 0 0 0;
-        }
-        @media (max-width: 991px) {
-          border-radius: 0.35rem 0.35rem 0 0;
+        input {
+          width: 100%;
+          border: none;
+          background-color: white;
+          padding: 0 1rem;
+          height: 60px;
+          border-radius: 0.35rem 0 0 0.35rem;
+          -webkit-box-shadow: none;
+          box-shadow: none;
+          outline: none;
+          &:focus {
+            // border-radius: 0.35rem 0 0 0;
+          }
+          @media (max-width: 991px) {
+            border-radius: 0.35rem 0.35rem 0 0;
+          }
         }
       }
-      /deep/ .suggestions {
-        top: 62px;
+      /deep/ .v-autocomplete-list {
+        background: red;
+        .v-autocomplete-list-item {
+          &.v-autocomplete-item-active {
+            background: green;
+          }
+        }
       }
     }
     .dApplicationDateFrom {

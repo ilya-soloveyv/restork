@@ -25,7 +25,10 @@ module.exports = {
   },
   loading: { color: '#007bff' },
   css: ['~/assets/scss/main.scss', '~/assets/scss/admin/admin.scss'],
-  plugins: [{ src: '~/plugins/datepicker', ssr: false }],
+  plugins: [
+    { src: '~/plugins/datepicker', ssr: false },
+    { src: '~/plugins/v-autocomplete', ssr: false }
+  ],
   buildModules: ['@nuxtjs/eslint-module'],
   modules: [
     'bootstrap-vue/nuxt',
