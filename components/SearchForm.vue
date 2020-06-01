@@ -1,13 +1,19 @@
 <template>
   <div id="search">
-    <b-form class="form" autocomplete="off">
-      <!-- <div class="sApplicationAddress">
+    <b-form @submit.prevent="searchResult" class="form" autocomplete="off">
+      <div class="sApplicationAddress">
         <b-input
-          @onchange="search"
+          v-on:keyup="updateItems"
+          v-model="search"
+          @focus="focused = true"
+          @blur="focused = false"
           placeholder="Куда Вы направляетесь?"
         ></b-input>
-      </div> -->
-      <client-only>
+        <div v-if="focused" class="result">
+          resutl
+        </div>
+      </div>
+      <!-- <client-only>
         <v-autocomplete
           :min-len="2"
           :auto-select-one-item="false"
@@ -21,7 +27,7 @@
           class="sApplicationAddress"
         >
         </v-autocomplete>
-      </client-only>
+      </client-only> -->
       <!-- <suggestions
         ref="sApplicationAddress"
         v-model="sApplicationAddress"
@@ -200,7 +206,8 @@ export default {
       },
       items: [],
       template: AutocompleteItem,
-      search: 'мос'
+      search: 'мос',
+      focused: false
     }
   },
   computed: {
@@ -255,11 +262,18 @@ export default {
       // console.log(item)
       // return item.name
     },
-    updateItems(text) {
+    updateItems(e) {
+      console.log(e)
+      const key = String.fromCharCode(e.keyCode)
+      console.log(key)
+      if (/[a-zA-Zа-яА-Я\d.,]/.test(key)) {
+        console.log('success')
+      }
+
       // console.log('updateItems', text)
       this.$axios
         .post('/api/object/search_address', {
-          search: text
+          search: this.search
         })
         .then((response) => {
           this.items = response.data.list
@@ -304,6 +318,9 @@ export default {
       // yourGetItemsMethod(text).then( (response) => {
       //   this.items = response
       // })
+    },
+    searchResult() {
+      console.log('searchResult')
     }
   }
 }
