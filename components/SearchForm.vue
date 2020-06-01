@@ -1,12 +1,18 @@
 <template>
   <div id="search">
     <b-form class="form" autocomplete="off">
+      <!-- <div class="sApplicationAddress">
+        <b-input
+          @onchange="search"
+          placeholder="Куда Вы направляетесь?"
+        ></b-input>
+      </div> -->
       <client-only>
         <v-autocomplete
           :min-len="2"
           :auto-select-one-item="false"
           :items="items"
-          v-model="search"
+          v-model.lazy="item"
           :wait="0"
           :get-label="getLabel"
           :component-item="template"
@@ -342,34 +348,45 @@ export default {
         grid-column: 1 / 2;
         grid-row: 1 / 2;
       }
-      /deep/ .v-autocomplete-input-group {
+      input {
         border: none;
-        input {
-          width: 100%;
-          border: none;
-          background-color: white;
-          padding: 0 1rem;
-          height: 60px;
-          border-radius: 0.35rem 0 0 0.35rem;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-          outline: none;
-          &:focus {
-            // border-radius: 0.35rem 0 0 0;
-          }
-          @media (max-width: 991px) {
-            border-radius: 0.35rem 0.35rem 0 0;
-          }
+        background-color: white;
+        padding: 0 1rem;
+        height: 60px;
+        border-radius: 0.35rem 0 0 0.35rem;
+        outline: none;
+        @media (max-width: 991px) {
+          border-radius: 0.35rem 0.35rem 0 0;
         }
       }
-      /deep/ .v-autocomplete-list {
-        background: red;
-        .v-autocomplete-list-item {
-          &.v-autocomplete-item-active {
-            background: green;
-          }
-        }
-      }
+      // /deep/ .v-autocomplete-input-group {
+      //   border: none;
+      //   input {
+      //     width: 100%;
+      //     border: none;
+      //     background-color: white;
+      //     padding: 0 1rem;
+      //     height: 60px;
+      //     border-radius: 0.35rem 0 0 0.35rem;
+      //     -webkit-box-shadow: none;
+      //     box-shadow: none;
+      //     outline: none;
+      //     &:focus {
+      //       // border-radius: 0.35rem 0 0 0;
+      //     }
+      //     @media (max-width: 991px) {
+      //       border-radius: 0.35rem 0.35rem 0 0;
+      //     }
+      //   }
+      // }
+      // /deep/ .v-autocomplete-list {
+      //   background: red;
+      //   .v-autocomplete-list-item {
+      //     &.v-autocomplete-item-active {
+      //       background: green;
+      //     }
+      //   }
+      // }
     }
     .dApplicationDateFrom {
       grid-column: 2 / 3;
