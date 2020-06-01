@@ -8,9 +8,11 @@
 export default {
   props: {
     item: {
+      type: Object,
       required: true
     },
     searchText: {
+      type: String,
       required: true
     }
   }

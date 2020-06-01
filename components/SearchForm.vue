@@ -239,18 +239,18 @@ export default {
       this.$set(this, 'sApplicationAddress', item.formattedAddress)
     },
     checkApplicationAddress() {
-      console.log('checkApplicationAddress')
+      // console.log('checkApplicationAddress')
     },
     getLabel(item) {
       // this.item = null
-      console.log('getLabel', item)
+      // console.log('getLabel', item)
       // return item
       // this.item = item
       // console.log(item)
       // return item.name
     },
     updateItems(text) {
-      console.log('updateItems', text)
+      // console.log('updateItems', text)
       this.$axios
         .post('/api/object/search_address', {
           search: text
