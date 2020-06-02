@@ -5,6 +5,7 @@ const SocketIO = require('socket.io')
 const consola = require('consola')
 
 const port = process.env.PORT || 3000
+const host = process.env.HOST || '0.0.0.0'
 const isProd = process.env.NODE_ENV === 'production'
 
 const app = express()
@@ -46,8 +47,8 @@ if (config.dev) {
 }
 app.use(nuxt.render)
 
-server.listen(port, 'localhost')
-consola.log('Server listening on localhost:' + port)
+server.listen(port, host)
+consola.log('Server listening on ' + host + ':' + port)
 
 const messages = []
 io.on('connection', (socket) => {
