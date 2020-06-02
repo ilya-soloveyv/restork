@@ -312,7 +312,7 @@ router.post('/search_address', async (req, res, next) => {
   const search = req.body.search || false
 
   if (search) {
-    response.list = await geocoder.geocode('Россия, ' + search)
+    response.list = await geocoder.geocode(search)
   }
 
   res.json(response)

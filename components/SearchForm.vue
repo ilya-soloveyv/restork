@@ -287,6 +287,7 @@ export default {
         })
         .then((response) => {
           this.items = response.data.list
+          return 111
         })
       // console.log(text)
       // this.items = [
@@ -382,6 +383,11 @@ export default {
         height: 60px;
         border-radius: 0.35rem 0 0 0.35rem;
         outline: none;
+        &.smart-autocomplete-focus {
+          &.smart-autocomplete-isResult {
+            border-radius: 0.35rem 0 0 0;
+          }
+        }
         @media (max-width: 991px) {
           border-radius: 0.35rem 0.35rem 0 0;
         }
