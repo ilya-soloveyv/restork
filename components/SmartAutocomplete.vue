@@ -1,9 +1,10 @@
 <template>
-  <div class="smart-autocomplete">
+  <div ref="smartAutocomplete" class="smart-autocomplete">
     <input
       v-bind:value="value"
       @keyup="keyup"
       v-on:input="$emit('input', $event.target.value)"
+      @focus="focusInput"
       type="search"
     />
     <ul v-if="items.length">
@@ -49,8 +50,9 @@ export default {
     get() {
       this.$emit('get')
     },
-    alert() {
-      alert(1)
+    focusInput() {
+      const smartAutocomplete = this.$refs.smartAutocomplete
+      smartAutocomplete.scrollIntoView()
     }
   }
 }
@@ -73,15 +75,20 @@ export default {
     }
   }
   ul {
-    margin: 0;
+    z-index: 10;
+    margin: 2px 0 0;
     padding: 0;
     list-style: none;
     position: absolute;
     left: 0;
     top: 100%;
     width: 100%;
-    background-color: red;
+    border-radius: 0 0 0.35rem 0.35rem;
+    background-color: white;
     li {
+      color: #6c757d;
+      padding: 0.25rem 1rem;
+      border-bottom: 1px solid #eeeeee;
     }
   }
 }
