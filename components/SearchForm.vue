@@ -2,7 +2,14 @@
   <div id="search">
     <b-form @submit.prevent="searchResult" class="form" autocomplete="off">
       <div class="sApplicationAddress">
-        <b-input
+        <SmartAutocomplete
+          v-model="search"
+          :timeout="500"
+          :items="items"
+          @get="updateItems"
+          placeholder="Введите поисковый запрос"
+        />
+        <!-- <b-input
           v-on:keyup="updateItems"
           v-model="search"
           @focus="focused = true"
@@ -11,8 +18,8 @@
           placeholder="Куда Вы направляетесь?"
         ></b-input>
         <div v-if="focused" class="result">
-          resutl
-        </div>
+          {{ items }}
+        </div> -->
       </div>
       <!-- <client-only>
         <v-autocomplete
@@ -175,8 +182,10 @@
 // import Suggestions from 'v-suggestions'
 // import 'v-suggestions/dist/v-suggestions.css'
 import AutocompleteItem from '~/components/AutocompleteItem'
+import SmartAutocomplete from '~/components/SmartAutocomplete'
 export default {
   components: {
+    SmartAutocomplete
     // Suggestions
   },
   data() {
@@ -264,12 +273,12 @@ export default {
       // return item.name
     },
     updateItems(e) {
-      console.log(e)
-      const key = String.fromCharCode(e.keyCode)
-      console.log(key)
-      if (/[a-zA-Zа-яА-Я\d.,]/.test(key)) {
-        console.log('success')
-      }
+      // console.log(e)
+      // const key = String.fromCharCode(e.keyCode)
+      // console.log(key)
+      // if (/[a-zA-Zа-яА-Я\d.,]/.test(key)) {
+      //   console.log('success')
+      // }
 
       // console.log('updateItems', text)
       this.$axios
@@ -366,7 +375,7 @@ export default {
         grid-column: 1 / 2;
         grid-row: 1 / 2;
       }
-      input {
+      /deep/ input {
         border: none;
         background-color: white;
         padding: 0 1rem;
