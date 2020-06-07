@@ -50,10 +50,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.topNavBg {
-  background-color: white;
-  box-shadow: 0 8px 14.72px 1.28px rgba(0, 0, 0, 0.3);
-}
 #dashboard {
   padding-top: 2rem;
   padding-bottom: 2rem;

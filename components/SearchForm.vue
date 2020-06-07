@@ -7,6 +7,8 @@
           :timeout="500"
           :items="items"
           @get="updateItems"
+          @clear="clearItems"
+          @selectItem="selectItem"
           placeholder="Введите поисковый запрос"
         />
         <!-- <b-input
@@ -172,7 +174,7 @@
         </b-popover>
       </div>
       <div class="wrapButtom">
-        <b-button>Показать предложения</b-button>
+        <b-button type="submit">Показать предложения</b-button>
       </div>
     </b-form>
   </div>
@@ -191,8 +193,8 @@ export default {
   data() {
     return {
       sApplicationAddress: '',
-      dApplicationDateFrom: null,
-      dApplicationDateTo: null,
+      dApplicationDateFrom: '2020-06-11',
+      dApplicationDateTo: '2020-06-13',
       iApplicationAdult: 1,
       iApplicationChild: 0,
       popoverPeopleCountView: false,
@@ -202,21 +204,23 @@ export default {
         placeholder: 'Куда Вы направляетесь?'
       },
       locale: 'ru-RU',
+      items: [],
       item: {
-        city: 'Сочи',
+        city: 'посёлок городского типа Красная Поляна',
         country: 'Россия',
         countryCode: 'RU',
-        formattedAddress: 'Россия, Краснодарский край, Сочи',
-        latitude: 43.585525,
-        longitude: 39.723062,
+        formattedAddress:
+          'Россия, Краснодарский край, городской округ Сочи, посёлок городского типа Красная Поляна',
+        latitude: 43.679964,
+        longitude: 40.205538,
         provider: 'yandex',
         state: 'Краснодарский край',
         streetName: null,
         streetNumber: null
       },
-      items: [],
       template: AutocompleteItem,
-      search: 'мос',
+      search:
+        'Россия, Краснодарский край, городской округ Сочи, посёлок городского типа Красная Поляна',
       focused: false
     }
   },
@@ -332,6 +336,19 @@ export default {
     },
     searchResult() {
       console.log('searchResult')
+      console.log(this.item)
+      console.log(this.dApplicationDateFrom)
+      console.log(this.dApplicationDateTo)
+      console.log(this.iApplicationAdult)
+      console.log(this.iApplicationChild)
+    },
+    clearItems() {
+      this.items = []
+    },
+    selectItem(item) {
+      // console.log(item)
+      this.item = item
+      this.search = item.formattedAddress
     }
   }
 }
@@ -587,7 +604,7 @@ export default {
         font-weight: 500;
         border: none;
         box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.15);
-        &:focus {
+        &:active {
           box-shadow: inset 0 -3px 2px 1px rgba(0, 0, 0, 0.5);
         }
       }

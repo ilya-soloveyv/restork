@@ -2,7 +2,7 @@
   <div ref="smartAutocomplete" class="smart-autocomplete">
     <input
       v-bind:value="value"
-      @keyup="keyup"
+      @keydown="keyup"
       v-on:input="$emit('input', $event.target.value)"
       @focus="focusInput"
       @blur="blurInput"
@@ -16,17 +16,18 @@
     <div v-if="loading" class="spin">
       <b-spinner small variant="primary"></b-spinner>
     </div>
-    <ul v-if="items.length">
+    <ul v-if="items.length && focus">
       <!--  && focus -->
       <li
         v-for="(item, index) in items"
         :key="index"
-        @click="selectItem(item, index)"
+        @mousedown="selectItem(item, index)"
         :class="{ active: activeItem === index }"
       >
         {{ item.formattedAddress }}
       </li>
     </ul>
+    <!-- {{ items }} -->
   </div>
 </template>
 
@@ -68,6 +69,7 @@ export default {
       const key = String.fromCharCode(e.keyCode)
       // console.log(key)
       if (/^[a-zA-Z0-9._\b]+$/.test(key)) {
+        this.activeItem = null
         this.loading = true
         const get = this.get
         this.timeoutID = setTimeout(function() {
@@ -78,6 +80,32 @@ export default {
         }, this.timeout)
         // console.log(this.timeoutID)
         // clearTimeout(timeoutID)
+      } else if (key === '(') {
+        if (this.activeItem === null && this.checkNextIndexItems(0)) {
+          this.activeItem = 0
+        } else if (this.checkNextIndexItems(this.activeItem + 1)) {
+          this.activeItem++
+        } else {
+          this.activeItem = null
+        }
+      } else if (key === '&') {
+        const count = this.items.length - 1
+        if (this.activeItem === null && this.checkNextIndexItems(count)) {
+          this.activeItem = count
+        } else if (this.checkNextIndexItems(this.activeItem - 1)) {
+          this.activeItem--
+        } else {
+          this.activeItem = null
+        }
+      } else if (key === '\r') {
+        if (this.activeItem !== null) {
+          // console.log('enter')
+          // console.log(this.activeItem)
+          // console.log(this.items[this.activeItem])
+          const item = this.items[this.activeItem]
+          this.selectItem(item, this.activeItem)
+          e.preventDefault()
+        }
       }
     },
     get() {
@@ -85,7 +113,10 @@ export default {
       console.log(result)
     },
     focusInput() {
+      this.loading = true
+      this.activeItem = null
       this.focus = true
+      this.$emit('get')
       // const smartAutocomplete = this.$refs.smartAutocomplete
       // smartAutocomplete.scrollIntoView()
     },
@@ -93,8 +124,15 @@ export default {
       this.focus = false
     },
     selectItem(item, index) {
+      console.log(index)
       this.activeItem = index
-      // console.log(item)
+      this.$emit('selectItem', item)
+      this.$emit('clear')
+    },
+    checkNextIndexItems(i) {
+      i = i || 0
+      if (this.items[i] !== undefined) return true
+      else return false
     }
   }
 }
