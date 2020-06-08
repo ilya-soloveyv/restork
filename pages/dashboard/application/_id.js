@@ -1,5 +1,5 @@
 import { mapGetters } from 'vuex'
-import socket from '~/plugins/socket.io.js'
+// import socket from '~/plugins/socket.io.js'
 import moment from 'moment'
 moment.locale('ru')
 
@@ -42,29 +42,12 @@ export default {
       )
     }
   },
-  async asyncData({ store, $axios, params }, callback) {
+  async asyncData({ store, $axios, params }) {
     await store.dispatch('application_object/GET_ITEM', {
       iApplicationObjectID: params.id
     })
     await store.dispatch('objectOption/GET_LIST')
     await store.dispatch('roomOption/GET_LIST')
-    await socket.emit('last-messages', function(messages) {
-      callback(null, {
-        messages,
-        message: ''
-      })
-    })
-  },
-  watch: {
-    messages: 'scrollToBottom'
-  },
-  beforeMount() {
-    socket.on('new-message', (message) => {
-      this.messages.push(message)
-    })
-  },
-  mounted() {
-    this.scrollToBottom()
   },
   methods: {
     cancelApplicationObject() {
@@ -72,23 +55,6 @@ export default {
     },
     selectelApplicationObject() {
       this.$store.dispatch('application_object/SET_SELECTED')
-    },
-    sendMessage() {
-      if (!this.message.trim()) {
-        return
-      }
-      const message = {
-        date: new Date().toJSON(),
-        text: this.message.trim()
-      }
-      this.messages.push(message)
-      this.message = ''
-      socket.emit('send-message', message)
-    },
-    scrollToBottom() {
-      this.$nextTick(() => {
-        this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight
-      })
     }
   }
 }

@@ -109,8 +109,8 @@ export default {
       }
     },
     get() {
-      const result = this.$emit('get')
-      console.log(result)
+      this.$emit('get')
+      // console.log(result)
     },
     focusInput() {
       this.loading = true
@@ -124,7 +124,7 @@ export default {
       this.focus = false
     },
     selectItem(item, index) {
-      console.log(index)
+      // console.log(index)
       this.activeItem = index
       this.$emit('selectItem', item)
       this.$emit('clear')

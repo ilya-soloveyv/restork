@@ -335,12 +335,12 @@ export default {
       // })
     },
     searchResult() {
-      console.log('searchResult')
-      console.log(this.item)
-      console.log(this.dApplicationDateFrom)
-      console.log(this.dApplicationDateTo)
-      console.log(this.iApplicationAdult)
-      console.log(this.iApplicationChild)
+      // console.log('searchResult')
+      // console.log(this.item)
+      // console.log(this.dApplicationDateFrom)
+      // console.log(this.dApplicationDateTo)
+      // console.log(this.iApplicationAdult)
+      // console.log(this.iApplicationChild)
     },
     clearItems() {
       this.items = []

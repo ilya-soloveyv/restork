@@ -1,4 +1,4 @@
-const env = require('dotenv').config()
+require('dotenv').config()
 
 module.exports = {
   mode: 'universal',
@@ -20,8 +20,8 @@ module.exports = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   server: {
-    host: env.HOST,
-    port: env.PORT
+    host: process.env.HOST,
+    port: process.env.PORT
   },
   loading: { color: '#007bff' },
   css: ['~/assets/scss/main.scss', '~/assets/scss/admin/admin.scss'],
@@ -36,11 +36,11 @@ module.exports = {
     '@nuxtjs/auth',
     '@nuxtjs/dotenv',
     '@nuxtjs/svg',
-    '~/io',
+    // '~/io',
     [
       'vue-yandex-maps/nuxt',
       {
-        apiKey: env.YANDEX_MAP_KEY,
+        apiKey: process.env.YANDEX_MAP_KEY,
         lang: 'ru_RU',
         coordorder: 'latlong',
         version: '2.1'

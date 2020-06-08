@@ -1,7 +1,8 @@
+require('dotenv').config()
 const http = require('http')
 const { Nuxt, Builder } = require('nuxt')
 const express = require('express')
-const SocketIO = require('socket.io')
+// const SocketIO = require('socket.io')
 const consola = require('consola')
 
 const port = process.env.PORT || 3000
@@ -10,7 +11,7 @@ const isProd = process.env.NODE_ENV === 'production'
 
 const app = express()
 const server = http.createServer(app)
-const io = SocketIO(server)
+// const io = SocketIO(server)
 
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -50,18 +51,18 @@ app.use(nuxt.render)
 server.listen(port, host)
 consola.log('Server listening on ' + host + ':' + port)
 
-const messages = []
-io.on('connection', (socket) => {
-  socket.on('last-messages', function(fn) {
-    consola.info('last-messages')
-    fn(messages.slice(-50))
-  })
-  socket.on('send-message', function(message) {
-    consola.info('send-message')
-    messages.push(message)
-    socket.broadcast.emit('new-message', message)
-  })
-})
+// const messages = []
+// io.on('connection', (socket) => {
+//   socket.on('last-messages', function(fn) {
+//     consola.info('last-messages')
+//     fn(messages.slice(-50))
+//   })
+//   socket.on('send-message', function(message) {
+//     consola.info('send-message')
+//     messages.push(message)
+//     socket.broadcast.emit('new-message', message)
+//   })
+// })
 
 // // const config = require('../nuxt.config.js')
 // // config.dev = process.env.NODE_ENV !== 'production'

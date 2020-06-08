@@ -1,6 +1,12 @@
 <template>
   <div class="dashboardObjectApplication">
     <h1>Заявка от {{ dApplicationDate }}г.</h1>
+    <div id="chat">
+      <ul ref="messages" class="messages">
+        <li>message item</li>
+      </ul>
+      <input type="text" placeholder="Введите сообщение..." />
+    </div>
     <div class="row line">
       <div class="col"><b>Имя:</b></div>
       <div class="col">
@@ -126,8 +132,6 @@ export default {
           'DD MMMM YYYY'
         )
       )
-      // {{  }} -
-      // {{ applicationObject.application.dApplicationDateTo }}
     }
   },
   async asyncData({ store, $axios, params }) {

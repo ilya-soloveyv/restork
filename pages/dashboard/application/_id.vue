@@ -110,6 +110,16 @@
         </b-row>
       </b-col>
       <b-col md="12" lg="6">
+        <div class="row">
+          <div class="col">
+            <div id="chat">
+              <ul ref="messages" class="messages">
+                <li>message item</li>
+              </ul>
+              <input type="text" placeholder="Введите сообщение..." />
+            </div>
+          </div>
+        </div>
         <div class="dApplicationDate">
           Заявка на проживание от {{ dApplicationDate }}
         </div>
@@ -212,26 +222,6 @@
               >
                 Выбрать
               </b-button>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <div id="chat">
-              <ul ref="messages" class="messages">
-                <li v-for="(message, index) in messages" :key="index">
-                  <!-- <i :title="message.date">
-                    {{ message.date.split('T')[1].slice(0, -2) }}
-                  </i> -->
-                  <span>{{ message.text }}</span>
-                </li>
-              </ul>
-              <input
-                v-model="message"
-                @keyup.enter="sendMessage"
-                type="text"
-                placeholder="Введите сообщение..."
-              />
             </div>
           </div>
         </div>
