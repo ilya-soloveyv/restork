@@ -45,7 +45,7 @@
         Сохранить
       </b-button>
     </b-form>
-    <pre>{{ object }}</pre>
+    <!-- <pre>{{ object }}</pre> -->
   </div>
 </template>
 

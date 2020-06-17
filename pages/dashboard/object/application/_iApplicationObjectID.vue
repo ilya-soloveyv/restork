@@ -1,12 +1,6 @@
 <template>
   <div class="dashboardObjectApplication">
     <h1>Заявка от {{ dApplicationDate }}г.</h1>
-    <div id="chat">
-      <ul ref="messages" class="messages">
-        <li>message item</li>
-      </ul>
-      <input type="text" placeholder="Введите сообщение..." />
-    </div>
     <div class="row line">
       <div class="col"><b>Имя:</b></div>
       <div class="col">
@@ -70,11 +64,17 @@
         </b-button>
       </div>
     </div>
+    <div class="row">
+      <div class="col">
+        <Message :applicationObject="applicationObject" />
+      </div>
+    </div>
     <!-- <pre>{{ applicationObject }}</pre> -->
   </div>
 </template>
 
 <script>
+import Message from '~/components/Message'
 import moment from 'moment'
 moment.locale('ru')
 export default {
@@ -85,8 +85,8 @@ export default {
       title: 'Object Application'
     }
   },
-  data() {
-    return {}
+  components: {
+    Message
   },
   computed: {
     applicationObject({ $store }) {
@@ -138,6 +138,9 @@ export default {
     await store.dispatch('application_object/GET_ITEM', {
       iApplicationObjectID: params.iApplicationObjectID
     })
+    await store.dispatch('message/GET_LIST', {
+      iApplicationObjectID: params.iApplicationObjectID
+    })
   },
   methods: {
     async update() {
@@ -156,6 +159,9 @@ export default {
     b {
       font-weight: 500;
     }
+  }
+  /deep/ #chat {
+    margin-top: 1rem;
   }
 }
 </style>

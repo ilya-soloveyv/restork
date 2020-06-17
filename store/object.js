@@ -74,8 +74,8 @@ const actions = {
   SET_ITEM({ commit }, params) {
     commit('SET_ITEM', params)
   },
-  async GET_ITEM({ commit }, params) {
-    let { object } = await this.$axios.$post('/api/object/item', params)
+  async GET_ITEM({ commit }, { iObjectID }) {
+    let { object } = await this.$axios.$post('/api/object/item', { iObjectID })
     object = object || {}
     commit('SET_ITEM', object)
   },

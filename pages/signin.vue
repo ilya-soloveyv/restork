@@ -41,9 +41,16 @@
             {{ error.message }}
           </b-form-invalid-feedback>
         </b-form-group>
-        <b-button :disabled="$auth.busy" type="submit" variant="primary">
-          Войти
-        </b-button>
+        <b-row>
+          <b-col>
+            <b-button :disabled="$auth.busy" type="submit" variant="primary">
+              Войти
+            </b-button>
+          </b-col>
+          <b-col cols="auto" align-self="center">
+            <nuxt-link :to="link">Регистрация</nuxt-link>
+          </b-col>
+        </b-row>
         <!-- <small class="float-right pt-2 pb-2">
           <nuxt-link to="/recovery">Восстановить пароль</nuxt-link>
         </small> -->
@@ -68,6 +75,16 @@ export default {
       error: null,
       sUserPhone: '',
       sUserPassword: ''
+    }
+  },
+  computed: {
+    link() {
+      let link = '/signup'
+      const redirect = this.$route.query.redirect
+      if (redirect) {
+        link = link + '?redirect=' + redirect
+      }
+      return link
     }
   },
   methods: {

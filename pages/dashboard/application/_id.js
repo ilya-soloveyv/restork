@@ -1,3 +1,4 @@
+import Message from '~/components/Message'
 import { mapGetters } from 'vuex'
 // import socket from '~/plugins/socket.io.js'
 import moment from 'moment'
@@ -10,6 +11,9 @@ export default {
     return {
       title: 'Application Object Item'
     }
+  },
+  components: {
+    Message
   },
   data() {
     return {
@@ -48,6 +52,9 @@ export default {
     })
     await store.dispatch('objectOption/GET_LIST')
     await store.dispatch('roomOption/GET_LIST')
+    await store.dispatch('message/GET_LIST', {
+      iApplicationObjectID: params.id
+    })
   },
   methods: {
     cancelApplicationObject() {

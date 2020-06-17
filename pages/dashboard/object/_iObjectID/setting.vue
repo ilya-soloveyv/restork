@@ -1,6 +1,17 @@
 <template>
   <div>
-    <b-form @submit.prevent="submit">
+    <b-form @submit.prevent="submit" inline>
+      <!-- <div class="form-group row">
+        <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+          <b-input
+            id="staticEmail"
+            type="text"
+            class="form-control-plaintext"
+            value="email@example.com"
+          />
+        </div>
+      </div> -->
       <b-button type="submit" variant="primary">
         Сохранить
       </b-button>

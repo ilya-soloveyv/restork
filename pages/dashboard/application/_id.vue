@@ -110,16 +110,6 @@
         </b-row>
       </b-col>
       <b-col md="12" lg="6">
-        <div class="row">
-          <div class="col">
-            <div id="chat">
-              <ul ref="messages" class="messages">
-                <li>message item</li>
-              </ul>
-              <input type="text" placeholder="Введите сообщение..." />
-            </div>
-          </div>
-        </div>
         <div class="dApplicationDate">
           Заявка на проживание от {{ dApplicationDate }}
         </div>
@@ -225,6 +215,7 @@
             </div>
           </div>
         </div>
+        <Message :applicationObject="applicationObject" />
       </b-col>
     </b-row>
     <b-row>

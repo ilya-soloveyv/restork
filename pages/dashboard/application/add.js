@@ -15,25 +15,6 @@ export default {
   },
   data() {
     return {
-      application: {
-        sApplicationAddress: '',
-        aApplicationCoordinate: {
-          coordinates: []
-        },
-        sApplicationCountry: null,
-        sApplicationState: null,
-        sApplicationCity: null,
-        dApplicationDateFrom: moment()
-          .add(1, 'day')
-          .format('YYYY-MM-DD'),
-        dApplicationDateTo: moment()
-          .add(4, 'day')
-          .format('YYYY-MM-DD'),
-        iApplicationAdult: 2,
-        iApplicationChild: 0,
-        objectOption: [2, 1],
-        roomOption: [1, 5]
-      },
       suggestionsOptions: {
         inputClass: 'form-control',
         // debounce: 250,
@@ -47,6 +28,50 @@ export default {
     },
     roomOption({ $store }) {
       return $store.state.roomOption.list
+    },
+    application({ $store }) {
+      return {
+        sApplicationAddress:
+          $store.state.searchForm.sApplicationAddress.formattedAddress || '',
+        aApplicationCoordinate: {
+          coordinates:
+            $store.state.searchForm.sApplicationAddress.latitude &&
+            $store.state.searchForm.sApplicationAddress.longitude
+              ? [
+                  $store.state.searchForm.sApplicationAddress.latitude,
+                  $store.state.searchForm.sApplicationAddress.longitude
+                ]
+              : []
+        },
+        sApplicationCountry:
+          $store.state.searchForm.sApplicationAddress.country || null,
+        sApplicationState:
+          $store.state.searchForm.sApplicationAddress.state || null,
+        sApplicationCity:
+          $store.state.searchForm.sApplicationAddress.city || null,
+        dApplicationDateFrom:
+          $store.state.searchForm.dApplicationDateFrom || null,
+        dApplicationDateTo: $store.state.searchForm.dApplicationDateTo || null,
+        iApplicationAdult: $store.state.searchForm.iApplicationAdult || 1,
+        iApplicationChild: $store.state.searchForm.iApplicationChild || 0,
+        objectOption: [],
+        roomOption: []
+      }
+    },
+    sApplicationAddress({ $store }) {
+      return $store.state.searchForm.sApplicationAddress
+    },
+    dApplicationDateFrom({ $store }) {
+      return $store.state.searchForm.dApplicationDateFrom
+    },
+    dApplicationDateTo({ $store }) {
+      return $store.state.searchForm.dApplicationDateTo
+    },
+    iApplicationAdult({ $store }) {
+      return $store.state.searchForm.iApplicationAdult
+    },
+    iApplicationChild({ $store }) {
+      return $store.state.searchForm.iApplicationChild
     }
   },
   async asyncData({ store, $axios, params }) {

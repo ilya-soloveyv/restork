@@ -15,9 +15,6 @@
         </div>
       </b-container>
     </div>
-    <div class="second">
-      second
-    </div>
   </main>
 </template>
 
@@ -94,9 +91,5 @@ export default {
       }
     }
   }
-}
-.second {
-  height: 100vh;
-  background-color: #ffffff;
 }
 </style>

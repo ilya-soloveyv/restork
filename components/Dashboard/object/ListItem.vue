@@ -14,7 +14,9 @@
         />
       </div>
       <div class="title">
-        <span class="sObjectTitle">{{ object.sObjectTitle }}</span>
+        <span class="sObjectTitle">
+          {{ object.sObjectTitle }}
+        </span>
         <span class="sObjectTypeTitle">
           {{ object.object_type.sObjectTypeTitle }}
         </span>
@@ -143,12 +145,12 @@ export default {
     display: grid;
     grid-template-columns: 130px 1fr 150px;
     grid-template-rows: 1fr;
-    // grid-gap: 1rem;
     grid-column-gap: 1rem;
     cursor: pointer;
-    @media (max-width: 991px) {
-      grid-template-columns: 130px 1fr;
-      grid-template-rows: 1rem auto auto;
+    @media (max-width: 575px) {
+      // background-color: red;
+      grid-template-columns: 90px 1fr;
+      grid-template-rows: 1fr auto;
     }
     &.collapsed {
       .info {
@@ -167,11 +169,12 @@ export default {
       background-color: #f5f5f5;
       border-radius: 0.5rem;
       overflow: hidden;
-      @media (max-width: 991px) {
+      @media (max-width: 575px) {
+        height: auto;
         grid-column-start: 1;
         grid-column-end: 2;
         grid-row-start: 1;
-        grid-row-end: 4;
+        grid-row-end: 3;
       }
       img {
         width: 100%;
@@ -181,15 +184,15 @@ export default {
     }
     .title {
       padding: 0;
-      // display: flex;
-      // flex-direction: column;
-      // justify-content: space-around;
-      // align-items: flex-start;
-      @media (max-width: 991px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: flex-start;
+      @media (max-width: 575px) {
         grid-column-start: 2;
         grid-column-end: 3;
         grid-row-start: 1;
-        grid-row-end: 3;
+        grid-row-end: 2;
       }
       .sObjectTitle {
         font-weight: 500;
@@ -206,14 +209,17 @@ export default {
     }
     .info {
       border-left: 1px solid #dddddd;
-      // display: flex;
-      // justify-content: flex-end;
-      // align-items: center;
-      @media (max-width: 991px) {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      @media (max-width: 575px) {
         grid-column-start: 2;
         grid-column-end: 3;
-        grid-row-start: 3;
+        grid-row-start: 2;
         grid-row-end: 3;
+        border-left: none;
+        justify-content: flex-start;
+        align-items: flex-end;
       }
       svg {
         margin-left: 0.25rem;

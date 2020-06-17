@@ -58,14 +58,16 @@
             {{ error.message }}
           </b-form-invalid-feedback>
         </b-form-group>
-        <b-button
-          :disabled="loading"
-          type="submit"
-          variant="primary"
-          class="mb-3"
-        >
-          Регистрация
-        </b-button>
+        <b-row>
+          <b-col>
+            <b-button :disabled="loading" type="submit" variant="primary">
+              Регистрация
+            </b-button>
+          </b-col>
+          <b-col cols="auto" align-self="center">
+            <nuxt-link :to="link">Войти</nuxt-link>
+          </b-col>
+        </b-row>
       </b-form>
     </div>
   </b-container>
@@ -89,6 +91,16 @@ export default {
       sUserFirstName: '',
       sUserPhone: '',
       sUserPassword: ''
+    }
+  },
+  computed: {
+    link() {
+      let link = '/signin'
+      const redirect = this.$route.query.redirect
+      if (redirect) {
+        link = link + '?redirect=' + redirect
+      }
+      return link
     }
   },
   methods: {

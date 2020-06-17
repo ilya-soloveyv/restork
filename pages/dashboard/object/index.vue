@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="dashboardObjectIndex">
     <h1>Мои объекты размещения</h1>
     <ListItem
       v-for="(object, objectIndex) in objects"
@@ -35,3 +35,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.dashboardObjectIndex {
+  h1 {
+    font-size: 24px;
+    margin-bottom: 1.5rem;
+  }
+}
+</style>

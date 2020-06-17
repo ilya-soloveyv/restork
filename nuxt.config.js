@@ -36,7 +36,7 @@ module.exports = {
     '@nuxtjs/auth',
     '@nuxtjs/dotenv',
     '@nuxtjs/svg',
-    // '~/io',
+    'nuxt-socket-io',
     [
       'vue-yandex-maps/nuxt',
       {
@@ -62,6 +62,36 @@ module.exports = {
       home: '/dashboard',
       login: '/signin'
     }
+  },
+  io: {
+    sockets: [
+      {
+        name: 'home',
+        url: 'http://localhost:3000',
+        default: true
+        // vuex: {
+        //   mutations: [
+        //     {
+        //       progress: 'examples/SET_PROGRESS'
+        //     },
+        //     'progress --> examples/SET_PROGRESS'
+        //   ],
+        //   actions: [
+        //     {
+        //       chatMessage: 'FORMAT_MESSAGE'
+        //     },
+        //     'SOMETHING_ELSE'
+        //   ],
+        //   emitBacks: [
+        //     'examples/sample',
+        //     {
+        //       'examples/sample2': 'sample2'
+        //     },
+        //     'examples/sample2 <-- sample2'
+        //   ]
+        // }
+      }
+    ]
   },
   build: {
     extend(config, ctx) {}

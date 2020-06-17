@@ -110,6 +110,11 @@ export default {
       title: 'Dashboard'
     }
   },
+  mounted() {
+    if (this.$route.query.redirect === 'new-application') {
+      this.$router.push('/dashboard/application/add')
+    }
+  },
   computed: {
     applications({ $store }) {
       const response = []

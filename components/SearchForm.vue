@@ -193,8 +193,8 @@ export default {
   data() {
     return {
       sApplicationAddress: '',
-      dApplicationDateFrom: '2020-06-11',
-      dApplicationDateTo: '2020-06-13',
+      dApplicationDateFrom: null,
+      dApplicationDateTo: null,
       iApplicationAdult: 1,
       iApplicationChild: 0,
       popoverPeopleCountView: false,
@@ -205,22 +205,9 @@ export default {
       },
       locale: 'ru-RU',
       items: [],
-      item: {
-        city: 'посёлок городского типа Красная Поляна',
-        country: 'Россия',
-        countryCode: 'RU',
-        formattedAddress:
-          'Россия, Краснодарский край, городской округ Сочи, посёлок городского типа Красная Поляна',
-        latitude: 43.679964,
-        longitude: 40.205538,
-        provider: 'yandex',
-        state: 'Краснодарский край',
-        streetName: null,
-        streetNumber: null
-      },
+      item: {},
       template: AutocompleteItem,
-      search:
-        'Россия, Краснодарский край, городской округ Сочи, посёлок городского типа Красная Поляна',
+      search: '',
       focused: false
     }
   },
@@ -335,12 +322,29 @@ export default {
       // })
     },
     searchResult() {
-      // console.log('searchResult')
-      // console.log(this.item)
-      // console.log(this.dApplicationDateFrom)
-      // console.log(this.dApplicationDateTo)
-      // console.log(this.iApplicationAdult)
-      // console.log(this.iApplicationChild)
+      this.$store.dispatch('searchForm/SET_sApplicationAddress', this.item)
+      this.$store.dispatch(
+        'searchForm/SET_dApplicationDateFrom',
+        this.dApplicationDateFrom
+      )
+      this.$store.dispatch(
+        'searchForm/SET_dApplicationDateTo',
+        this.dApplicationDateTo
+      )
+      this.$store.dispatch(
+        'searchForm/SET_iApplicationAdult',
+        this.iApplicationAdult
+      )
+      this.$store.dispatch(
+        'searchForm/SET_iApplicationChild',
+        this.iApplicationChild
+      )
+
+      if (this.$store.state.auth.user) {
+        this.$router.push('/dashboard/application/add')
+      } else {
+        this.$router.push('/signup?redirect=new-application')
+      }
     },
     clearItems() {
       this.items = []
