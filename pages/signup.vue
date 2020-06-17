@@ -29,6 +29,7 @@
             id="sUserPhoneInput"
             ref="sUserPhone"
             v-model="sUserPhone"
+            @keyup.native="validatePhone"
             :class="{ 'is-invalid': error && error.ref === 'sUserPhone' }"
             mask="+7 (###) ###-##-##"
             type="text"
@@ -126,6 +127,14 @@ export default {
         })
       }
       this.$set(this, 'loading', false)
+    },
+    validatePhone(e) {
+      if (
+        this.sUserPhone[0] &&
+        (this.sUserPhone[0] === '8' || this.sUserPhone[0] === '7')
+      ) {
+        this.sUserPhone = ''
+      }
     }
   }
 }

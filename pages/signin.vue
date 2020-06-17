@@ -13,6 +13,7 @@
             ref="sUserPhone"
             v-model="sUserPhone"
             :class="{ 'is-invalid': error && error.ref === 'sUserPhone' }"
+            @keyup.native="validatePhone"
             mask="+7 (###) ###-##-##"
             type="text"
             class="form-control"
@@ -101,6 +102,14 @@ export default {
           this.$set(this, 'error', e.response.data.error)
           this.$refs[this.error.ref].$el.focus()
         })
+    },
+    validatePhone(e) {
+      if (
+        this.sUserPhone[0] &&
+        (this.sUserPhone[0] === '8' || this.sUserPhone[0] === '7')
+      ) {
+        this.sUserPhone = ''
+      }
     }
   }
 }
