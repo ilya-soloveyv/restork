@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Фотографии объекта</h1>
     <ul class="objectImage">
       <li v-for="(image, imageIndex) in object.object_images" :key="imageIndex">
         <img
@@ -13,17 +14,22 @@
           @click="imageRemove(image)"
         />
       </li>
+      <li v-show="!dropzoneLoading">
+        <dropzone
+          id="objectDropzone"
+          ref="objectDropzone"
+          :options="objectDropzoneOptions"
+        />
+      </li>
+      <li v-show="dropzoneLoading">
+        <b-spinner variant="primary" label="Spinning"></b-spinner>
+      </li>
     </ul>
-    <dropzone
-      id="objectDropzone"
-      ref="objectDropzone"
-      :options="objectDropzoneOptions"
-    />
-    {{ dropzoneLoading }}
+    <!-- {{ dropzoneLoading }} -->
     <b-button :to="'/dashboard/object/' + object.iObjectID" variant="primary">
-      Перейти к объекту
+      Вернуться к объекту
     </b-button>
-    <pre>{{ object }}</pre>
+    <!-- <pre>{{ object }}</pre> -->
   </div>
 </template>
 
@@ -95,7 +101,10 @@ ul.objectImage {
   padding: 0;
   list-style: none;
   li {
-    background: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
     img {
       width: 100%;
       height: 100%;
@@ -108,7 +117,8 @@ ul.objectImage {
 }
 .dropzone {
   width: 100%;
-  height: 150px;
+  min-height: 150px;
+  height: 100%;
   display: block;
   padding: 0;
   margin: 0;
@@ -118,12 +128,15 @@ ul.objectImage {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  .dz-message {
+  /deep/ .dz-message {
     height: 100%;
     font-size: 14px;
     display: flex;
     justify-content: center;
     align-items: center;
+    span {
+      text-align: center;
+    }
   }
 }
 </style>

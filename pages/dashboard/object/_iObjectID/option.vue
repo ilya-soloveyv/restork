@@ -1,23 +1,31 @@
 <template>
   <div>
+    <h1>Опции объекта</h1>
     <b-form @submit.prevent="submit">
-      <b-form-group id="label-objectOption" label="Опции объекта">
+      <b-form-group id="label-objectOption">
         <b-form-checkbox-group
           id="checkbox-group-2"
           v-model="objectObjectOptionsArray"
         >
-          <b-form-checkbox
-            v-for="(option, optionIndex) in objectOption"
-            :key="optionIndex"
-            :value="option.iObjectOptionID"
-            :disabled="loadingDisabledCheckbox"
-          >
-            {{ option.sObjectOptionTitle }}
-          </b-form-checkbox>
+          <b-row>
+            <b-col
+              v-for="(option, optionIndex) in objectOption"
+              :key="optionIndex"
+              cols="4"
+              class="mb-2"
+            >
+              <b-form-checkbox
+                :value="option.iObjectOptionID"
+                :disabled="loadingDisabledCheckbox"
+              >
+                {{ option.sObjectOptionTitle }}
+              </b-form-checkbox>
+            </b-col>
+          </b-row>
         </b-form-checkbox-group>
       </b-form-group>
       <b-button type="submit" variant="primary">
-        Далее
+        Сохранить
       </b-button>
     </b-form>
     <!-- {{ options }} -->

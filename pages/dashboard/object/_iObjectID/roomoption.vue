@@ -1,19 +1,27 @@
 <template>
   <div>
+    <h1>Опции номеров</h1>
     <b-form @submit.prevent="submit">
-      <b-form-group id="label-roomOption" label="Опции объекта">
+      <b-form-group id="label-roomOption">
         <b-form-checkbox-group
           id="checkbox-group-2"
           v-model="objectRoomOptionsArray"
         >
-          <b-form-checkbox
-            v-for="(option, optionIndex) in roomOption"
-            :key="optionIndex"
-            :value="option.iRoomOptionID"
-            :disabled="loadingDisabledCheckbox"
-          >
-            {{ option.sRoomOptionTitle }}
-          </b-form-checkbox>
+          <b-row>
+            <b-col
+              v-for="(option, optionIndex) in roomOption"
+              :key="optionIndex"
+              cols="4"
+              class="mb-2"
+            >
+              <b-form-checkbox
+                :value="option.iRoomOptionID"
+                :disabled="loadingDisabledCheckbox"
+              >
+                {{ option.sRoomOptionTitle }}
+              </b-form-checkbox>
+            </b-col>
+          </b-row>
         </b-form-checkbox-group>
       </b-form-group>
       <b-button type="submit" variant="primary">
@@ -21,7 +29,7 @@
       </b-button>
     </b-form>
     <!-- {{ options }} -->
-    <pre>{{ object }}</pre>
+    <!-- <pre>{{ object }}</pre> -->
     <!-- <pre>{{ roomOption }}</pre> -->
   </div>
 </template>

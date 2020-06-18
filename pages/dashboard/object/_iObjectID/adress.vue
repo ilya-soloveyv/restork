@@ -133,11 +133,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#map {
-  width: 100%;
-  height: 400px;
-  .ymap-container {
-    height: 100%;
+.objectAdress {
+  /deep/ #map {
+    margin: 2rem 0;
+    box-shadow: none;
   }
 }
 </style>

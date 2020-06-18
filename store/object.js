@@ -62,6 +62,21 @@ const mutations = {
   },
   UPDATE_tObjectDesc(state, { tObjectDesc }) {
     state.item.tObjectDesc = tObjectDesc
+  },
+  SET_OBJECT_iObjectArea(state, iObjectArea) {
+    state.item.iObjectArea = Number(iObjectArea)
+  },
+  SET_OBJECT_iObjectRoomCount(state, iObjectRoomCount) {
+    state.item.iObjectRoomCount = Number(iObjectRoomCount)
+  },
+  SET_OBJECT_iObjectBed(state, iObjectBed) {
+    state.item.iObjectBed = Number(iObjectBed)
+  },
+  SET_OBJECT_iObjectPlace(state, iObjectPlace) {
+    state.item.iObjectPlace = Number(iObjectPlace)
+  },
+  SET_OBJECT_iObjectPlaceDop(state, iObjectPlaceDop) {
+    state.item.iObjectPlaceDop = Number(iObjectPlaceDop)
   }
 }
 
@@ -120,6 +135,21 @@ const actions = {
   },
   UPDATE_tObjectDesc({ state, commit }, { tObjectDesc }) {
     commit('UPDATE_tObjectDesc', { tObjectDesc })
+  },
+  SET_OBJECT_iObjectArea({ state, commit }, iObjectArea) {
+    commit('SET_OBJECT_iObjectArea', iObjectArea)
+  },
+  SET_OBJECT_iObjectRoomCount({ state, commit }, iObjectRoomCount) {
+    commit('SET_OBJECT_iObjectRoomCount', iObjectRoomCount)
+  },
+  SET_OBJECT_iObjectBed({ state, commit }, iObjectBed) {
+    commit('SET_OBJECT_iObjectBed', iObjectBed)
+  },
+  SET_OBJECT_iObjectPlace({ state, commit }, iObjectPlace) {
+    commit('SET_OBJECT_iObjectPlace', iObjectPlace)
+  },
+  SET_OBJECT_iObjectPlaceDop({ state, commit }, iObjectPlaceDop) {
+    commit('SET_OBJECT_iObjectPlaceDop', iObjectPlaceDop)
   }
 }
 

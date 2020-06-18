@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Базовые настройки</h1>
     <b-form @submit.prevent="submit">
       <b-form-group
         id="label_sObjectTitle"
