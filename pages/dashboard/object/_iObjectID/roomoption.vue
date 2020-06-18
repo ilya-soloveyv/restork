@@ -11,7 +11,7 @@
             <b-col
               v-for="(option, optionIndex) in roomOption"
               :key="optionIndex"
-              cols="4"
+              cols="12"
               class="mb-2"
             >
               <b-form-checkbox

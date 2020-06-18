@@ -11,8 +11,8 @@
             <b-col
               v-for="(option, optionIndex) in objectOption"
               :key="optionIndex"
-              cols="4"
-              class="mb-2"
+              cols="12"
+              class="mb-1"
             >
               <b-form-checkbox
                 :value="option.iObjectOptionID"
