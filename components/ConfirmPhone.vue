@@ -14,7 +14,7 @@
           @keyup.native="confirmPhone"
           :disabled="status"
           mask="####"
-          type="number"
+          type="tel"
           class="form-control"
           autocomplete="off"
           required
