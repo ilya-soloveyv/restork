@@ -6,13 +6,9 @@
           <TopNav />
         </b-container>
       </div>
-      <div id="dashboard">
+      <ConfirmPhone v-if="$auth.user.sUserPhoneKod" />
+      <div id="dashboard" v-else>
         <b-container>
-          <b-row>
-            <b-col cols="12">
-              <ConfirmPhone v-if="$auth.user.sUserPhoneKod" />
-            </b-col>
-          </b-row>
           <b-row>
             <b-col xl="4" lg="4" md="6" sm="12">
               <!-- <b-col class="d-none d-lg-block"> -->
@@ -71,7 +67,7 @@ export default {
 }
 .main {
   @media (max-width: 991px) {
-    padding-bottom: 6rem;
+    // padding-bottom: 6rem;
   }
 }
 </style>

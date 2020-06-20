@@ -11,6 +11,7 @@ const md5 = require('md5')
 const validator = require('validator')
 const randomstring = require('randomstring')
 const axios = require('axios')
+const sequelizePaginate = require('sequelize-paginate')
 // const urlencode = require('urlencode')
 
 module.exports = (sequelize, DataTypes) => {
@@ -69,37 +70,25 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'user'
     }
   )
-  User.associate = function(models) {}
 
-  User.searchUsers = async function(search) {
-    // search = search.split(' ')
+  sequelizePaginate.paginate(User)
 
-    // search.forEach(item => {
+  User.associate = function(models) {
+    User.hasMany(models.object, {
+      foreignKey: 'iUserID'
+    })
+  }
 
-    //   where[Sequelize.or()].push(
-    //     Sequelize.or({
-    //       sUserLastName: {
-    //         [Op.substring]: item
-    //       }
-    //     })
-    //   )
-
-    // })
-
-    // console.log(search)
-    const users = await User.findAll({
-      attributes: [
-        'iUserID',
-        'sUserLastName',
-        'sUserMiddleName',
-        'sUserFirstName',
-        'sUserPhone',
-        'sUserEmail',
-        'dUserBirthday',
-        'sUserAvatar',
-        'iUserAdmin'
-      ],
-      where: Sequelize.or(
+  User.searchUsers = async function({
+    search = null,
+    limit = false,
+    page = 1
+  }) {
+    limit = Number(limit) || 3
+    let where = {}
+    search = search || false
+    if (search) {
+      where = Sequelize.or(
         Sequelize.or({
           sUserLastName: {
             [Op.substring]: search
@@ -116,7 +105,23 @@ module.exports = (sequelize, DataTypes) => {
           }
         })
       )
+    }
+
+    const users = await User.paginate({
+      attributes: {
+        exclude: ['sUserPassword', 'iUserKey']
+      },
+      where,
+      include: [
+        {
+          model: sequelize.models.object
+        }
+      ],
+      order: [['iUserID', 'DESC']],
+      paginate: limit,
+      page
     })
+
     return users
   }
 
@@ -369,6 +374,11 @@ module.exports = (sequelize, DataTypes) => {
       .then(({ data }) => {
         return data
       })
+  }
+
+  User.item = async function({ iUserID }) {
+    const user = await User.findByPk(iUserID)
+    return user
   }
 
   return User

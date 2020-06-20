@@ -111,9 +111,9 @@ nav.navbar {
   }
   &.nav-theme-transparent {
     button.navbar-toggler {
-      background-color: rgba(0, 0, 0, 0.5);
+      // background-color: rgba(0, 0, 0, 0.5);
       &.not-collapsed {
-        background-color: red;
+        // background-color: white;
       }
       svg {
         stroke: rgba(255, 255, 255, 0.5);
@@ -177,16 +177,19 @@ nav.navbar {
           height: 2px;
           margin-top: -1px;
           border-radius: 0;
+          background-color: white;
           &::before {
             // top: -7px;
             width: 100%;
             height: 2px;
             border-radius: 0;
+            background-color: white;
           }
           &::after {
             width: 100%;
             height: 2px;
             border-radius: 0;
+            background-color: white;
             // bottom: -7px;
           }
         }

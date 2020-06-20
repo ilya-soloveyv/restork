@@ -232,7 +232,7 @@ export default {
             search: query
           })
           .then((response) => {
-            resolve(response.data.users)
+            resolve(response.data.users.docs)
           })
       })
     },
