@@ -5,8 +5,14 @@ export default {
     return {}
   },
   computed: {
+    SELECTEL_WEB() {
+      return process.env.SELECTEL_WEB
+    },
     user() {
       return this.$store.state.user.item
+    },
+    object() {
+      return this.$store.state.object.list
     },
     sUserName() {
       const sUserName = []
@@ -30,6 +36,7 @@ export default {
   },
   async asyncData({ store, $axios, params, query }) {
     await store.dispatch('user/GET_ITEM', { iUserID: params.iUserID })
+    await store.dispatch('object/GET_LIST', { iUserID: params.iUserID })
   },
   methods: {}
 }

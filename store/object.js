@@ -81,8 +81,8 @@ const mutations = {
 }
 
 const actions = {
-  async GET_LIST({ state, commit, rootState }) {
-    const iUserID = rootState.auth.user.iUserID
+  async GET_LIST({ state, commit, rootState }, { iUserID = false } = {}) {
+    iUserID = iUserID || rootState.auth.user.iUserID
     const { objects } = await this.$axios.$post('/api/object/list', { iUserID })
     commit('SET_LIST', objects)
   },

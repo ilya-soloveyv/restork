@@ -22,7 +22,9 @@
         />
       </li>
       <li v-show="dropzoneLoading">
-        <b-spinner variant="primary" label="Spinning"></b-spinner>
+        <div class="loadingImage">
+          <b-spinner variant="primary" label="Spinning"></b-spinner>
+        </div>
       </li>
     </ul>
     <!-- {{ dropzoneLoading }} -->
@@ -105,19 +107,23 @@ ul.objectImage {
     justify-content: center;
     align-items: center;
     background-color: #f9f9f9;
+    padding-top: 100%;
+    position: relative;
     img {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-    }
-    &:last-child {
-      width: 100%;
+      border-radius: 0.25rem;
     }
   }
 }
 .dropzone {
+  position: absolute;
+  left: 0;
+  top: 0;
   width: 100%;
-  min-height: 150px;
   height: 100%;
   display: block;
   padding: 0;
@@ -127,6 +133,7 @@ ul.objectImage {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 0.25rem;
   cursor: pointer;
   /deep/ .dz-message {
     height: 100%;
@@ -138,5 +145,18 @@ ul.objectImage {
       text-align: center;
     }
   }
+}
+.loadingImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px dashed #dee2e6;
+  background: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.25rem;
 }
 </style>

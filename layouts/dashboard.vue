@@ -49,6 +49,7 @@ export default {
 #dashboard {
   padding-top: 2rem;
   padding-bottom: 2rem;
+  margin-bottom: 7rem;
   @media (max-width: 991px) {
     padding-bottom: 0;
   }
