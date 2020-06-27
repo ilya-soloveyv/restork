@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Финансы</h1>
+    <b-button variant="primary">Добавить карту</b-button>
   </div>
 </template>
 

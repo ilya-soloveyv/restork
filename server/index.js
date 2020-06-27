@@ -41,6 +41,7 @@ app.use('/api/application', require('./routes/application'))
 app.use('/api/application_object', require('./routes/application_object'))
 app.use('/api/room', require('./routes/room'))
 app.use('/api/message', require('./routes/message'))
+app.use('/api/b2p', require('./routes/b2p'))
 
 const nuxt = new Nuxt(config)
 

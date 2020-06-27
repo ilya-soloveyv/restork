@@ -17,6 +17,8 @@ export default {
     }
   },
   async asyncData({ store, $axios, params }) {
-    await store.dispatch('application/GET_LIST')
+    await store.dispatch('application/GET_LIST', {
+      iUserID: store.state.auth.user.iUserID
+    })
   }
 }
