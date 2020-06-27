@@ -3,7 +3,7 @@ const router = Router()
 
 // const md5 = require('md5')
 
-router.get('/callback', (req, res, next) => {
+router.post('/callback', (req, res, next) => {
   const response = {}
   console.log(req.body)
   console.log(req.query)
