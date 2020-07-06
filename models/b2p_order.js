@@ -60,11 +60,11 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   b2pOrder.signatureRegister = ({ iAmountValue, iAmountCurrency }) => {
-    const signatureString =
-      process.env.B2P_SECTOR_ID.toString() +
-      iAmountValue.toString() +
-      iAmountCurrency.toString() +
-      process.env.B2P_SECTOR_PASS.toString()
+    const signatureString = process.env.B2P_SECTOR_ID.concat(
+      iAmountValue,
+      iAmountCurrency,
+      process.env.B2P_SECTOR_PASS
+    )
     const signatureMD5 = md5(signatureString)
     return Base64.encode(signatureMD5)
   }
@@ -136,10 +136,10 @@ module.exports = (sequelize, DataTypes) => {
     // return order
 
     const id = order.id
-    const signatureString =
-      process.env.B2P_SECTOR_ID.toString() +
-      order.id.toString() +
-      process.env.B2P_SECTOR_PASS.toString()
+    const signatureString = process.env.B2P_SECTOR_ID.concat(
+      order.id,
+      process.env.B2P_SECTOR_PASS
+    )
     const signatureMD5 = md5(signatureString)
     const signatureBase64 = Base64.encode(signatureMD5)
 
