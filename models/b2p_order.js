@@ -6,6 +6,7 @@ const Base64 = require('js-base64').Base64
 // const fetch = require('node-fetch')
 const axios = require('axios')
 const qs = require('qs')
+const consola = require('consola')
 
 module.exports = (sequelize, DataTypes) => {
   const b2pOrder = sequelize.define(
@@ -142,6 +143,7 @@ module.exports = (sequelize, DataTypes) => {
       sUserPhone: user.sUserPhone,
       sUserEmail: user.sUserEmail
     })
+    consola.log(order)
     // return order
 
     const id = order.id
