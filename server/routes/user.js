@@ -20,4 +20,19 @@ router.post('/item', async (req, res, next) => {
   res.json(response)
 })
 
+router.post('/clearB2PPan', async (req, res, next) => {
+  const iUserID = req.body.iUserID
+  await User.update(
+    {
+      B2PPan: null
+    },
+    {
+      where: {
+        iUserID
+      }
+    }
+  )
+  res.json(true)
+})
+
 module.exports = router
