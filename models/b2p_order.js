@@ -60,15 +60,18 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   b2pOrder.signatureRegister = ({ iAmountValue, iAmountCurrency }) => {
-    const signatureString = ''
-    signatureString.concat(
-      process.env.B2P_SECTOR_ID,
-      iAmountValue,
-      iAmountCurrency,
+    const signatureString =
+      process.env.B2P_SECTOR_ID +
+      iAmountValue +
+      iAmountCurrency +
       process.env.B2P_SECTOR_PASS
-    )
     const signatureMD5 = md5(signatureString)
-    return Base64.encode(signatureMD5)
+    const signatureBase64 = Base64.encode(signatureMD5)
+    return {
+      signatureString,
+      signatureMD5,
+      signatureBase64
+    }
   }
 
   b2pOrder.sendRegister = async ({
@@ -125,25 +128,25 @@ module.exports = (sequelize, DataTypes) => {
       iAmountCurrency
     })
 
-    // return user
+    // return {
+    //   user,
+    //   iAmountValue,
+    //   signature
+    // }
 
     const { order } = await b2pOrder.sendRegister({
       iAmountValue,
       iAmountCurrency,
       sOrderDescription,
-      signature,
+      signature: signature.signatureBase64,
       sUserPhone: user.sUserPhone,
       sUserEmail: user.sUserEmail
     })
     // return order
 
     const id = order.id
-    const signatureString = ''
-    signatureString.concat(
-      process.env.B2P_SECTOR_ID,
-      order.id,
-      process.env.B2P_SECTOR_PASS
-    )
+    const signatureString =
+      process.env.B2P_SECTOR_ID + order.id + process.env.B2P_SECTOR_PASS
     const signatureMD5 = md5(signatureString)
     const signatureBase64 = Base64.encode(signatureMD5)
 

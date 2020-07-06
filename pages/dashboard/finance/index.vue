@@ -19,6 +19,7 @@ export default {
       const { url } = await this.$axios.$post('/api/b2p/addOrder', {
         iUserID: this.$auth.state.user.iUserID
       })
+      // console.log(url)
       window.location.href = url
       // this.$router.replace({ path: url })
       // console.log(response)
