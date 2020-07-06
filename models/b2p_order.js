@@ -60,7 +60,9 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   b2pOrder.signatureRegister = ({ iAmountValue, iAmountCurrency }) => {
-    const signatureString = process.env.B2P_SECTOR_ID.concat(
+    const signatureString = ''
+    signatureString.concat(
+      process.env.B2P_SECTOR_ID,
       iAmountValue,
       iAmountCurrency,
       process.env.B2P_SECTOR_PASS
@@ -136,7 +138,9 @@ module.exports = (sequelize, DataTypes) => {
     // return order
 
     const id = order.id
-    const signatureString = process.env.B2P_SECTOR_ID.concat(
+    const signatureString = ''
+    signatureString.concat(
+      process.env.B2P_SECTOR_ID,
       order.id,
       process.env.B2P_SECTOR_PASS
     )
