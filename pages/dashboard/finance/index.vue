@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Финансы</h1>
-    <b-button variant="primary">Добавить карту</b-button>
+    <b-button @click="add" variant="primary">Добавить карту</b-button>
   </div>
 </template>
 
@@ -12,6 +12,17 @@ export default {
   head() {
     return {
       title: 'Финансы'
+    }
+  },
+  methods: {
+    async add() {
+      const { url } = await this.$axios.$post('/api/b2p/addOrder', {
+        iUserID: this.$auth.state.user.iUserID
+      })
+      window.location.href = url
+      // this.$router.replace({ path: url })
+      // console.log(response)
+      // return redirect(url)
     }
   }
 }

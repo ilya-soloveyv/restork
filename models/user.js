@@ -62,6 +62,10 @@ module.exports = (sequelize, DataTypes) => {
       iUserAdmin: {
         type: DataTypes.BOOLEAN,
         defaultValue: 0
+      },
+      B2PPan: {
+        type: DataTypes.STRING,
+        allowNull: true
       }
     },
     {
