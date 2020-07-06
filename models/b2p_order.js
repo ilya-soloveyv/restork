@@ -128,6 +128,7 @@ module.exports = (sequelize, DataTypes) => {
       iAmountValue,
       iAmountCurrency
     })
+    consola.log(signature)
 
     // return {
     //   user,
