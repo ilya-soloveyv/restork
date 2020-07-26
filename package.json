@@ -46,10 +46,13 @@
     "sequelize": "^5.21.10",
     "sequelize-paginate": "^1.1.6",
     "sharp": "^0.25.4",
+    "typeface-montserrat": "0.0.75",
     "urlencode": "^1.1.0",
     "v-autocomplete": "^1.8.2",
     "v-suggestions": "^1.1.1",
     "validator": "^12.2.0",
+    "vue-slick-carousel": "^1.0.6",
+    "vue-sticky-directive": "0.0.10",
     "vue-the-mask": "^0.11.1",
     "vue-yandex-maps": "^0.10.7",
     "vuejs-datepicker": "^1.6.2"

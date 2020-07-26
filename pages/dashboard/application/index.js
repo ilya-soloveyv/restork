@@ -1,14 +1,14 @@
-import ListItem from '../../../components/Dashboard/application/ListItem'
+import ApplicationListItem from '@/components/Dashboard/application/ApplicationListItem'
 
 export default {
   middleware: 'auth',
-  layout: 'dashboard',
+  layout: 'dashboardV2',
   components: {
-    ListItem
+    ApplicationListItem
   },
   head() {
     return {
-      title: 'Application'
+      title: 'История поездок'
     }
   },
   computed: {

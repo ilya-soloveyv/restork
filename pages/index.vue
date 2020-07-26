@@ -4,7 +4,7 @@
       <b-container>
         <div class="wrap">
           <div class="wrapTopNav">
-            <TopNav theme="transparent" />
+            <TopNav theme="white" />
           </div>
           <div class="wrapSearchForm">
             <h1>
@@ -34,10 +34,10 @@ export default {
 .first {
   height: 100vh;
   background-color: white;
-  background-image: url('~assets/images/welcome/bg.jpg');
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-size: cover;
+  // background-image: url('~assets/images/welcome/bg.jpg');
+  // background-position: center top;
+  // background-repeat: no-repeat;
+  // background-size: cover;
   position: relative;
   &::before {
     content: '';
@@ -47,7 +47,7 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba($color: #000000, $alpha: 0.75);
+    // background-color: rgba($color: #000000, $alpha: 0.75);
     // background-color: rgba($color: #2196f3, $alpha: 1);
   }
   .container {

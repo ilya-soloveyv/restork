@@ -7,17 +7,17 @@ module.exports = {
       [
         {
           iApplicationObjectOptionID: 1,
-          iApplicationID: 1,
+          iApplicationID: 2,
           iObjectOptionID: 2
         },
         {
           iApplicationObjectOptionID: 2,
-          iApplicationID: 1,
+          iApplicationID: 2,
           iObjectOptionID: 4
         },
         {
           iApplicationObjectOptionID: 3,
-          iApplicationID: 1,
+          iApplicationID: 2,
           iObjectOptionID: 5
         }
       ],

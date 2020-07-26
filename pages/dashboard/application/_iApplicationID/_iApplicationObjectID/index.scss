@@ -1,0 +1,105 @@
+.applicationObjectItem {
+  display: grid;
+  grid-template-columns: auto 730px 355px auto;
+  grid-template-rows: 3;
+  grid-gap: 25px;
+  position: relative;
+  padding-bottom: 70px;
+  @media (max-width: 1199px) {
+    grid-template-columns: auto 605px 300px auto;
+  }
+  @media (max-width: 991px) {
+    grid-template-columns: auto 690px auto;
+    grid-template-rows: 4;
+  }
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 3;
+  }
+  .wrapImages {
+    grid-column: 1/5;
+    grid-row: 1/2;
+    background-color: green;
+    height: 510px;
+    @media (max-width: 991px) {
+      grid-column: 1/4;
+      grid-row: 1/2;
+    }
+    @media (max-width: 767px) {
+      grid-column: 1/2;
+      grid-row: 1/2;
+    }
+  }
+  .wrapInfo {
+    grid-column: 2/3;
+    grid-row: 2/4;
+    padding: 25px;
+    background-color: orange;
+    @media (max-width: 991px) {
+      grid-column: 2/3;
+      grid-row: 2/3;
+    }
+    @media (max-width: 767px) {
+      grid-column: 1/2;
+      grid-row: 2/3;
+    }
+  }
+  .wrapControlRight {
+    grid-column: 3/4;
+    grid-row: 1/3;
+    padding-top: 70px;
+    @media (max-width: 991px) {
+      display: none;
+      grid-column: auto;
+      grid-row: auto;
+    }
+    .controlRight {
+      background-color: white;
+      border: 1px solid #eaeaea;
+      padding: 40px 25px 25px;
+      border-radius: 8px;
+      .rating {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        svg {
+
+        }
+      }
+    }
+  }
+  .wrapControlBottom {
+    display: none;
+    @media (max-width: 991px) {
+      display: block;
+      grid-column: 1/4;
+      grid-row: 4/5;
+    }
+    @media (max-width: 767px) {
+      grid-column: 1/2;
+      grid-row: 3/4;
+    }
+    .controlBottom {
+      background-color: white;
+      height: 110px;
+      box-shadow: 0 3px 10px rgba($color: #000000, $alpha: 0.16);
+      @media (max-width: 767px) {
+        height: 90px;
+      }
+    }
+  }
+  .wrapChat {
+    background-color: red;
+    grid-column: 3/4;
+    grid-row: 3/4;
+    @media (max-width: 991px) {
+      grid-column: 1/4;
+      grid-row: 3/4;
+    }
+    .chat {
+      bottom: 25px !important;
+      flex-grow: 1;
+      background-color: yellow;
+    }
+  }
+}

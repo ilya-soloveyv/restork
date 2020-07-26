@@ -105,6 +105,9 @@ module.exports = (sequelize, DataTypes) => {
               model: sequelize.models.object,
               include: [
                 {
+                  model: sequelize.models.object_type
+                },
+                {
                   model: sequelize.models.object_image
                 },
                 {
@@ -114,6 +117,9 @@ module.exports = (sequelize, DataTypes) => {
                   }
                 }
               ]
+            },
+            {
+              model: sequelize.models.message
             }
           ]
         },
@@ -320,6 +326,9 @@ module.exports = (sequelize, DataTypes) => {
                   model: sequelize.models.object_image
                 }
               ]
+            },
+            {
+              model: sequelize.models.message
             }
           ]
         },

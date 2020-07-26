@@ -1,3 +1,37 @@
+.tableTitle {
+  background-color: rgba($color: #dbdbdb, $alpha: 0.2);
+  border-radius: 8px 8px 0 0;
+  @media (max-width: 767px) {
+    display: none;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 2fr 4fr 2fr 150px 130px 120px;
+    grid-template-rows: 1fr;
+    @media (max-width: 991px) {
+      grid-template-columns: 2fr 4fr 2fr 100px 100px 100px;
+    }
+    li {
+      flex-grow: 1;
+      color: #818181;
+      font-size: 14px;
+      line-height: 18px;
+      padding: 0.75rem 1rem;
+      @media (max-width: 991px) {
+        padding: 0.75rem 0.5rem;
+      }
+      &.status {
+        text-align: right;
+      }
+    }
+  }
+}
+
 #applicationList {
-  margin-bottom: 1rem;
+  .application {
+    border: 1px solid #eaeaea;
+  }
 }

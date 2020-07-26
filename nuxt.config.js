@@ -24,10 +24,15 @@ module.exports = {
     port: process.env.PORT
   },
   loading: { color: '#007bff' },
-  css: ['~/assets/scss/main.scss', '~/assets/scss/admin/admin.scss'],
+  css: [
+    '~/assets/scss/fonts.scss',
+    '~/assets/scss/main.scss',
+    '~/assets/scss/admin/admin.scss'
+  ],
   plugins: [
     { src: '~/plugins/datepicker', ssr: false },
-    { src: '~/plugins/v-autocomplete', ssr: false }
+    { src: '~/plugins/v-autocomplete', ssr: false },
+    { src: '~/plugins/vue-sticky-directive', ssr: false }
   ],
   buildModules: ['@nuxtjs/eslint-module'],
   modules: [
