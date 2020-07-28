@@ -50,6 +50,18 @@ module.exports = {
         coordorder: 'latlong',
         version: '2.1'
       }
+    ],
+    [
+      '@rkaliev/nuxtjs-yandex-metrika',
+      {
+        id: 65958184,
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true,
+        trackHash: true,
+        debug: false
+      }
     ]
   ],
   axios: {
