@@ -33,6 +33,12 @@ h1 {
     font-weight: bold;
     padding: 1rem 2rem;
   }
+  &.btn-light {
+    background-color: white;
+    border: 1px solid #dbdbdb;
+    font-weight: normal;
+    color: #818181;
+  }
 }
 #map {
   height: 400px;

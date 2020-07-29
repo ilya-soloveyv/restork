@@ -2,13 +2,15 @@ import moment from 'moment'
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+import Message from '@/components/Message'
 moment.locale('ru')
 
 export default {
   middleware: 'auth',
   layout: 'dashboardV2Fluid',
   components: {
-    VueSlickCarousel
+    VueSlickCarousel,
+    Message
   },
   head() {
     return {
@@ -39,10 +41,30 @@ export default {
   },
   methods: {
     autoHeightChatModule() {
+      // const offsetPadding = 25
+      const windowHeight = window.innerHeight
       // const windowHeight = window.innerHeight
       // console.log(windowHeight)
       const controlRight = this.$refs.controlRight
-      console.log(controlRight.pageYOffset)
+      const wrapChat = this.$refs.chat
+
+      const controlRightBounding = controlRight.getBoundingClientRect()
+      const controlRightTop = controlRightBounding.top
+      const controlRightHeight = controlRightBounding.height
+
+      // const wrapChatBounding = wrapChat.getBoundingClientRect()
+
+      // console.log('windowHeight', windowHeight)
+
+      // console.log('offsetPadding', offsetPadding)
+      // console.log('controlRightTop', controlRightTop)
+      // console.log('controlRightHeight', controlRightHeight)
+
+      // console.log('wrapChatBounding', wrapChatBounding.bottom)
+
+      const wrapChatHeight =
+        windowHeight - controlRightTop - controlRightHeight - 50
+      wrapChat.style.height = wrapChatHeight + 'px'
     },
     handleScroll() {
       this.autoHeightChatModule()

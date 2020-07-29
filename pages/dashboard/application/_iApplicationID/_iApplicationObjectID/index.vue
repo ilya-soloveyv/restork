@@ -248,7 +248,7 @@
               transform="translate(0 -0.492)"
             />
           </svg>
-          <div>4.9 (25)</div>
+          <div><span>4.9</span> (25)</div>
         </div>
         <div class="addFavourit">
           <svg
@@ -262,11 +262,10 @@
               d="M13.741,1.3A4.013,4.013,0,0,0,10.756,0,3.755,3.755,0,0,0,8.41.809a4.8,4.8,0,0,0-.948.99,4.8,4.8,0,0,0-.948-.99A3.754,3.754,0,0,0,4.169,0,4.014,4.014,0,0,0,1.184,1.3,4.665,4.665,0,0,0,0,4.485,5.555,5.555,0,0,0,1.48,8.122,31.563,31.563,0,0,0,5.186,11.6c.513.438,1.1.934,1.7,1.462a.876.876,0,0,0,1.154,0c.6-.528,1.187-1.025,1.7-1.463a31.549,31.549,0,0,0,3.705-3.478,5.555,5.555,0,0,0,1.48-3.636A4.665,4.665,0,0,0,13.741,1.3Zm0,0"
               transform="translate(0.5 0.5)"
               fill="none"
-              stroke="#000"
               stroke-width="1"
             />
           </svg>
-          <span>В избранное</span>
+          <nuxt-link to="#">В избранное</nuxt-link>
         </div>
         <div class="cost">
           <label>Предложение отеля:</label>
@@ -309,10 +308,12 @@
           </svg>
           <span>20 минут назад</span>
         </div>
-        <div class="buttons">
-          <b-button variant="light" size="lg" block>Не интересно</b-button>
-          <b-button variant="primary" size="lg" block>Забронировать</b-button>
-        </div>
+        <b-button class="noInterest" variant="light" size="lg" block>
+          Не интересно
+        </b-button>
+        <b-button class="toBook" variant="primary" size="lg" block>
+          Забронировать
+        </b-button>
       </div>
     </div>
     <div class="wrapControlBottom">
@@ -327,12 +328,13 @@
     </div>
     <div class="wrapChat">
       <div
+        ref="chat"
         v-sticky
         sticky-side="bottom"
         sticky-offset="{ top: 0, bottom: 25 }"
         class="chat"
       >
-        Chat Module
+        <Message :applicationObject="applicationObject" />
       </div>
     </div>
   </div>

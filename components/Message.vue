@@ -69,6 +69,9 @@ export default {
       tMessageText: ''
     }
   },
+  created() {
+    console.log(111)
+  },
   computed: {
     SELECTEL_WEB() {
       return process.env.SELECTEL_WEB
@@ -144,10 +147,13 @@ export default {
   display: flex;
   flex-direction: column;
   border: 1px solid #eaeaea;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   margin-bottom: 0;
   overflow: hidden;
-  height: 500px;
+  height: auto;
+  bottom: 25px !important;
+  flex-grow: 1;
+  background-color: white;
   .userWrap {
     flex-shrink: 0;
     margin: 1.5rem 1.5rem 0 1.5rem;
