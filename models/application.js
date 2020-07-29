@@ -93,10 +93,65 @@ module.exports = (sequelize, DataTypes) => {
     const application = await Application.findByPk(iApplicationID, {
       include: [
         {
-          model: sequelize.models.application_object
+          model: sequelize.models.user,
+          attributes: {
+            exclude: ['sUserPassword', 'iUserKey', 'iUserAdmin']
+          }
         },
         {
-          model: sequelize.models.object
+          model: sequelize.models.application_object,
+          include: [
+            {
+              model: sequelize.models.object,
+              include: [
+                {
+                  model: sequelize.models.object_type
+                },
+                {
+                  model: sequelize.models.object_image
+                },
+                {
+                  model: sequelize.models.user,
+                  attributes: {
+                    exclude: ['sUserPassword', 'iUserKey', 'iUserAdmin']
+                  }
+                }
+              ]
+            },
+            {
+              model: sequelize.models.message
+            }
+          ]
+        },
+        {
+          model: sequelize.models.object,
+          include: [
+            {
+              model: sequelize.models.object_image
+            },
+            {
+              model: sequelize.models.user,
+              attributes: {
+                exclude: ['sUserPassword', 'iUserKey', 'iUserAdmin']
+              }
+            }
+          ]
+        },
+        {
+          model: sequelize.models.applicationObjectOption,
+          include: [
+            {
+              model: sequelize.models.object_option
+            }
+          ]
+        },
+        {
+          model: sequelize.models.applicationRoomOption,
+          include: [
+            {
+              model: sequelize.models.room_option
+            }
+          ]
         }
       ]
     })
@@ -255,6 +310,10 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   Application.list = async function({ iUserID }) {
+    const where = {}
+    if (iUserID) {
+      where.iUserID = iUserID
+    }
     const response = await Application.findAll({
       include: [
         {
@@ -267,6 +326,9 @@ module.exports = (sequelize, DataTypes) => {
                   model: sequelize.models.object_image
                 }
               ]
+            },
+            {
+              model: sequelize.models.message
             }
           ]
         },
@@ -290,9 +352,7 @@ module.exports = (sequelize, DataTypes) => {
           ]
         }
       ],
-      where: {
-        iUserID
-      },
+      where,
       order: [
         ['dDate', 'ASC'],
         ['iApplicationID', 'ASC'],

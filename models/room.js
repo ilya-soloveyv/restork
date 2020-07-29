@@ -86,8 +86,73 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   Room.getRoom = async function(iRoomID) {
-    const room = await Room.findByPk(iRoomID)
+    const room = await Room.findByPk(iRoomID, {
+      include: [
+        {
+          model: sequelize.models.object
+        },
+        {
+          model: sequelize.models.room_type
+        },
+        {
+          model: sequelize.models.room_room_option
+        },
+        {
+          model: sequelize.models.room_image
+        }
+      ]
+    })
     return room
+  }
+
+  Room.up = async function(room = {}) {
+    const iRoomID = room.iRoomID && Number(room.iRoomID) ? room.iRoomID : false
+    const iRoomTypeID =
+      room.iRoomTypeID && Number(room.iRoomTypeID) ? room.iRoomTypeID : false
+    const iRoomArea =
+      room.iRoomArea && Number(room.iRoomArea) ? room.iRoomArea : 0
+    const iRoomCount =
+      room.iRoomCount && Number(room.iRoomCount) ? room.iRoomCount : 0
+    const iRoomBed = room.iRoomBed && Number(room.iRoomBed) ? room.iRoomBed : 0
+    const iRoomPlace =
+      room.iRoomPlace && Number(room.iRoomPlace) ? room.iRoomPlace : 0
+    const iRoomPlaceDop =
+      room.iRoomPlaceDop && Number(room.iRoomPlaceDop) ? room.iRoomPlaceDop : 0
+    const tRoomDesc = room.tRoomDesc ? room.tRoomDesc : null
+    const iRoomActive = room.iRoomActive || false
+
+    if (iRoomID) {
+      const update = await Room.update(
+        {
+          iRoomTypeID,
+          iRoomArea,
+          iRoomCount,
+          iRoomBed,
+          iRoomPlace,
+          iRoomPlaceDop,
+          tRoomDesc,
+          iRoomActive
+        },
+        {
+          where: {
+            iRoomID
+          }
+        }
+      )
+      return update
+    } else {
+      const create = await Room.create({
+        iRoomTypeID,
+        iRoomArea,
+        iRoomCount,
+        iRoomBed,
+        iRoomPlace,
+        iRoomPlaceDop,
+        tRoomDesc,
+        iRoomActive
+      })
+      return create
+    }
   }
 
   return Room

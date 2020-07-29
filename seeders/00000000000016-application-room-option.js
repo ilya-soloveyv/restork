@@ -7,17 +7,17 @@ module.exports = {
       [
         {
           iApplicationRoomOptionID: 1,
-          iApplicationID: 1,
+          iApplicationID: 2,
           iRoomOptionID: 2
         },
         {
           iApplicationRoomOptionID: 2,
-          iApplicationID: 1,
+          iApplicationID: 2,
           iRoomOptionID: 4
         },
         {
           iApplicationRoomOptionID: 3,
-          iApplicationID: 1,
+          iApplicationID: 2,
           iRoomOptionID: 5
         }
       ],

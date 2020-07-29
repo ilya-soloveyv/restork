@@ -50,9 +50,6 @@
               <b-dropdown-item to="/">
                 К сайту
               </b-dropdown-item>
-              <b-dropdown-item to="/profile" active-class="active">
-                Профиль
-              </b-dropdown-item>
               <b-dropdown-item @click.prevent="$auth.logout()">
                 Выйти
               </b-dropdown-item>

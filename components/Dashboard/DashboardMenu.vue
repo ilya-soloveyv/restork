@@ -205,7 +205,7 @@
     @media (max-width: 991px) {
       flex-direction: row;
       border-radius: 0.5rem;
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.9);
       box-shadow: 0 0.5rem 1rem 1px rgba(0, 0, 0, 0.25);
     }
     li {
@@ -231,11 +231,21 @@
           padding: 1rem 0;
           align-items: center;
           justify-content: center;
+          width: 1px;
         }
         span {
           display: block;
           @media (max-width: 991px) {
-            display: none;
+            // display: none;
+            font-size: 10px;
+            order: 1;
+            text-align: center;
+            line-height: 11px;
+            height: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 0.5rem;
           }
         }
         svg {
@@ -260,6 +270,7 @@
           border-bottom: 1px solid #0063cc;
           @media (max-width: 991px) {
             background: none;
+            color: #007bff;
           }
           svg {
             stroke: white;

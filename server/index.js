@@ -1,3 +1,4 @@
+require('dotenv').config()
 const http = require('http')
 const { Nuxt, Builder } = require('nuxt')
 const express = require('express')
@@ -5,6 +6,7 @@ const SocketIO = require('socket.io')
 const consola = require('consola')
 
 const port = process.env.PORT || 3000
+const host = process.env.HOST || '0.0.0.0'
 const isProd = process.env.NODE_ENV === 'production'
 
 const app = express()
@@ -37,6 +39,9 @@ app.use('/api/room_option', require('./routes/room_option'))
 app.use('/api/room_type', require('./routes/room_type'))
 app.use('/api/application', require('./routes/application'))
 app.use('/api/application_object', require('./routes/application_object'))
+app.use('/api/room', require('./routes/room'))
+app.use('/api/message', require('./routes/message'))
+app.use('/api/b2p', require('./routes/b2p'))
 
 const nuxt = new Nuxt(config)
 
@@ -46,19 +51,29 @@ if (config.dev) {
 }
 app.use(nuxt.render)
 
-server.listen(port, 'localhost')
-consola.log('Server listening on localhost:' + port)
+server.listen(port, host)
+consola.log('Server listening on ' + host + ':' + port)
 
-const messages = []
 io.on('connection', (socket) => {
-  socket.on('last-messages', function(fn) {
-    consola.info('last-messages')
-    fn(messages.slice(-50))
-  })
-  socket.on('send-message', function(message) {
-    consola.info('send-message')
-    messages.push(message)
-    socket.broadcast.emit('new-message', message)
+  // socket.on('last-messages', function(fn) {
+  //   consola.info('last-messages')
+  //   // fn(messages.slice(-50))
+  // })
+  // socket.on('send-message', function(message) {
+  //   consola.info('send-message')
+  //   // messages.push(message)
+  //   socket.broadcast.emit('new-message', message)
+  // })
+  // socket.on('getMessage', function(message) {
+  //   consola.info('getMessage')
+  //   socket.broadcast.emit('new-message', message)
+  // })
+  socket.on('sendMessage', function(message, iApplicationObjectID) {
+    // consola.info('sendMessage')
+    // consola.success(message)
+    // consola.success(iApplicationObjectID)
+    // io.sockets.emit('newMessage', message)
+    socket.broadcast.emit('newMessage', message)
   })
 })
 

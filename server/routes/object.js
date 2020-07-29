@@ -327,7 +327,7 @@ router.post('/list', async (req, res, next) => {
 
 router.post('/item', async (req, res, next) => {
   const response = {}
-  response.object = await Object.getObject(req.body.id)
+  response.object = await Object.getObject(req.body.iObjectID)
   res.json(response)
 })
 

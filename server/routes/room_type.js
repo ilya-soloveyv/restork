@@ -3,6 +3,11 @@ const router = Router()
 
 const RoomType = require('../../models').room_type
 
+router.post('/list', async (req, res, next) => {
+  const response = await RoomType.getTypes()
+  res.json(response)
+})
+
 router.post('/get', async (req, res, next) => {
   const iRoomTypeID = req.body.id
   let response = null

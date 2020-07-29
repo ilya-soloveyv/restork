@@ -26,7 +26,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   )
   ObjectRoomOption.associate = function(models) {
-    // associations can be defined here
+    ObjectRoomOption.belongsTo(models.room_option, {
+      foreignKey: 'iRoomOptionID'
+    })
   }
 
   return ObjectRoomOption

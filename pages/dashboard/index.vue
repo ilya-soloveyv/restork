@@ -169,9 +169,15 @@ export default {
       return applicationObjectCount
     }
   },
-  async asyncData({ store, $axios, params }) {
-    await store.dispatch('application/GET_LIST')
-    await store.dispatch('object/GET_LIST')
+  async asyncData({ store, $axios, params, $auth }) {
+    const iUserID = $auth.$state.user.iUserID
+    await store.dispatch('application/GET_LIST', { iUserID })
+    await store.dispatch('object/GET_LIST', { iUserID })
+  },
+  mounted() {
+    if (this.$route.query.redirect === 'new-application') {
+      this.$router.push('/dashboard/application/add')
+    }
   },
   methods: {
     declOfNum(n, a) {

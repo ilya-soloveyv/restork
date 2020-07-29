@@ -26,7 +26,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   )
   ObjectObjectOption.associate = function(models) {
-    // associations can be defined here
+    ObjectObjectOption.belongsTo(models.object_option, {
+      foreignKey: 'iObjectOptionID'
+    })
   }
 
   return ObjectObjectOption

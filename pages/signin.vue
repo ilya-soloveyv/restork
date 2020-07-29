@@ -13,6 +13,7 @@
             ref="sUserPhone"
             v-model="sUserPhone"
             :class="{ 'is-invalid': error && error.ref === 'sUserPhone' }"
+            @keyup.native="validatePhone"
             mask="+7 (###) ###-##-##"
             type="text"
             class="form-control"
@@ -41,9 +42,16 @@
             {{ error.message }}
           </b-form-invalid-feedback>
         </b-form-group>
-        <b-button :disabled="$auth.busy" type="submit" variant="primary">
-          Войти
-        </b-button>
+        <b-row>
+          <b-col>
+            <b-button :disabled="$auth.busy" type="submit" variant="primary">
+              Войти
+            </b-button>
+          </b-col>
+          <b-col cols="auto" align-self="center">
+            <nuxt-link :to="link">Регистрация</nuxt-link>
+          </b-col>
+        </b-row>
         <!-- <small class="float-right pt-2 pb-2">
           <nuxt-link to="/recovery">Восстановить пароль</nuxt-link>
         </small> -->
@@ -70,6 +78,16 @@ export default {
       sUserPassword: ''
     }
   },
+  computed: {
+    link() {
+      let link = '/signup'
+      const redirect = this.$route.query.redirect
+      if (redirect) {
+        link = link + '?redirect=' + redirect
+      }
+      return link
+    }
+  },
   methods: {
     login() {
       this.$set(this, 'error', null)
@@ -84,6 +102,14 @@ export default {
           this.$set(this, 'error', e.response.data.error)
           this.$refs[this.error.ref].$el.focus()
         })
+    },
+    validatePhone(e) {
+      if (
+        this.sUserPhone[0] &&
+        (this.sUserPhone[0] === '8' || this.sUserPhone[0] === '7')
+      ) {
+        this.sUserPhone = ''
+      }
     }
   }
 }

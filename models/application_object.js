@@ -69,6 +69,9 @@ module.exports = (sequelize, DataTypes) => {
     ApplicationObject.belongsTo(models.application, {
       foreignKey: 'iApplicationID'
     })
+    ApplicationObject.hasMany(models.message, {
+      foreignKey: 'iApplicationObjectID'
+    })
   }
 
   ApplicationObject.get = async function({ iApplicationObjectID }) {

@@ -62,20 +62,35 @@ const mutations = {
   },
   UPDATE_tObjectDesc(state, { tObjectDesc }) {
     state.item.tObjectDesc = tObjectDesc
+  },
+  SET_OBJECT_iObjectArea(state, iObjectArea) {
+    state.item.iObjectArea = Number(iObjectArea)
+  },
+  SET_OBJECT_iObjectRoomCount(state, iObjectRoomCount) {
+    state.item.iObjectRoomCount = Number(iObjectRoomCount)
+  },
+  SET_OBJECT_iObjectBed(state, iObjectBed) {
+    state.item.iObjectBed = Number(iObjectBed)
+  },
+  SET_OBJECT_iObjectPlace(state, iObjectPlace) {
+    state.item.iObjectPlace = Number(iObjectPlace)
+  },
+  SET_OBJECT_iObjectPlaceDop(state, iObjectPlaceDop) {
+    state.item.iObjectPlaceDop = Number(iObjectPlaceDop)
   }
 }
 
 const actions = {
-  async GET_LIST({ state, commit, rootState }) {
-    const iUserID = rootState.auth.user.iUserID
+  async GET_LIST({ state, commit, rootState }, { iUserID = false } = {}) {
+    iUserID = iUserID || rootState.auth.user.iUserID
     const { objects } = await this.$axios.$post('/api/object/list', { iUserID })
     commit('SET_LIST', objects)
   },
   SET_ITEM({ commit }, params) {
     commit('SET_ITEM', params)
   },
-  async GET_ITEM({ commit }, params) {
-    let { object } = await this.$axios.$post('/api/object/item', params)
+  async GET_ITEM({ commit }, { iObjectID }) {
+    let { object } = await this.$axios.$post('/api/object/item', { iObjectID })
     object = object || {}
     commit('SET_ITEM', object)
   },
@@ -120,6 +135,21 @@ const actions = {
   },
   UPDATE_tObjectDesc({ state, commit }, { tObjectDesc }) {
     commit('UPDATE_tObjectDesc', { tObjectDesc })
+  },
+  SET_OBJECT_iObjectArea({ state, commit }, iObjectArea) {
+    commit('SET_OBJECT_iObjectArea', iObjectArea)
+  },
+  SET_OBJECT_iObjectRoomCount({ state, commit }, iObjectRoomCount) {
+    commit('SET_OBJECT_iObjectRoomCount', iObjectRoomCount)
+  },
+  SET_OBJECT_iObjectBed({ state, commit }, iObjectBed) {
+    commit('SET_OBJECT_iObjectBed', iObjectBed)
+  },
+  SET_OBJECT_iObjectPlace({ state, commit }, iObjectPlace) {
+    commit('SET_OBJECT_iObjectPlace', iObjectPlace)
+  },
+  SET_OBJECT_iObjectPlaceDop({ state, commit }, iObjectPlaceDop) {
+    commit('SET_OBJECT_iObjectPlaceDop', iObjectPlaceDop)
   }
 }
 

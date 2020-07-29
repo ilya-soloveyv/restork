@@ -26,10 +26,8 @@ router.post('/list', async (req, res, next) => {
 })
 
 router.post('/get', async (req, res, next) => {
-  const response = {}
-
-  response.application = await Application.findByPk(req.body.iApplicationID)
-
+  const iApplicationID = req.body.iApplicationID
+  const response = await Application.get({ iApplicationID })
   res.json(response)
 })
 

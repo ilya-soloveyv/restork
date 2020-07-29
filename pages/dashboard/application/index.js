@@ -1,14 +1,14 @@
-import ListItem from '../../../components/Dashboard/application/ListItem'
+import ApplicationListItem from '@/components/Dashboard/application/ApplicationListItem'
 
 export default {
   middleware: 'auth',
-  layout: 'dashboard',
+  layout: 'dashboardV2',
   components: {
-    ListItem
+    ApplicationListItem
   },
   head() {
     return {
-      title: 'Application'
+      title: 'История поездок'
     }
   },
   computed: {
@@ -17,6 +17,8 @@ export default {
     }
   },
   async asyncData({ store, $axios, params }) {
-    await store.dispatch('application/GET_LIST')
+    await store.dispatch('application/GET_LIST', {
+      iUserID: store.state.auth.user.iUserID
+    })
   }
 }

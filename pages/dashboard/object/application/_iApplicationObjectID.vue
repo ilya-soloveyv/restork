@@ -64,11 +64,17 @@
         </b-button>
       </div>
     </div>
+    <div class="row">
+      <div class="col">
+        <Message :applicationObject="applicationObject" />
+      </div>
+    </div>
     <!-- <pre>{{ applicationObject }}</pre> -->
   </div>
 </template>
 
 <script>
+import Message from '~/components/Message'
 import moment from 'moment'
 moment.locale('ru')
 export default {
@@ -79,8 +85,8 @@ export default {
       title: 'Object Application'
     }
   },
-  data() {
-    return {}
+  components: {
+    Message
   },
   computed: {
     applicationObject({ $store }) {
@@ -126,12 +132,13 @@ export default {
           'DD MMMM YYYY'
         )
       )
-      // {{  }} -
-      // {{ applicationObject.application.dApplicationDateTo }}
     }
   },
   async asyncData({ store, $axios, params }) {
     await store.dispatch('application_object/GET_ITEM', {
+      iApplicationObjectID: params.iApplicationObjectID
+    })
+    await store.dispatch('message/GET_LIST', {
       iApplicationObjectID: params.iApplicationObjectID
     })
   },
@@ -152,6 +159,9 @@ export default {
     b {
       font-weight: 500;
     }
+  }
+  /deep/ #chat {
+    margin-top: 1rem;
   }
 }
 </style>

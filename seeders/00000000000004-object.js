@@ -45,7 +45,7 @@ module.exports = {
         },
         {
           iObjectID: 3,
-          iUserID: 5,
+          iUserID: 2,
           iObjectTypeID: 7,
           sObjectTitle: 'Роза Ски Инн',
           iObjectArea: 150,

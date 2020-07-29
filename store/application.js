@@ -20,8 +20,7 @@ const actions = {
     const res = await this.$axios.$post('/api/application/add', params)
     return res
   },
-  async GET_LIST({ state, commit, rootState }, params) {
-    const iUserID = rootState.auth.user.iUserID
+  async GET_LIST({ state, commit, rootState }, { iUserID = false } = {}) {
     const { applications } = await this.$axios.$post('/api/application/list', {
       iUserID
     })

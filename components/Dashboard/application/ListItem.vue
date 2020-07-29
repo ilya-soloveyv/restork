@@ -173,6 +173,9 @@ export default {
     // background: red;
     padding: 1rem 0 0;
     font-size: 16px;
+    &:focus {
+      outline: none;
+    }
     @media (max-width: 767px) {
       flex-direction: column;
     }

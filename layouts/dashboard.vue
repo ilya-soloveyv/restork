@@ -1,14 +1,14 @@
 <template>
   <div class="main mainDashboard">
     <main>
-      <TopNav />
-      <div id="dashboard">
+      <div class="topNavBg">
         <b-container>
-          <b-row>
-            <b-col cols="12">
-              <ConfirmPhone v-if="$auth.user.sUserPhoneKod" />
-            </b-col>
-          </b-row>
+          <TopNav />
+        </b-container>
+      </div>
+      <ConfirmPhone v-if="$auth.user.sUserPhoneKod" />
+      <div id="dashboard" v-else>
+        <b-container>
           <b-row>
             <b-col xl="4" lg="4" md="6" sm="12">
               <!-- <b-col class="d-none d-lg-block"> -->
@@ -49,6 +49,7 @@ export default {
 #dashboard {
   padding-top: 2rem;
   padding-bottom: 2rem;
+  margin-bottom: 7rem;
   @media (max-width: 991px) {
     padding-bottom: 0;
   }
@@ -67,7 +68,7 @@ export default {
 }
 .main {
   @media (max-width: 991px) {
-    padding-bottom: 6rem;
+    // padding-bottom: 6rem;
   }
 }
 </style>
