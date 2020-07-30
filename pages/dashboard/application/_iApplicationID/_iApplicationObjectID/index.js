@@ -73,6 +73,18 @@ export default {
     },
     dDate() {
       return moment(this.applicationObject.dDate).fromNow()
+    },
+    user() {
+      // Данные собеседника (не моя!)
+      let user = {}
+      const userObject = this.applicationObject.object.user
+      const userApplication = this.applicationObject.application.user
+      if (this.iUserID === userObject.iUserID) {
+        user = userApplication
+      } else {
+        user = userObject
+      }
+      return user
     }
   },
   async asyncData({ store, $axios, params }) {

@@ -89,9 +89,7 @@
         </ul>
         <div class="info">
           <div class="line1">
-            <div class="id">
-              id {{ applicationObject.iApplicationObjectID }}
-            </div>
+            <div class="id">№ {{ applicationObject.iApplicationObjectID }}</div>
             <div class="stars">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -179,6 +177,54 @@
           </g>
         </svg>
         100 метров пешком до моря
+      </div>
+      <div class="hideDataApplication">
+        <div class="cost">
+          <label>Предложение отеля:</label>
+          <div class="value">
+            <span>{{ applicationObject.iObjectPrice }} ₽</span>
+            {{ applicationObject.iObjectPrice }} ₽
+          </div>
+          <div class="desc">За весь период проживания</div>
+        </div>
+        <div class="dates">
+          <label>Проживание:</label>
+          <span>{{ dates }}</span>
+        </div>
+        <div class="guest">
+          <label>Гостей:</label>
+          <span>{{ sApplicationAdultAndChildren }}</span>
+        </div>
+        <div class="time">
+          <label>Предложение сделано:</label>
+          <div class="v">
+            <svg
+              id="clock"
+              xmlns="http://www.w3.org/2000/svg"
+              width="14.5"
+              height="14.5"
+              viewBox="0 0 14.5 14.5"
+            >
+              <path
+                id="Контур_61"
+                data-name="Контур 61"
+                d="M7.25,0A7.25,7.25,0,1,0,14.5,7.25,7.258,7.258,0,0,0,7.25,0Zm0,13.594A6.344,6.344,0,1,1,13.594,7.25,6.351,6.351,0,0,1,7.25,13.594Z"
+                fill="#00e234"
+              />
+              <path
+                id="Контур_62"
+                data-name="Контур 62"
+                d="M208.7,83.118h-.906v4.719l2.851,2.851.641-.641L208.7,87.462Z"
+                transform="translate(-200.997 -80.399)"
+                fill="#00e234"
+              />
+            </svg>
+            <span>{{ dDate }}</span>
+          </div>
+        </div>
+        <b-button class="noInterest" variant="light" size="lg" block>
+          Не интересно
+        </b-button>
       </div>
       <ul class="params">
         <li>
@@ -725,7 +771,28 @@
         sticky-offset="{ top: 0, bottom: 0 }"
         class="controlBottom"
       >
-        controlBottom
+        <!-- {{ user }} -->
+        <div class="wrapApp">
+          <div class="ico">
+            <img
+              v-if="user.sUserAvatar"
+              :src="SELECTEL_WEB + '/user/preview/' + user.sUserAvatar"
+            />
+          </div>
+          <div class="label">Предложение отеля:</div>
+          <div class="cost">{{ applicationObject.iObjectPrice }} ₽</div>
+          <div class="desc">За весь период проживания</div>
+        </div>
+        <div class="wrapNoInterest">
+          <b-button class="noInterest" variant="light" size="lg" block>
+            Не интересно
+          </b-button>
+        </div>
+        <div class="wrapToBook">
+          <b-button class="toBook" variant="primary" size="lg" block>
+            Забронировать
+          </b-button>
+        </div>
       </div>
     </div>
     <div class="wrapChat">
