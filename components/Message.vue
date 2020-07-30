@@ -69,9 +69,6 @@ export default {
       tMessageText: ''
     }
   },
-  created() {
-    console.log(111)
-  },
   computed: {
     SELECTEL_WEB() {
       return process.env.SELECTEL_WEB
@@ -95,6 +92,11 @@ export default {
       }
       return user
     }
+  },
+  created() {
+    this.$store.dispatch('message/GET_LIST', {
+      iApplicationObjectID: this.applicationObject.iApplicationObjectID
+    })
   },
   mounted() {
     const _this = this
