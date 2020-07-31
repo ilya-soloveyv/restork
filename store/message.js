@@ -16,7 +16,7 @@ const mutations = {
 
 const actions = {
   async GET_LIST({ state, commit, rootState }, { iApplicationObjectID }) {
-    console.log('iApplicationObjectID', iApplicationObjectID)
+    // console.log('iApplicationObjectID', iApplicationObjectID)
     const messages = await this.$axios.$post('/api/message/get', {
       iApplicationObjectID
     })

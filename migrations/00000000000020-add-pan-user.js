@@ -11,4 +11,4 @@ module.exports = {
   down: (queryInterface, Sequelize) => {
     return queryInterface.removeColumn('user', 'B2PPan')
   }
-};
+}
