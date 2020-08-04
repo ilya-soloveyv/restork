@@ -2,6 +2,7 @@ import moment from 'moment'
 moment.locale('ru')
 
 const state = () => ({
+  list: [],
   item: {}
 })
 
@@ -77,6 +78,9 @@ const mutations = {
   SET_SELECTED(state) {
     state.item.iUserSelected = true
     state.item.dUserSelectedDate = moment()
+  },
+  SET_LIST(state, applicationObject) {
+    state.list = applicationObject
   }
 }
 
@@ -105,6 +109,13 @@ const actions = {
   async SET_SELECTED({ state, commit, dispatch }) {
     commit('SET_SELECTED')
     await dispatch('UPDATE')
+  },
+  async GET_LIST({ state, commit }, params) {
+    const applicationObject = await this.$axios.$post(
+      '/api/application_object/list',
+      params
+    )
+    commit('SET_LIST', applicationObject)
   }
 }
 

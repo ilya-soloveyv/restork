@@ -162,7 +162,7 @@ export default {
         }
       })
       if (click) {
-        this.$router.push('/dashboard/object/' + this.object.iObjectID)
+        this.$router.push('/dashboard/object/request/' + this.object.iObjectID)
       }
     }
   }

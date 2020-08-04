@@ -9,9 +9,7 @@
       <ConfirmPhone v-if="$auth.user.sUserPhoneKod" />
       <div id="dashboard" v-else>
         <b-container>
-          <div class="data">
-            <nuxt />
-          </div>
+          <nuxt />
         </b-container>
       </div>
     </main>
@@ -38,28 +36,9 @@ export default {
 <style lang="scss" scoped>
 #dashboard {
   flex-grow: 1;
-  // padding-top: 2rem;
-  // padding-bottom: 2rem;
-  // margin-bottom: 7rem;
-  // @media (max-width: 991px) {
-  //   padding-bottom: 0;
-  // }
-  .data {
-    // padding: 2rem;
-    // border-radius: 1rem;
-    // box-shadow: 0 0 1rem 1px rgba(0, 0, 0, 0.15);
-    // background: #fff;
-    // @media (max-width: 991px) {
-    //   border-radius: 0;
-    //   padding: 0;
-    //   box-shadow: none;
-    //   background: none;
-    // }
-  }
-}
-.main {
-  @media (max-width: 991px) {
-    // padding-bottom: 6rem;
+  display: flex;
+  .container {
+    flex-grow: 1;
   }
 }
 </style>

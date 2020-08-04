@@ -150,6 +150,43 @@ module.exports = (sequelize, DataTypes) => {
             }
           ]
         }
+        // {
+        //   model: sequelize.models.application_object,
+        //   include: [
+        //     {
+        //       model: sequelize.models.application,
+        //       include: [
+        //         {
+        //           model: sequelize.models.applicationObjectOption,
+        //           include: [
+        //             {
+        //               model: sequelize.models.object_option
+        //             }
+        //           ]
+        //         },
+        //         {
+        //           model: sequelize.models.applicationRoomOption,
+        //           include: [
+        //             {
+        //               model: sequelize.models.room_option
+        //             }
+        //           ]
+        //         },
+        //         {
+        //           model: sequelize.models.user,
+        //           attributes: {
+        //             exclude: [
+        //               'sUserPhoneKod',
+        //               'sUserPassword',
+        //               'iUserKey',
+        //               'iUserAdmin'
+        //             ]
+        //           }
+        //         }
+        //       ]
+        //     }
+        //   ]
+        // }
       ],
       order: [[sequelize.models.room, 'iRoomID', 'ASC']]
     })
