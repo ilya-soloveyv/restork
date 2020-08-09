@@ -45,7 +45,6 @@ export default {
   methods: {
     useStatus(index, id) {
       this.activeIndex = index
-      console.log(id)
     }
   }
 }
@@ -69,6 +68,10 @@ export default {
     /deep/ button.dropdown-toggle {
       font-size: 16px;
       line-height: 58px;
+      @media (max-width: 767px) {
+        font-size: 14px;
+        line-height: 38px;
+      }
     }
   }
   /deep/ button.dropdown-toggle {

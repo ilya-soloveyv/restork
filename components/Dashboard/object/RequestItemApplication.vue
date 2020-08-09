@@ -53,8 +53,10 @@
       <div class="options">
         <div class="label">Дополнительные удобства:</div>
         <div class="value">
-          Бассейн, Зона мангала, Кондиционер, Собственая кухня
-          <span>+7</span>
+          {{ options.value }}
+          <span v-if="!showAllOptions" @click="showMoreOptions">
+            +{{ options.number }}
+          </span>
         </div>
       </div>
       <div class="cancel">
@@ -71,6 +73,7 @@
           </template>
         </div>
       </div>
+      <!-- <pre>{{ options }}</pre> -->
       <!-- <pre>{{ application }}</pre> -->
     </div>
   </div>
@@ -84,6 +87,11 @@ export default {
     application: {
       type: Object,
       default: () => {}
+    }
+  },
+  data() {
+    return {
+      showAllOptions: false
     }
   },
   computed: {
@@ -108,6 +116,36 @@ export default {
         ? new Intl.NumberFormat('ru-RU').format(this.application.iObjectPrice) +
             ' ₽'
         : false
+    },
+    options() {
+      const objectOptions = this.application.application.applicationObjectOptions.map(
+        (x) => {
+          return x.object_option.sObjectOptionTitle
+        }
+      )
+      const roomOptions = this.application.application.applicationRoomOptions.map(
+        (x) => {
+          return x.room_option.sRoomOptionTitle
+        }
+      )
+      const allOptions = objectOptions.concat(roomOptions)
+      const showOptions = allOptions.slice(0, 4)
+      const number = allOptions.length - showOptions.length
+      let value = ''
+      if (this.showAllOptions) {
+        value = allOptions.join(', ')
+      } else {
+        value = showOptions.join(', ')
+      }
+      return {
+        number,
+        value
+      }
+    }
+  },
+  methods: {
+    showMoreOptions() {
+      this.showAllOptions = true
     }
   }
 }
@@ -125,6 +163,10 @@ export default {
   @media (max-width: 1199px) {
     grid-template-columns: 150px 1fr;
   }
+  @media (max-width: 767px) {
+    grid-template-rows: 1fr auto;
+    grid-template-columns: 1fr;
+  }
   &:hover {
     border-color: rgba($color: #077bff, $alpha: 0.5);
     box-shadow: 0 3px 15px rgba($color: black, $alpha: 0.16);
@@ -140,9 +182,19 @@ export default {
       grid-template-rows: 100px 48px 1fr;
       grid-gap: 10px;
     }
+    @media (max-width: 767px) {
+      padding: 20px;
+      grid-template-columns: 100px 1fr;
+      grid-template-rows: 1fr auto;
+      grid-gap: 10px;
+    }
     .ico {
       position: relative;
       cursor: pointer;
+      @media (max-width: 767px) {
+        grid-row: 1/3;
+        grid-column: 1/2;
+      }
       img {
         width: 100%;
         height: 100%;
@@ -187,12 +239,23 @@ export default {
       line-height: 24px;
       font-weight: normal;
       overflow: hidden;
+      @media (max-width: 767px) {
+        grid-row: 1/2;
+        grid-column: 2/3;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
     }
     .rating {
       display: flex;
       justify-content: flex-start;
       align-items: flex-end;
       font-size: 14px;
+      @media (max-width: 767px) {
+        grid-row: 2/3;
+        grid-column: 2/3;
+      }
       svg {
         fill: #ffc107;
         margin-right: 10px;
@@ -213,6 +276,9 @@ export default {
     grid-row-gap: 20px;
     @media (max-width: 1199px) {
       margin: 25px;
+    }
+    @media (max-width: 767px) {
+      margin: 20px;
     }
     .label {
       display: block;
@@ -258,16 +324,26 @@ export default {
       // background-color: orchid;
       grid-row: 3/4;
       grid-column: 1/6;
+      span {
+        background-color: rgba($color: #077bff, $alpha: 0.2);
+        color: white;
+        padding: 0 10px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
     }
     .cancel {
       // background-color: pink;
       grid-row: 4/5;
       grid-column: 1/3;
-      font-size: 12px;
+      font-size: 14px;
       line-height: 20px;
       display: flex;
       justify-content: flex-start;
       align-items: flex-end;
+      @media (max-width: 767px) {
+        grid-column: 1/4;
+      }
       a {
         color: #818181;
         text-decoration: underline;
@@ -286,10 +362,11 @@ export default {
       align-items: flex-end;
       .label {
         text-align: right;
+        margin-bottom: 10px;
       }
       .value {
         font-size: 30px;
-        line-height: 38px;
+        line-height: 30px;
         font-weight: bold;
         display: flex;
         align-items: flex-end;

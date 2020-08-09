@@ -72,6 +72,25 @@
     <div class="button">
       <dropdown :items="status" />
     </div>
+    <div :class="{ toggleMore: more }" class="wrapMore">
+      <div @click="toggleMore" class="more">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#ffffff"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="bevel"
+        >
+          <circle cx="12" cy="12" r="1" />
+          <circle cx="19" cy="12" r="1" />
+          <circle cx="5" cy="12" r="1" />
+        </svg>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -110,7 +129,8 @@ export default {
           title: 'Занят',
           desc: 'Занят'
         }
-      ]
+      ],
+      more: false
     }
   },
   computed: {
@@ -122,14 +142,18 @@ export default {
       params.push(this.object.iObjectBed + ' кров.')
       return params.join(' | ')
     }
+  },
+  methods: {
+    toggleMore() {
+      this.more = !this.more
+      this.$emit('showMore', this.more)
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .objectData {
-  grid-column: 1/2;
-  grid-row: 2/3;
   border-radius: 0 0 3px 3px;
   border: 1px solid #eaeaea;
   border-top: none;
@@ -151,6 +175,10 @@ export default {
     // background-color: green;
     font-size: 16px;
     line-height: 24px;
+    @media (max-width: 767px) {
+      font-size: 14px;
+      line-height: 20px;
+    }
   }
   .location {
     grid-column: 1/4;
@@ -216,7 +244,32 @@ export default {
     border-top: 1px solid #f0f0f0;
     padding-top: 25px;
     margin-top: 5px;
+    @media (max-width: 767px) {
+      font-size: 14px;
+    }
     // background-color: rosybrown;
+  }
+  .wrapMore {
+    display: none;
+    &.toggleMore {
+      .more {
+        background-color: white;
+        border: 1px solid #077bff;
+        svg {
+          stroke: #077bff;
+        }
+      }
+    }
+    .more {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: rgba($color: #077bff, $alpha: 1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
   }
 }
 </style>
