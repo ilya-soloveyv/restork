@@ -226,7 +226,10 @@
             </button>
           </div>
           <div class="wrapGoToMap">
-            <button class="goToMap">
+            <nuxt-link
+              :to="'/dashboard/application/map/' + application.iApplicationID"
+              class="goToMap"
+            >
               <svg
                 id="geo"
                 xmlns="http://www.w3.org/2000/svg"
@@ -248,7 +251,7 @@
                 />
               </svg>
               <span>Показать на карте</span>
-            </button>
+            </nuxt-link>
           </div>
         </div>
       </b-col>

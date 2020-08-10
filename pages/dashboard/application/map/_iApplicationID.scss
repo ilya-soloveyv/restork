@@ -1,0 +1,17 @@
+.map {
+  flex-grow: 1;
+  // background-color: yellowgreen;
+  .ymap-container {
+    height: 100%;
+    .map {
+      height: 500px;
+    }
+  }
+}
+.balloonCard {
+  width: 300px;
+  height: 400px;
+}
+.balloonContent {
+  background-color: yellowgreen;
+}
