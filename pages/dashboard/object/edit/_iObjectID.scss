@@ -87,6 +87,67 @@
       grid-template-rows: 1fr;
       grid-template-columns: 1fr 1fr 1fr 1fr;
     }
+    h2 {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 24px;
+      margin: 90px 0 40px;
+    }
+    ul.optionsCheckboxList {
+      display: grid;
+      grid-template-rows: 1fr;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      li {
+        line-height: 20px;
+        .custom-control {
+          line-height: 20px;
+          min-height: 20px;
+          margin: 0;
+          padding-left: 30px;
+          /deep/ .custom-control-input {
+            &:checked {
+              & ~ .custom-control-label::before {
+                background-color: #efefef;
+                border: none;
+              }
+              & ~ .custom-control-label::after {
+                background-image: url('~assets/images/check.svg');
+              }
+            }
+            &:active {
+              & ~ .custom-control-label::before {
+                background: none;
+              }
+            }
+          }
+          /deep/ .custom-control-label {
+            font-size: 14px;
+            &::before {
+              box-shadow: none;
+              border-radius: 5px;
+              width: 20px;
+              height: 20px;
+              top: 0;
+              left: -30px;
+              border: 1px solid #dbdbdb;
+            }
+            &::after {
+              width: 20px;
+              height: 20px;
+              top: 0;
+              left: -30px;
+            }
+          }
+        }
+      }
+    }
+    #map {
+      box-shadow: none;
+    }
   }
   .wrapStatusTop {
     display: none;
