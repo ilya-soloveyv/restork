@@ -32,7 +32,8 @@ module.exports = {
   plugins: [
     { src: '~/plugins/datepicker', ssr: false },
     { src: '~/plugins/v-autocomplete', ssr: false },
-    { src: '~/plugins/vue-sticky-directive', ssr: false }
+    { src: '~/plugins/vue-sticky-directive', ssr: false },
+    { src: '~/plugins/vue-js-grid', ssr: false }
   ],
   buildModules: ['@nuxtjs/eslint-module'],
   modules: [

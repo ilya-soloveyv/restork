@@ -176,11 +176,140 @@
         </client-only>
       </div>
       <h2>Основные места рядом</h2>
+      <div class="places">
+        <div class="item">
+          <div class="form">
+            <div class="form-group-wrap form-group-wrap-line2">
+              <b-form-group
+                id="label-sObjectTypeTitle"
+                label="Место"
+                label-for="input-sObjectTypeTitle"
+              >
+                <b-form-input
+                  id="input-sObjectTypeTitle"
+                  type="text"
+                  value="Море"
+                  required
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group
+                id="label-iObjectRoomCount"
+                label="Название"
+                label-for="input-iObjectRoomCount"
+              >
+                <b-form-input
+                  id="input-iObjectRoomCount"
+                  type="text"
+                  value="Пешком"
+                  required
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group
+                id="label-iObjectBed"
+                label="Расстояние"
+                label-for="input-iObjectBed"
+              >
+                <b-form-input
+                  id="input-iObjectBed"
+                  type="text"
+                  value="100 м"
+                  required
+                ></b-form-input>
+              </b-form-group>
+            </div>
+          </div>
+          <div class="remove">
+            <a href="">- Удалить</a>
+          </div>
+        </div>
+        <div class="item">
+          <div class="form">
+            <div class="form-group-wrap form-group-wrap-line2">
+              <b-form-group
+                id="label-sObjectTypeTitle"
+                label="Место"
+                label-for="input-sObjectTypeTitle"
+              >
+                <b-form-input
+                  id="input-sObjectTypeTitle"
+                  type="text"
+                  value="Море"
+                  required
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group
+                id="label-iObjectRoomCount"
+                label="Название"
+                label-for="input-iObjectRoomCount"
+              >
+                <b-form-input
+                  id="input-iObjectRoomCount"
+                  type="text"
+                  value="Пешком"
+                  required
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group
+                id="label-iObjectBed"
+                label="Расстояние"
+                label-for="input-iObjectBed"
+              >
+                <b-form-input
+                  id="input-iObjectBed"
+                  type="text"
+                  value="100 м"
+                  required
+                ></b-form-input>
+              </b-form-group>
+            </div>
+          </div>
+          <div class="remove">
+            <a href="">- Удалить</a>
+          </div>
+        </div>
+        <b-button>+ Добавить</b-button>
+      </div>
+      <h2>Фотографии</h2>
+      <grid
+        :draggable="true"
+        :sortable="true"
+        :items="object.object_images"
+        :height="150"
+        :width="150"
+        class="images"
+      >
+        <template slot="cell" scope="props">
+          <div class="item">
+            <!-- <div>{{ props.item }}</div> -->
+            <div class="num">
+              <template v-if="props.sort === 0">
+                Обложка
+              </template>
+              <template v-else>
+                {{ props.sort + 1 }}
+              </template>
+            </div>
+            <img
+              :src="
+                SELECTEL_WEB +
+                  '/object/' +
+                  props.item.iObjectID +
+                  '/preview/' +
+                  props.item.sObjectImage
+              "
+              alt=""
+            />
+          </div>
+        </template>
+      </grid>
+      <div class="uploadImage">
+        <span>Выберете файл</span> или перетащите его сюда
+      </div>
       <!-- <pre>{{ objectOptions }}</pre>
       <pre>{{ roomOptions }}</pre>
       <pre>{{ objectObjectOptionsArray }}</pre>
       <pre>{{ objectRoomOptionsArray }}</pre> -->
-      <pre>{{ object }}</pre>
+      <!-- <pre>{{ object }}</pre> -->
       <!-- <p v-for="i in 10" :key="i">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium,
         quos accusamus! Nostrum omnis autem exercitationem! Incidunt

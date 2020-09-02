@@ -11,6 +11,9 @@ export default {
     }
   },
   computed: {
+    SELECTEL_WEB() {
+      return process.env.SELECTEL_WEB
+    },
     object({ $store }) {
       return $store.state.object.item
     },
