@@ -97,10 +97,20 @@ module.exports = (sequelize, DataTypes) => {
                 model: sequelize.models.object_image
               },
               {
-                model: sequelize.models.object_object_option
+                model: sequelize.models.object_object_option,
+                include: [
+                  {
+                    model: sequelize.models.object_option
+                  }
+                ]
               },
               {
-                model: sequelize.models.object_room_option
+                model: sequelize.models.object_room_option,
+                include: [
+                  {
+                    model: sequelize.models.room_option
+                  }
+                ]
               },
               {
                 model: sequelize.models.object_type
@@ -238,6 +248,49 @@ module.exports = (sequelize, DataTypes) => {
       iApplicationID
     })
     return update
+  }
+
+  ApplicationObject.list = async function({ iObjectID } = {}) {
+    const applicationObject = await ApplicationObject.findAll({
+      where: {
+        iObjectID
+      },
+      include: [
+        {
+          model: sequelize.models.application,
+          include: [
+            {
+              model: sequelize.models.applicationObjectOption,
+              include: [
+                {
+                  model: sequelize.models.object_option
+                }
+              ]
+            },
+            {
+              model: sequelize.models.applicationRoomOption,
+              include: [
+                {
+                  model: sequelize.models.room_option
+                }
+              ]
+            },
+            {
+              model: sequelize.models.user,
+              attributes: {
+                exclude: [
+                  'sUserPhoneKod',
+                  'sUserPassword',
+                  'iUserKey',
+                  'iUserAdmin'
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    })
+    return applicationObject
   }
 
   return ApplicationObject

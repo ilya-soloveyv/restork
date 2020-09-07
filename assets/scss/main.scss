@@ -32,6 +32,9 @@ h1 {
     font-size: 16px;
     font-weight: bold;
     padding: 1rem 2rem;
+    @media (max-width: 767px) {
+      font-size: 14px;
+    }
   }
   &.btn-light {
     background-color: white;
@@ -58,4 +61,54 @@ h1 {
 .topNavBg {
   // background-color: white;
   // box-shadow: 0 8px 14.72px 1.28px rgba(0, 0, 0, 0.3);
+}
+
+
+
+.form-group-wrap {
+  margin-bottom: 25px;
+  border-radius: 8px;
+  border: 1px solid #eaeaea;
+  // border: 1px solid red;
+  padding: 10px 5px;
+  display: grid;
+  // grid-gap: 1px;
+  // background-color: #f0f0f0;
+  .form-group {
+    margin: 0;
+    padding: 10px;
+    border-left: 1px solid #f0f0f0;
+    &:first-child {
+      border-left: none;
+    }
+    label {
+      // background-color: white;
+      margin: 0;
+      color: #818181;
+      font-size: 14px;
+      padding: 0;
+    }
+    .bv-no-focus-ring {
+      display: flex;
+      input.form-control {
+        // background-color: red;
+        border-radius: 0;
+        border: none;
+        padding: 0;
+        height: auto;
+        font-size: 16px;
+        font-weight: 600;
+        box-shadow: none;
+      }
+      textarea.form-control {
+        // background-color: red;
+        border-radius: 0;
+        border: none;
+        padding: 0;
+        height: auto;
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+  }
 }

@@ -23,4 +23,9 @@ router.post('/update', async (req, res, next) => {
   res.json(response)
 })
 
+router.post('/list', async (req, res, next) => {
+  const response = await ApplicationObject.list(req.body)
+  res.json(response)
+})
+
 module.exports = router

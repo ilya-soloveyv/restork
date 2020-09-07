@@ -8,24 +8,19 @@
       </div>
       <ConfirmPhone v-if="$auth.user.sUserPhoneKod" />
       <div id="dashboard" v-else>
-        <b-container>
-          <nuxt />
-        </b-container>
+        <nuxt />
       </div>
     </main>
-    <Footer />
   </div>
 </template>
 
 <script>
 import TopNav from '~/components/TopNav'
 import ConfirmPhone from '~/components/ConfirmPhone'
-import Footer from '~/components/Footer'
 export default {
   components: {
     TopNav,
-    ConfirmPhone,
-    Footer
+    ConfirmPhone
   },
   head: {
     script: [{ src: '/js/main.js' }]
@@ -37,8 +32,5 @@ export default {
 #dashboard {
   flex-grow: 1;
   display: flex;
-  .container {
-    flex-grow: 1;
-  }
 }
 </style>

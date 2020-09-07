@@ -52,6 +52,7 @@
     "v-autocomplete": "^1.8.2",
     "v-suggestions": "^1.1.1",
     "validator": "^12.2.0",
+    "vue-js-grid": "^1.0.1",
     "vue-slick-carousel": "^1.0.6",
     "vue-sticky-directive": "0.0.10",
     "vue-the-mask": "^0.11.1",

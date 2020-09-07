@@ -1,5 +1,52 @@
 <template>
   <div id="search">
+    <div class="form-group-wrap">
+      <b-form-group
+        id="label-sObjectTitle"
+        label="Категорию жилья"
+        label-for="input-sObjectTitle"
+      >
+        <b-form-input
+          id="input-sObjectTitle"
+          type="text"
+          required
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group
+        id="label-sObjectTitle"
+        label="Направление"
+        label-for="input-sObjectTitle"
+      >
+        <b-form-input
+          id="input-sObjectTitle"
+          v-model="search"
+          type="text"
+          required
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group
+        id="label-sObjectTitle"
+        label="Даты"
+        label-for="input-sObjectTitle"
+      >
+        <b-form-input
+          id="input-sObjectTitle"
+          type="text"
+          required
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group
+        id="label-sObjectTitle"
+        label="Гости"
+        label-for="input-sObjectTitle"
+      >
+        <b-form-input
+          id="input-sObjectTitle"
+          type="text"
+          required
+        ></b-form-input>
+      </b-form-group>
+    </div>
     <b-form @submit.prevent="searchResult" class="form" autocomplete="off">
       <div class="sApplicationAddress">
         <SmartAutocomplete
@@ -364,6 +411,10 @@ export default {
   z-index: 1;
   color: white;
   width: 100%;
+  .form-group-wrap {
+    grid-template-rows: 1fr;
+    grid-template-columns: 3fr 5fr 3fr 3fr;
+  }
   .form {
     display: grid;
     grid-template-columns: 1fr 210px 210px 210px;

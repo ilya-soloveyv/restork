@@ -36,6 +36,7 @@ export default {
 <style lang="scss" scoped>
 #dashboard {
   flex-grow: 1;
+  display: flex;
   // padding-top: 2rem;
   // padding-bottom: 2rem;
   // margin-bottom: 7rem;
@@ -43,6 +44,8 @@ export default {
   //   padding-bottom: 0;
   // }
   .data {
+    flex-grow: 1;
+    margin-bottom: 70px;
     // padding: 2rem;
     // border-radius: 1rem;
     // box-shadow: 0 0 1rem 1px rgba(0, 0, 0, 0.15);
