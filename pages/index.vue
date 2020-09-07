@@ -8,7 +8,11 @@
           </div>
           <div class="wrapSearchForm">
             <h1>
-              Поиск отелей, квартир и коттеджей <span>по низким ценам</span>
+              Получите самые горячие предложения
+              <span>
+                Укажите детали своей поездки и хозяева в ответ дадут вам
+                индивидуальные горячие предложения
+              </span>
             </h1>
             <SearchForm />
           </div>
@@ -60,8 +64,8 @@ export default {
         flex-shrink: 0;
       }
       h1 {
-        color: white;
-        font-size: 2rem;
+        // color: white;
+        font-size: 30px;
         font-weight: 500;
         margin-bottom: 4rem;
         @media (max-width: 991px) {
@@ -75,7 +79,9 @@ export default {
           margin-bottom: 2rem;
         }
         span {
+          padding-top: 1rem;
           display: block;
+          font-size: 16px;
         }
       }
       .wrapSearchForm {
@@ -85,7 +91,7 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         height: 100%;
         // background-color: red;
       }
