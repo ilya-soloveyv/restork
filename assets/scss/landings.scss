@@ -1,0 +1,41 @@
+.landing {
+  // background: red;
+}
+
+.landing-adaptive {
+  display: grid;
+  grid-template-columns: auto 1110px auto;
+  grid-template-rows: auto;
+  @media (max-width: 1199px) {
+    grid-template-columns: auto 930px auto;
+  }
+  @media (max-width: 991px) {
+    grid-template-columns: auto 690px auto;
+  }
+  @media (max-width: 767px) {
+    grid-template-columns: auto 510px auto;
+  }
+  @media (max-width: 575px) {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+  }
+}
+
+.wrapWelcome,
+.wrapHowWork,
+.wrapOpport,
+.wrapNewObj,
+.wrapHistory,
+.wrapQuestion,
+.wrapDesc,
+.wrapRequest {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  @media (max-width: 575px) {
+    grid-column: 1/2;
+  }
+}
+//   height: 100%;
+//   display: grid;
+//   grid-template-columns: 1fr;
+//   grid-template-rows: auto;
