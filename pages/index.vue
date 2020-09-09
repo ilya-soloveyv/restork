@@ -1,101 +1,152 @@
 <template>
-  <main>
-    <div class="first">
-      <b-container>
-        <div class="wrap">
-          <div class="wrapTopNav">
-            <TopNav theme="white" />
-          </div>
-          <div class="wrapSearchForm">
-            <h1>
-              Получите самые горячие предложения
-              <span>
-                Укажите детали своей поездки и хозяева в ответ дадут вам
-                индивидуальные горячие предложения
-              </span>
-            </h1>
-            <SearchForm />
-          </div>
-        </div>
-      </b-container>
+  <div class="landing">
+    <div class="wrapWelcome">
+      <Welcome
+        :title="'Получите самые горячие предложения'"
+        :desc="
+          'Укажите детали своей поездки и хозяева в ответ дадут вам индивидуальные горячие предложения'
+        "
+        :image="'main-client.svg'"
+        :isClient="'true'"
+      />
     </div>
-  </main>
+    <div class="wrapHowWork">
+      <HowWork
+        :title="'Как это работает'"
+        :list="[
+          {
+            image: 'howWork4.svg',
+            title: 'Заполните детали своей поездки',
+            desc:
+              'Выберите категорию желаемого объекта для проживания (Дом, Квартира, Номер в отеле и т.п.) Укажите куда вы направляетесь , когда вы планируете заселиться (сегодня, завтра, послезавтра) и сколько будет взрослых и детей.'
+          },
+          {
+            image: 'howWork5.svg',
+            title: 'Выберите подходящее предложение от хозяев',
+            desc:
+              'Хозяева будут присылать свои предложения. Просматривайте их, задавайте уточняющие вопросы через чат и выбирайте самое подходящее.'
+          },
+          {
+            image: 'howWork6.svg',
+            title: 'Совершите бронирование',
+            desc: 'Оплатите бронирование.'
+          }
+        ]"
+      />
+    </div>
+    <div class="wrapOpportunity">
+      <Opportunity
+        :title="'Преимущества'"
+        :list="[
+          {
+            id: 1,
+            desc: 'Вы будете получать только самые выгодные предложения'
+          },
+          {
+            id: 2,
+            desc: 'Вы не будете тратить лишнее время на поиски жилья'
+          },
+          {
+            id: 3,
+            desc: 'Каждое предложение будет индивидуальным, только для вас'
+          }
+        ]"
+      />
+    </div>
+    <div class="wrapDescription">
+      <Description
+        :registerObj="{
+          image: 'image',
+          title:
+            'Restork – сервис онлайн бронирования, с совершенно новым видением работы сферы гостеприимства',
+          desc:
+            'Сервис разработан для максимального упрощения поиска лучшего предложения для Вашего отдыха.Мы искренне верим что отдых может быть не дорогим и максимально подходящим для Вас по условиям проживания.'
+        }"
+        :advertObj="{
+          image: 'image',
+          photoNumber: '+16 фото',
+          desc: 'Шикарный двух этажный коттедж Париж рядом с морем',
+          where: '10 минут пешком до моря',
+          priceOld: '27 000₽',
+          priceNew: '22 500₽',
+          howLong: '5 дней',
+          howMuch: '4 взрос., 2 дет.'
+        }"
+      />
+    </div>
+    <div class="wrapRequest">
+      <Request
+        :title="'Популярные запросы'"
+        :list="[
+          {
+            id: 1,
+            accomType: 'Номер в отеле',
+            where: 'Анапа',
+            when: 'Завтра',
+            howMuch: '2 человека'
+          },
+          {
+            id: 2,
+            accomType: 'Номер в отеле',
+            where: 'Геленджик',
+            when: 'Сегодня',
+            howMuch: '1 человека'
+          },
+          {
+            id: 3,
+            accomType: 'Дом',
+            where: 'Сочи',
+            when: 'Завтра',
+            howMuch: '4 взрослых., 2 дет.'
+          },
+          {
+            id: 4,
+            accomType: 'Хостел',
+            where: 'Ялта',
+            when: 'Завтра',
+            howMuch: '3 человека'
+          }
+        ]"
+      />
+    </div>
+    <div class="wrapQuestion">
+      <Question
+        :title="'Частые вопросы'"
+        :image="'question-image.svg'"
+        :list="[
+          {
+            id: 1,
+            req: 'Как установить стоимость моего жилья за ночь?',
+            res:
+              'В сервисе Restork вам не нужно устанавливать тарифы и расценки на проживание. Вам остаётся только выставить гостю в ответ на его запрос общую стоимость проживания.'
+          },
+          {
+            id: 2,
+            req: 'Сколько стоит опубликовать объявление?',
+            res: 'Добавление объекта в систему не требует оплаты.'
+          },
+          {
+            id: 3,
+            req: 'Как получать запросы на проживание от гостей?',
+            res:
+              'Следите за статусом вашего жилья. Для приёма запросов от гостей в зависимости от занятости вашего объекта установите его в положение Свободен, Освобождается завтра или Освобождается послезавтра.'
+          }
+        ]"
+      />
+    </div>
+  </div>
 </template>
-
 <script>
-import TopNav from '~/components/TopNav'
-import SearchForm from '~/components/SearchForm'
+import Welcome from '~/components/Landing/Welcome'
+import HowWork from '~/components/Landing/HowWork'
+import Opportunity from '~/components/Landing/Opportunity'
+import Description from '~/components/Landing/Description'
+import Request from '~/components/Landing/Request'
+import Question from '~/components/Landing/Question'
 export default {
-  layout: 'welcome',
-  components: {
-    TopNav,
-    SearchForm
-  }
+  layout: 'dashboardV2Fluid',
+  components: { Welcome, HowWork, Opportunity, Description, Request, Question }
 }
 </script>
 
-<style lang="scss" scoped>
-.first {
-  height: 100vh;
-  background-color: white;
-  // background-image: url('~assets/images/welcome/bg.jpg');
-  // background-position: center top;
-  // background-repeat: no-repeat;
-  // background-size: cover;
-  position: relative;
-  &::before {
-    content: '';
-    z-index: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    // background-color: rgba($color: #000000, $alpha: 0.75);
-    // background-color: rgba($color: #2196f3, $alpha: 1);
-  }
-  .container {
-    height: 100%;
-    .wrap {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      .wrapTopNav {
-        flex-shrink: 0;
-      }
-      h1 {
-        // color: white;
-        font-size: 30px;
-        font-weight: 500;
-        margin-bottom: 4rem;
-        @media (max-width: 991px) {
-          font-size: 1.75rem;
-        }
-        @media (max-width: 767px) {
-          font-size: 1.5rem;
-          margin-bottom: 3rem;
-        }
-        @media (max-width: 575px) {
-          margin-bottom: 2rem;
-        }
-        span {
-          padding-top: 1rem;
-          display: block;
-          font-size: 16px;
-        }
-      }
-      .wrapSearchForm {
-        flex-grow: 1;
-        position: relative;
-        z-index: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        height: 100%;
-        // background-color: red;
-      }
-    }
-  }
-}
-</style>
+<style lang="scss" scoped></style>
