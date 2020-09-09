@@ -270,38 +270,32 @@
         <b-button>+ Добавить</b-button>
       </div>
       <h2>Фотографии</h2>
-      <grid
-        :draggable="true"
-        :sortable="true"
-        :items="object.object_images"
-        :height="150"
-        :width="150"
-        class="images"
-      >
-        <template slot="cell" scope="props">
-          <div class="item">
-            <!-- <div>{{ props.item }}</div> -->
-            <div class="num">
-              <template v-if="props.sort === 0">
-                Обложка
-              </template>
-              <template v-else>
-                {{ props.sort + 1 }}
-              </template>
-            </div>
-            <img
-              :src="
-                SELECTEL_WEB +
-                  '/object/' +
-                  props.item.iObjectID +
-                  '/preview/' +
-                  props.item.sObjectImage
-              "
-              alt=""
-            />
+      <div class="images">
+        <div
+          v-for="(image, index) in object.object_images"
+          :key="index"
+          class="item"
+        >
+          <div class="num">
+            <template v-if="index === 0">
+              Обложка
+            </template>
+            <template v-else>
+              {{ index + 1 }}
+            </template>
           </div>
-        </template>
-      </grid>
+          <img
+            :src="
+              SELECTEL_WEB +
+                '/object/' +
+                image.iObjectID +
+                '/preview/' +
+                image.sObjectImage
+            "
+            alt=""
+          />
+        </div>
+      </div>
       <div class="uploadImage">
         <span>Выберете файл</span> или перетащите его сюда
       </div>
