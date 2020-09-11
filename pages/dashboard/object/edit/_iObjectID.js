@@ -26,7 +26,7 @@ export default {
         return this.$store.state.object.item.object_object_options_array
       },
       set(objectObjectOptionsArray) {
-        console.log(objectObjectOptionsArray)
+        // console.log(objectObjectOptionsArray)
       }
     },
     roomOptions({ $store }) {
@@ -37,7 +37,7 @@ export default {
         return this.$store.state.object.item.object_room_options_array
       },
       set(objectRoomOptionsArray) {
-        console.log(objectRoomOptionsArray)
+        // console.log(objectRoomOptionsArray)
       }
     }
   },

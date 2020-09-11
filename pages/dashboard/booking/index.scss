@@ -1,0 +1,21 @@
+.tableTitle {
+  background-color: rgba($color: #dbdbdb, $alpha: 0.2);
+  border-radius: 8px 8px 0 0;
+  ul {
+    margin: 0;
+    padding: 10px;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 70px 70px 180px 70px 70px 80px 1fr 70px 70px;
+    grid-template-rows: 1fr;
+    grid-gap: 20px;
+    // @media (max-width: 991px) {
+    //   grid-template-columns: 2fr 4fr 2fr 100px 100px 100px;
+    // }
+    li {
+      color: #818181;
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+}

@@ -173,6 +173,17 @@ export default {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto auto auto;
   grid-row-gap: 20px;
+  @media (max-width: 991px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-row-gap: 0;
+    grid-column-gap: 20px;
+  }
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-gap: 0;
+  }
   .id {
     grid-column: 1/2;
     grid-row: 1/2;
@@ -183,6 +194,16 @@ export default {
     align-items: center;
     border-bottom: 1px solid #f0f0f0;
     padding-bottom: 25px;
+    @media (max-width: 991px) {
+      grid-column: 1/2;
+      grid-row: 1/2;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    @media (max-width: 767px) {
+      grid-column: 1/2;
+      grid-row: 1/2;
+    }
   }
   .rating {
     grid-column: 2/3;
@@ -191,29 +212,77 @@ export default {
     justify-content: flex-end;
     border-bottom: 1px solid #f0f0f0;
     padding-bottom: 25px;
+    @media (max-width: 991px) {
+      grid-column: 1/2;
+      grid-row: 2/3;
+      padding-bottom: 20px;
+      justify-content: flex-start;
+    }
+    @media (max-width: 767px) {
+      grid-column: 2/3;
+      grid-row: 1/2;
+    }
   }
   .create {
     grid-column: 1/2;
     grid-row: 2/3;
     border-bottom: 1px solid #f0f0f0;
     padding-bottom: 15px;
+    @media (max-width: 991px) {
+      grid-column: 2/3;
+      grid-row: 1/3;
+      padding-bottom: 0;
+    }
+    @media (max-width: 767px) {
+      grid-column: 1/2;
+      grid-row: 2/3;
+    }
   }
   .update {
     grid-column: 2/3;
     grid-row: 2/3;
     border-bottom: 1px solid #f0f0f0;
     padding-bottom: 15px;
+    @media (max-width: 991px) {
+      grid-column: 3/5;
+      grid-row: 1/3;
+      padding-bottom: 0;
+    }
+    @media (max-width: 767px) {
+      grid-column: 2/3;
+      grid-row: 2/3;
+    }
   }
   .list {
     grid-column: 1/3;
     grid-row: 3/4;
     border-bottom: 1px solid #f0f0f0;
     padding-bottom: 15px;
+    @media (max-width: 991px) {
+      grid-column: 1/5;
+      grid-row: 3/4;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      grid-column-gap: 20px;
+      padding-top: 20px;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    @media (max-width: 767px) {
+      grid-column: 1/3;
+      grid-row: 3/4;
+      grid-template-columns: 1fr;
+    }
     .item {
       line-height: 16px;
       font-size: 16px;
       padding: 6px 0;
       display: flex;
+      @media (max-width: 767px) {
+        font-size: 14px;
+        padding: 3px 0;
+      }
       &.success {
         .ico {
           border: 1px solid #000000;
@@ -236,6 +305,9 @@ export default {
         align-items: center;
         justify-content: center;
         padding: 4px;
+        @media (max-width: 767px) {
+          padding: 2px;
+        }
         svg {
           stroke: #dbdbdb;
         }
@@ -245,6 +317,9 @@ export default {
   .button {
     grid-column: 1/3;
     grid-row: 4/5;
+    @media (max-width: 991px) {
+      display: none;
+    }
   }
   .label {
     color: #818181;

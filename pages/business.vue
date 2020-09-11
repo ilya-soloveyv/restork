@@ -6,8 +6,8 @@
         :desc="
           'Всё просто, добавьте ваш объект недвижимости и принимайте запросы от гостей'
         "
-        :image="'main-business.svg'"
-        :isClient="'false'"
+        :image="'main-business.jpg'"
+        :isClient="false"
       />
     </div>
     <div class="wrapHowWork">

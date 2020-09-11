@@ -37,7 +37,7 @@ export default {
     },
     list: {
       type: Array,
-      dafault: null
+      default: () => []
     }
   }
 }

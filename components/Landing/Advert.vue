@@ -1,13 +1,13 @@
 <template>
   <div class="content">
     <div
-      class="phone"
       :style="{ 'background-image': 'url(/landing/' + imagePhone + ')' }"
+      class="phone"
     >
       <div class="info">
         <div
-          class="phoneFoto"
           :style="{ 'background-image': 'url(/landing/' + imageFoto + ')' }"
+          class="phoneFoto"
         >
           <div class="fotoNumber">{{ fotoNumber }}</div>
         </div>

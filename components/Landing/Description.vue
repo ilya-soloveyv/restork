@@ -49,6 +49,7 @@ export default {
 <style lang="scss" scoped>
 .desc {
   background: #ffffff;
+  background: green;
   margin: 50px 0;
   @media (max-width: 767px) {
     margin: 50px 0 100px 0;
@@ -64,6 +65,11 @@ export default {
     margin: 0 auto;
     display: flex;
     width: 690px;
+    background: red;
+    @media (max-width: 991px) {
+      margin: 0;
+      width: 100%;
+    }
     @media (max-width: 575px) {
       grid-column-gap: 35px;
     }
@@ -76,7 +82,7 @@ export default {
     }
     .wrapAdvert {
       // grid-column: 3/4;
-      @media (max-width: 575px) {
+      @media (max-width: 767px) {
         display: none;
       }
     }

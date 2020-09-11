@@ -1,7 +1,7 @@
 <template>
   <div
-    class="welcome landing-adaptive"
     :style="{ 'background-image': 'url(/landing/' + image + ')' }"
+    class="welcome landing-adaptive"
   >
     <div class="wrapWelcome">
       <h1 class="title">
