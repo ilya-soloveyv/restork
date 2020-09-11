@@ -1,13 +1,13 @@
 <template>
   <div class="landing">
-    <div class="wrapWelcome">
+    <!-- <div class="wrapWelcome">
       <Welcome
         :title="'Получите самые горячие предложения'"
         :desc="
           'Укажите детали своей поездки и хозяева в ответ дадут вам индивидуальные горячие предложения'
         "
-        :image="'main-client.svg'"
-        :isClient="'true'"
+        :image="'main-client.jpg'"
+        :isClient="true"
       />
     </div>
     <div class="wrapHowWork">
@@ -52,29 +52,27 @@
           }
         ]"
       />
-    </div>
-    <div class="wrapDescription">
-      <Description
-        :registerObj="{
-          image: 'desc-home.svg',
-          title:
-            'Restork – сервис онлайн бронирования, с совершенно новым видением работы сферы гостеприимства',
-          desc:
-            'Сервис разработан для максимального упрощения поиска лучшего предложения для Вашего отдыха.Мы искренне верим что отдых может быть не дорогим и максимально подходящим для Вас по условиям проживания.'
-        }"
-        :advertObj="{
-          imagePhone: 'desc-phone.svg',
-          imageFoto: 'desc-phone-foto.svg',
-          fotoNumber: '+16 фото',
-          desc: 'Шикарный двух этажный коттедж Париж рядом с морем',
-          where: '10 минут пешком до моря',
-          priceOld: '27 000₽',
-          priceNew: '22 500₽',
-          howLong: '5 дней',
-          howMuch: '4 взрос., 2 дет.'
-        }"
-      />
-    </div>
+    </div> -->
+    <Description
+      :registerObj="{
+        image: 'desc-home.svg',
+        title:
+          'Restork – сервис онлайн бронирования, с совершенно новым видением работы сферы гостеприимства',
+        desc:
+          'Сервис разработан для максимального упрощения поиска лучшего предложения для Вашего отдыха.Мы искренне верим что отдых может быть не дорогим и максимально подходящим для Вас по условиям проживания.'
+      }"
+      :advertObj="{
+        imagePhone: 'desc-phone.svg',
+        imageFoto: 'desc-phone-foto.svg',
+        fotoNumber: '+16 фото',
+        desc: 'Шикарный двух этажный коттедж Париж рядом с морем',
+        where: '10 минут пешком до моря',
+        priceOld: '27 000₽',
+        priceNew: '22 500₽',
+        howLong: '5 дней',
+        howMuch: '4 взрос., 2 дет.'
+      }"
+    />
     <!-- <div class="wrapRequest">
       <Request
         :title="'Популярные запросы'"
@@ -110,7 +108,7 @@
         ]"
       />
     </div> -->
-    <div class="wrapQuestion">
+    <!-- <div class="wrapQuestion">
       <Question
         :title="'Частые вопросы'"
         :image="'question-image.svg'"
@@ -134,25 +132,25 @@
           }
         ]"
       />
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
-import Welcome from '~/components/Landing/Welcome'
-import HowWork from '~/components/Landing/HowWork'
-import Opportunity from '~/components/Landing/Opportunity'
+// import Welcome from '~/components/Landing/Welcome'
+// import HowWork from '~/components/Landing/HowWork'
+// import Opportunity from '~/components/Landing/Opportunity'
 import Description from '~/components/Landing/Description'
 // import Request from '~/components/Landing/Request'
-import Question from '~/components/Landing/Question'
+// import Question from '~/components/Landing/Question'
 export default {
   layout: 'dashboardV2Fluid',
   components: {
-    Welcome,
-    HowWork,
-    Opportunity,
-    Description,
+    // Welcome,
+    // HowWork,
+    // Opportunity,
+    Description
     // Request,
-    Question
+    // Question
   }
 }
 </script>

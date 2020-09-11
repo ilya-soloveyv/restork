@@ -1,12 +1,12 @@
 <template>
   <div class="content">
-    <div class="wrapImage">
+    <div class="img">
       <img :src="'/landing/' + image" />
     </div>
-    <div class="wrapTitle">
+    <div class="title">
       {{ title }}
     </div>
-    <div class="wrapDesc">
+    <div class="desc">
       {{ desc }}
     </div>
     <div class="wrapBtn">
@@ -38,10 +38,10 @@ export default {
 .content {
   display: flex;
   flex-direction: column;
-  .wrapImage {
+  .img {
     padding: 70px 0 25px 0;
   }
-  .wrapTitle {
+  .title {
     padding-bottom: 25px;
     font-family: Montserrat;
     font-size: 20px;
@@ -53,7 +53,7 @@ export default {
       line-height: 20px;
     }
   }
-  .wrapDesc {
+  .desc {
     padding-bottom: 25px;
     font-family: Montserrat;
     font-size: 14px;
