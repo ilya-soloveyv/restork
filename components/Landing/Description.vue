@@ -1,21 +1,26 @@
 <template>
   <div class="desc landing-adaptive">
     <div class="wrapDesc">
-      <Register
-        :image="registerObj.image"
-        :title="registerObj.title"
-        :desc="registerObj.desc"
-      />
-      <Advert
-        :image="advertObj.image"
-        :photoNumber="advertObj.photoNumber"
-        :desc="advertObj.desc"
-        :where="advertObj.where"
-        :priceOld="advertObj.priceOld"
-        :priceNew="advertObj.priceNew"
-        :howLong="advertObj.howLong"
-        :howMuch="advertObj.howMuch"
-      />
+      <div class="wrapRegister">
+        <Register
+          :image="registerObj.image"
+          :title="registerObj.title"
+          :desc="registerObj.desc"
+        />
+      </div>
+      <div class="wrapAdvert">
+        <Advert
+          :imagePhone="advertObj.imagePhone"
+          :imageFoto="advertObj.imageFoto"
+          :fotoNumber="advertObj.fotoNumber"
+          :desc="advertObj.desc"
+          :where="advertObj.where"
+          :priceOld="advertObj.priceOld"
+          :priceNew="advertObj.priceNew"
+          :howLong="advertObj.howLong"
+          :howMuch="advertObj.howMuch"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -43,6 +48,38 @@ export default {
 
 <style lang="scss" scoped>
 .desc {
-  background: yellow;
+  background: #ffffff;
+  margin: 50px 0;
+  @media (max-width: 767px) {
+    margin: 50px 0 100px 0;
+  }
+  @media (max-width: 575px) {
+    margin: 80px 0;
+  }
+  .wrapDesc {
+    // display: grid;
+    // grid-template-columns: auto 1fr 1fr auto;
+    // grid-template-rows: 1fr;
+    // grid-column-gap: 85px;
+    margin: 0 auto;
+    display: flex;
+    width: 690px;
+    @media (max-width: 575px) {
+      grid-column-gap: 35px;
+    }
+    @media (max-width: 575px) {
+      display: block;
+    }
+    .wrapRegister {
+      // grid-column: 2/3;
+      padding-right: 85px;
+    }
+    .wrapAdvert {
+      // grid-column: 3/4;
+      @media (max-width: 575px) {
+        display: none;
+      }
+    }
+  }
 }
 </style>
