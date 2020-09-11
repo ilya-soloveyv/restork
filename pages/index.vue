@@ -56,15 +56,16 @@
     <div class="wrapDescription">
       <Description
         :registerObj="{
-          image: 'image',
+          image: 'desc-home.svg',
           title:
             'Restork – сервис онлайн бронирования, с совершенно новым видением работы сферы гостеприимства',
           desc:
             'Сервис разработан для максимального упрощения поиска лучшего предложения для Вашего отдыха.Мы искренне верим что отдых может быть не дорогим и максимально подходящим для Вас по условиям проживания.'
         }"
         :advertObj="{
-          image: 'image',
-          photoNumber: '+16 фото',
+          imagePhone: 'desc-phone.svg',
+          imageFoto: 'desc-phone-foto.svg',
+          fotoNumber: '+16 фото',
           desc: 'Шикарный двух этажный коттедж Париж рядом с морем',
           where: '10 минут пешком до моря',
           priceOld: '27 000₽',
@@ -74,7 +75,7 @@
         }"
       />
     </div>
-    <div class="wrapRequest">
+    <!-- <div class="wrapRequest">
       <Request
         :title="'Популярные запросы'"
         :list="[
@@ -108,7 +109,7 @@
           }
         ]"
       />
-    </div>
+    </div> -->
     <div class="wrapQuestion">
       <Question
         :title="'Частые вопросы'"
@@ -141,11 +142,18 @@ import Welcome from '~/components/Landing/Welcome'
 import HowWork from '~/components/Landing/HowWork'
 import Opportunity from '~/components/Landing/Opportunity'
 import Description from '~/components/Landing/Description'
-import Request from '~/components/Landing/Request'
+// import Request from '~/components/Landing/Request'
 import Question from '~/components/Landing/Question'
 export default {
   layout: 'dashboardV2Fluid',
-  components: { Welcome, HowWork, Opportunity, Description, Request, Question }
+  components: {
+    Welcome,
+    HowWork,
+    Opportunity,
+    Description,
+    // Request,
+    Question
+  }
 }
 </script>
 
