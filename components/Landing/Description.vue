@@ -49,12 +49,11 @@ export default {
 <style lang="scss" scoped>
 .desc {
   background: #ffffff;
-  background: green;
   margin: 50px 0;
-  @media (max-width: 767px) {
+  @media (max-width: 1279px) {
     margin: 50px 0 100px 0;
   }
-  @media (max-width: 575px) {
+  @media (max-width: 767px) {
     margin: 80px 0;
   }
   .wrapDesc {
@@ -65,20 +64,25 @@ export default {
     margin: 0 auto;
     display: flex;
     width: 690px;
-    background: red;
     @media (max-width: 991px) {
       margin: 0;
       width: 100%;
     }
-    @media (max-width: 575px) {
+    @media (max-width: 767px) {
       grid-column-gap: 35px;
     }
-    @media (max-width: 575px) {
+    @media (max-width: 767px) {
       display: block;
     }
     .wrapRegister {
       // grid-column: 2/3;
       padding-right: 85px;
+      @media (max-width: 1279px) {
+        padding-right: 35px;
+      }
+      @media (max-width: 767px) {
+        padding-right: 0px;
+      }
     }
     .wrapAdvert {
       // grid-column: 3/4;

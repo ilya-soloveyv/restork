@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div>
-      {{ desc }}
-    </div>
+    <DescImage :desc="desc" />
     <div>
       {{ author }}
     </div>
@@ -10,7 +8,11 @@
 </template>
 
 <script>
+import DescImage from './HistoryItemDescImage'
 export default {
+  components: {
+    DescImage
+  },
   props: {
     desc: {
       type: String,

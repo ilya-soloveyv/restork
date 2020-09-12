@@ -2,11 +2,12 @@
   <div class="history landing-adaptive">
     <div class="wrapHistory">
       <HistoryTitle :title="title" />
-      <ul>
-        <li v-for="item in list" :key="item.id">
-          <HistoryItem :desc="item.history" :author="item.author.name" />
-        </li>
-      </ul>
+      <HistoryItem
+        v-for="item in list"
+        :key="item.id"
+        :desc="item.history"
+        :author="item.author.name"
+      />
     </div>
   </div>
 </template>
@@ -31,6 +32,6 @@ export default {
 
 <style lang="scss" scoped>
 .history {
-  background: green;
+  background: #f5f5f5;
 }
 </style>

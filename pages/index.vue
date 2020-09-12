@@ -1,6 +1,6 @@
 <template>
   <div class="landing">
-    <!-- <div class="wrapWelcome">
+    <div class="wrapWelcome">
       <Welcome
         :title="'Получите самые горячие предложения'"
         :desc="
@@ -52,7 +52,7 @@
           }
         ]"
       />
-    </div> -->
+    </div>
     <Description
       :registerObj="{
         image: 'desc-home.svg',
@@ -73,7 +73,7 @@
         howMuch: '4 взрос., 2 дет.'
       }"
     />
-    <!-- <div class="wrapRequest">
+    <div class="wrapRequest">
       <Request
         :title="'Популярные запросы'"
         :list="[
@@ -107,8 +107,8 @@
           }
         ]"
       />
-    </div> -->
-    <!-- <div class="wrapQuestion">
+    </div>
+    <div class="wrapQuestion">
       <Question
         :title="'Частые вопросы'"
         :image="'question-image.svg'"
@@ -132,25 +132,25 @@
           }
         ]"
       />
-    </div> -->
+    </div>
   </div>
 </template>
 <script>
-// import Welcome from '~/components/Landing/Welcome'
-// import HowWork from '~/components/Landing/HowWork'
-// import Opportunity from '~/components/Landing/Opportunity'
+import Welcome from '~/components/Landing/Welcome'
+import HowWork from '~/components/Landing/HowWork'
+import Opportunity from '~/components/Landing/Opportunity'
 import Description from '~/components/Landing/Description'
-// import Request from '~/components/Landing/Request'
-// import Question from '~/components/Landing/Question'
+import Request from '~/components/Landing/Request'
+import Question from '~/components/Landing/Question'
 export default {
   layout: 'dashboardV2Fluid',
   components: {
-    // Welcome,
-    // HowWork,
-    // Opportunity,
-    Description
-    // Request,
-    // Question
+    Welcome,
+    HowWork,
+    Opportunity,
+    Description,
+    Request,
+    Question
   }
 }
 </script>
