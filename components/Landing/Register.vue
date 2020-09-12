@@ -40,6 +40,9 @@ export default {
   flex-direction: column;
   .img {
     padding: 70px 0 25px 0;
+    @media (max-width: 767px) {
+      padding: 0 0 25px 0;
+    }
   }
   .title {
     padding-bottom: 25px;
