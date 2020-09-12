@@ -1,14 +1,20 @@
+.booking {
+  margin-bottom: 75px;
+}
 .tableTitle {
   background-color: rgba($color: #dbdbdb, $alpha: 0.2);
   border-radius: 8px 8px 0 0;
+  @media (max-width: 991px) {
+    display: none;
+  }
   ul {
     margin: 0;
-    padding: 10px;
+    padding: 10px 15px;
     list-style: none;
     display: grid;
-    grid-template-columns: 70px 70px 180px 70px 70px 80px 1fr 70px 70px;
+    grid-template-columns: 70px 70px 90px 90px 70px 70px 80px 1fr 1fr 70px 70px;
     grid-template-rows: 1fr;
-    grid-gap: 20px;
+    grid-gap: 15px;
     // @media (max-width: 991px) {
     //   grid-template-columns: 2fr 4fr 2fr 100px 100px 100px;
     // }
@@ -16,6 +22,43 @@
       color: #818181;
       font-size: 14px;
       line-height: 22px;
+      &.date {
+        grid-column: 1/2;
+        grid-row: 1/2;
+      }
+      &.id {
+        grid-column: 2/3;
+        grid-row: 1/2;
+      }
+      &.object {
+        grid-column: 3/5;
+        grid-row: 1/2;
+      }
+      &.dates {
+        grid-column: 5/6;
+        grid-row: 1/2;
+      }
+      &.price {
+        grid-column: 6/7;
+        grid-row: 1/2;
+      }
+      &.commission {
+        grid-column: 7/8;
+        grid-row: 1/2;
+      }
+      &.guests {
+        grid-column: 8/10;
+        grid-row: 1/2;
+      }
+      &.chat {
+        grid-column: 10/11;
+        grid-row: 1/2;
+      }
+      &.status {
+        grid-column: 11/12;
+        grid-row: 1/2;
+      }
+    
     }
   }
 }

@@ -1,3 +1,4 @@
+import BookingListItem from '@/components/Dashboard/booking/BookingListItem'
 export default {
   middleware: 'auth',
   layout: 'dashboardV2',
@@ -5,6 +6,9 @@ export default {
     return {
       title: 'Бронирования'
     }
+  },
+  components: {
+    BookingListItem
   },
   computed: {
     SELECTEL_WEB() {

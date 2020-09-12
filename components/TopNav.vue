@@ -102,8 +102,8 @@
             <b-dropdown-item to="/dashboard/object/add">
               Добавить объект
             </b-dropdown-item>
-            <b-dropdown-item to="#">
-              Забронированные
+            <b-dropdown-item to="/dashboard/booking">
+              Бронирования
             </b-dropdown-item>
             <b-dropdown-item to="/dashboard/profile">
               Редактировать профиль

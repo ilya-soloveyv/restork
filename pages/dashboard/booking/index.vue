@@ -7,7 +7,7 @@
       <div class="tableTitle">
         <ul>
           <li class="date">Дата</li>
-          <li class="adress">Номер</li>
+          <li class="id">Номер</li>
           <li class="object">Объект</li>
           <li class="dates">Даты</li>
           <li class="price">Цена</li>
@@ -17,6 +17,7 @@
           <li class="status">Статус</li>
         </ul>
       </div>
+      <BookingListItem v-for="i in 5" :key="i" />
     </div>
   </div>
 </template>
