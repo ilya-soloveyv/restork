@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <div ref="item" :class="{ open: buttonActive }" class="item">
     <div class="date">12.09.2020</div>
     <div class="id">Id2382354</div>
     <div class="object">Шикарный двух этажный коттедж Париж рядом с морем</div>
@@ -77,6 +77,9 @@ export default {
   methods: {
     toggleButton() {
       this.buttonActive = !this.buttonActive
+      const item = this.$refs.item.getBoundingClientRect()
+      console.log(item)
+      window.scrollTo(0, item.top + window.pageYOffset - 15)
     }
   }
 }
@@ -99,8 +102,41 @@ export default {
   overflow: hidden;
   @media (max-width: 991px) {
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto auto auto auto;
+    grid-template-rows: auto;
     grid-row-gap: 15px;
+    &.open {
+      .img {
+        grid-row: 3/7;
+      }
+      .setting {
+        display: flex !important;
+      }
+      .options {
+        display: block !important;
+      }
+    }
+  }
+  @media (max-width: 767px) {
+    grid-gap: 15px;
+    &.open {
+      box-shadow: 0 20px 15px rgba($color: black, $alpha: 0.16);
+      .price {
+        display: flex;
+      }
+      .commission {
+        display: flex;
+      }
+      .avatar {
+        display: flex;
+      }
+      .rating {
+        display: flex;
+      }
+      .img {
+        display: block;
+        grid-row: auto;
+      }
+    }
   }
   .date {
     grid-column: 1/2;
@@ -111,6 +147,11 @@ export default {
       grid-column: 2/3;
       grid-row: 1/2;
     }
+    @media (max-width: 767px) {
+      grid-column: 3/4;
+      grid-row: 1/2;
+      text-align: right;
+    }
   }
   .id {
     grid-column: 2/3;
@@ -119,6 +160,11 @@ export default {
     @media (max-width: 991px) {
       grid-column: 3/4;
       grid-row: 1/2;
+    }
+    @media (max-width: 767px) {
+      grid-column: 4/5;
+      grid-row: 1/2;
+      text-align: right;
     }
   }
   .object {
@@ -130,6 +176,11 @@ export default {
       grid-column: 1/3;
       grid-row: 3/4;
     }
+    @media (max-width: 767px) {
+      grid-column: 1/4;
+      grid-row: 3/4;
+      height: auto;
+    }
   }
   .dates {
     grid-column: 5/6;
@@ -138,6 +189,10 @@ export default {
       grid-column: 3/4;
       grid-row: 3/4;
     }
+    @media (max-width: 767px) {
+      grid-column: 1/4;
+      grid-row: 4/5;
+    }
   }
   .price {
     grid-column: 6/7;
@@ -145,12 +200,20 @@ export default {
     @media (max-width: 991px) {
       grid-column: 1/2;
       grid-row: 4/5;
+      display: flex;
+      align-items: center;
+    }
+    @media (max-width: 767px) {
+      grid-column: 1/3;
+      grid-row: 7/8;
+      display: none;
     }
     span {
       color: #818181;
       display: none;
       @media (max-width: 991px) {
-        display: inline;
+        display: block;
+        padding-right: 5px;
       }
     }
   }
@@ -160,12 +223,20 @@ export default {
     @media (max-width: 991px) {
       grid-column: 2/3;
       grid-row: 4/5;
+      display: flex;
+      align-items: center;
+    }
+    @media (max-width: 767px) {
+      grid-column: 3/5;
+      grid-row: 7/8;
+      display: none;
     }
     span {
       color: #818181;
       display: none;
       @media (max-width: 991px) {
-        display: inline;
+        display: block;
+        padding-right: 5px;
       }
     }
   }
@@ -174,6 +245,10 @@ export default {
     grid-row: 1/2;
     @media (max-width: 991px) {
       grid-column: 1/3;
+      grid-row: 2/3;
+    }
+    @media (max-width: 767px) {
+      grid-column: 1/4;
       grid-row: 2/3;
     }
     span {
@@ -188,6 +263,11 @@ export default {
     @media (max-width: 991px) {
       grid-column: 3/4;
       grid-row: 2/3;
+    }
+    @media (max-width: 767px) {
+      grid-column: 4/5;
+      grid-row: 2/3;
+      text-align: right;
     }
     span {
       background-color: #077bff;
@@ -210,6 +290,10 @@ export default {
       grid-column: 1/2;
       grid-row: 1/2;
     }
+    @media (max-width: 767px) {
+      grid-column: 1/2;
+      grid-row: 1/2;
+    }
   }
   .img {
     grid-column: 1/3;
@@ -219,11 +303,26 @@ export default {
       grid-column: 4/5;
       grid-row: 3/5;
       margin: 0 -15px -15px 0;
+      position: relative;
+    }
+    @media (max-width: 767px) {
+      grid-column: 3/5;
+      grid-row: 8/9;
+      // margin: 0;
+      display: none;
+      // position: static;
+      // overflow: hidden;
     }
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      @media (max-width: 991px) {
+        position: absolute;
+      }
+      @media (max-width: 767px) {
+        // position: static;
+      }
     }
   }
   .setting {
@@ -234,9 +333,31 @@ export default {
     border-right: 1px solid #dbdbdb;
     color: #818181;
     @media (max-width: 991px) {
+      grid-column: 1/4;
+      grid-row: 5/6;
+      border: none;
+      flex-direction: row;
       display: none;
     }
+    @media (max-width: 767px) {
+      grid-column: 1/5;
+      grid-row: 5/6;
+      border-top: 1px solid #dbdbdb;
+      padding-top: 15px;
+      margin-top: 5px;
+    }
     span {
+      @media (max-width: 991px) {
+        padding: 0 0 0 8px;
+        margin: 0 0 0 8px;
+        border-left: 1px solid #818181;
+        line-height: 14px;
+        &:first-child {
+          margin: 0;
+          padding: 0;
+          border: none;
+        }
+      }
     }
   }
   .options {
@@ -244,11 +365,21 @@ export default {
     grid-row: 2/3;
     border-right: 1px solid #dbdbdb;
     @media (max-width: 991px) {
+      grid-column: 1/4;
+      grid-row: 6/7;
+      border: none;
       display: none;
+    }
+    @media (max-width: 767px) {
+      grid-column: 1/5;
+      grid-row: 6/7;
     }
     .title {
       color: #818181;
       font-weight: normal;
+      @media (max-width: 767px) {
+        font-size: 10px;
+      }
     }
   }
   .rating {
@@ -263,6 +394,12 @@ export default {
       margin: -15px -15px -15px 0;
       display: flex;
       justify-content: center;
+    }
+    @media (max-width: 767px) {
+      grid-column: 2/3;
+      grid-row: 8/9;
+      margin: 0;
+      display: none;
     }
   }
   .avatar {
@@ -279,6 +416,13 @@ export default {
       display: flex;
       justify-content: center;
     }
+    @media (max-width: 767px) {
+      grid-column: 1/2;
+      grid-row: 8/9;
+      margin: 0;
+      padding: 0;
+      display: none;
+    }
     img {
       width: 100%;
       border-radius: 50%;
@@ -286,6 +430,12 @@ export default {
         width: 50px;
         height: 50px;
         margin-bottom: -15px;
+      }
+      @media (max-width: 767px) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        margin: 0;
       }
     }
   }
@@ -297,6 +447,11 @@ export default {
       grid-row: 4/5;
       display: flex;
       justify-content: flex-end;
+    }
+    @media (max-width: 767px) {
+      grid-column: 4/5;
+      grid-row: 3/5;
+      align-items: flex-end;
     }
     .toggleBtn {
       width: 30px;
