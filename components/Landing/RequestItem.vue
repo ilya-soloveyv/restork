@@ -1,6 +1,7 @@
 <template>
   <div class="item">
-    <div class="left">
+    1
+    <!-- <div class="left">
       <div class="accomType">
         {{ accomType }}
       </div>
@@ -17,7 +18,7 @@
     </div>
     <div class="right">
       <div class="circle"></div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -54,8 +55,8 @@ export default {
   font-weight: 500;
   line-height: 20px;
   color: #ffffff;
-  display: flex;
-  flex-direction: row;
+  // display: flex;
+  // flex-direction: row;
   .left {
     display: flex;
     flex-direction: column;

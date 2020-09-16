@@ -24,6 +24,19 @@ export default {
   padding: 20px;
   position: relative;
   box-shadow: 0px 20px 15px rgba($color: #000000, $alpha: 0.1);
+  @media (max-width: 991px) {
+    width: 650px;
+  }
+  @media (max-width: 767px) {
+    width: 100%;
+    padding: 16px 23px;
+  }
+  span {
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+  }
   &:before {
     content: '';
     position: absolute;
