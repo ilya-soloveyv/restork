@@ -6,7 +6,7 @@
           <TopNav />
         </b-container>
       </div>
-      <ConfirmPhone v-if="$auth.user.sUserPhoneKod" />
+      <ConfirmPhone v-if="$auth.$state.loggedIn && $auth.user.sUserPhoneKod" />
       <div id="dashboard" v-else>
         <div class="data">
           <nuxt />
