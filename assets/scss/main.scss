@@ -1,4 +1,4 @@
-@import "landings.scss";
+@import 'landings.scss';
 
 * {
   font-family: Montserrat;
@@ -47,7 +47,7 @@ h1 {
 }
 #map {
   height: 400px;
-  box-shadow: 0 0 31.15px 3.85px rgba(0,0,0,.15);
+  box-shadow: 0 0 31.15px 3.85px rgba(0, 0, 0, 0.15);
   margin: 4rem 0 0;
   overflow: hidden;
   @media (max-width: 575px) {
@@ -64,8 +64,6 @@ h1 {
   // background-color: white;
   // box-shadow: 0 8px 14.72px 1.28px rgba(0, 0, 0, 0.3);
 }
-
-
 
 .form-group-wrap {
   margin-bottom: 25px;
@@ -110,6 +108,19 @@ h1 {
         height: auto;
         font-size: 16px;
         font-weight: 500;
+      }
+      select {
+        // background: red;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 0;
+        border: none;
+        padding: 0;
+        height: auto;
+        font-size: 16px;
+        font-weight: 600;
+        box-shadow: none;
       }
     }
   }

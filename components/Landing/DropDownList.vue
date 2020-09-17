@@ -3,14 +3,24 @@
     <div class="desc">
       {{ desc }}
     </div>
-    <div>
-      {{ label }}
+    <div class="form-group-wrap form-group-wrap-line2">
+      <b-form-group
+        id="label-sObjectTypeTitle"
+        :label="label"
+        label-for="input-sObjectTypeTitle"
+      >
+        <b-form-select
+          id="input-sObjectTypeTitle"
+          v-model="selected"
+          :options="options"
+        >
+          <option disabled value="">Выберите один из вариантов</option>
+          <option v-for="item in list" :key="item" value="item">
+            {{ item }}
+          </option>
+        </b-form-select>
+      </b-form-group>
     </div>
-    <select class="dropDown">
-      <option v-for="item in list" :key="item" value="item">
-        {{ item }}
-      </option>
-    </select>
   </div>
 </template>
 
@@ -29,6 +39,11 @@ export default {
       type: Array,
       default: null
     }
+  },
+  data() {
+    return {
+      selected: ''
+    }
   }
 }
 </script>
@@ -41,19 +56,11 @@ export default {
     line-height: 26px;
     font-weight: 400;
     color: #000000;
+    margin-bottom: 20px;
   }
-  .dropDown {
-    appearance: none;
-    width: 100%;
-    height: 85px;
-    border-radius: 8px;
-    border-color: #eaeaea;
-    padding: 44px 0 0 15px;
-    position: relative;
-    &:before {
-      content: '';
-      position: absolute;
-    }
-  }
+}
+.wrapDropDown:last-child {
+  margin-top: 40px;
+  background: red;
 }
 </style>

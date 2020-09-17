@@ -16,10 +16,15 @@
           <b-button variant="primary" size="lg">Далее</b-button>
         </div>
       </div>
+      <button class="wrapHintMin" :click="showHints">
+        <img :src="'/landing/hint-image.svg'" />
+        <span>
+          Подсказка
+        </span>
+      </button>
       <div class="wrapHintMax">
         <Hint :title="hintObj.title" :list="hintObj.list" />
       </div>
-      <div class="wrapHintMin">Подсказка</div>
     </div>
   </div>
 </template>
@@ -43,6 +48,11 @@ export default {
       type: Object,
       default: null
     }
+  },
+  methods: {
+    showHints() {
+      console.log('showHints')
+    }
   }
 }
 </script>
@@ -55,8 +65,8 @@ export default {
     grid-template-rows: 1fr;
     grid-column-gap: 25px;
     position: relative;
-    @media (max-width: 767px) {
-      grid-template-columns: 1fr;
+    @media (max-width: 991px) {
+      grid-template-columns: 1fr 25%;
     }
     .wrapNewObjectForm {
       .wrapNewObjectTitle {
@@ -67,13 +77,13 @@ export default {
       }
     }
     .wrapHintMax {
-      @media (max-width: 767px) {
+      @media (max-width: 991px) {
         display: none;
       }
     }
     .wrapHintMin {
       display: none;
-      @media (max-width: 767px) {
+      @media (max-width: 991px) {
         position: absolute;
         display: block;
         top: 50px;
@@ -81,7 +91,14 @@ export default {
         height: 40px;
         width: 156px;
         border-radius: 20px;
+        border: 1px solid #dbdbdb;
         border-color: #dbdbdb;
+        font-family: Montserrat;
+        font-size: 12px;
+        line-height: 15px;
+        font-weight: 400;
+        display: flex;
+        justify-content: center;
       }
     }
   }
