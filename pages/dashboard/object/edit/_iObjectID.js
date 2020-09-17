@@ -10,6 +10,11 @@ export default {
       title: 'Редактирование объекта'
     }
   },
+  data() {
+    return {
+      iObjectTypeID: 1
+    }
+  },
   computed: {
     SELECTEL_WEB() {
       return process.env.SELECTEL_WEB

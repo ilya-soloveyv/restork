@@ -76,10 +76,11 @@ export default {
   },
   methods: {
     toggleButton() {
+      if (!this.buttonActive) {
+        const item = this.$refs.item.getBoundingClientRect()
+        window.scrollTo(0, item.top + window.pageYOffset - 15)
+      }
       this.buttonActive = !this.buttonActive
-      const item = this.$refs.item.getBoundingClientRect()
-      console.log(item)
-      window.scrollTo(0, item.top + window.pageYOffset - 15)
     }
   }
 }

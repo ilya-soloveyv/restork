@@ -27,13 +27,9 @@
           label="Категорию жилья"
           label-for="input-sObjectTypeTitle"
         >
-          <b-form-input
-            id="input-sObjectTypeTitle"
-            v-model="object.object_type.sObjectTypeTitle"
-            disabled
-            type="text"
-            required
-          ></b-form-input>
+          <b-select v-model="iObjectTypeID" disabled>
+            <option value="1">{{ object.object_type.sObjectTypeTitle }}</option>
+          </b-select>
         </b-form-group>
         <b-form-group
           id="label-iObjectRoomCount"
@@ -303,13 +299,6 @@
       <pre>{{ roomOptions }}</pre>
       <pre>{{ objectObjectOptionsArray }}</pre>
       <pre>{{ objectRoomOptionsArray }}</pre> -->
-      <!-- <pre>{{ object }}</pre> -->
-      <!-- <p v-for="i in 10" :key="i">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium,
-        quos accusamus! Nostrum omnis autem exercitationem! Incidunt
-        perspiciatis fugiat error pariatur nihil nemo adipisci consectetur eaque
-        voluptate, placeat dolor possimus obcaecati.
-      </p> -->
       <!-- <pre>{{ object }}</pre> -->
     </div>
     <div class="wrapStatusTop">

@@ -121,6 +121,9 @@ h1 {
         font-size: 16px;
         font-weight: 600;
         box-shadow: none;
+        &:disabled {
+          background: none;
+        }
       }
     }
   }
