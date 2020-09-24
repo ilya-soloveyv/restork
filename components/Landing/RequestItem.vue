@@ -1,11 +1,9 @@
 <template>
   <div class="item">
-    1
-    <!-- <div class="left">
+    <div class="left">
       <div class="accomType">
         {{ accomType }}
       </div>
-      <hr class="line" />
       <div class="where">
         {{ where }}
       </div>
@@ -17,8 +15,22 @@
       </div>
     </div>
     <div class="right">
-      <div class="circle"></div>
-    </div> -->
+      <div class="circle">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#ffffff"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="bevel"
+        >
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -47,43 +59,59 @@ export default {
 
 <style lang="scss" scoped>
 .item {
+  position: relative;
   background: #077bff;
   border-radius: 5px;
-  padding: 22px 39px;
-  font-family: Montserrat;
+  padding: 20px 40px;
   font-size: 14px;
+  line-height: 20px;
   font-weight: 500;
   line-height: 20px;
   color: #ffffff;
+  cursor: pointer;
   // display: flex;
   // flex-direction: row;
   .left {
     display: flex;
     flex-direction: column;
-    .line {
-      background: #ffffff;
-      width: 100%;
-      height: 1px;
-      opacity: 0.3;
+    .accomType {
+      font-size: 14px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba($color: white, $alpha: 0.3);
     }
     .where {
       position: relative;
+      font-size: 20px;
+      line-height: 30px;
+      padding: 15px 0;
       &::before {
         content: '';
         position: absolute;
-        left: -15px;
+        top: 21px;
+        left: -20px;
         width: 12px;
         height: 17px;
-        background: #077bff;
+        // background: #077bff;
         background-image: url('/landing/geo-locator.svg');
+        background-size: contain;
         background-repeat: no-repeat;
-        background-position: center;
+        // background-position: center;
       }
+    }
+    .when {
+      padding-bottom: 5px;
+      padding-right: 50px;
+    }
+    .howMush {
+      padding-right: 50px;
     }
   }
   .right {
     display: flex;
     align-items: flex-end;
+    position: absolute;
+    right: 40px;
+    bottom: 20px;
     .circle {
       border-radius: 50%;
       border: 1px solid #ffffff;
@@ -94,15 +122,6 @@ export default {
       align-items: center;
       justify-content: center;
       position: relative;
-      &::before {
-        content: '';
-        position: absolute;
-        width: 9px;
-        height: 9px;
-        background-image: url('/landing/check-white-hor.svg');
-        background-repeat: no-repeat;
-        background-position: center;
-      }
     }
   }
 }
