@@ -69,6 +69,7 @@ export default {
   line-height: 20px;
   color: #ffffff;
   cursor: pointer;
+  outline: none;
   // display: flex;
   // flex-direction: row;
   .left {
