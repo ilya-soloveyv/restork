@@ -128,3 +128,47 @@ h1 {
     }
   }
 }
+
+.form-group-restork {
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 0;
+  background-color: white;
+  label {
+    margin: 3px 0 2px;
+    font-size: 14px;
+    line-height: 18px;
+    color: #818181;
+  }
+  .form-control {
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    height: 30px;
+    font-size: 16px;
+    line-height: 30px;
+    font-weight: 500;
+    color: black;
+    &::placeholder {
+      color: black;
+      opacity: 0.25;
+    }
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+  .input-group-append {
+    button {
+      border: none;
+      padding: 0;
+      box-shadow: none;
+      &:active {
+        background: none !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+}

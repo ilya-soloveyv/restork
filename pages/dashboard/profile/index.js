@@ -1,15 +1,16 @@
 import { ru } from 'vuejs-datepicker/dist/locale'
 import moment from 'moment'
 import Dropzone from 'nuxt-dropzone'
+
 export default {
   middleware: 'auth',
-  layout: 'dashboard',
+  layout: 'dashboardV2',
   components: {
     Dropzone
   },
   head() {
     return {
-      title: 'Profile'
+      title: 'Редактирование пользователя'
     }
   },
   data() {
@@ -112,6 +113,22 @@ export default {
     },
     newPasswordToggle() {
       this.$set(this, 'newPasswordView', !this.newPasswordView || false)
+    },
+    async addCard() {
+      const { url } = await this.$axios.$post('/api/b2p/addOrder', {
+        iUserID: this.$auth.state.user.iUserID
+      })
+      // console.log(url)
+      window.location.href = url
+      // this.$router.replace({ path: url })
+      // console.log(response)
+      // return redirect(url)
+    },
+    async removeCard() {
+      await this.$axios.$post('/api/user/clearB2PPan', {
+        iUserID: this.$auth.state.user.iUserID
+      })
+      await this.$auth.fetchUser()
     }
   }
 }
