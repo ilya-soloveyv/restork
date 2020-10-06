@@ -70,6 +70,11 @@ export default {
       } else {
         return false
       }
+    },
+    numberCard() {
+      if (this.$auth.loggedIn && this.$auth.state.user.B2PPan) {
+        return this.$auth.state.user.B2PPan.match(/.{1,4}/g).join(' ')
+      }
     }
   },
   methods: {

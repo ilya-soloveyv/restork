@@ -24,7 +24,22 @@
                         />
                       </template>
                       <template v-else>
-                        <img src="~/static/user.svg" class="empty" />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="64"
+                          height="64"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="#000000"
+                          stroke-width="1"
+                          stroke-linecap="round"
+                          stroke-linejoin="bevel"
+                        >
+                          <path
+                            d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                          ></path>
+                          <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
                       </template>
                       <div v-if="dropzoneLoading" class="spinner">
                         <b-spinner label="Loading..." variant="primary" />
@@ -38,15 +53,17 @@
               </dropzone>
             </client-only>
           </div>
+          <div class="line"></div>
           <div class="payment">
             <template v-if="$auth.loggedIn && $auth.state.user.B2PPan">
               <div class="usercard">
                 <div class="usercard__title">Карта</div>
                 <div class="usercard__number">
-                  {{ $auth.state.user.B2PPan }}
+                  {{ numberCard }}
                 </div>
-                <div @click="removeCard" class="usercard__remove">
+                <div class="usercard__remove">
                   <svg
+                    @click="removeCard"
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="16"
@@ -59,6 +76,57 @@
                   >
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </div>
+                <div class="usercard__ico">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="65.5"
+                    height="45"
+                    viewBox="0 0 65.5 45"
+                  >
+                    <g
+                      id="Сгруппировать_118"
+                      data-name="Сгруппировать 118"
+                      transform="translate(-212 -677)"
+                    >
+                      <rect
+                        id="Прямоугольник_223"
+                        data-name="Прямоугольник 223"
+                        width="65.5"
+                        height="45"
+                        rx="4"
+                        transform="translate(212 677)"
+                        fill="#dbdbdb"
+                      />
+                      <rect
+                        id="Прямоугольник_224"
+                        data-name="Прямоугольник 224"
+                        width="7"
+                        height="7"
+                        rx="1"
+                        transform="translate(220 691)"
+                        fill="#fff"
+                      />
+                      <rect
+                        id="Прямоугольник_226"
+                        data-name="Прямоугольник 226"
+                        width="23"
+                        height="4"
+                        rx="2"
+                        transform="translate(220 684)"
+                        fill="#fff"
+                      />
+                      <rect
+                        id="Прямоугольник_225"
+                        data-name="Прямоугольник 225"
+                        width="9"
+                        height="9"
+                        rx="4.5"
+                        transform="translate(262 706)"
+                        fill="#fff"
+                      />
+                    </g>
                   </svg>
                 </div>
               </div>
