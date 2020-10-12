@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 13 14">
+  <g id="Сгруппировать_202" data-name="Сгруппировать 202" transform="translate(-90 -104)">
+    <g id="Эллипс_42" data-name="Эллипс 42" transform="translate(99 104)" fill="#fff" stroke="#000" stroke-width="1">
+      <circle cx="2" cy="2" r="2" stroke="none"/>
+      <circle cx="2" cy="2" r="1.5" fill="none"/>
+    </g>
+    <g id="Эллипс_43" data-name="Эллипс 43" transform="translate(99 109)" fill="#fff" stroke="#000" stroke-width="1">
+      <circle cx="2" cy="2" r="2" stroke="none"/>
+      <circle cx="2" cy="2" r="1.5" fill="none"/>
+    </g>
+    <g id="Эллипс_44" data-name="Эллипс 44" transform="translate(99 114)" fill="#fff" stroke="#000" stroke-width="1">
+      <circle cx="2" cy="2" r="2" stroke="none"/>
+      <circle cx="2" cy="2" r="1.5" fill="none"/>
+    </g>
+    <line id="Линия_82" data-name="Линия 82" x2="6.417" transform="translate(90.5 105.925)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="1"/>
+    <line id="Линия_83" data-name="Линия 83" x2="6.417" transform="translate(90.5 111.059)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="1"/>
+    <line id="Линия_84" data-name="Линия 84" x2="6.417" transform="translate(90.5 116.193)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="1"/>
+  </g>
+</svg>
