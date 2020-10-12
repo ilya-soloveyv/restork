@@ -21,5 +21,9 @@ h2 {
   font-weight: 500;
   line-height: 30px;
   padding: 40px 0;
+  @media (max-width: 767px) {
+    font-size: 26px;
+    padding: 30px 0;
+  }
 }
 </style>

@@ -4,19 +4,19 @@
       <div class="wrapQuestionTitle">
         <QuestionTitle :title="title" />
       </div>
-      <div class="wrapQuestionGrid">
-        <div class="wrapQuestionImage">
-          <img :src="'/landing/' + image" />
-        </div>
-        <div class="wrapQuestionList">
-          <QuestionItem
-            v-for="item in list"
-            :key="item.id"
-            :req="item.req"
-            :res="item.res"
-          />
-        </div>
+      <div class="wrapQuestionImage">
+        <img :src="'/landing/' + image" />
       </div>
+      <div class="wrapQuestionList">
+        <QuestionItem
+          v-for="item in list"
+          :key="item.id"
+          :req="item.req"
+          :res="item.res"
+        />
+      </div>
+      <!-- <div class="wrapQuestionGrid">
+      </div> -->
     </div>
   </div>
 </template>
@@ -46,50 +46,57 @@ export default {
 <style lang="scss" scoped>
 .question {
   .wrapQuestion {
+    // background-color: red;
+    display: grid;
+    grid-template-columns: 200px 450px;
+    grid-template-rows: auto 1fr;
+    grid-gap: 50px;
+    margin: 0 auto;
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      grid-gap: 0;
+    }
     .wrapQuestionTitle {
-      padding: 90px 0 40px 0;
+      padding: 50px 0 0 0;
       margin: 0;
+      grid-column: 2/3;
+      grid-row: 1/2;
       @media (max-width: 767px) {
-        padding: 55px 0 40px 0;
-      }
-      @media (max-width: 575px) {
-        padding: 80px 0 30px 0;
-        font-size: 26px;
+        padding: 30px 0;
+        grid-column: 1/2;
+        grid-row: 1/2;
       }
       .wrapTitle {
         margin: 0;
         padding: 0;
       }
     }
-    .wrapQuestionGrid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr;
-      grid-column-gap: 55px;
+    .wrapQuestionImage {
+      grid-column: 1/2;
+      grid-row: 2/3;
+      // height: 100%;
+      // width: 100%;
+      // display: flex;
+      // justify-content: flex-end;
       @media (max-width: 767px) {
-        grid-column-gap: 45px;
+        display: none;
       }
-      @media (max-width: 575px) {
-        grid-template-columns: 1fr;
+      img {
+        height: 200px;
+        width: 200px;
       }
-      .wrapQuestionImage {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        @media (max-width: 575px) {
-          display: none;
-        }
-        img {
-          height: 200px;
-          width: 200px;
-        }
+    }
+    .wrapQuestionList {
+      grid-column: 2/3;
+      grid-row: 2/3;
+      @media (max-width: 767px) {
+        grid-column: 1/2;
+        grid-row: 2/3;
       }
-      .wrapQuestionList {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-      }
+      // display: grid;
+      // grid-template-columns: 1fr;
+      // grid-template-rows: auto;
     }
   }
 }
