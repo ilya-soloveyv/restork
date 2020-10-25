@@ -10,17 +10,20 @@
       <div class="desc">
         {{ desc }}
       </div>
-      <b-button variant="primary" size="lg">Добавить объект</b-button>
+      <b-button v-if="!isClient" variant="primary" size="lg">
+        Добавить объект
+      </b-button>
+      <SearchForm v-if="isClient" />
     </div>
   </div>
 </template>
 
 <script>
-// import SearchForm from '../SearchForm'
+import SearchForm from '../SearchForm'
 export default {
-  // components: {
-  //   SearchForm
-  // },
+  components: {
+    SearchForm
+  },
   props: {
     title: {
       type: String,
@@ -50,6 +53,20 @@ export default {
   min-height: 586px;
   padding-top: 140px;
   position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    // background-color: rgba(255, 255, 255, 0.5);
+    // background: linear-gradient(#80668b, #020305);
+    z-index: 1;
+    background: transparent;
+    background-image: linear-gradient(to bottom, #66828b, #020305);
+    opacity: 0.8;
+  }
   @media (max-width: 767px) {
     min-height: 455px;
   }
@@ -57,20 +74,21 @@ export default {
     min-height: 426px;
     padding-top: 180px;
   }
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    //background-color: rgba($color: #000000, $alpha: 0.4);
-    opacity: 0.4;
-    background: linear-gradient(#80668b, #020305);
-    z-index: -1;
-  }
+  // &:before {
+  //   content: '';
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   height: 100%;
+  //   width: 100%;
+  //   //background-color: rgba($color: #000000, $alpha: 0.4);
+  //   opacity: 0.4;
+  //   background: linear-gradient(#80668b, #020305);
+  //   z-index: -1;
+  // }
   .wrapWelcome {
-    width: 450px;
+    width: 100%;
+    z-index: 2;
     @media (max-width: 575px) {
       display: flex;
       flex-direction: column;
