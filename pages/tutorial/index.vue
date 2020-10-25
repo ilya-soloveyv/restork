@@ -1,11 +1,13 @@
 <template>
   <div class="wrapTutorial">
+    <!-- <h1 @click="test">test</h1> -->
     <div class="wrapTitle">
-      <Title :stepNumber="stepNumber" />
+      <Title :stepNumber="currentStepNumber" />
     </div>
     <div class="wrapStep">
       <Step1
-        v-if="stepNumber == 1"
+        v-if="currentStepNumber == 1"
+        :objectType="objectType"
         :list="[
           {
             id: 1,
@@ -21,15 +23,15 @@
           }
         ]"
       />
-      <Step2 v-if="stepNumber == 2" />
-      <Step3 v-if="stepNumber == 3" />
-      <Step4 v-if="stepNumber == 4" />
-      <Step5 v-if="stepNumber == 5" />
-      <Step6 v-if="stepNumber == 6" />
-      <Step7 v-if="stepNumber == 7" />
-      <Step8 v-if="stepNumber == 8" />
-      <Step9 v-if="stepNumber == 9" />
-      <Step10 v-if="stepNumber == 10" />
+      <Step2 v-if="currentStepNumber == 2" />
+      <Step3 v-if="currentStepNumber == 3" />
+      <Step4 v-if="currentStepNumber == 4" />
+      <Step5 v-if="currentStepNumber == 5" />
+      <Step6 v-if="currentStepNumber == 6" />
+      <Step7 v-if="currentStepNumber == 7" />
+      <Step8 v-if="currentStepNumber == 8" />
+      <Step9 v-if="currentStepNumber == 9" />
+      <Step10 v-if="currentStepNumber == 10" />
     </div>
     <div class="wrapHint">
       <HintStep1
@@ -56,99 +58,103 @@
       />
     </div>
     <div class="wrapProgress">
-      <ProgressBar v-on:changeStep="showStep" :currentStep="stepNumber" />
+      <ProgressBar
+        v-on:changeStep="setCurrentStepNumberFromPB"
+        :currentStep="currentStepNumber"
+      />
     </div>
+
     <div id="popupSteps" class="popupSteps">
       <div class="popup__body">
         <div class="popup__content landing-adaptive">
           <div class="popup__title"><a href="#" class="popup_close">X</a></div>
           <div class="popup__text">
-            <div class="item" v-on:click="changeStepNumber(1)">
+            <div class="item" v-on:click="setCurrentStepNumberFromMenu(1)">
               <div class="desc">Шаг 1 | Категория объекта</div>
               <div class="circle">
                 <CrossOrTickWithCircle
-                  :currentStepNumber="stepNumber"
+                  :currentStepNumber="currentStepNumber"
                   :stepNumber="1"
                 />
               </div>
             </div>
-            <div class="item" v-on:click="changeStepNumber(2)">
+            <div class="item" v-on:click="setCurrentStepNumberFromMenu(2)">
               <div class="desc">Шаг 2 | Основные параметры</div>
               <div class="circle">
                 <CrossOrTickWithCircle
-                  :currentStepNumber="stepNumber"
+                  :currentStepNumber="currentStepNumber"
                   :stepNumber="2"
                 />
               </div>
             </div>
-            <div class="item" v-on:click="changeStepNumber(3)">
+            <div class="item" v-on:click="setCurrentStepNumberFromMenu(3)">
               <div class="desc">Шаг 3 | Удобства</div>
               <div class="circle">
                 <CrossOrTickWithCircle
-                  :currentStepNumber="stepNumber"
+                  :currentStepNumber="currentStepNumber"
                   :stepNumber="3"
                 />
               </div>
             </div>
-            <div class="item">
+            <div class="item" v-on:click="setCurrentStepNumberFromMenu(4)">
               <div class="desc">Шаг 4 | Удобства</div>
               <div class="circle">
                 <CrossOrTickWithCircle
-                  :currentStepNumber="stepNumber"
+                  :currentStepNumber="currentStepNumber"
                   :stepNumber="4"
                 />
               </div>
             </div>
-            <div class="item">
+            <div class="item" v-on:click="setCurrentStepNumberFromMenu(5)">
               <div class="desc">Шаг 5 | Особенности</div>
               <div class="circle">
                 <CrossOrTickWithCircle
-                  :currentStepNumber="stepNumber"
+                  :currentStepNumber="currentStepNumber"
                   :stepNumber="5"
                 />
               </div>
             </div>
-            <div class="item">
+            <div class="item" v-on:click="setCurrentStepNumberFromMenu(6)">
               <div class="desc">Шаг 6 | Местоположение</div>
               <div class="circle">
                 <CrossOrTickWithCircle
-                  :currentStepNumber="stepNumber"
+                  :currentStepNumber="currentStepNumber"
                   :stepNumber="6"
                 />
               </div>
             </div>
-            <div class="item">
+            <div class="item" v-on:click="setCurrentStepNumberFromMenu(7)">
               <div class="desc">Шаг 7 | Значимые места рядом</div>
               <div class="circle">
                 <CrossOrTickWithCircle
-                  :currentStepNumber="stepNumber"
+                  :currentStepNumber="currentStepNumber"
                   :stepNumber="7"
                 />
               </div>
             </div>
-            <div class="item">
+            <div class="item" v-on:click="setCurrentStepNumberFromMenu(8)">
               <div class="desc">Шаг 8 | Фотографии</div>
               <div class="circle">
                 <CrossOrTickWithCircle
-                  :currentStepNumber="stepNumber"
+                  :currentStepNumber="currentStepNumber"
                   :stepNumber="8"
                 />
               </div>
             </div>
-            <div class="item">
+            <div class="item" v-on:click="setCurrentStepNumberFromMenu(9)">
               <div class="desc">Шаг 9 | Название и описание</div>
               <div class="circle">
                 <CrossOrTickWithCircle
-                  :currentStepNumber="stepNumber"
+                  :currentStepNumber="currentStepNumber"
                   :stepNumber="9"
                 />
               </div>
             </div>
-            <div class="item">
+            <div class="item" v-on:click="setCurrentStepNumberFromMenu(10)">
               <div class="desc">Шаг 10 | Приготовьтесь к приёму гостей</div>
               <div class="circle">
                 <CrossOrTickWithCircle
-                  :currentStepNumber="stepNumber"
+                  :currentStepNumber="currentStepNumber"
                   :stepNumber="10"
                 />
               </div>
@@ -179,7 +185,7 @@ import CrossOrTickWithCircle from '~/components/Tutorial/CrossOrTickWithCircle'
 export default {
   data() {
     return {
-      stepNumber: 1
+      currentStepNumber: 1
     }
   },
   layout: 'dashboardV2Tutorial',
@@ -199,15 +205,25 @@ export default {
     ProgressBar,
     CrossOrTickWithCircle
   },
-  methods: {
-    showStep(step) {
-      console.log('!!! showStep')
-      this.stepNumber = step
-    },
-    changeStepNumber(stepNumber) {
-      this.stepNumber = stepNumber
-      console.log('!!! changeStepNumber to: ', this.stepNumber)
+  computed: {
+    objectType() {
+      return this.$store.state.objectType.list
     }
+  },
+  methods: {
+    setCurrentStepNumberFromMenu(stepNumber) {
+      this.currentStepNumber = stepNumber
+    },
+    setCurrentStepNumberFromPB(step) {
+      this.currentStepNumber += step
+    },
+    test() {
+      console.log('test')
+      window.location.replace('/tutorial/Step2')
+    }
+  },
+  async asyncData({ store, params }) {
+    await store.dispatch('objectType/GET_LIST')
   }
 }
 </script>
@@ -256,6 +272,9 @@ export default {
     left: 0;
     opacity: 0;
     visibility: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: all 0.8s ease 0s;
     &:target {
       opacity: 1;
       visibility: visible;
@@ -270,10 +289,9 @@ export default {
         color: #000;
         //padding: 30px;
         position: relative;
-        // display: flex;
-        // flex-direction: column;
-        // align-items: center;
-        //justify-content: center;
+        opacity: 0;
+        transform: translate(0px, -100%);
+        transition: all 0.8s ease 0s;
         .popup__close {
           position: absolute;
           right: 10px;
@@ -312,6 +330,10 @@ export default {
         }
       }
     }
+  }
+  .popupSteps:target .popup__content {
+    transform: translate(0px, 0px);
+    opacity: 1;
   }
 }
 </style>

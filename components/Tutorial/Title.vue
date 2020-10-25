@@ -1,7 +1,7 @@
 <template>
   <div class="title">
     <div class="leftTitle">
-      <div class="circle">
+      <div class="circle" v-b-modal.modalHint>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -20,9 +20,29 @@
           <line x1="3" y1="12" x2="3.01" y2="12"></line>
           <line x1="3" y1="18" x2="3.01" y2="18"></line>
         </svg>
+        <b-modal
+          id="modalHint"
+          scrollable
+          hide-backdrop
+          class="modalStepHint"
+          title="BootstrapVue"
+        >
+          <p class="my-4"><PopupStepBootstrap /></p>
+        </b-modal>
       </div>
-      <div class="stepNumber">Шаг {{ stepNumber }} | Категория объекта</div>
+      <div class="stepNumber">
+        Шаг {{ currentStep }} | {{ currentStepDesc }}
+      </div>
     </div>
+
+    <!-- <div>
+      <div v-b-modal.modalHint>Launch demo modal</div>
+
+      <b-modal id="modalHint" title="BootstrapVue">
+        <p class="my-4">Hello from modal!</p>
+      </b-modal>
+    </div> -->
+
     <div class="rightTitle">
       <div class="hint">
         <div class="hintWord"><a href="#popupSteps">Подсказка</a></div>
@@ -32,17 +52,29 @@
 </template>
 
 <script>
+import PopupStepBootstrap from '~/components/Tutorial/PopupStepBootstrap'
 export default {
-  props: {
-    stepNumber: {
-      type: Number,
-      default: null
+  components: {
+    PopupStepBootstrap
+  },
+  computed: {
+    currentStep() {
+      return this.$store.state.tutorial.step
+    },
+    currentStepDesc() {
+      return this.$store.getters['tutorial/currentStepDesc']
+      // return this.$store.getters.tutorial.currentStepDesc
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+/deep/ #modalHint {
+  .modal-dialog {
+    max-width: 100%;
+  }
+}
 .title {
   margin: 27px 0 45px;
   @media (max-width: 991px) {

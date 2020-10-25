@@ -2,16 +2,15 @@
   <div class="progressBar">
     <div class="progressB">
       <div
-        v-for="(stepActive, index) in isStepActive"
+        v-for="(step, index) in maxStep"
         :key="index"
-        v-bind:class="{ current: stepActive }"
+        v-bind:class="{ current: currentStep >= step }"
         class="step"
       ></div>
     </div>
     <div class="wrapBtn">
       <button class="prevBtn" v-on:click="prevStep"><span>Назад</span></button>
-      <span class="steps">{{ stepNumber }}/{{ maxStep }}</span>
-      <span class="steps">{{ currentStep }}</span>
+      <span class="steps">{{ currentStep }}/{{ maxStep }}</span>
       <button class="nextBtn" v-on:click="nextStep">Далеe</button>
     </div>
   </div>
@@ -21,63 +20,29 @@
 export default {
   data() {
     return {
-      stepNumber: 1,
       minStep: 1,
-      maxStep: 10,
-      isStepActive: [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
+      maxStep: 10
     }
   },
-  props: {
-    currentStep: {
-      type: Number,
-      default: 1
+  computed: {
+    currentStep() {
+      return this.$store.state.tutorial.step
     }
   },
-  // computed: {
-  //   stepNumber: {
-  //     get() {
-  //       return this.stepNumberProp
-  //     },
-  //     set(value) {
-  //       this.stepNumber = value
-  //     }
-  //   }
-  // },
   methods: {
     prevStep() {
-      if (this.stepNumber > this.minStep) {
-        this.stepNumber -= 1
-        this.isStepActive[this.stepNumber] = false
-        this.$emit('changeStep', this.stepNumber)
+      if (this.currentStep > this.minStep) {
+        this.$store.commit('tutorial/DECREMENT')
+        const url = '/tutorial/step' + this.currentStep
+        this.$router.push(url)
       }
-      console.log('prevStep ', this.stepNumber)
-      console.log(
-        'prevStep this.isStepActive[this.stepNumber - 1]',
-        this.isStepActive
-      )
     },
     nextStep() {
-      if (this.stepNumber < this.maxStep) {
-        this.stepNumber += 1
-        this.isStepActive[this.stepNumber - 1] = true
-        this.$emit('changeStep', this.stepNumber)
+      if (this.currentStep < this.maxStep) {
+        this.$store.commit('tutorial/INCREMENT')
+        const url = '/tutorial/step' + this.currentStep
+        this.$router.push(url)
       }
-      console.log('nextStep ', this.stepNumber)
-      console.log(
-        'nextStep this.isStepActive[this.stepNumber - 1]',
-        this.isStepActive
-      )
     }
   }
 }
@@ -120,11 +85,12 @@ export default {
       border-radius: 5px;
       border: 1px solid #077bff;
       background: #ffffff;
-      @media (max-width: 767px) {
-        width: 156px;
-      }
       @media (max-width: 991px) {
         width: 240px;
+      }
+      @media (max-width: 767px) {
+        width: 156px;
+        height: 40px;
       }
       span {
         font-size: 16px;
@@ -139,11 +105,12 @@ export default {
       border-radius: 5px;
       border: 1px solid #077bff;
       background: #077bff;
-      @media (max-width: 767px) {
-        width: 156px;
-      }
       @media (max-width: 991px) {
         width: 240px;
+      }
+      @media (max-width: 767px) {
+        width: 156px;
+        height: 40px;
       }
       span {
         font-size: 16px;

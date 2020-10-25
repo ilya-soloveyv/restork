@@ -24,6 +24,7 @@
         </b-form-group>
       </div>
     </div>
+    <pre>{{ objectType }}</pre>
   </div>
 </template>
 
@@ -33,6 +34,10 @@ export default {
     list: {
       type: Array,
       default: null
+    },
+    objectType: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
