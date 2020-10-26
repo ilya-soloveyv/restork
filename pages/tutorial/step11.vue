@@ -32,55 +32,12 @@
           </b-form-group>
         </div>
         <div class="hintInsideMain">
-          <!-- <HintStep1
-            :list="[
-              {
-                name: 'Single',
-                desc:
-                  'Однокомнатный, для размещения одного отдыхающего. Спальное место одно.'
-              },
-              {
-                name: 'Double',
-                desc:
-                  'Однокомнатный номер для двоих. Может быть с одной большой кроватью или с двумя раздельными кроватями.'
-              },
-              {
-                name: 'Triple',
-                desc: 'Номер для троих отдыхающих.'
-              },
-              {
-                name: 'Family Room',
-                desc: 'Семейный двух- или трехкомнатный номер.'
-              }
-            ]"
-          /> -->
           <HintStep11 />
         </div>
       </div>
     </div>
     <div class="wrapHint">
-      <HintStep1
-        :list="[
-          {
-            name: 'Single',
-            desc:
-              'Однокомнатный, для размещения одного отдыхающего. Спальное место одно.'
-          },
-          {
-            name: 'Double',
-            desc:
-              'Однокомнатный номер для двоих. Может быть с одной большой кроватью или с двумя раздельными кроватями.'
-          },
-          {
-            name: 'Triple',
-            desc: 'Номер для троих отдыхающих.'
-          },
-          {
-            name: 'Family Room',
-            desc: 'Семейный двух- или трехкомнатный номер.'
-          }
-        ]"
-      />
+      <HintStep11 />
     </div>
     <div class="wrapProgress">
       <ProgressBar />
@@ -93,42 +50,15 @@
 import ProgressBar from '~/components/Tutorial/ProgressBar'
 import Title from '~/components/Tutorial/Title'
 import PopupStep from '~/components/Tutorial/PopupStep'
-import HintStep1 from '~/components/Tutorial/HintStep1'
 import HintStep11 from '~/components/Tutorial/HintStep11'
 
 export default {
-  data() {
-    return {
-      currentStepNumber: 1,
-      iObjectTypeID: 0,
-      iCategoryID: 0,
-      roomCategory: [
-        { id: 1, title: 'Single' },
-        { id: 2, title: 'Double' },
-        { id: 3, title: 'Triple' },
-        { id: 4, title: 'Family room' }
-      ]
-    }
-  },
   layout: 'dashboardV2Tutorial',
   components: {
     Title,
     ProgressBar,
     PopupStep,
-    HintStep1,
     HintStep11
-  },
-  computed: {
-    objectType() {
-      return this.$store.state.objectType.list
-    },
-    object() {
-      return this.$store.state.tutorial.object
-    }
-  },
-  methods: {},
-  async asyncData({ store, params }) {
-    await store.dispatch('objectType/GET_LIST')
   }
 }
 </script>
@@ -140,12 +70,21 @@ export default {
   grid-template-rows: auto 1fr auto;
   height: calc(100vh - 63px);
   @media (max-width: 991px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 767px) {
     grid-template-columns: 1fr;
   }
   .wrapTitle {
     // background: blue;
     grid-column: 1/2;
     grid-row: 1/2;
+    @media (max-width: 991px) {
+      grid-column: 1/3;
+    }
+    @media (max-width: 767px) {
+      grid-column: 1/2;
+    }
   }
   .wrapStep11 {
     // background: red;
@@ -194,8 +133,13 @@ export default {
     grid-row: 2/4;
     overflow: auto;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     @media (max-width: 991px) {
+      //   display: none;
+      grid-column: 2/3;
+      grid-row: 2/3;
+    }
+    @media (max-width: 767px) {
       display: none;
     }
   }
@@ -203,6 +147,12 @@ export default {
     // background: yellow;
     grid-column: 1/2;
     grid-row: 3/4;
+    @media (max-width: 991px) {
+      grid-column: 1/3;
+    }
+    @media (max-width: 767px) {
+      grid-column: 1/2;
+    }
   }
 }
 </style>

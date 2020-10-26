@@ -171,6 +171,7 @@
           </yandex-map>
         </client-only>
       </div>
+      <pre>{{ object.aObjectCoordinate }}</pre>
       <h2>Основные места рядом</h2>
       <div class="places">
         <div class="item">

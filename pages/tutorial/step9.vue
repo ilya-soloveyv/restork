@@ -11,7 +11,7 @@
         решающим фактором.
       </div>
       <div class="imageGrid">
-        <div class="itemImage">
+        <div v-for="(item, index) in 10" :key="index" class="itemImage">
           <img src="/tutorial/step8-example.jpg" alt="" />
           <div class="circle-left">
             <svg
@@ -30,205 +30,7 @@
             </svg>
           </div>
           <div class="circle-right">
-            <span>1</span>
-          </div>
-        </div>
-        <div class="itemImage">
-          <img src="/tutorial/step8-example.jpg" alt="" />
-          <div class="circle-left">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </div>
-          <div class="circle-right">
-            <span>2</span>
-          </div>
-        </div>
-        <div class="itemImage">
-          <img src="/tutorial/step8-example.jpg" alt="" />
-          <div class="circle-left">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </div>
-          <div class="circle-right">
-            <span>3</span>
-          </div>
-        </div>
-        <div class="itemImage">
-          <img src="/tutorial/step8-example.jpg" alt="" />
-          <div class="circle-left">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </div>
-          <div class="circle-right">
-            <span>4</span>
-          </div>
-        </div>
-        <div class="itemImage">
-          <img src="/tutorial/step8-example.jpg" alt="" />
-          <div class="circle-left">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </div>
-          <div class="circle-right">
-            <span>5</span>
-          </div>
-        </div>
-        <div class="itemImage">
-          <img src="/tutorial/step8-example.jpg" alt="" />
-          <div class="circle-left">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </div>
-          <div class="circle-right">
-            <span>6</span>
-          </div>
-        </div>
-        <div class="itemImage">
-          <img src="/tutorial/step8-example.jpg" alt="" />
-          <div class="circle-left">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </div>
-          <div class="circle-right">
-            <span>7</span>
-          </div>
-        </div>
-        <div class="itemImage">
-          <img src="/tutorial/step8-example.jpg" alt="" />
-          <div class="circle-left">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </div>
-          <div class="circle-right">
-            <span>8</span>
-          </div>
-        </div>
-        <div class="itemImage">
-          <img src="/tutorial/step8-example.jpg" alt="" />
-          <div class="circle-left">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </div>
-          <div class="circle-right">
-            <span>9</span>
-          </div>
-        </div>
-        <div class="itemImage">
-          <img src="/tutorial/step8-example.jpg" alt="" />
-          <div class="circle-left">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </div>
-          <div class="circle-right">
-            <span>1</span>
+            <span>{{ item }}</span>
           </div>
         </div>
       </div>
@@ -352,7 +154,7 @@ export default {
       // overflow: hidden;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
-      grid-template-rows: auto;
+      grid-template-rows: 1fr;
       grid-column-gap: 25px;
       grid-row-gap: 20px;
       position: relative;
@@ -364,6 +166,10 @@ export default {
         // width: 100%;
         // height: 100%;
         position: relative;
+        img {
+          width: 100%;
+          height: 100%;
+        }
         .circle-left {
           position: absolute;
           top: 20px;

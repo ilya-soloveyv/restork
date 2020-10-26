@@ -2,33 +2,10 @@
   <div class="title">
     <div class="leftTitle">
       <div class="circle" v-b-modal.modalHint>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#000000"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <line x1="8" y1="6" x2="21" y2="6"></line>
-          <line x1="8" y1="12" x2="21" y2="12"></line>
-          <line x1="8" y1="18" x2="21" y2="18"></line>
-          <line x1="3" y1="6" x2="3.01" y2="6"></line>
-          <line x1="3" y1="12" x2="3.01" y2="12"></line>
-          <line x1="3" y1="18" x2="3.01" y2="18"></line>
-        </svg>
-        <b-modal
-          id="modalHint"
-          scrollable
-          hide-backdrop
-          class="modalStepHint"
-          title="BootstrapVue"
-        >
-          <p class="my-4"><PopupStepBootstrap /></p>
-        </b-modal>
+        <div class="picture">
+          <img src="~/static/tutorial/title-left-icon.svg" />
+        </div>
+        <PopupStepBootstrap />
       </div>
       <div class="stepNumber">
         Шаг {{ currentStep }} | {{ currentStepDesc }}
@@ -72,7 +49,22 @@ export default {
 <style lang="scss" scoped>
 /deep/ #modalHint {
   .modal-dialog {
+    height: 100%;
     max-width: 100%;
+    margin: 63px 0 0;
+    .modal-content {
+      border-radius: 0;
+      border: 0;
+      .modal-header {
+        display: none;
+      }
+      .modal-body {
+        padding: 0;
+      }
+      .modal-footer {
+        display: none;
+      }
+    }
   }
 }
 .title {
@@ -108,6 +100,7 @@ export default {
     }
   }
   .rightTitle {
+    cursor: pointer;
     .hint {
       width: 156px;
       height: 40px;
@@ -146,6 +139,9 @@ export default {
         color: #000000;
         @media (max-width: 767px) {
           display: none;
+        }
+        a {
+          text-decoration: none;
         }
       }
     }
