@@ -1,103 +1,41 @@
 <template>
-  <div id="popupSteps" class="popupSteps">
-    <div class="popup__body">
-      <div class="popup__content landing-adaptive">
-        <div class="popup__title"><a href="#" class="popup_close">X</a></div>
-        <div class="popup__text">
-          <div class="item" v-on:click="setCurrentStep(1)">
-            <div class="desc">Шаг 1 | Категория объекта</div>
-            <div class="circle">
-              <CrossOrTickWithCircle
-                :currentStepNumber="currentStep"
-                :stepNumber="1"
-              />
-            </div>
-          </div>
-          <div class="item" v-on:click="setCurrentStep(2)">
-            <div class="desc">Шаг 2 | Основные параметры</div>
-            <div class="circle">
-              <CrossOrTickWithCircle
-                :currentStepNumber="currentStep"
-                :stepNumber="2"
-              />
-            </div>
-          </div>
-          <div class="item" v-on:click="setCurrentStep(3)">
-            <div class="desc">Шаг 3 | Удобства</div>
-            <div class="circle">
-              <CrossOrTickWithCircle
-                :currentStepNumber="currentStep"
-                :stepNumber="3"
-              />
-            </div>
-          </div>
-          <div class="item" v-on:click="setCurrentStep(4)">
-            <div class="desc">Шаг 4 | Удобства</div>
-            <div class="circle">
-              <CrossOrTickWithCircle
-                :currentStepNumber="currentStep"
-                :stepNumber="4"
-              />
-            </div>
-          </div>
-          <div class="item" v-on:click="setCurrentStep(5)">
-            <div class="desc">Шаг 5 | Особенности</div>
-            <div class="circle">
-              <CrossOrTickWithCircle
-                :currentStepNumber="currentStep"
-                :stepNumber="5"
-              />
-            </div>
-          </div>
-          <div class="item" v-on:click="setCurrentStep(6)">
-            <div class="desc">Шаг 6 | Местоположение</div>
-            <div class="circle">
-              <CrossOrTickWithCircle
-                :currentStepNumber="currentStep"
-                :stepNumber="6"
-              />
-            </div>
-          </div>
-          <div class="item" v-on:click="setCurrentStep(7)">
-            <div class="desc">Шаг 7 | Значимые места рядом</div>
-            <div class="circle">
-              <CrossOrTickWithCircle
-                :currentStepNumber="currentStep"
-                :stepNumber="7"
-              />
-            </div>
-          </div>
-          <div class="item" v-on:click="setCurrentStep(8)">
-            <div class="desc">Шаг 8 | Фотографии</div>
-            <div class="circle">
-              <CrossOrTickWithCircle
-                :currentStepNumber="currentStep"
-                :stepNumber="8"
-              />
-            </div>
-          </div>
-          <div class="item" v-on:click="setCurrentStep(9)">
-            <div class="desc">Шаг 9 | Название и описание</div>
-            <div class="circle">
-              <CrossOrTickWithCircle
-                :currentStepNumber="currentStep"
-                :stepNumber="9"
-              />
-            </div>
-          </div>
-          <div class="item" v-on:click="setCurrentStep(10)">
-            <div class="desc">Шаг 10 | Приготовьтесь к приёму гостей</div>
-            <div class="circle">
-              <CrossOrTickWithCircle
-                :currentStepNumber="currentStep"
-                :stepNumber="10"
-              />
-            </div>
+  <b-modal id="modalHintStep" scrollable hide-backdrop class="modalStepHint">
+    <div class="popup">
+      <div class="closeBtn" v-on:click="closeModal">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#818181"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </div>
+      <div class="stepList">
+        <div
+          v-for="(item, index) in steps"
+          :key="index"
+          class="item"
+          v-on:click="setCurrentStep(index + 1)"
+        >
+          <div class="desc">Шаг {{ index + 1 }} | {{ item }}</div>
+          <div class="circle">
+            <CrossOrTickWithCircle
+              :currentStepNumber="currentStep"
+              :stepNumber="index + 1"
+            />
           </div>
         </div>
       </div>
+      <pre>{{ steps }}</pre>
     </div>
-  </div>
+  </b-modal>
 </template>
 <script>
 import CrossOrTickWithCircle from '~/components/Tutorial/CrossOrTickWithCircle'
@@ -108,6 +46,9 @@ export default {
   computed: {
     currentStep() {
       return this.$store.state.tutorial.step
+    },
+    steps() {
+      return this.$store.state.tutorial.steps
     }
   },
   methods: {
@@ -117,81 +58,71 @@ export default {
       console.log('currentStep ' + this.currentStep)
       const url = '/tutorial/step' + this.currentStep
       this.$router.push(url)
+    },
+    closeModal() {
+      this.$bvModal.hide('modalHintStep')
     }
   }
 }
 </script>
-
 <style lang="scss" scoped>
-.popupSteps {
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 63px;
-  left: 0;
-  opacity: 0;
-  visibility: hidden;
-  overflow-x: hidden;
-  overflow-y: auto;
-  transition: all 0.8s ease 0s;
-  &:target {
-    opacity: 1;
-    visibility: visible;
-  }
-  .popup__body {
+/deep/ #modalHintStep {
+  .modal-dialog {
     height: 100%;
-    width: 100%;
-    .popup__content {
-      height: 100%;
-      width: 100%;
-      background-color: #fff;
-      color: #000;
-      //padding: 30px;
-      position: relative;
-      opacity: 0;
-      transform: translate(0px, -100%);
-      transition: all 0.8s ease 0s;
-      .popup__close {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        color: #000;
-        text-decoration: none;
+    max-width: 100%;
+    margin: 79px 0 0;
+    @media (max-width: 991px) {
+      margin: 63px 0 0;
+    }
+    .modal-content {
+      border-radius: 0;
+      border: 0;
+      .modal-header {
+        display: none;
       }
-      .popup__title {
-        width: 100%;
-        font-size: 20px;
-      }
-      .popup__text {
-        height: 100%;
-        width: 100%;
-        .item {
-          display: flex;
-          justify-content: space-between;
-          margin-bottom: 25px;
-          .desc {
-            font-family: Montserrat;
-            font-size: 14px;
-            line-height: 20px;
-            font-weight: 500;
-            color: #000000;
-          }
-          .circle {
+      .modal-body {
+        padding: 0;
+        .popup {
+          padding: 0 25px;
+          .closeBtn {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            height: 20px;
-            width: 20px;
-            border: 1px solid #000;
+            border: 1px solid #818181;
+            cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
+            margin: 30px 0;
+          }
+          .item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            cursor: pointer;
+            .desc {
+              font-family: Montserrat;
+              font-size: 14px;
+              line-height: 20px;
+              font-weight: 500;
+              color: #000000;
+            }
+            .circle {
+              border-radius: 50%;
+              height: 20px;
+              width: 20px;
+              border: 1px solid #000;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
           }
         }
       }
+      .modal-footer {
+        display: none;
+      }
     }
   }
-}
-.popupSteps:target .popup__content {
-  transform: translate(0px, 0px);
-  opacity: 1;
 }
 </style>

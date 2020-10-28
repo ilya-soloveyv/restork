@@ -4,9 +4,9 @@
       <Title />
     </div>
 
-    <div class="wrapStep4">
+    <div class="wrapStep5">
       <div class="itemDesc">
-        Выберите, какие из удобств есть внутри вашего объекта
+        Выбирите, какие из особенностей есть в вашем объекте.
       </div>
 
       <div class="checkboxGrid">
@@ -45,14 +45,12 @@
     <div class="wrapProgress">
       <ProgressBar />
     </div>
-    <PopupStep />
   </div>
 </template>
 
 <script>
 import ProgressBar from '~/components/Tutorial/ProgressBar'
 import Title from '~/components/Tutorial/Title'
-import PopupStep from '~/components/Tutorial/PopupStep'
 import HintStep1 from '~/components/Tutorial/HintStep1'
 import Checkbox from '~/components/Tutorial/Checkbox'
 
@@ -74,7 +72,6 @@ export default {
   components: {
     Title,
     ProgressBar,
-    PopupStep,
     HintStep1,
     Checkbox
   },
@@ -104,11 +101,13 @@ export default {
     grid-column: 1/2;
     grid-row: 1/2;
   }
-  .wrapStep4 {
+  .wrapStep5 {
     // background: red;
     grid-column: 1/2;
     grid-row: 2/3;
     overflow: auto;
+    margin: -15px;
+    padding: 15px;
     .itemDesc {
       margin: 0 0 15px;
       font-size: 20px;

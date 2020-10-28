@@ -38,9 +38,14 @@ export default {
       }
     },
     nextStep() {
-      if (this.currentStep < this.maxStep) {
+      if (this.currentStep <= this.maxStep) {
         this.$store.commit('tutorial/INCREMENT')
         const url = '/tutorial/step' + this.currentStep
+        this.$router.push(url)
+      }
+      if (this.currentStep === this.maxStep + 1) {
+        // this.$store.commit('tutorial/INCREMENT')
+        const url = '/tutorial/greeting'
         this.$router.push(url)
       }
     }

@@ -4,43 +4,62 @@
       <Title />
     </div>
 
-    <div class="wrapStep9">
-      <div class="hostel">
-        <div class="itemDesc">
-          Напишите название вашего объекта
-        </div>
-        <div class="hostelInfoInput">
-          <b-form-group
-            id="objectNameLabel"
-            class="form-group-restork"
-            label="Название объекта"
-            label-for="objectNameInput"
-          >
-            <b-form-input
-              id="objectNameInput"
-              placeholder="Название"
-              type="text"
-            ></b-form-input>
-          </b-form-group>
-        </div>
-
-        <div class="itemDesc secondDesc">
-          Расскажите, чем интересен ваш район, и укажите особенности жилья,
-          например быстрый Wi-Fi или парковку
-        </div>
-
+    <div class="wrapStep3">
+      <div class="itemDesc">
+        Напишите общую площадь номера, с учётом прихожей и балкона
+      </div>
+      <div class="roomSquareInput singleInput">
         <b-form-group
-          id="objectNameLabel"
+          id="roomSquareLabel"
           class="form-group-restork"
-          label="Название объекта"
-          label-for="objectNameInput"
+          label="Площадь объекта"
+          label-for="roomSquareInput"
         >
-          <b-form-textarea
-            id="featuresTextarea"
-            placeholder="Описание"
-            rows="3"
-            max-rows="10"
-          ></b-form-textarea>
+          <b-form-input
+            id="roomSquareInput"
+            placeholder="0"
+            type="text"
+          ></b-form-input>
+        </b-form-group>
+      </div>
+
+      <div class="itemDesc secondDesc">
+        Укажите количество комнат в номере
+      </div>
+      <div class="roomNumberInput singleInput">
+        <b-form-group
+          id="roomNumberLabel"
+          class="form-group-restork"
+          label="Комнат"
+          label-for="roomNumberInput"
+        >
+          <b-form-input
+            id="roomNumberInput"
+            placeholder="0"
+            type="text"
+          ></b-form-input>
+        </b-form-group>
+      </div>
+
+      <div class="itemDesc secondDesc">
+        Напишите сколько в общем спальных мест в номере.
+        <div class="explanation">
+          Не считайте дополнительные места, детские кроватки, раскладушки или
+          надувные матрасы.
+        </div>
+      </div>
+      <div class="placeNumberInput singleInput">
+        <b-form-group
+          id="placeNumberLabel"
+          class="form-group-restork"
+          label="Спальных мест"
+          label-for="placeNumberInput"
+        >
+          <b-form-input
+            id="placeNumberInput"
+            placeholder="0"
+            type="text"
+          ></b-form-input>
         </b-form-group>
       </div>
     </div>
@@ -128,13 +147,11 @@ export default {
     grid-column: 1/2;
     grid-row: 1/2;
   }
-  .wrapStep9 {
+  .wrapStep3 {
     // background: red;
     grid-column: 1/2;
     grid-row: 2/3;
     overflow: auto;
-    margin: -15px;
-    padding: 15px;
     .itemDesc {
       margin: 0 0 15px;
       font-size: 20px;
@@ -149,6 +166,44 @@ export default {
         @media (max-width: 767px) {
           margin-top: 37px;
         }
+      }
+      .explanation {
+        font-size: 14px;
+        @media (max-width: 767px) {
+          display: none;
+        }
+      }
+    }
+    .singleInput {
+      width: 203px;
+      @media (max-width: 991px) {
+        width: 226px;
+      }
+      @media (max-width: 767px) {
+        width: 250px;
+      }
+    }
+    .doubleInput {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      grid-gap: 5px;
+      @media (max-width: 767px) {
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 10px;
+        grid-row-gap: 20px;
+      }
+    }
+    .tripleInput {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr;
+      grid-gap: 5px;
+      @media (max-width: 767px) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-column-gap: 10px;
+        grid-row-gap: 20px;
       }
     }
   }

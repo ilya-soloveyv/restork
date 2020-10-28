@@ -6,17 +6,17 @@
 
     <div class="wrapStep4">
       <div class="itemDesc">
-        Выберите, какие из удобств доступны вашим гостям
+        Выберите, какие из удобств есть внутри вашего объекта
       </div>
 
       <div class="checkboxGrid">
         <Checkbox
-          v-for="(opt, index) in objectOptions"
+          v-for="(opt, index) in roomOptions"
           :key="index"
-          :desc="opt.sObjectOptionTitle"
+          :desc="opt.sRoomOptionTitle"
         />
       </div>
-      <!-- <pre>{{ objectOptions }}</pre> -->
+      <pre>{{ roomOptions }}</pre>
     </div>
     <div class="wrapHint">
       <HintStep1
@@ -45,14 +45,12 @@
     <div class="wrapProgress">
       <ProgressBar />
     </div>
-    <PopupStep />
   </div>
 </template>
 
 <script>
 import ProgressBar from '~/components/Tutorial/ProgressBar'
 import Title from '~/components/Tutorial/Title'
-import PopupStep from '~/components/Tutorial/PopupStep'
 import HintStep1 from '~/components/Tutorial/HintStep1'
 import Checkbox from '~/components/Tutorial/Checkbox'
 
@@ -74,18 +72,17 @@ export default {
   components: {
     Title,
     ProgressBar,
-    PopupStep,
     HintStep1,
     Checkbox
   },
   computed: {
-    objectOptions() {
-      return this.$store.state.objectOption.list
+    roomOptions() {
+      return this.$store.state.roomOption.list
     }
   },
   methods: {},
   async asyncData({ store }) {
-    await store.dispatch('objectOption/GET_LIST')
+    await store.dispatch('roomOption/GET_LIST')
   }
 }
 </script>
@@ -109,6 +106,8 @@ export default {
     grid-column: 1/2;
     grid-row: 2/3;
     overflow: auto;
+    margin: -15px;
+    padding: 15px;
     .itemDesc {
       margin: 0 0 15px;
       font-size: 20px;

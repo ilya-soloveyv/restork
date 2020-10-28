@@ -72,13 +72,14 @@ export default {
     place: {
       type: Object,
       default: () => ({})
-    }
+    },
+    deletePlace: Function
   },
   methods: {
-    deletePlace() {
-      console.log('deleteItem')
-      // this.$store.dispatch('tutorial/DELETE_PLACE', this.places[index])
-    }
+    // deletePlace() {
+    //   console.log('deleteItem')
+    //   // this.$store.dispatch('tutorial/DELETE_PLACE', this.places[index])
+    // }
   }
 }
 </script>
@@ -102,6 +103,7 @@ export default {
     justify-content: flex-end;
     align-items: center;
     color: #dbdbdb;
+    cursor: pointer;
     @media (max-width: 767px) {
       height: 40px;
       grid-column: 3/4;

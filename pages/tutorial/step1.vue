@@ -91,14 +91,12 @@
     <div class="wrapProgress">
       <ProgressBar />
     </div>
-    <PopupStep />
   </div>
 </template>
 
 <script>
 import ProgressBar from '~/components/Tutorial/ProgressBar'
 import Title from '~/components/Tutorial/Title'
-import PopupStep from '~/components/Tutorial/PopupStep'
 import HintStep1 from '~/components/Tutorial/HintStep1'
 
 export default {
@@ -115,11 +113,10 @@ export default {
       ]
     }
   },
-  layout: 'dashboardV2Tutorial',
+  layout: 'dashboardV2TutorialNew',
   components: {
     Title,
     ProgressBar,
-    PopupStep,
     HintStep1
   },
   computed: {
@@ -167,6 +164,8 @@ export default {
     grid-column: 1/2;
     grid-row: 2/3;
     overflow: auto;
+    margin: -15px;
+    padding: 15px;
     .step1Title {
       margin: 0 0 45px;
     }

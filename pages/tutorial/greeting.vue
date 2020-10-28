@@ -59,6 +59,8 @@ export default {
     grid-column: 1/2;
     grid-row: 2/3;
     overflow: auto;
+    margin: -15px;
+    padding: 15px;
     @media (max-width: 991px) {
       grid-column: 1/2;
       grid-row: 3/4;

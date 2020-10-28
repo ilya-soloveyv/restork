@@ -1,38 +1,33 @@
 <template>
   <div class="title">
     <div class="leftTitle">
-      <div class="circle" v-b-modal.modalHint>
+      <div class="circle" v-b-modal.modalHintStep>
         <div class="picture">
           <img src="~/static/tutorial/title-left-icon.svg" />
         </div>
-        <PopupStepBootstrap />
+        <PopupStep />
       </div>
       <div class="stepNumber">
         Шаг {{ currentStep }} | {{ currentStepDesc }}
       </div>
     </div>
 
-    <!-- <div>
-      <div v-b-modal.modalHint>Launch demo modal</div>
-
-      <b-modal id="modalHint" title="BootstrapVue">
-        <p class="my-4">Hello from modal!</p>
-      </b-modal>
-    </div> -->
-
     <div class="rightTitle">
-      <div class="hint">
-        <div class="hintWord"><a href="#popupSteps">Подсказка</a></div>
+      <div class="hint" v-b-modal.modalHint>
+        <div class="hintWord">Подсказка</div>
+        <PopupHint />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import PopupStepBootstrap from '~/components/Tutorial/PopupStepBootstrap'
+import PopupStep from '~/components/Tutorial/PopupStep'
+import PopupHint from '~/components/Tutorial/PopupHint'
 export default {
   components: {
-    PopupStepBootstrap
+    PopupStep,
+    PopupHint
   },
   computed: {
     currentStep() {
@@ -47,26 +42,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/deep/ #modalHint {
-  .modal-dialog {
-    height: 100%;
-    max-width: 100%;
-    margin: 63px 0 0;
-    .modal-content {
-      border-radius: 0;
-      border: 0;
-      .modal-header {
-        display: none;
-      }
-      .modal-body {
-        padding: 0;
-      }
-      .modal-footer {
-        display: none;
-      }
-    }
-  }
-}
 .title {
   margin: 27px 0 45px;
   @media (max-width: 991px) {

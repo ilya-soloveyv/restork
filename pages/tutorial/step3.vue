@@ -4,8 +4,20 @@
       <Title />
     </div>
 
-    <div class="wrapStep3">
+    <div class="wrapStep4">
       <div class="itemDesc">
+        Выберите, какие из удобств доступны вашим гостям
+      </div>
+
+      <div class="checkboxGrid">
+        <Checkbox
+          v-for="(opt, index) in objectOptions"
+          :key="index"
+          :desc="opt.sObjectOptionTitle"
+        />
+      </div>
+
+      <div class="itemDesc second">
         Напишите общую площадь номера, с учётом прихожей и балкона
       </div>
       <div class="roomSquareInput singleInput">
@@ -62,6 +74,7 @@
           ></b-form-input>
         </b-form-group>
       </div>
+      <!-- <pre>{{ objectOptions }}</pre> -->
     </div>
     <div class="wrapHint">
       <HintStep1
@@ -90,15 +103,14 @@
     <div class="wrapProgress">
       <ProgressBar />
     </div>
-    <PopupStep />
   </div>
 </template>
 
 <script>
 import ProgressBar from '~/components/Tutorial/ProgressBar'
 import Title from '~/components/Tutorial/Title'
-import PopupStep from '~/components/Tutorial/PopupStep'
 import HintStep1 from '~/components/Tutorial/HintStep1'
+import Checkbox from '~/components/Tutorial/Checkbox'
 
 export default {
   data() {
@@ -118,20 +130,17 @@ export default {
   components: {
     Title,
     ProgressBar,
-    PopupStep,
-    HintStep1
+    HintStep1,
+    Checkbox
   },
   computed: {
-    objectType() {
-      return this.$store.state.objectType.list
-    },
-    object() {
-      return this.$store.state.tutorial.object
+    objectOptions() {
+      return this.$store.state.objectOption.list
     }
   },
   methods: {},
-  async asyncData({ store, params }) {
-    await store.dispatch('objectType/GET_LIST')
+  async asyncData({ store }) {
+    await store.dispatch('objectOption/GET_LIST')
   }
 }
 </script>
@@ -150,11 +159,13 @@ export default {
     grid-column: 1/2;
     grid-row: 1/2;
   }
-  .wrapStep3 {
+  .wrapStep4 {
     // background: red;
     grid-column: 1/2;
     grid-row: 2/3;
     overflow: auto;
+    margin: -15px;
+    padding: 15px;
     .itemDesc {
       margin: 0 0 15px;
       font-size: 20px;
@@ -207,6 +218,71 @@ export default {
         grid-template-rows: 1fr 1fr;
         grid-column-gap: 10px;
         grid-row-gap: 20px;
+      }
+    }
+    .second {
+      margin-top: 50px;
+    }
+
+    .checkboxGrid {
+      margin-top: 45px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      grid-gap: 25px;
+      @media (max-width: 767px) {
+        grid-template-columns: 1fr;
+        grid-gap: 20px;
+      }
+    }
+    .custom-control {
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      /deep/ .custom-control-input {
+        &:checked {
+          & ~ .custom-control-label {
+            opacity: 1;
+            border: 1px solid #000000;
+            &::after {
+              left: 20px;
+              background-image: url('/tutorial/tick.svg');
+              width: 25px;
+              height: 25px;
+              top: 50%;
+              transform: translate(0, -50%);
+            }
+          }
+        }
+      }
+      /deep/ .custom-control-label {
+        padding: 29px 0;
+        border: 1px solid #eaeaea;
+        border-radius: 8px;
+        width: 100%;
+        font-size: 16px;
+        line-height: 18px;
+        font-weight: 500;
+        opacity: 0.7;
+        @media (max-width: 767px) {
+          font-size: 14px;
+        }
+        &::before {
+          left: 20px;
+          border: none;
+          box-shadow: none;
+          background: none;
+          top: 50%;
+          transform: translate(0, -50%);
+        }
+        .wrapContent {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          .image-checkbox {
+            margin: 0 30px 0 50px;
+          }
+        }
       }
     }
   }

@@ -6,101 +6,38 @@
 
     <div class="wrapStep8">
       <div class="itemDesc">
-        Перечислите какие значимые места есть рядом с вашим объектом, напишите
-        их названия и расстояния до них.
+        Загрузите как можно больше ярких и красивых фотографий. Гости большое
+        внимание уделяют качеству изображений и при выборе жилья это может стать
+        решающим фактором.
       </div>
-      <!-- <div
-        class="placeInfo quadrupleInput"
-        v-for="(place, index) in places"
-        :key="index"
-      >
-        <div class="wrapPlace">
-          <b-form-group
-            id="placeLabel"
-            class="form-group-restork"
-            label="Место"
-            label-for="placeInput"
-          >
-            <b-form-input
-              id="placeInput"
-              placeholder="Место"
-              type="text"
-            ></b-form-input>
-          </b-form-group>
+      <div class="imageGrid">
+        <div v-for="(item, index) in 10" :key="index" class="itemImage">
+          <img src="/tutorial/step8-example.jpg" alt="" />
+          <div class="circle-left">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </div>
+          <div class="circle-right">
+            <span>{{ item }}</span>
+          </div>
         </div>
-        <div class="wrapName">
-          <b-form-group
-            id="nameLabel"
-            class="form-group-restork"
-            label="Название"
-            label-for="nameInput"
-          >
-            <b-form-input
-              id="nameInput"
-              placeholder="Название"
-              type="text"
-            ></b-form-input>
-          </b-form-group>
-        </div>
-
-        <div class="wrapDistance">
-          <b-form-group
-            id="distanceLabel"
-            class="form-group-restork"
-            label="Расстояние"
-            label-for="distanceInput"
-          >
-            <b-form-input
-              id="distanceInput"
-              placeholder="0"
-              type="text"
-            ></b-form-input>
-          </b-form-group>
-        </div>
-
-        <div class="deleteBtn" @click="deletePlace(index)">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="10"
-            height="10"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#dbdbdb"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-          </svg>
-          <span>&nbsp;&nbsp;Удалить</span>
-        </div>
-      </div> -->
-
-      <PlaceInput
-        v-for="(place, index) in places"
-        :key="index"
-        :place="place"
-      />
-
-      <div class="addBtn" @click="addPlace">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="10"
-          height="10"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#000000"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <line x1="12" y1="5" x2="12" y2="19"></line>
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-        </svg>
-        <span>&nbsp;&nbsp;Добавить</span>
       </div>
-
-      <pre>{{ places }}</pre>
+      <div class="selectFileBtn">
+        <span class="change">Выберете файл</span>
+        <span class="dragg">&nbsp;или перетащите его сюда</span>
+      </div>
     </div>
     <div class="wrapHint">
       <HintStep1
@@ -129,16 +66,13 @@
     <div class="wrapProgress">
       <ProgressBar />
     </div>
-    <PopupStep />
   </div>
 </template>
 
 <script>
 import ProgressBar from '~/components/Tutorial/ProgressBar'
 import Title from '~/components/Tutorial/Title'
-import PopupStep from '~/components/Tutorial/PopupStep'
 import HintStep1 from '~/components/Tutorial/HintStep1'
-import PlaceInput from '~/components/Tutorial/PlaceInput'
 
 export default {
   data() {
@@ -159,9 +93,7 @@ export default {
   components: {
     Title,
     ProgressBar,
-    PopupStep,
-    HintStep1,
-    PlaceInput
+    HintStep1
   },
   computed: {
     objectType() {
@@ -171,22 +103,7 @@ export default {
       return this.$store.state.tutorial.object
     }
   },
-  methods: {
-    addPlace() {
-      console.log('addPlace')
-      this.places.push({})
-      // if (this.places.length) {
-      //   this.$store.dispatch(
-      //     'tutorial/ADD_PLACE',
-      //     this.places[this.places.length - 1]
-      //   )
-      // }
-    },
-    deletePlace(index) {
-      console.log('index ', index)
-      this.places.splice(index, 1)
-    }
-  },
+  methods: {},
   async asyncData({ store, params }) {
     await store.dispatch('objectType/GET_LIST')
   }
@@ -212,6 +129,8 @@ export default {
     grid-column: 1/2;
     grid-row: 2/3;
     overflow: auto;
+    margin: -15px;
+    padding: 15px;
     .itemDesc {
       margin: 0 0 15px;
       font-size: 20px;
@@ -229,53 +148,78 @@ export default {
       }
     }
 
-    // .quadrupleInput {
-    //   margin-bottom: 20px;
-    //   display: grid;
-    //   grid-template-columns: 1.5fr 1fr 1fr 0.51fr;
-    //   grid-template-rows: 1fr;
-    //   grid-gap: 5px;
-    //   @media (max-width: 767px) {
-    //     grid-template-columns: 1.5fr 1fr 1fr;
-    //     grid-template-rows: auto;
-    //     grid-column-gap: 10px;
-    //     grid-row-gap: 10px;
-    //   }
-    //   .deleteBtn {
-    //     height: 100%;
-    //     display: flex;
-    //     justify-content: flex-end;
-    //     align-items: center;
-    //     color: #dbdbdb;
-    //     @media (max-width: 767px) {
-    //       height: 40px;
-    //       grid-column: 3/4;
-    //       align-items: flex-start;
-    //     }
-    //     span {
-    //       font-size: 12px;
-    //       line-height: 14px;
-    //       font-weight: 500;
-    //       @media (max-width: 767px) {
-    //         font-size: 11px;
-    //       }
-    //     }
-    //   }
-    // }
-    .addBtn {
-      border: 1px solid #dbdbdb;
-      border-radius: 24px;
-      width: 118px;
-      height: 40px;
+    .imageGrid {
+      margin: 30px 0 20px;
+      // overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr;
+      grid-column-gap: 25px;
+      grid-row-gap: 20px;
+      position: relative;
+      @media (max-width: 767px) {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+      }
+      .itemImage {
+        // width: 100%;
+        // height: 100%;
+        position: relative;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+        .circle-left {
+          position: absolute;
+          top: 20px;
+          left: 15px;
+          border: 1px solid #ffffff;
+          border-radius: 50%;
+          width: 25px;
+          height: 25px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .circle-right {
+          position: absolute;
+          top: 20px;
+          right: 15px;
+          border: 1px solid #ffffff;
+          border-radius: 50%;
+          background: #ffffff;
+          width: 25px;
+          height: 25px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          span {
+            front-size: 14px;
+          }
+        }
+      }
+    }
+    .selectFileBtn {
+      border: 1px solid #077bff;
+      border-radius: 5px;
+      width: 100%;
+      height: 63px;
       display: flex;
       justify-content: center;
       align-items: center;
       span {
-        font-size: 12px;
-        line-height: 14px;
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 700;
+        color: #077bff;
+        @media (max-width: 767px) {
+          font-size: 14px;
+        }
+      }
+      .dragg {
         font-weight: 500;
         @media (max-width: 767px) {
-          font-size: 11px;
+          display: none;
         }
       }
     }
