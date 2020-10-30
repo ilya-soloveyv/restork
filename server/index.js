@@ -43,7 +43,7 @@ app.use('/api/room', require('./routes/room'))
 app.use('/api/message', require('./routes/message'))
 app.use('/api/b2p', require('./routes/b2p'))
 app.use('/api/tutorial', require('./routes/tutorial'))
-app.use('/api/object_type_group', require('./routes/object_type_group'))
+// app.use('/api/object_type_group', require('./routes/object_type_group'))
 
 const nuxt = new Nuxt(config)
 
