@@ -269,6 +269,44 @@ module.exports = (sequelize, DataTypes) => {
     // return object
   }
 
+  Object.up = async ({ iObjectID = false, iObjectTypeID = false }) => {
+    if (iObjectID) {
+      const response = await Object.update(
+        {
+          iObjectTypeID
+        },
+        {
+          where: {
+            iObjectID
+          }
+        }
+      )
+      return response
+    } else {
+      const response = await Object.create({
+        iObjectTypeID
+      })
+      return response
+    }
+  }
+
+  Object.add = async ({
+    iUserID = false,
+    iObjectTypeID = false,
+    sObjectTitle = 'Без названия'
+  }) => {
+    if (iUserID && iObjectTypeID) {
+      const response = await Object.create({
+        iUserID,
+        iObjectTypeID,
+        sObjectTitle
+      })
+      return response
+    } else {
+      return false
+    }
+  }
+
   sequelizePaginate.paginate(Object)
   return Object
 }
