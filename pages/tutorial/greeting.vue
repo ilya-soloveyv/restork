@@ -27,15 +27,15 @@
 import Title from '~/components/Tutorial/Title'
 
 export default {
+  components: {
+    Title
+  },
   data() {
     return {
       currentStepNumber: 1
     }
   },
-  layout: 'dashboardV2Tutorial',
-  components: {
-    Title
-  }
+  layout: 'dashboardV2Tutorial'
 }
 </script>
 

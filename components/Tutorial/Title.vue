@@ -1,7 +1,7 @@
 <template>
   <div class="title">
     <div class="leftTitle">
-      <div class="circle" v-b-modal.modalHintStep>
+      <div v-b-modal.modalHintStep class="circle">
         <div class="picture">
           <img src="~/static/tutorial/title-left-icon.svg" />
         </div>
@@ -13,7 +13,7 @@
     </div>
 
     <div class="rightTitle">
-      <div class="hint" v-b-modal.modalHint>
+      <div v-b-modal.modalHint class="hint">
         <div class="hintWord">Подсказка</div>
         <PopupHint />
       </div>

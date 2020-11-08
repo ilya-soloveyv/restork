@@ -1,7 +1,7 @@
 <template>
   <div class="hint">
     <div class="title">Подсказка</div>
-    <div class="item" v-for="item in list" :key="item.name">
+    <div v-for="item in list" :key="item.name" class="item">
       <span class="name">{{ item.name }}</span> -
       <span class="desc">{{ item.desc }}</span>
     </div>

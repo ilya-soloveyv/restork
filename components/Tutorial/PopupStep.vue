@@ -1,7 +1,7 @@
 <template>
   <b-modal id="modalHintStep" scrollable hide-backdrop class="modalStepHint">
     <div class="popup">
-      <div class="closeBtn" v-on:click="closeModal">
+      <div v-on:click="closeModal" class="closeBtn">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="15"
@@ -21,8 +21,8 @@
         <div
           v-for="(item, index) in steps"
           :key="index"
-          class="item"
           v-on:click="setCurrentStep(index + 1)"
+          class="item"
         >
           <div class="desc">Шаг {{ index + 1 }} | {{ item }}</div>
           <div class="circle">
@@ -53,9 +53,7 @@ export default {
   },
   methods: {
     setCurrentStep(step) {
-      console.log('currentStep ' + this.currentStep)
       this.$store.commit('tutorial/SET_STEP', step)
-      console.log('currentStep ' + this.currentStep)
       const url = '/tutorial/step' + this.currentStep
       this.$router.push(url)
     },

@@ -184,13 +184,13 @@
 <script>
 import ObjectCarouselImage from '@/components/Dashboard/ObjectCarouselImage'
 export default {
+  components: {
+    ObjectCarouselImage
+  },
   data() {
     return {
       object_images: []
     }
-  },
-  components: {
-    ObjectCarouselImage
   }
 }
 </script>

@@ -2,7 +2,7 @@
   <b-modal id="modalHint" scrollable hide-backdrop class="modalStepHint">
     <div class="popup">
       <div class="wrapCloseBtn">
-        <div class="closeBtn" v-on:click="closeModal">
+        <div v-on:click="closeModal" class="closeBtn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="15"
@@ -64,9 +64,7 @@ export default {
   },
   methods: {
     setCurrentStep(step) {
-      console.log('currentStep ' + this.currentStep)
       this.$store.commit('tutorial/SET_STEP', step)
-      console.log('currentStep ' + this.currentStep)
       const url = '/tutorial/step' + this.currentStep
       this.$router.push(url)
     },

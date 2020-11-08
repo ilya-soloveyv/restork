@@ -9,9 +9,13 @@
       ></div>
     </div>
     <div class="wrapBtn">
-      <button class="prevBtn" v-on:click="prevStep"><span>Назад</span></button>
+      <button form="mainForm" class="prevBtn">
+        <span>Назад</span>
+      </button>
       <span class="steps">{{ currentStep }}/{{ maxStep }}</span>
-      <button class="nextBtn" v-on:click="nextStep">Далеe</button>
+      <button form="mainForm" class="nextBtn">
+        <span>Далеe</span>
+      </button>
     </div>
   </div>
 </template>
@@ -27,6 +31,9 @@ export default {
   computed: {
     currentStep() {
       return this.$store.state.tutorial.step
+    },
+    isFormValid() {
+      return this.$store.state.tutorial.object.iObjectTypeID
     }
   },
   methods: {
@@ -37,10 +44,13 @@ export default {
         this.$router.push(url)
       }
     },
-    nextStep() {
+    async nextStep() {
+      const { iObjectID } = await this.$store.dispatch('tutorial/NEXT_STEP')
+
       if (this.currentStep <= this.maxStep) {
         this.$store.commit('tutorial/INCREMENT')
-        const url = '/tutorial/step' + this.currentStep
+        const url =
+          '/tutorial/step' + this.currentStep + '?iObjectID=' + iObjectID
         this.$router.push(url)
       }
       if (this.currentStep === this.maxStep + 1) {
@@ -48,6 +58,26 @@ export default {
         const url = '/tutorial/greeting'
         this.$router.push(url)
       }
+
+      // console.log(this.$store.$auth.user.iUserID)
+      // const iUserID = this.$store.$auth.user.iUserID
+      // if (this.currentStep === 1) {
+      //   const { object } = await this.$axios.$post('/api/tutorial/object', {
+      //     iUserID,
+      //     iObjectTypeID: this.iObjectTypeID
+      //   })
+      //   console.log(object)
+      // }
+      // if (this.currentStep <= this.maxStep) {
+      //   this.$store.commit('tutorial/INCREMENT')
+      //   const url = '/tutorial/step' + this.currentStep
+      //   this.$router.push(url)
+      // }
+      // if (this.currentStep === this.maxStep + 1) {
+      //   // this.$store.commit('tutorial/INCREMENT')
+      //   const url = '/tutorial/greeting'
+      //   this.$router.push(url)
+      // }
     }
   }
 }

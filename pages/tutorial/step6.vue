@@ -76,6 +76,11 @@ import Title from '~/components/Tutorial/Title'
 import HintStep1 from '~/components/Tutorial/HintStep1'
 
 export default {
+  components: {
+    Title,
+    ProgressBar,
+    HintStep1
+  },
   data() {
     return {
       object: {
@@ -92,12 +97,7 @@ export default {
       ]
     }
   },
-  layout: 'dashboardV2Tutorial',
-  components: {
-    Title,
-    ProgressBar,
-    HintStep1
-  }
+  layout: 'dashboardV2Tutorial'
 }
 </script>
 

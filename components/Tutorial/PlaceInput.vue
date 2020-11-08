@@ -8,8 +8,8 @@
         label-for="placeInput"
       >
         <b-form-input
-          v-model="place.place"
           id="placeInput"
+          v-model="place.place"
           placeholder="Место"
           type="text"
         ></b-form-input>
@@ -23,8 +23,8 @@
         label-for="nameInput"
       >
         <b-form-input
-          v-model="place.name"
           id="nameInput"
+          v-model="place.name"
           placeholder="Название"
           type="text"
         ></b-form-input>
@@ -39,15 +39,15 @@
         label-for="distanceInput"
       >
         <b-form-input
-          v-model="place.distance"
           id="distanceInput"
+          v-model="place.distance"
           placeholder="0"
           type="text"
         ></b-form-input>
       </b-form-group>
     </div>
 
-    <div class="deleteBtn" @click="deletePlace()">
+    <div @click="deletePlace()" class="deleteBtn">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="10"

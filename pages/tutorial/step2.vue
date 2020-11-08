@@ -300,8 +300,8 @@
         </div>
       </div>
 
-      <!-- <pre>{{ object }}</pre>
-      <pre>{{ objectType }}</pre> -->
+      <pre>{{ object }}</pre>
+      <!-- <pre>{{ objectType }}</pre> -->
     </div>
     <div class="wrapHint">
       <HintStep1
@@ -339,6 +339,11 @@ import Title from '~/components/Tutorial/Title'
 import HintStep1 from '~/components/Tutorial/HintStep1'
 
 export default {
+  components: {
+    Title,
+    ProgressBar,
+    HintStep1
+  },
   data() {
     return {
       currentStepNumber: 1,
@@ -353,11 +358,6 @@ export default {
     }
   },
   layout: 'dashboardV2Tutorial',
-  components: {
-    Title,
-    ProgressBar,
-    HintStep1
-  },
   computed: {
     objectType() {
       return this.$store.state.objectType.list
@@ -366,10 +366,10 @@ export default {
       return this.$store.state.tutorial.object
     }
   },
-  methods: {},
   async asyncData({ store, params }) {
     await store.dispatch('objectType/GET_LIST')
-  }
+  },
+  methods: {}
 }
 </script>
 

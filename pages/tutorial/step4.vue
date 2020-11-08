@@ -55,6 +55,12 @@ import HintStep1 from '~/components/Tutorial/HintStep1'
 import Checkbox from '~/components/Tutorial/Checkbox'
 
 export default {
+  components: {
+    Title,
+    ProgressBar,
+    HintStep1,
+    Checkbox
+  },
   data() {
     return {
       currentStepNumber: 1,
@@ -69,21 +75,15 @@ export default {
     }
   },
   layout: 'dashboardV2Tutorial',
-  components: {
-    Title,
-    ProgressBar,
-    HintStep1,
-    Checkbox
-  },
   computed: {
     roomOptions() {
       return this.$store.state.roomOption.list
     }
   },
-  methods: {},
   async asyncData({ store }) {
     await store.dispatch('roomOption/GET_LIST')
-  }
+  },
+  methods: {}
 }
 </script>
 

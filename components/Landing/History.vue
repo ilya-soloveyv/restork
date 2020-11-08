@@ -3,22 +3,22 @@
     <div class="wrapHistory">
       <HistoryTitle :title="title" />
       <div
-        class="wrapToggle"
         v-bind:class="{ hideAll: isHideAll, closeBefore: !isHideAll }"
+        class="wrapToggle"
       >
         <div class="flexContainer">
           <HistoryItem
-            class="item"
             v-for="item in list"
             :key="item.id"
             :desc="item.history"
             :author="item.author.name"
             :image="item.author.image"
+            class="item"
           />
         </div>
       </div>
       <div class="wrapShowMore">
-        <button class="showMore" v-on:click="showMore">
+        <button v-on:click="showMore" class="showMore">
           Показать еще
         </button>
       </div>
@@ -49,10 +49,7 @@ export default {
   },
   methods: {
     showMore() {
-      console.log('Show more')
-      console.log('isHideAll before', this.isHideAll)
       this.isHideAll = !this.isHideAll
-      console.log('isHideAll after', this.isHideAll)
     }
   }
 }

@@ -16,7 +16,7 @@
           <b-button variant="primary" size="lg">Далее</b-button>
         </div>
       </div>
-      <button class="wrapHintMin" :click="showHints">
+      <button :click="showHints" class="wrapHintMin">
         <img :src="'/landing/hint-image.svg'" />
         <span>
           Подсказка
@@ -50,9 +50,7 @@ export default {
     }
   },
   methods: {
-    showHints() {
-      console.log('showHints')
-    }
+    showHints() {}
   }
 }
 </script>

@@ -17,7 +17,7 @@
         :deletePlace="deletePlace"
       />
 
-      <div class="addBtn" @click="addPlace">
+      <div @click="addPlace" class="addBtn">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="10"
@@ -74,6 +74,12 @@ import HintStep1 from '~/components/Tutorial/HintStep1'
 import PlaceInput from '~/components/Tutorial/PlaceInput'
 
 export default {
+  components: {
+    Title,
+    ProgressBar,
+    HintStep1,
+    PlaceInput
+  },
   data() {
     return {
       places: [],
@@ -89,12 +95,6 @@ export default {
     }
   },
   layout: 'dashboardV2Tutorial',
-  components: {
-    Title,
-    ProgressBar,
-    HintStep1,
-    PlaceInput
-  },
   computed: {
     objectType() {
       return this.$store.state.objectType.list
@@ -103,9 +103,11 @@ export default {
       return this.$store.state.tutorial.object
     }
   },
+  async asyncData({ store, params }) {
+    await store.dispatch('objectType/GET_LIST')
+  },
   methods: {
     addPlace() {
-      console.log('addPlace')
       this.places.push({})
       // if (this.places.length) {
       //   this.$store.dispatch(
@@ -115,12 +117,8 @@ export default {
       // }
     },
     deletePlace(index) {
-      console.log('index ', index)
       this.places.splice(index, 1)
     }
-  },
-  async asyncData({ store, params }) {
-    await store.dispatch('objectType/GET_LIST')
   }
 }
 </script>
