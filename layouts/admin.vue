@@ -1,3 +1,4 @@
+admin.vue
 <template>
   <div>
     <b-navbar toggleable="sm" type="dark" variant="dark">
@@ -16,6 +17,12 @@
               Пользователи
             </b-nav-item>
             <b-nav-item-dropdown text="Справочники">
+              <b-dropdown-item
+                to="/admin/libraries/object_type_group"
+                active-class="active"
+              >
+                Группы объектов
+              </b-dropdown-item>
               <b-dropdown-item
                 to="/admin/libraries/object_type"
                 active-class="active"
@@ -61,3 +68,17 @@
     <nuxt />
   </div>
 </template>
+
+<style lang="scss" scoped>
+/deep/ table.tableList {
+  td {
+    cursor: pointer;
+    &.ID {
+      width: 55px;
+    }
+    &.iActive {
+      width: 105px;
+    }
+  }
+}
+</style>
