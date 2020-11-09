@@ -2,7 +2,7 @@
   <div class="wrapItem">
     <DescImage :desc="desc" />
     <div class="author">
-      <img class="avatar" :src="'/landing/' + image" />
+      <img :src="'/landing/' + image" class="avatar" />
       <div class="authorName">{{ author }}</div>
     </div>
   </div>
