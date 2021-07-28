@@ -129,7 +129,7 @@ export default {
       valid_iOblectTypeID: null
     }
   },
-  layout: 'dashboardV2TutorialNew',
+  layout: 'tutorial',
   computed: {
     objectType() {
       return this.$store.state.objectType.list

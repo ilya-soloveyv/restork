@@ -2,7 +2,7 @@
   <b-navbar toggleable="md">
     <!-- :class="'nav-theme-' + theme" -->
     <b-navbar-brand to="/">
-      <img src="/logo-theme-white.png" alt="" />
+      <img src="@/assets/images/logo2.svg" alt="" />
     </b-navbar-brand>
     <b-navbar-toggle target="nav-collapse">
       <div class="hamburger hamburger--squeeze">
