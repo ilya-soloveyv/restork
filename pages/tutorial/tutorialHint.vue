@@ -6,5 +6,9 @@
 .tutorial-hint {
   background: palegreen;
   height: 400px;
+
+  @media (max-width: 1199px) {
+    height: 100px;
+  }
 }
 </style>
