@@ -17,8 +17,8 @@
 
 <script>
 import TutorialPage from './tutorialPage.vue'
-import TutorialHeader from './TutorialHeader.vue'
-import TutorialHint from './TutorialHint.vue'
+import TutorialHeader from './tutorialHeader.vue'
+import TutorialHint from './tutorialHint.vue'
 import TutorialControls from './tutorialControls.vue'
 
 export default {
