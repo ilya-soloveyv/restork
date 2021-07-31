@@ -17,12 +17,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .tutorial-layout {
   min-height: 100vh;
 
   &__container {
-    background: blue;
     min-height: 100vh;
     display: flex;
     flex-direction: column;

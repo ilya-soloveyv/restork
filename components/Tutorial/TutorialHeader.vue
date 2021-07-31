@@ -4,7 +4,7 @@
 
 <style lang="scss" scoped>
 .tutorial-header {
-  background: olive;
+  // background: olive;
   height: 100px;
 }
 </style>

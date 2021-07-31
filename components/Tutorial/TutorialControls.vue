@@ -4,7 +4,7 @@
 
 <style lang="scss" scoped>
 .tutorial-controls {
-  background: tomato;
+  // background: tomato;
   height: 100px;
 }
 </style>

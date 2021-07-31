@@ -16,10 +16,10 @@
 </template>
 
 <script>
-import TutorialPage from './tutorialPage.vue'
-import TutorialHeader from './tutorialHeader.vue'
-import TutorialHint from './tutorialHint.vue'
-import TutorialControls from './tutorialControls.vue'
+import TutorialPage from '@/components/Tutorial/TutorialPage.vue'
+import TutorialHeader from '@/components/Tutorial/TutorialHeader.vue'
+import TutorialHint from '@/components/Tutorial/TutorialHint.vue'
+import TutorialControls from '@/components/Tutorial/TutorialControls.vue'
 
 export default {
   layout: 'tutorial',

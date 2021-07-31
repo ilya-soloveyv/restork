@@ -4,7 +4,7 @@
 
 <style lang="scss" scoped>
 .tutorial-hint {
-  background: palegreen;
+  // background: palegreen;
   height: 400px;
 
   @media (max-width: 1199px) {

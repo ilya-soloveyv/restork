@@ -73,7 +73,10 @@ export default {
       type: Object,
       default: () => ({})
     },
-    deletePlace: Function
+    deletePlace: {
+      type: Function,
+      default: () => 1
+    }
   },
   methods: {
     // deletePlace() {
