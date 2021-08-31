@@ -1,12 +1,20 @@
 <template>
   <TutorialPage>
     <template slot="header">
-      <TutorialHeader />
+      <TutorialHeader
+        :step="currentStep.stepNumber"
+        :title="currentStep.title"
+      />
     </template>
     <template slot="hint">
       <TutorialHint />
     </template>
     <template slot="content">
+      <!-- <pre>
+        {{ object.iObjectID }}
+        {{ object.sObjectTitle }}
+        {{ object.sTutorialStepActive }}
+      </pre> -->
       <TutorialTitle title="Давайте подготовим вас к приему гостей" />
       <TutorialFormLabel
         title="Выберите из предложенного списка категорию вашего объекта"
@@ -30,32 +38,40 @@
           </b-form-invalid-feedback>
         </b-form-group>
       </div>
-      <TutorialFormLabel
-        title="Используя подсказки, укажите категорию номера"
-      />
-      <div class="form-group-wrap">
-        <b-form-group label="Категория номера">
-          <b-form-select v-model="iRoomTypeID" :state="iRoomTypeIDValid">
-            <option class="placeholder" value="null">
-              Выберите один из вариантов
-            </option>
-            <option
-              v-for="(elem, index) in roomType"
-              :key="index"
-              :value="elem.iRoomTypeID"
-            >
-              {{ elem.sRoomTypeTitle }}
-            </option>
-          </b-form-select>
-          <b-form-invalid-feedback class="error-message">
-            Укажите категорию номера
-          </b-form-invalid-feedback>
-        </b-form-group>
-      </div>
-      <!-- <pre>{{ roomType }}</pre> -->
+      <template v-if="isRoom">
+        <TutorialFormLabel
+          title="Используя подсказки, укажите категорию номера"
+        />
+        <div class="form-group-wrap">
+          <b-form-group label="Категория номера">
+            <b-form-select v-model="iRoomTypeID" :state="iRoomTypeIDValid">
+              <option class="placeholder" value="null">
+                Выберите один из вариантов
+              </option>
+              <option
+                v-for="(elem, index) in roomType"
+                :key="index"
+                :value="elem.iRoomTypeID"
+              >
+                {{ elem.sRoomTypeTitle }}
+              </option>
+            </b-form-select>
+            <b-form-invalid-feedback class="error-message">
+              Укажите категорию номера
+            </b-form-invalid-feedback>
+          </b-form-group>
+        </div>
+      </template>
     </template>
     <template slot="controls">
-      <TutorialControls />
+      <TutorialControls
+        :currentStep="currentStep"
+        :prevStep="prevStep"
+        :nextStep="nextStep"
+        :countSteps="countSteps"
+        :currentStepIndex="currentStepIndex"
+        @click="changeStep"
+      />
     </template>
   </TutorialPage>
 </template>
@@ -86,6 +102,9 @@ export default {
     }
   },
   computed: {
+    object() {
+      return this.$store.state.tutorial.object
+    },
     objectType() {
       return this.$store.state.objectType.list
     },
@@ -97,6 +116,14 @@ export default {
         this.$store.commit('tutorial/SET_iObjectTypeID', value)
       }
     },
+    isRoom() {
+      const type = this.objectType.find(
+        (type) => type.iObjectTypeID === this.iObjectTypeID
+      )
+      return typeof type === 'object' && 'iRoomPermission' in type
+        ? type.iRoomPermission
+        : false
+    },
     roomType() {
       return this.$store.state.roomType.list
     },
@@ -107,11 +134,33 @@ export default {
       set(value) {
         this.$store.commit('tutorial/SET_iRoomTypeID', value)
       }
+    },
+    steps() {
+      return this.$store.state.tutorial.steps
+    },
+    currentStep() {
+      return this.$store.getters['tutorial/currentStep']
+    },
+    prevStep() {
+      return this.$store.getters['tutorial/prevStep']
+    },
+    nextStep() {
+      return this.$store.getters['tutorial/nextStep']
+    },
+    countSteps() {
+      return this.$store.getters['tutorial/countSteps']
+    },
+    currentStepIndex() {
+      return this.$store.getters['tutorial/currentStepIndex']
     }
   },
-  created() {
-    this.$store.dispatch('objectType/GET_LIST')
-    this.$store.dispatch('roomType/GET_LIST')
+  methods: {
+    changeStep(type) {
+      this.$store.dispatch('tutorial/CHANGE_STEP', {
+        type,
+        currentStep: this.currentStep
+      })
+    }
   }
 }
 </script>

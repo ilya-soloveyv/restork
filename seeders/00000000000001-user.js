@@ -17,7 +17,8 @@ module.exports = {
           dUserBirthday: null,
           sUserAvatar: null,
           iUserKey: 123,
-          iUserAdmin: 1
+          iUserAdmin: 1,
+          B2PPan: null
         },
         {
           iUserID: 2,
@@ -31,7 +32,8 @@ module.exports = {
           dUserBirthday: null,
           sUserAvatar: null,
           iUserKey: 123,
-          iUserAdmin: 0
+          iUserAdmin: 0,
+          B2PPan: null
         },
         {
           iUserID: 3,
@@ -45,7 +47,8 @@ module.exports = {
           dUserBirthday: null,
           sUserAvatar: null,
           iUserKey: 123,
-          iUserAdmin: 0
+          iUserAdmin: 0,
+          B2PPan: null
         },
         {
           iUserID: 4,
@@ -59,7 +62,8 @@ module.exports = {
           dUserBirthday: null,
           sUserAvatar: null,
           iUserKey: 123,
-          iUserAdmin: 0
+          iUserAdmin: 0,
+          B2PPan: null
         },
         {
           iUserID: 5,
@@ -73,7 +77,8 @@ module.exports = {
           dUserBirthday: null,
           sUserAvatar: null,
           iUserKey: 123,
-          iUserAdmin: 0
+          iUserAdmin: 0,
+          B2PPan: null
         },
         {
           iUserID: 6,
@@ -87,7 +92,8 @@ module.exports = {
           dUserBirthday: null,
           sUserAvatar: null,
           iUserKey: 123,
-          iUserAdmin: 0
+          iUserAdmin: 0,
+          B2PPan: null
         },
         {
           iUserID: 7,
@@ -101,7 +107,8 @@ module.exports = {
           dUserBirthday: null,
           sUserAvatar: null,
           iUserKey: 123,
-          iUserAdmin: 0
+          iUserAdmin: 0,
+          B2PPan: null
         }
       ],
       {}

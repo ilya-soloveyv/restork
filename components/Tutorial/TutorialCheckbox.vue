@@ -1,37 +1,39 @@
 <template>
-  <div>
-    <b-form-checkbox value="accepted" unchecked-value="not_accepted">
-      <div class="wrapContent">
-        <div class="image-checkbox">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="25"
-            height="25"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#000000"
-            stroke-width="1"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="10" cy="20.5" r="1" />
-            <circle cx="18" cy="20.5" r="1" />
-            <path
-              d="M2.5 2.5h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6l1.6-8.4H7.1"
-            />
-          </svg>
-        </div>
-        <div class="desc">
-          {{ desc }}
-        </div>
+  <b-form-checkbox :value="value">
+    <div class="wrapContent">
+      <div class="image-checkbox">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#000000"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="10" cy="20.5" r="1" />
+          <circle cx="18" cy="20.5" r="1" />
+          <path
+            d="M2.5 2.5h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6l1.6-8.4H7.1"
+          />
+        </svg>
       </div>
-    </b-form-checkbox>
-  </div>
+      <div class="desc">
+        {{ desc }}
+      </div>
+    </div>
+  </b-form-checkbox>
 </template>
 
 <script>
 export default {
   props: {
+    value: {
+      type: Number,
+      default: null
+    },
     desc: {
       type: String,
       default: null
@@ -42,7 +44,8 @@ export default {
 
 <style lang="scss" scoped>
 .custom-control {
-  margin: 0;
+  margin: 0 0 32px;
+  display: flex !important;
   padding: 0;
   background-color: white;
   /deep/ .custom-control-input {

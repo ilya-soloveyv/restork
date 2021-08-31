@@ -1,0 +1,284 @@
+<template>
+  <TutorialPage>
+    <template slot="header">
+      <TutorialHeader
+        :step="currentStep.stepNumber"
+        :title="currentStep.title"
+      />
+    </template>
+    <template slot="hint">
+      <TutorialHint />
+    </template>
+    <template slot="content">
+      <TutorialFormLabel
+        title="Укажите общую площадь, сколько жилых комнат и спальных мест"
+      />
+      <b-row>
+        <b-col v-if="is_iObjectArea" xl="4">
+          <div class="form-group-wrap">
+            <b-form-group label="Площадь объекта">
+              <b-form-input
+                v-model="iObjectArea"
+                :state="iObjectAreaValid"
+                placeholder="Площадь объекта"
+              />
+              <b-form-invalid-feedback class="error-message">
+                Укажите Площадь объекта
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </div>
+        </b-col>
+        <b-col v-if="is_iObjectAreaLocation" xl="4">
+          <div class="form-group-wrap">
+            <b-form-group label="Площадь участка">
+              <b-form-input
+                v-model="iObjectAreaLocation"
+                :state="iObjectAreaLocationValid"
+                placeholder="Площадь участка"
+              />
+              <b-form-invalid-feedback class="error-message">
+                Укажите Площадь участка
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </div>
+        </b-col>
+        <b-col v-if="is_iObjectRoomCount" xl="4">
+          <div class="form-group-wrap">
+            <b-form-group label="Колличество комнат">
+              <b-form-input
+                v-model="iObjectRoomCount"
+                :state="iObjectRoomCountValid"
+                placeholder="Колличество комнат"
+              />
+              <b-form-invalid-feedback class="error-message">
+                Укажите Колличество комнат
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </div>
+        </b-col>
+        <b-col v-if="is_iObjectRoomHotelCount" xl="4">
+          <div class="form-group-wrap">
+            <b-form-group label="Количество номеров">
+              <b-form-input
+                v-model="iObjectRoomHotelCount"
+                :state="iObjectRoomHotelCountValid"
+                placeholder="Количество номеров"
+              />
+              <b-form-invalid-feedback class="error-message">
+                Укажите Количество номеров
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </div>
+        </b-col>
+        <b-col v-if="is_iObjectPlace" xl="4">
+          <div class="form-group-wrap">
+            <b-form-group label="Кол-во спальных мест">
+              <b-form-input
+                v-model="iObjectPlace"
+                :state="iObjectPlaceValid"
+                placeholder="Кол-во спальных мест"
+              />
+              <b-form-invalid-feedback class="error-message">
+                Укажите Кол-во спальных мест
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </div>
+        </b-col>
+      </b-row>
+      <TutorialFormLabel
+        title="Укажите на каком этаже располагается объект и сколько всего этажей"
+      />
+      <b-row>
+        <b-col v-if="is_iObjectFloorAll" xl="4">
+          <div class="form-group-wrap">
+            <b-form-group label="Этажность строения">
+              <b-form-input
+                v-model="iObjectFloorAll"
+                :state="iObjectFloorAllValid"
+                placeholder="Этажность строения"
+              />
+              <b-form-invalid-feedback class="error-message">
+                Укажите Этажность строения
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </div>
+        </b-col>
+        <b-col v-if="is_iObjectFloor" xl="4">
+          <div class="form-group-wrap">
+            <b-form-group label="Этаж">
+              <b-form-input
+                v-model="iObjectFloor"
+                :state="iObjectFloorValid"
+                placeholder="Этаж"
+              />
+              <b-form-invalid-feedback class="error-message">
+                Укажите Этаж
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </div>
+        </b-col>
+      </b-row>
+    </template>
+    <template slot="controls">
+      <TutorialControls
+        :currentStep="currentStep"
+        :prevStep="prevStep"
+        :nextStep="nextStep"
+        :countSteps="countSteps"
+        :currentStepIndex="currentStepIndex"
+        @click="changeStep"
+      />
+    </template>
+  </TutorialPage>
+</template>
+
+<script>
+import TutorialPage from '@/components/Tutorial/TutorialPage.vue'
+import TutorialHeader from '@/components/Tutorial/TutorialHeader.vue'
+import TutorialHint from '@/components/Tutorial/TutorialHint.vue'
+import TutorialControls from '@/components/Tutorial/TutorialControls.vue'
+
+import TutorialFormLabel from '@/components/Tutorial/TutorialFormLabel.vue'
+
+export default {
+  layout: 'tutorial',
+  components: {
+    TutorialPage,
+    TutorialHeader,
+    TutorialHint,
+    TutorialControls,
+    TutorialFormLabel
+  },
+  data() {
+    return {
+      iObjectAreaValid: null,
+      iObjectAreaLocationValid: null,
+      iObjectFloorAllValid: null,
+      iObjectFloorValid: null,
+      iObjectRoomCountValid: null,
+      iObjectRoomHotelCountValid: null,
+      iObjectPlaceValid: null
+    }
+  },
+  computed: {
+    iObjectTypeID() {
+      return this.$store.state.tutorial.object.iObjectTypeID
+    },
+
+    iObjectArea: {
+      get() {
+        return this.$store.state.tutorial.object.iObjectArea
+      },
+      set(value) {
+        this.$store.commit('tutorial/SET_iObjectArea', value)
+      }
+    },
+    is_iObjectArea() {
+      const is = [1, 2, 3, 4, 5, 6]
+      return is.includes(this.iObjectTypeID)
+    },
+
+    iObjectAreaLocation: {
+      get() {
+        return this.$store.state.tutorial.object.iObjectAreaLocation
+      },
+      set(value) {
+        this.$store.commit('tutorial/SET_iObjectAreaLocation', value)
+      }
+    },
+    is_iObjectAreaLocation() {
+      const is = [1, 2, 3, 4]
+      return is.includes(this.iObjectTypeID)
+    },
+
+    iObjectFloorAll: {
+      get() {
+        return this.$store.state.tutorial.object.iObjectFloorAll
+      },
+      set(value) {
+        this.$store.commit('tutorial/SET_iObjectFloorAll', value)
+      }
+    },
+    is_iObjectFloorAll() {
+      const is = [1, 2, 3, 4, 5, 6, 7, 8]
+      return is.includes(this.iObjectTypeID)
+    },
+
+    iObjectFloor: {
+      get() {
+        return this.$store.state.tutorial.object.iObjectFloor
+      },
+      set(value) {
+        this.$store.commit('tutorial/SET_iObjectFloor', value)
+      }
+    },
+    is_iObjectFloor() {
+      const is = [5, 6, 9]
+      return is.includes(this.iObjectTypeID)
+    },
+
+    iObjectRoomCount: {
+      get() {
+        return this.$store.state.tutorial.object.iObjectRoomCount
+      },
+      set(value) {
+        this.$store.commit('tutorial/SET_iObjectRoomCount', value)
+      }
+    },
+    is_iObjectRoomCount() {
+      const is = [1, 2, 3, 4, 5, 6]
+      return is.includes(this.iObjectTypeID)
+    },
+
+    iObjectRoomHotelCount: {
+      get() {
+        return this.$store.state.tutorial.object.iObjectRoomHotelCount
+      },
+      set(value) {
+        this.$store.commit('tutorial/SET_iObjectRoomHotelCount', value)
+      }
+    },
+    is_iObjectRoomHotelCount() {
+      const is = [7, 8]
+      return is.includes(this.iObjectTypeID)
+    },
+
+    iObjectPlace: {
+      get() {
+        return this.$store.state.tutorial.object.iObjectPlace
+      },
+      set(value) {
+        this.$store.commit('tutorial/SET_iObjectPlace', value)
+      }
+    },
+    is_iObjectPlace() {
+      const is = [1, 2, 3, 4, 5, 6, 9]
+      return is.includes(this.iObjectTypeID)
+    },
+
+    currentStep() {
+      return this.$store.getters['tutorial/currentStep']
+    },
+    prevStep() {
+      return this.$store.getters['tutorial/prevStep']
+    },
+    nextStep() {
+      return this.$store.getters['tutorial/nextStep']
+    },
+    countSteps() {
+      return this.$store.getters['tutorial/countSteps']
+    },
+    currentStepIndex() {
+      return this.$store.getters['tutorial/currentStepIndex']
+    }
+  },
+  methods: {
+    changeStep(type) {
+      this.$store.dispatch('tutorial/CHANGE_STEP', {
+        type,
+        currentStep: this.currentStep
+      })
+    }
+  }
+}
+</script>

@@ -7,19 +7,25 @@ module.exports = {
       [
         {
           iRoomTypeID: 1,
-          sRoomTypeTitle: 'Эконом',
+          sRoomTypeTitle: 'Single',
           iRoomTypeSort: 9999,
           iRoomTypeActive: true
         },
         {
           iRoomTypeID: 2,
-          sRoomTypeTitle: 'Стандарт',
+          sRoomTypeTitle: 'Double',
           iRoomTypeSort: 9999,
           iRoomTypeActive: true
         },
         {
           iRoomTypeID: 3,
-          sRoomTypeTitle: 'Люкс',
+          sRoomTypeTitle: 'Triple',
+          iRoomTypeSort: 9999,
+          iRoomTypeActive: true
+        },
+        {
+          iRoomTypeID: 4,
+          sRoomTypeTitle: 'Family Room',
           iRoomTypeSort: 9999,
           iRoomTypeActive: true
         }

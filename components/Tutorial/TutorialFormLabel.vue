@@ -19,5 +19,7 @@ export default {
 <style>
 .tutorial-form-label {
   padding: 0 0 15px;
+  font-weight: 500;
+  font-size: 16px;
 }
 </style>

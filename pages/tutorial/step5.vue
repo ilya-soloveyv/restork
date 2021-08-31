@@ -52,7 +52,7 @@
 import ProgressBar from '~/components/Tutorial/ProgressBar'
 import Title from '~/components/Tutorial/Title'
 import HintStep1 from '~/components/Tutorial/HintStep1'
-import Checkbox from '~/components/Tutorial/Checkbox'
+import Checkbox from '~/components/Tutorial/TutorialCheckbox'
 
 export default {
   components: {

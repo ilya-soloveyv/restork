@@ -14,12 +14,23 @@
       <slot name="content" />
     </div>
     <div class="tutorial-page__controls">
-      <div v-sticky :sticky-offset="{ top: 0, bottom: 0 }" sticky-side="bottom">
+      <slot name="controls" />
+      <!-- <div v-sticky :sticky-offset="{ top: 0, bottom: 0 }" sticky-side="bottom">
         <slot name="controls" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  created() {
+    this.$store.dispatch('tutorial/GET_OBJECT')
+    this.$store.dispatch('objectType/GET_LIST')
+    this.$store.dispatch('roomType/GET_LIST')
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .tutorial-page {
@@ -55,6 +66,9 @@
   &__controls {
     grid-column: 1/2;
     grid-row: 3/4;
+    position: sticky;
+    left: 0;
+    bottom: 0;
 
     @media (max-width: 1199px) {
       grid-column: 1/3;

@@ -5,7 +5,7 @@
         <h1>Мои объекты</h1>
       </b-col>
       <b-col md="5" lg="4" xl="3" align-self="center" class="wrapButtonAdd">
-        <b-button to="/dashboard/object/add" variant="primary" size="lg" block>
+        <b-button to="/tutorial" variant="primary" size="lg" block>
           Добавить объект
         </b-button>
       </b-col>

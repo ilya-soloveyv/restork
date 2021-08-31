@@ -20,34 +20,50 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false
       },
+      iRoomTypeID: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+      },
       sObjectTitle: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true,
+        defaultValue: null
       },
       iObjectArea: {
         type: DataTypes.INTEGER,
-        allowNull: true,
-        defaultValue: 0
+        allowNull: true
+      },
+      iObjectAreaLocation: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+      },
+      iObjectFloorAll: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+      },
+      iObjectFloor: {
+        type: DataTypes.INTEGER,
+        allowNull: true
       },
       iObjectRoomCount: {
         type: DataTypes.INTEGER,
-        allowNull: true,
-        defaultValue: 0
+        allowNull: true
+      },
+      iObjectRoomHotelCount: {
+        type: DataTypes.INTEGER,
+        allowNull: true
       },
       iObjectBed: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 1
+        allowNull: true
       },
       iObjectPlace: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 1
+        allowNull: true
       },
       iObjectPlaceDop: {
         type: DataTypes.INTEGER,
-        allowNull: true,
-        defaultValue: 0
+        allowNull: true
       },
       sObjectAddress: {
         type: DataTypes.STRING,
@@ -68,6 +84,10 @@ module.exports = (sequelize, DataTypes) => {
       iObjectVerification: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
+      },
+      sTutorialStepActive: {
+        type: DataTypes.STRING,
+        defaultValue: null
       }
     },
     {
@@ -207,6 +227,10 @@ module.exports = (sequelize, DataTypes) => {
 
     return object
   }
+
+  // Object.item = async function({ iObjectID, iUserID }) {
+
+  // }
 
   Object.getList = async (params) => {
     const objects = await Object.findAll({

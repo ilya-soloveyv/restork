@@ -47,6 +47,10 @@ module.exports = {
       iUserAdmin: {
         type: Sequelize.BOOLEAN,
         defaultValue: 0
+      },
+      B2PPan: {
+        type: Sequelize.STRING,
+        allowNull: true
       }
     })
   },

@@ -10,6 +10,10 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
+      iObjectTypeGroupID: {
+        allowNull: false,
+        type: DataTypes.INTEGER
+      },
       sObjectTypeTitle: {
         allowNull: false,
         type: DataTypes.STRING

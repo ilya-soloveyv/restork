@@ -53,7 +53,7 @@
             </svg>
             Выйти
           </b-nav-item> -->
-          <b-nav-item to="/dashboard/object/add">Добавить объект</b-nav-item>
+          <b-nav-item to="/tutorial">Добавить объект</b-nav-item>
           <b-nav-item to="/dashboard/application">Мои поездки</b-nav-item>
           <b-nav-item-dropdown right class="userDropdown">
             <template v-slot:button-content>
@@ -100,7 +100,7 @@
               Мои объекты
             </b-dropdown-item>
             <b-dropdown-item to="/dashboard/object/add">
-              Добавить объект
+              Добавить объект (old)
             </b-dropdown-item>
             <b-dropdown-item to="/dashboard/booking">
               Бронирования

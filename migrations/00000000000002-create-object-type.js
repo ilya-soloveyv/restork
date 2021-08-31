@@ -9,6 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      iObjectTypeGroupID: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       sObjectTypeTitle: {
         allowNull: false,
         type: Sequelize.STRING
