@@ -1,7 +1,6 @@
 require('dotenv').config()
 
 module.exports = {
-  mode: 'universal',
   telemetry: false,
   head: {
     title: process.env.npm_package_name || '',

@@ -9,7 +9,7 @@ router.post('/check_object', async (req, res, next) => {
   const iUserID = req.user.iUserID
   const objects = await Object.getList({ iUserID })
   const isTutorialObject = objects.find((object) => !!object.sTutorialStepActive)
-  response.object = isTutorialObject ? await Object.getObject(isTutorialObject.iObjectID) : {}
+  response.object = isTutorialObject ? await Object.getObject(isTutorialObject.iObjectID) : null
 
   res.json(response)
 })
