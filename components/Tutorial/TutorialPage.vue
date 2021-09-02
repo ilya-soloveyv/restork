@@ -15,9 +15,6 @@
     </div>
     <div class="tutorial-page__controls">
       <slot name="controls" />
-      <!-- <div v-sticky :sticky-offset="{ top: 0, bottom: 0 }" sticky-side="bottom">
-        <slot name="controls" />
-      </div> -->
     </div>
   </div>
 </template>

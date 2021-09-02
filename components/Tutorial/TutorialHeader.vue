@@ -1,5 +1,5 @@
 <template>
-  <div class="tutorial-header">
+  <div v-if="step && title" class="tutorial-header">
     <div class="tutorial-header__wrapper">
       <!-- <div class="tutorial-header__icon"></div> -->
       <div class="tutorial-header__step">
@@ -18,11 +18,11 @@ export default {
   props: {
     step: {
       type: Number,
-      required: true
+      required: false
     },
     title: {
       type: String,
-      required: true
+      required: false
     }
   }
 }

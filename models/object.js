@@ -118,6 +118,12 @@ module.exports = (sequelize, DataTypes) => {
     Object.hasMany(models.application_object, {
       foreignKey: 'iObjectID'
     })
+    Object.hasMany(models.object_feature, {
+      foreignKey: 'iObjectID'
+    })
+    Object.hasMany(models.object_place, {
+      foreignKey: 'iObjectID'
+    })
   }
 
   Object.getObject = async function(iObjectID) {
@@ -152,6 +158,12 @@ module.exports = (sequelize, DataTypes) => {
               model: sequelize.models.room_option
             }
           ]
+        },
+        {
+          model: sequelize.models.object_feature
+        },
+        {
+          model: sequelize.models.object_place
         },
         {
           model: sequelize.models.object_image

@@ -6,13 +6,14 @@ const state = () => ({
   },
   object_object_options: [],
   object_room_options: [],
+  object_feature: [],
   steps: [
     {
       id: 'object_type',
       url: 'object-type',
       stepNumber: 1,
       title: 'Категория объекта',
-      current: true
+      current: false
     },
     {
       id: 'basic',
@@ -34,13 +35,34 @@ const state = () => ({
       stepNumber: 4,
       title: 'Удобства',
       current: false
+    },
+    {
+      id: 'feature',
+      url: 'feature',
+      stepNumber: 5,
+      title: 'Особенности',
+      current: false
+    },
+    {
+      id: 'location',
+      url: 'location',
+      stepNumber: 6,
+      title: 'Местоположение',
+      current: false
+    },
+    {
+      id: 'place',
+      url: 'place',
+      stepNumber: 7,
+      title: 'Значимые места рядом',
+      current: false
     }
   ]
 })
 
 const getters = {
   currentStep: (state) => {
-    return state.steps.find((step) => step.current)
+    return state.steps.find((step) => step.current) || {}
   },
   currentStepIndex: (state) => {
     return state.steps.findIndex((step) => step.current)
@@ -72,6 +94,10 @@ const mutations = {
     state.object_room_options = []
     state.object.object_room_options.forEach((option) => {
       state.object_room_options.push(option.iRoomOptionID)
+    })
+    state.object_feature = []
+    state.object.object_features.forEach((option) => {
+      state.object_feature.push(option.iFeatureID)
     })
   },
   SET_iObjectID(state, payload) {
@@ -121,6 +147,13 @@ const mutations = {
   },
   SET_roomOptions(state, payload) {
     state.object_room_options = payload
+  },
+  SET_objectFeature(state, payload) {
+    state.object_feature = payload
+  },
+  SET_sObjectAddress(state, { sObjectAddress, coordinates }) {
+    state.object.sObjectAddress = sObjectAddress
+    state.object.aObjectCoordinate.coordinates = coordinates
   }
 }
 
@@ -215,6 +248,21 @@ const actions = {
               roomOptions: state.object_room_options
             }
           )
+          commit('SET_object', response.object)
+          break
+        case 'feature':
+          response = await this.$axios.$post('/api/tutorial/update_feature', {
+            iObjectID: state.object.iObjectID,
+            object_feature: state.object_feature
+          })
+          commit('SET_object', response.object)
+          break
+        case 'location':
+          response = await this.$axios.$post('/api/tutorial/update_location', {
+            iObjectID: state.object.iObjectID,
+            sObjectAddress: state.object.sObjectAddress,
+            aObjectCoordinate: state.object.aObjectCoordinate
+          })
           commit('SET_object', response.object)
           break
         default:

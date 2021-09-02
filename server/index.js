@@ -44,6 +44,8 @@ app.use('/api/message', require('./routes/message'))
 app.use('/api/b2p', require('./routes/b2p'))
 app.use('/api/tutorial', require('./routes/tutorial'))
 app.use('/api/object_type_group', require('./routes/object_type_group'))
+app.use('/api/feature', require('./routes/feature'))
+app.use('/api/place', require('./routes/place'))
 
 const nuxt = new Nuxt(config)
 
