@@ -13,49 +13,72 @@ const state = () => ({
       url: 'object-type',
       stepNumber: 1,
       title: 'Категория объекта',
-      current: false
+      current: false,
+      iObjectTypeGroupID: [1, 2, 3]
     },
     {
       id: 'basic',
       url: 'basic',
       stepNumber: 2,
       title: 'Основные параметры',
-      current: false
+      current: false,
+      iObjectTypeGroupID: [1, 3]
+    },
+    {
+      id: 'hotel',
+      url: 'hotel',
+      stepNumber: 2,
+      title: 'Отель',
+      current: false,
+      iObjectTypeGroupID: [2]
+    },
+    {
+      id: 'room',
+      url: 'room',
+      stepNumber: 2,
+      title: 'Номер',
+      current: false,
+      iObjectTypeGroupID: [2]
     },
     {
       id: 'object_options',
       url: 'object-options',
       stepNumber: 3,
       title: 'Удобства',
-      current: false
+      current: false,
+      iObjectTypeGroupID: [1, 2, 3]
     },
     {
       id: 'room_options',
       url: 'room-options',
       stepNumber: 4,
       title: 'Удобства',
-      current: false
+      current: false,
+      iObjectTypeGroupID: [1, 2, 3]
     },
     {
       id: 'feature',
       url: 'feature',
       stepNumber: 5,
       title: 'Особенности',
-      current: false
+      current: false,
+      iObjectTypeGroupID: [1, 2, 3]
     },
     {
       id: 'location',
       url: 'location',
       stepNumber: 6,
       title: 'Местоположение',
-      current: false
+      current: false,
+      iObjectTypeGroupID: [1, 2, 3]
     },
     {
       id: 'place',
       url: 'place',
       stepNumber: 7,
       title: 'Значимые места рядом',
-      current: false
+      current: false,
+      iObjectTypeGroupID: [1, 2, 3]
     }
   ]
 })
@@ -154,6 +177,21 @@ const mutations = {
   SET_sObjectAddress(state, { sObjectAddress, coordinates }) {
     state.object.sObjectAddress = sObjectAddress
     state.object.aObjectCoordinate.coordinates = coordinates
+  },
+  CHANGE_iPlaceID_in_places(state, { iPlaceID, index }) {
+    state.object.object_places[index].iPlaceID = Number(iPlaceID)
+  },
+  CHANGE_sPlaceTitle_in_places(state, { sPlaceTitle, index }) {
+    state.object.object_places[index].sPlaceTitle = sPlaceTitle
+  },
+  CHANGE_iPlaceDistance_in_places(state, { iPlaceDistance, index }) {
+    state.object.object_places[index].iPlaceDistance = Number(iPlaceDistance)
+  },
+  ADD_iPlaceID_in_places(state, payload) {
+    state.object.object_places.push(payload)
+  },
+  REMOVE_place_in_places(state, payload) {
+    state.object.object_places.splice(payload, 1)
   }
 }
 
@@ -265,6 +303,13 @@ const actions = {
           })
           commit('SET_object', response.object)
           break
+        case 'place':
+          response = await this.$axios.$post('/api/tutorial/update_place', {
+            iObjectID: state.object.iObjectID,
+            places: state.object.object_places
+          })
+          commit('SET_object', response.object)
+          break
         default:
           break
       }
@@ -277,6 +322,30 @@ const actions = {
       }
       this.$router.push(`/tutorial/step/${step.url}`)
     }
+  },
+  CHANGE_iPlaceID_in_places({ state, commit }, { iPlaceID, index }) {
+    commit('CHANGE_iPlaceID_in_places', { iPlaceID, index })
+  },
+  CHANGE_sPlaceTitle_in_places({ state, commit }, { sPlaceTitle, index }) {
+    commit('CHANGE_sPlaceTitle_in_places', { sPlaceTitle, index })
+  },
+  CHANGE_iPlaceDistance_in_places(
+    { state, commit },
+    { iPlaceDistance, index }
+  ) {
+    commit('CHANGE_iPlaceDistance_in_places', { iPlaceDistance, index })
+  },
+  ADD_iPlaceID_in_places({ state, commit }) {
+    commit('ADD_iPlaceID_in_places', {
+      iObjectPlaceID: null,
+      iObjectID: state.object.iObjectID,
+      iPlaceID: null,
+      sPlaceTitle: null,
+      iPlaceDistance: null
+    })
+  },
+  REMOVE_place_in_places({ commit }, { index }) {
+    commit('REMOVE_place_in_places', index)
   }
 }
 

@@ -253,4 +253,38 @@ router.post('/update_location', async (req, res, next) => {
   res.json(response)
 })
 
+router.post('/update_place', async (req, res, next) => {
+  const ObjectPlace = require('../../models').object_place
+
+  const iObjectID = req.body.iObjectID
+  const objectPlaces = req.body.places
+
+  const response = {}
+
+  await ObjectPlace.destroy({
+    where: {
+      iObjectID
+    }
+  })
+
+  const places = []
+  objectPlaces.forEach((place) => {
+    places.push({
+      iObjectID: place.iObjectID,
+      iPlaceID: place.iPlaceID,
+      sPlaceTitle: place.sPlaceTitle,
+      iPlaceDistance: place.iPlaceDistance
+    })
+  })
+
+  if (places) {
+    await ObjectPlace.bulkCreate(places)
+  }
+
+
+  response.object = await Object.getObject(iObjectID)
+
+  res.json(response)
+})
+
 module.exports = router

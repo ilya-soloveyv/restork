@@ -6,9 +6,7 @@
       </div>
     </div>
     <div class="tutorial-page__hint">
-      <div v-sticky :sticky-offset="{ top: 0, bottom: 100 }" sticky-side="both">
-        <slot name="hint" />
-      </div>
+      <slot name="hint" />
     </div>
     <div class="tutorial-page__content">
       <slot name="content" />
@@ -44,7 +42,12 @@ export default {
 
   &__hint {
     grid-column: 2/3;
-    grid-row: 2/4;
+    grid-row: 1/4;
+    position: sticky;
+    left: 0;
+    top: 0;
+    overflow: auto;
+    height: calc(100vh - 79px);
 
     @media (max-width: 1199px) {
       grid-row: 1/2;
