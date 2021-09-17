@@ -39,7 +39,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   )
   ObjectType.associate = function(models) {
-    // associations can be defined here
+    ObjectType.belongsTo(models.objectTypeGroup, {
+      foreignKey: 'iObjectTypeGroupID'
+    })
   }
 
   ObjectType.getTypes = async function() {

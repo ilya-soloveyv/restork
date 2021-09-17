@@ -79,11 +79,53 @@ const state = () => ({
       title: 'Значимые места рядом',
       current: false,
       iObjectTypeGroupID: [1, 2, 3]
+    },
+    {
+      id: 'photo',
+      url: 'photo',
+      stepNumber: 8,
+      title: 'Фотографии',
+      current: false,
+      iObjectTypeGroupID: [1, 2, 3]
+    },
+    {
+      id: 'description',
+      url: 'description',
+      stepNumber: 9,
+      title: 'Название и описание',
+      current: false,
+      iObjectTypeGroupID: [1, 2, 3]
+    },
+    {
+      id: 'status',
+      url: 'status',
+      stepNumber: 10,
+      title: 'Статус жилья',
+      current: false,
+      iObjectTypeGroupID: [1, 2, 3]
     }
   ]
 })
 
 const getters = {
+  currentSteps: (state) => {
+    const iObjectTypeGroupID =
+      state.object && state.object.object_type
+        ? state.object.object_type.iObjectTypeGroupID
+        : false
+    console.log(iObjectTypeGroupID)
+    if (!iObjectTypeGroupID) return []
+    return state.steps.filter((step) => {
+      // console.log(step.iObjectTypeGroupID)
+      // const check = true
+      const check = step.iObjectTypeGroupID.indexOf(iObjectTypeGroupID)
+      console.log(check)
+      if (check !== -1) {
+        return step
+      }
+      // console.log(step.iObjectTypeGroupID)
+    })
+  },
   currentStep: (state) => {
     return state.steps.find((step) => step.current) || {}
   },
@@ -192,6 +234,12 @@ const mutations = {
   },
   REMOVE_place_in_places(state, payload) {
     state.object.object_places.splice(payload, 1)
+  },
+  SET_sObjectTitle(state, payload) {
+    state.object.sObjectTitle = payload
+  },
+  SET_tObjectDesc(state, payload) {
+    state.object.tObjectDesc = payload
   }
 }
 
@@ -278,6 +326,24 @@ const actions = {
           )
           commit('SET_object', response.object)
           break
+        case 'hotel':
+          response = await this.$axios.$post('/api/tutorial/update_hotel', {
+            iObjectID: state.object.iObjectID,
+            sObjectTitle: state.object.sObjectTitle,
+            iObjectRoomHotelCount: state.object.iObjectRoomHotelCount,
+            iObjectFloorAll: state.object.iObjectFloorAll
+          })
+          commit('SET_object', response.object)
+          break
+        case 'room':
+          response = await this.$axios.$post('/api/tutorial/update_room', {
+            iObjectID: state.object.iObjectID,
+            iObjectArea: state.object.iObjectArea,
+            iObjectRoomCount: state.object.iObjectRoomCount,
+            iObjectPlace: state.object.iObjectPlace
+          })
+          commit('SET_object', response.object)
+          break
         case 'room_options':
           response = await this.$axios.$post(
             '/api/tutorial/update_room_options',
@@ -308,6 +374,17 @@ const actions = {
             iObjectID: state.object.iObjectID,
             places: state.object.object_places
           })
+          commit('SET_object', response.object)
+          break
+        case 'description':
+          response = await this.$axios.$post(
+            '/api/tutorial/update_description',
+            {
+              iObjectID: state.object.iObjectID,
+              sObjectTitle: state.object.sObjectTitle,
+              tObjectDesc: state.object.tObjectDesc
+            }
+          )
           commit('SET_object', response.object)
           break
         default:

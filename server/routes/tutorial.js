@@ -208,7 +208,7 @@ router.post('/update_feature', async (req, res, next) => {
 
 router.post('/update_location', async (req, res, next) => {
   const Sequelize = require('sequelize')
-  
+
   const iUserID = req.user.iUserID
   const iObjectID = req.body.iObjectID
   const sObjectAddress = req.body.sObjectAddress
@@ -247,7 +247,6 @@ router.post('/update_location', async (req, res, next) => {
     }
   )
 
-
   response.object = await Object.getObject(iObjectID)
 
   res.json(response)
@@ -281,6 +280,90 @@ router.post('/update_place', async (req, res, next) => {
     await ObjectPlace.bulkCreate(places)
   }
 
+  response.object = await Object.getObject(iObjectID)
+
+  res.json(response)
+})
+
+router.post('/update_hotel', async (req, res, next) => {
+  const iUserID = req.user.iUserID
+  const iObjectID = req.body.iObjectID
+  const sObjectTitle = req.body.sObjectTitle
+  const iObjectRoomHotelCount = req.body.iObjectRoomHotelCount
+  const iObjectFloorAll = req.body.iObjectFloorAll
+
+  const response = {}
+
+  response.update = await Object.update(
+    {
+      sObjectTitle,
+      iObjectRoomHotelCount,
+      iObjectFloorAll,
+      sTutorialStepActive: 'hotel'
+    },
+    {
+      where: {
+        iObjectID,
+        iUserID
+      }
+    }
+  )
+
+  response.object = await Object.getObject(iObjectID)
+
+  res.json(response)
+})
+
+router.post('/update_room', async (req, res, next) => {
+  const iUserID = req.user.iUserID
+  const iObjectID = req.body.iObjectID
+  const iObjectArea = req.body.iObjectArea
+  const iObjectRoomCount = req.body.iObjectRoomCount
+  const iObjectPlace = req.body.iObjectPlace
+
+  const response = {}
+
+  response.update = await Object.update(
+    {
+      iObjectArea,
+      iObjectRoomCount,
+      iObjectPlace,
+      sTutorialStepActive: 'room'
+    },
+    {
+      where: {
+        iObjectID,
+        iUserID
+      }
+    }
+  )
+
+  response.object = await Object.getObject(iObjectID)
+
+  res.json(response)
+})
+
+router.post('/update_description', async (req, res, next) => {
+  const iUserID = req.user.iUserID
+  const iObjectID = req.body.iObjectID
+  const sObjectTitle = req.body.sObjectTitle
+  const tObjectDesc = req.body.tObjectDesc
+
+  const response = {}
+
+  response.update = await Object.update(
+    {
+      sObjectTitle,
+      tObjectDesc,
+      sTutorialStepActive: 'description'
+    },
+    {
+      where: {
+        iObjectID,
+        iUserID
+      }
+    }
+  )
 
   response.object = await Object.getObject(iObjectID)
 

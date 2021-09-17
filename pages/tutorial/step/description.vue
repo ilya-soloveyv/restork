@@ -10,56 +10,38 @@
       <TutorialHint />
     </template>
     <template slot="content">
-      <TutorialFormLabel
-        title="Напишите общую площадь номера, с учётом прихожей и балкона"
-      />
+      <TutorialFormLabel title="Напишите название вашего объекта" />
       <b-row>
-        <b-col xl="4">
+        <b-col xl="12">
           <div class="form-group-wrap">
-            <b-form-group label="Площадь номера">
+            <b-form-group label="Название">
               <b-form-input
-                v-model="iObjectArea"
-                :state="iObjectAreaValid"
-                placeholder="Площадь номера"
+                v-model="sObjectTitle"
+                :state="sObjectTitleValid"
+                placeholder="Название"
               />
               <b-form-invalid-feedback class="error-message">
-                Укажите Площадь номера
-              </b-form-invalid-feedback>
-            </b-form-group>
-          </div>
-        </b-col>
-      </b-row>
-      <TutorialFormLabel title="Укажите количество комнат в номере" />
-      <b-row>
-        <b-col xl="4">
-          <div class="form-group-wrap">
-            <b-form-group label="Кол-во номеров">
-              <b-form-input
-                v-model="iObjectRoomCount"
-                :state="iObjectRoomCountValid"
-                placeholder="Кол-во номеров"
-              />
-              <b-form-invalid-feedback class="error-message">
-                Укажите Кол-во номеров
+                Укажите Название
               </b-form-invalid-feedback>
             </b-form-group>
           </div>
         </b-col>
       </b-row>
       <TutorialFormLabel
-        title="Напишите сколько в общем спальных мест в номере"
+        title="Расскажите, чем интересен ваш район, и укажите особенности жилья, например быстрый Wi-Fi или парковку"
       />
       <b-row>
-        <b-col xl="4">
+        <b-col xl="12">
           <div class="form-group-wrap">
-            <b-form-group label="Кол-во спальных мест">
-              <b-form-input
-                v-model="iObjectPlace"
-                :state="iObjectPlaceValid"
-                placeholder="Кол-во спальных мест"
+            <b-form-group label="Описание">
+              <b-form-textarea
+                v-model="tObjectDesc"
+                :state="tObjectDescValid"
+                placeholder="Описание"
+                rows="4"
               />
               <b-form-invalid-feedback class="error-message">
-                Укажите Кол-во спальных мест
+                Укажите Описание
               </b-form-invalid-feedback>
             </b-form-group>
           </div>
@@ -98,34 +80,25 @@ export default {
   },
   data() {
     return {
-      iObjectAreaValid: null,
-      iObjectRoomCountValid: null,
-      iObjectPlaceValid: null
+      sObjectTitleValid: null,
+      tObjectDescValid: null
     }
   },
   computed: {
-    iObjectArea: {
+    sObjectTitle: {
       get() {
-        return this.$store.state.tutorial.object.iObjectArea
+        return this.$store.state.tutorial.object.sObjectTitle
       },
       set(value) {
-        this.$store.commit('tutorial/SET_iObjectArea', value)
+        this.$store.commit('tutorial/SET_sObjectTitle', value)
       }
     },
-    iObjectRoomCount: {
+    tObjectDesc: {
       get() {
-        return this.$store.state.tutorial.object.iObjectRoomCount
+        return this.$store.state.tutorial.object.tObjectDesc
       },
       set(value) {
-        this.$store.commit('tutorial/SET_iObjectRoomCount', value)
-      }
-    },
-    iObjectPlace: {
-      get() {
-        return this.$store.state.tutorial.object.iObjectPlace
-      },
-      set(value) {
-        this.$store.commit('tutorial/SET_iObjectPlace', value)
+        this.$store.commit('tutorial/SET_tObjectDesc', value)
       }
     },
     currentStep() {

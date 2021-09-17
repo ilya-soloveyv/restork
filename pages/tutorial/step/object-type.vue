@@ -10,11 +10,9 @@
       <TutorialHint />
     </template>
     <template slot="content">
-      <!-- <pre>
-        {{ object.iObjectID }}
-        {{ object.sObjectTitle }}
-        {{ object.sTutorialStepActive }}
-      </pre> -->
+      <!-- <pre>{{ object.iObjectID }}</pre> -->
+      <!-- <pre>{{ object.sObjectTitle }}</pre> -->
+      <!-- <pre>{{ object.sTutorialStepActive }}</pre> -->
       <TutorialTitle title="Давайте подготовим вас к приему гостей" />
       <TutorialFormLabel
         title="Выберите из предложенного списка категорию вашего объекта"
@@ -62,6 +60,7 @@
           </b-form-group>
         </div>
       </template>
+      <pre>{{ steps }}</pre>
     </template>
     <template slot="controls">
       <TutorialControls
@@ -136,7 +135,8 @@ export default {
       }
     },
     steps() {
-      return this.$store.state.tutorial.steps
+      return this.$store.getters['tutorial/currentSteps']
+      // return this.$store.state.tutorial.steps
     },
     currentStep() {
       return this.$store.getters['tutorial/currentStep']
