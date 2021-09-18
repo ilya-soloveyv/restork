@@ -8,8 +8,12 @@ router.post('/check_object', async (req, res, next) => {
 
   const iUserID = req.user.iUserID
   const objects = await Object.getList({ iUserID })
-  const isTutorialObject = objects.find((object) => !!object.sTutorialStepActive)
-  response.object = isTutorialObject ? await Object.getObject(isTutorialObject.iObjectID) : null
+  const isTutorialObject = objects.find(
+    (object) => !!object.sTutorialStepActive
+  )
+  response.object = isTutorialObject
+    ? await Object.getObject(isTutorialObject.iObjectID)
+    : null
 
   res.json(response)
 })
@@ -115,10 +119,8 @@ router.post('/update_basic', async (req, res, next) => {
 
 router.post('/update_object_options', async (req, res, next) => {
   const ObjectObjectOption = require('../../models').object_object_option
-  
   const iObjectID = req.body.iObjectID
   const objectOptions = req.body.objectOptions
-
   const response = {}
 
   await ObjectObjectOption.destroy({
@@ -146,10 +148,8 @@ router.post('/update_object_options', async (req, res, next) => {
 
 router.post('/update_room_options', async (req, res, next) => {
   const ObjectRoomOption = require('../../models').object_room_option
-  
   const iObjectID = req.body.iObjectID
   const roomOptions = req.body.roomOptions
-
   const response = {}
 
   await ObjectRoomOption.destroy({
@@ -177,10 +177,8 @@ router.post('/update_room_options', async (req, res, next) => {
 
 router.post('/update_feature', async (req, res, next) => {
   const ObjectFeature = require('../../models').object_feature
-  
   const iObjectID = req.body.iObjectID
-  const object_feature = req.body.object_feature
-
+  const featuresList = req.body.object_feature
   const response = {}
 
   await ObjectFeature.destroy({
@@ -190,7 +188,7 @@ router.post('/update_feature', async (req, res, next) => {
   })
 
   const features = []
-  object_feature.forEach((feature) => {
+  featuresList.forEach((feature) => {
     features.push({
       iObjectID,
       iFeatureID: feature

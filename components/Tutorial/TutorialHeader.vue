@@ -18,11 +18,13 @@ export default {
   props: {
     step: {
       type: Number,
-      required: false
+      required: false,
+      default: undefined
     },
     title: {
       type: String,
-      required: false
+      required: false,
+      default: undefined
     }
   }
 }

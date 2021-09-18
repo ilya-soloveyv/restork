@@ -30,7 +30,7 @@
           </div>
         </suggestions>
       </b-form-group>
-      <div v-if="aObjectCoordinate" id="map">
+      <div id="map" v-if="aObjectCoordinate">
         <client-only>
           <yandex-map
             :coords="aObjectCoordinate"
@@ -99,7 +99,6 @@ export default {
       },
       set(payload) {
         this.$store.commit('tutorial/SET_sObjectAddress', payload)
-        // console.log(payload)
       }
     },
     aObjectCoordinate: {
@@ -112,9 +111,6 @@ export default {
         } else {
           return [0, 0]
         }
-      },
-      set(payload) {
-        console.log(payload)
       }
     },
     currentStep() {
@@ -158,14 +154,10 @@ export default {
         sObjectAddress: item.formattedAddress,
         coordinates: [item.latitude, item.longitude]
       })
-      // this.$set(this.object, 'sObjectAddress', item.formattedAddress)
-      // this.$set(this.object.aObjectCoordinate.coordinates, 0, item.latitude)
-      // this.$set(this.object.aObjectCoordinate.coordinates, 1, item.longitude)
     },
     clickOnMap(event) {
       const coords = event.get('coords')
-      console.log(coords)
-      // this.$set(this.object.aObjectCoordinate, 'coordinates', coords)
+      this.$emit('clickOnMap', coords)
     }
   }
 }

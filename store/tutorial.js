@@ -113,17 +113,12 @@ const getters = {
       state.object && state.object.object_type
         ? state.object.object_type.iObjectTypeGroupID
         : false
-    console.log(iObjectTypeGroupID)
     if (!iObjectTypeGroupID) return []
     return state.steps.filter((step) => {
-      // console.log(step.iObjectTypeGroupID)
-      // const check = true
       const check = step.iObjectTypeGroupID.indexOf(iObjectTypeGroupID)
-      console.log(check)
       if (check !== -1) {
         return step
       }
-      // console.log(step.iObjectTypeGroupID)
     })
   },
   currentStep: (state) => {
@@ -175,7 +170,6 @@ const mutations = {
     state.object.iRoomTypeID = payload
   },
   SET_currentStep(state, payload) {
-    // console.log(payload)
     state.steps.map((step) => {
       if (step.id === payload.id) {
         step.current = true
@@ -184,7 +178,6 @@ const mutations = {
       }
       return step
     })
-    // this.$router.push(`/tutorial/step/${payload.url}`)
   },
   SET_iObjectArea(state, payload) {
     state.object.iObjectArea = payload

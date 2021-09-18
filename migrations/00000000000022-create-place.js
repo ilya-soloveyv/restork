@@ -21,7 +21,7 @@ module.exports = {
       iPlaceActive: {
         type: Sequelize.BOOLEAN,
         defaultValue: true
-      },
+      }
     })
   },
   down: (queryInterface, Sequelize) => {

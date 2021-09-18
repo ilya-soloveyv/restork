@@ -1,7 +1,7 @@
 <template>
   <div class="tutorial-hint">
     <div v-for="hint in hints" :key="hint.id" class="tutorial-hint__hint">
-      <img class="tutorial-hint__image" :src="hint.img" />
+      <img :src="hint.img" class="tutorial-hint__image" />
       <div class="tutorial-hint__title">{{ hint.title }}</div>
     </div>
   </div>

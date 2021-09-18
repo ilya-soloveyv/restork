@@ -23,10 +23,10 @@
       <div class="tutorial-place-item__wrapper">
         <label class="tutorial-place-item__label" for="">Название</label>
         <input
-          class="tutorial-place-item__input"
-          type="text"
           v-on:input="change_title"
           :value="sPlaceTitle"
+          class="tutorial-place-item__input"
+          type="text"
         />
       </div>
     </div>
@@ -34,18 +34,18 @@
       <div class="tutorial-place-item__wrapper">
         <label class="tutorial-place-item__label" for="">Расстояние</label>
         <input
-          class="tutorial-place-item__input"
-          type="text"
           v-on:input="change_distance"
           :value="iPlaceDistance"
+          class="tutorial-place-item__input"
+          type="text"
         />
       </div>
     </div>
     <div class="tutorial-place-item__remove">
       <a
+        @click.prevent="remove"
         class="tutorial-place-item__remove-link"
         href="#"
-        @click.prevent="remove"
       >
         - Удалить
       </a>

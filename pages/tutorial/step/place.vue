@@ -28,7 +28,7 @@
         @distance="change_iPlaceDistance($event)"
         @remove="removePlace"
       />
-      <b-btn variant="outline-secondary" pill size="sm" @click="addPlace">
+      <b-btn @click="addPlace" variant="outline-secondary" pill size="sm">
         Добавить
       </b-btn>
     </template>

@@ -21,7 +21,7 @@ module.exports = {
       iFeatureActive: {
         type: Sequelize.BOOLEAN,
         defaultValue: true
-      },
+      }
     })
   },
   down: (queryInterface, Sequelize) => {

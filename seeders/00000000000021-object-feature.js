@@ -19,7 +19,7 @@ module.exports = {
           iObjectFeatureID: 3,
           iObjectID: 7,
           iFeatureID: 5
-        },
+        }
       ],
       {}
     )
