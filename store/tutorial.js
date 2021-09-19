@@ -11,15 +11,13 @@ const state = () => ({
     {
       id: 'object_type',
       url: 'object-type',
-      stepNumber: 1,
       title: 'Категория объекта',
       current: false,
-      iObjectTypeGroupID: [1, 2, 3]
+      iObjectTypeGroupID: [null, 1, 2, 3]
     },
     {
       id: 'basic',
       url: 'basic',
-      stepNumber: 2,
       title: 'Основные параметры',
       current: false,
       iObjectTypeGroupID: [1, 3]
@@ -27,7 +25,6 @@ const state = () => ({
     {
       id: 'hotel',
       url: 'hotel',
-      stepNumber: 2,
       title: 'Отель',
       current: false,
       iObjectTypeGroupID: [2]
@@ -35,7 +32,6 @@ const state = () => ({
     {
       id: 'room',
       url: 'room',
-      stepNumber: 2,
       title: 'Номер',
       current: false,
       iObjectTypeGroupID: [2]
@@ -43,7 +39,6 @@ const state = () => ({
     {
       id: 'object_options',
       url: 'object-options',
-      stepNumber: 3,
       title: 'Удобства',
       current: false,
       iObjectTypeGroupID: [1, 2, 3]
@@ -51,7 +46,6 @@ const state = () => ({
     {
       id: 'room_options',
       url: 'room-options',
-      stepNumber: 4,
       title: 'Удобства',
       current: false,
       iObjectTypeGroupID: [1, 2, 3]
@@ -59,7 +53,6 @@ const state = () => ({
     {
       id: 'feature',
       url: 'feature',
-      stepNumber: 5,
       title: 'Особенности',
       current: false,
       iObjectTypeGroupID: [1, 2, 3]
@@ -67,7 +60,6 @@ const state = () => ({
     {
       id: 'location',
       url: 'location',
-      stepNumber: 6,
       title: 'Местоположение',
       current: false,
       iObjectTypeGroupID: [1, 2, 3]
@@ -75,7 +67,6 @@ const state = () => ({
     {
       id: 'place',
       url: 'place',
-      stepNumber: 7,
       title: 'Значимые места рядом',
       current: false,
       iObjectTypeGroupID: [1, 2, 3]
@@ -83,7 +74,6 @@ const state = () => ({
     {
       id: 'photo',
       url: 'photo',
-      stepNumber: 8,
       title: 'Фотографии',
       current: false,
       iObjectTypeGroupID: [1, 2, 3]
@@ -91,7 +81,6 @@ const state = () => ({
     {
       id: 'description',
       url: 'description',
-      stepNumber: 9,
       title: 'Название и описание',
       current: false,
       iObjectTypeGroupID: [1, 2, 3]
@@ -99,7 +88,6 @@ const state = () => ({
     {
       id: 'status',
       url: 'status',
-      stepNumber: 10,
       title: 'Статус жилья',
       current: false,
       iObjectTypeGroupID: [1, 2, 3]
@@ -108,12 +96,14 @@ const state = () => ({
 })
 
 const getters = {
-  currentSteps: (state) => {
-    const iObjectTypeGroupID =
-      state.object && state.object.object_type
-        ? state.object.object_type.iObjectTypeGroupID
-        : false
-    if (!iObjectTypeGroupID) return []
+  currentSteps: (state, getters, rootState, rootGetters) => {
+    const iObjectTypeID = state.object.iObjectTypeID
+    let iObjectTypeGroupID = null
+    if (iObjectTypeID > 0) {
+      iObjectTypeGroupID = rootState.objectType.list.find((type) => {
+        return type.iObjectTypeID === iObjectTypeID
+      }).iObjectTypeGroupID
+    }
     return state.steps.filter((step) => {
       const check = step.iObjectTypeGroupID.indexOf(iObjectTypeGroupID)
       if (check !== -1) {
@@ -121,26 +111,37 @@ const getters = {
       }
     })
   },
-  currentStep: (state) => {
-    return state.steps.find((step) => step.current) || {}
+  currentStep: (state, getters) => {
+    return getters.currentSteps.find((step) => step.current) || {}
   },
-  currentStepIndex: (state) => {
-    return state.steps.findIndex((step) => step.current)
+  currentStepIndex: (state, getters) => {
+    return getters.currentSteps.findIndex((step) => step.current)
   },
-  prevStep: (state) => {
-    const currentIndex = state.steps.findIndex((step) => step.current)
-    return currentIndex > 0 && state.steps[currentIndex - 1]
-      ? state.steps[currentIndex - 1]
-      : null
+  prevStep: (state, getters) => {
+    const currentStepIndex = getters.currentStepIndex
+    return getters.currentSteps[currentStepIndex - 1]
+      ? getters.currentSteps[currentStepIndex - 1]
+      : false
   },
-  nextStep: (state) => {
-    const currentIndex = state.steps.findIndex((step) => step.current)
-    return currentIndex >= 0 && state.steps[currentIndex + 1]
-      ? state.steps[currentIndex + 1]
-      : null
+  nextStep: (state, getters) => {
+    const currentStepIndex = getters.currentStepIndex
+    return currentStepIndex >= 0 && getters.currentSteps[currentStepIndex + 1]
+      ? getters.currentSteps[currentStepIndex + 1]
+      : false
   },
-  countSteps: (state) => {
-    return state.steps.length
+  checkPrevStep: (state, getters) => {
+    return !!getters.prevStep
+  },
+  checkNextStep: (state, getters) => {
+    return !!getters.nextStep
+  },
+  countSteps: (state, getters) => {
+    return getters.currentSteps.length
+    // console.log(state.steps)
+    // return state.steps.length
+  },
+  currentStepTitle: (state, getters) => {
+    return getters.currentStep.title
   }
 }
 
@@ -275,16 +276,19 @@ const actions = {
       // console.log(response)
     }
   },
-  async CHANGE_STEP({ state, commit, getters }, { type, currentStep }) {
-    const step =
-      type === 'prev' && getters.prevStep
+  async CHANGE_STEP({ state, commit, getters }, { type, stepID }) {
+    let step =
+      type === 'prev' && getters.checkPrevStep
         ? getters.prevStep
-        : type === 'next' && getters.nextStep
+        : type === 'next' && getters.checkNextStep
         ? getters.nextStep
         : null
+    if (!step && stepID) {
+      step = state.steps.find((step) => step.id === stepID)
+    }
     if (step) {
       let response = null
-      switch (currentStep && currentStep.id) {
+      switch (getters.currentStep && getters.currentStep.id) {
         case 'object_type':
           response = await this.$axios.$post(
             '/api/tutorial/update_object_type',

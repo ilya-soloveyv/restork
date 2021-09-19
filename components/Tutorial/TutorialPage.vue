@@ -1,28 +1,112 @@
 <template>
   <div class="tutorial-page" sticky-container>
     <div class="tutorial-page__header">
-      <div v-sticky :sticky-offset="{ top: 0, bottom: 100 }" sticky-side="both">
-        <slot name="header" />
-      </div>
+      <TutorialHeader
+        :currentStepIndex="currentStepIndex"
+        :currentStepTitle="currentStepTitle"
+        :steps="steps"
+        @useStep="useStep"
+      />
     </div>
-    <div class="tutorial-page__hint">
+    <div class="tutorial-page__hint" ref="hint">
       <slot name="hint" />
     </div>
     <div class="tutorial-page__content">
       <slot name="content" />
+      <!-- <pre>{{ steps }}</pre> -->
+      <!-- <pre>{{ currentStep }}</pre> -->
+      <!-- <pre>{{ currentStep }}</pre> -->
+      <!-- <pre>{{ steps }}</pre> -->
+      <!-- <pre>{{ currentStepIndex }}</pre> -->
+      <!-- <pre>{{ currentStepIndex }}</pre>
+      <pre>{{ checkPrevStep }}</pre>
+      <pre>{{ checkNextStep }}</pre> -->
     </div>
     <div class="tutorial-page__controls">
-      <slot name="controls" />
+      <TutorialControls
+        :countSteps="countSteps"
+        :currentStepIndex="currentStepIndex"
+        :checkPrevStep="checkPrevStep"
+        :checkNextStep="checkNextStep"
+        @click="changeStep"
+      />
+      <!-- <TutorialControls
+        :currentStep="currentStep"
+        :countSteps="countSteps"
+        :currentStepIndex="currentStepIndex"
+        @click="changeStep"
+      /> -->
     </div>
   </div>
 </template>
 
 <script>
+import TutorialHeader from '@/components/Tutorial/TutorialHeader.vue'
+import TutorialControls from '@/components/Tutorial/TutorialControls.vue'
+
 export default {
+  components: {
+    TutorialHeader,
+    TutorialControls
+  },
   created() {
     this.$store.dispatch('tutorial/GET_OBJECT')
     this.$store.dispatch('objectType/GET_LIST')
+    this.$store.dispatch('objectTypeGroup/GET_LIST')
     this.$store.dispatch('roomType/GET_LIST')
+  },
+  mounted() {
+    window.addEventListener('scroll', this.autoHeightHintBlock)
+    this.autoHeightHintBlock()
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.autoHeightHintBlock)
+  },
+  computed: {
+    steps() {
+      return this.$store.getters['tutorial/currentSteps']
+    },
+    currentStep() {
+      return this.$store.getters['tutorial/currentStep']
+    },
+    currentStepIndex() {
+      return this.$store.getters['tutorial/currentStepIndex']
+    },
+    checkPrevStep() {
+      return this.$store.getters['tutorial/checkPrevStep']
+    },
+    checkNextStep() {
+      return this.$store.getters['tutorial/checkNextStep']
+    },
+    countSteps() {
+      return this.$store.getters['tutorial/countSteps']
+    },
+    currentStepTitle() {
+      return this.$store.getters['tutorial/currentStepTitle']
+    }
+  },
+  methods: {
+    autoHeightHintBlock() {
+      const windowHeight = window.innerHeight
+      const hintEl = this.$refs.hint
+      const topOffset = document.scrollingElement.scrollTop
+      if (topOffset <= 79) {
+        hintEl.style.height = windowHeight - (79 - topOffset) + 'px'
+      } else {
+        hintEl.style.height = windowHeight + 'px'
+      }
+    },
+    changeStep(type) {
+      // console.log(type)
+      this.$store.dispatch('tutorial/CHANGE_STEP', {
+        type
+      })
+    },
+    useStep(stepID) {
+      this.$store.dispatch('tutorial/CHANGE_STEP', {
+        stepID
+      })
+    }
   }
 }
 </script>
@@ -38,6 +122,10 @@ export default {
   &__header {
     grid-column: 1/2;
     grid-row: 1/2;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1;
   }
 
   &__hint {
@@ -47,7 +135,6 @@ export default {
     left: 0;
     top: 0;
     overflow: auto;
-    height: calc(100vh - 79px);
 
     @media (max-width: 1199px) {
       grid-row: 1/2;

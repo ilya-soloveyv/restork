@@ -1,43 +1,28 @@
 <template>
   <div class="tutorial-hint">
     <div v-for="hint in hints" :key="hint.id" class="tutorial-hint__hint">
-      <img :src="hint.img" class="tutorial-hint__image" />
-      <div class="tutorial-hint__title">{{ hint.title }}</div>
+      <img v-if="hint.img" :src="hint.img" class="tutorial-hint__image" />
+      <div v-if="hint.title || hint.desc" class="tutorial-hint__data">
+        <span v-if="hint.title" class="tutorial-hint__title">
+          {{ hint.title }}
+        </span>
+        <span v-if="hint.title && hint.desc" class="tutorial-hint__dash">
+          -
+        </span>
+        <span v-if="hint.desc" class="tutorial-hint__desc">
+          {{ hint.desc }}
+        </span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      hints: [
-        {
-          id: 1,
-          title: 'Море | Черное море | 350м',
-          img: '/tutorial/hint/ocean.jpeg'
-        },
-        {
-          id: 2,
-          title: 'Озеро | Байкал | 1500м',
-          img: '/tutorial/hint/late.jpeg'
-        },
-        {
-          id: 3,
-          title: 'Подъемник | Роза Хутор | 150м',
-          img: '/tutorial/hint/snow.jpeg'
-        },
-        {
-          id: 4,
-          title: 'Центр города | 850м',
-          img: '/tutorial/hint/city.jpeg'
-        },
-        {
-          id: 5,
-          title: 'Кафе | Шаурма | 50м',
-          img: '/tutorial/hint/eat.jpeg'
-        }
-      ]
+  props: {
+    hints: {
+      type: Array,
+      default: () => []
     }
   }
 }
@@ -45,7 +30,6 @@ export default {
 
 <style lang="scss" scoped>
 .tutorial-hint {
-  // background: palegreen;
   padding: 100px 0 100px 30px;
   height: 100%;
   overflow: auto;
@@ -57,10 +41,10 @@ export default {
   &__hint {
     overflow: hidden;
     border-radius: 6px;
-    background: #eeeeee;
+    background: #f5f5f5;
 
     &:not(:last-child) {
-      margin-bottom: 16px;
+      margin-bottom: 24px;
     }
   }
 
@@ -68,8 +52,20 @@ export default {
     width: 100%;
   }
 
+  &__data {
+    padding: 12px 16px;
+  }
+
   &__title {
-    padding: 16px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &__dash {
+    color: #666;
+  }
+
+  &__desc {
     font-size: 14px;
     color: #666;
   }

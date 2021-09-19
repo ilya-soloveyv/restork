@@ -4,14 +4,15 @@
       <div
         v-for="i in countSteps"
         :key="i"
-        :class="{ 'tutorial-controls__dot_active': i <= currentStepIndex + 1 }"
+        :class="{ 'tutorial-controls__dot_active': i <= number }"
         class="tutorial-controls__dot"
       />
     </div>
     <div class="tutorial-controls__button">
+      <!-- <nuxt-link to="/tutorial/step/object-type">object-type</nuxt-link> -->
       <b-button
         @click="clickButton('prev')"
-        :disabled="!prevStep"
+        :disabled="!checkPrevStep"
         variant="primary"
         size="lg"
         block
@@ -20,15 +21,19 @@
       </b-button>
     </div>
     <div class="tutorial-controls__info">
-      {{ currentStep.stepNumber }} / {{ countSteps }}
+      {{ number }} / {{ countSteps }}
+      <!-- {{ currentStep.stepNumber }} / {{ countSteps }} -->
       <!-- {{ currentStepIndex }} -->
       <!-- {{ prevStep }} -->
       <!-- {{ !nextStep }} -->
+      <!-- {{ prevStep }} -->
+      <!-- {{ nextStep }} -->
     </div>
     <div class="tutorial-controls__button">
+      <!-- <nuxt-link to="/tutorial/step/basic">basic</nuxt-link> -->
       <b-button
         @click="clickButton('next')"
-        :disabled="!nextStep"
+        :disabled="!checkNextStep"
         variant="primary"
         size="lg"
         block
@@ -42,30 +47,31 @@
 <script>
 export default {
   props: {
-    currentStep: {
-      type: Object,
-      default: undefined
-    },
-    prevStep: {
-      type: Object,
-      default: undefined
-    },
-    nextStep: {
-      type: Object,
-      default: undefined
-    },
     countSteps: {
       type: Number,
-      default: undefined
+      default: 0
     },
     currentStepIndex: {
       type: Number,
-      default: undefined
+      default: 0
+    },
+    checkPrevStep: {
+      type: Boolean,
+      default: true
+    },
+    checkNextStep: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
     clickButton(type) {
       this.$emit('click', type)
+    }
+  },
+  computed: {
+    number() {
+      return this.currentStepIndex + 1
     }
   }
 }

@@ -1,13 +1,7 @@
 <template>
   <TutorialPage>
-    <template slot="header">
-      <TutorialHeader
-        :step="currentStep.stepNumber"
-        :title="currentStep.title"
-      />
-    </template>
     <template slot="hint">
-      <TutorialHint />
+      <TutorialHint :hints="hints" />
     </template>
     <template slot="content">
       <TutorialFormLabel
@@ -119,24 +113,12 @@
         </b-col>
       </b-row>
     </template>
-    <template slot="controls">
-      <TutorialControls
-        :currentStep="currentStep"
-        :prevStep="prevStep"
-        :nextStep="nextStep"
-        :countSteps="countSteps"
-        :currentStepIndex="currentStepIndex"
-        @click="changeStep"
-      />
-    </template>
   </TutorialPage>
 </template>
 
 <script>
 import TutorialPage from '@/components/Tutorial/TutorialPage.vue'
-import TutorialHeader from '@/components/Tutorial/TutorialHeader.vue'
 import TutorialHint from '@/components/Tutorial/TutorialHint.vue'
-import TutorialControls from '@/components/Tutorial/TutorialControls.vue'
 
 import TutorialFormLabel from '@/components/Tutorial/TutorialFormLabel.vue'
 
@@ -144,9 +126,7 @@ export default {
   layout: 'tutorial',
   components: {
     TutorialPage,
-    TutorialHeader,
     TutorialHint,
-    TutorialControls,
     TutorialFormLabel
   },
   data() {
@@ -157,14 +137,18 @@ export default {
       iObjectFloorValid: null,
       iObjectRoomCountValid: null,
       iObjectRoomHotelCountValid: null,
-      iObjectPlaceValid: null
+      iObjectPlaceValid: null,
+      hints: [
+        {
+          img: '/tutorial/hint/plan.jpeg'
+        }
+      ]
     }
   },
   computed: {
     iObjectTypeID() {
       return this.$store.state.tutorial.object.iObjectTypeID
     },
-
     iObjectArea: {
       get() {
         return this.$store.state.tutorial.object.iObjectArea
@@ -177,7 +161,6 @@ export default {
       const is = [1, 2, 3, 4, 5, 6]
       return is.includes(this.iObjectTypeID)
     },
-
     iObjectAreaLocation: {
       get() {
         return this.$store.state.tutorial.object.iObjectAreaLocation
@@ -190,7 +173,6 @@ export default {
       const is = [1, 2, 3, 4]
       return is.includes(this.iObjectTypeID)
     },
-
     iObjectFloorAll: {
       get() {
         return this.$store.state.tutorial.object.iObjectFloorAll
@@ -203,7 +185,6 @@ export default {
       const is = [1, 2, 3, 4, 5, 6, 7, 8]
       return is.includes(this.iObjectTypeID)
     },
-
     iObjectFloor: {
       get() {
         return this.$store.state.tutorial.object.iObjectFloor
@@ -216,7 +197,6 @@ export default {
       const is = [5, 6, 9]
       return is.includes(this.iObjectTypeID)
     },
-
     iObjectRoomCount: {
       get() {
         return this.$store.state.tutorial.object.iObjectRoomCount
@@ -229,7 +209,6 @@ export default {
       const is = [1, 2, 3, 4, 5, 6]
       return is.includes(this.iObjectTypeID)
     },
-
     iObjectRoomHotelCount: {
       get() {
         return this.$store.state.tutorial.object.iObjectRoomHotelCount
@@ -242,7 +221,6 @@ export default {
       const is = [7, 8]
       return is.includes(this.iObjectTypeID)
     },
-
     iObjectPlace: {
       get() {
         return this.$store.state.tutorial.object.iObjectPlace
@@ -254,30 +232,6 @@ export default {
     is_iObjectPlace() {
       const is = [1, 2, 3, 4, 5, 6, 9]
       return is.includes(this.iObjectTypeID)
-    },
-
-    currentStep() {
-      return this.$store.getters['tutorial/currentStep']
-    },
-    prevStep() {
-      return this.$store.getters['tutorial/prevStep']
-    },
-    nextStep() {
-      return this.$store.getters['tutorial/nextStep']
-    },
-    countSteps() {
-      return this.$store.getters['tutorial/countSteps']
-    },
-    currentStepIndex() {
-      return this.$store.getters['tutorial/currentStepIndex']
-    }
-  },
-  methods: {
-    changeStep(type) {
-      this.$store.dispatch('tutorial/CHANGE_STEP', {
-        type,
-        currentStep: this.currentStep
-      })
     }
   }
 }

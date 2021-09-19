@@ -1,20 +1,12 @@
 <template>
   <TutorialPage>
-    <template slot="header">
-      <TutorialHeader
-        :step="currentStep.stepNumber"
-        :title="currentStep.title"
-      />
-    </template>
     <template slot="hint">
-      <TutorialHint />
+      <TutorialHint :hints="hints" />
     </template>
     <template slot="content">
       <TutorialFormLabel
         title="Выберите какие из особенностей есть в Вашем объекте"
       />
-      <!-- <pre>{{ selectedFeature }}</pre> -->
-      <!-- <pre>{{ feature }}</pre> -->
       <b-form-checkbox-group v-model="selectedFeature">
         <b-row>
           <b-col v-for="item in feature" :key="item.iFeatureID" xl="6">
@@ -26,24 +18,12 @@
         </b-row>
       </b-form-checkbox-group>
     </template>
-    <template slot="controls">
-      <TutorialControls
-        :currentStep="currentStep"
-        :prevStep="prevStep"
-        :nextStep="nextStep"
-        :countSteps="countSteps"
-        :currentStepIndex="currentStepIndex"
-        @click="changeStep"
-      />
-    </template>
   </TutorialPage>
 </template>
 
 <script>
 import TutorialPage from '@/components/Tutorial/TutorialPage.vue'
-import TutorialHeader from '@/components/Tutorial/TutorialHeader.vue'
 import TutorialHint from '@/components/Tutorial/TutorialHint.vue'
-import TutorialControls from '@/components/Tutorial/TutorialControls.vue'
 
 import TutorialFormLabel from '@/components/Tutorial/TutorialFormLabel.vue'
 import TutorialCheckbox from '@/components/Tutorial/TutorialCheckbox.vue'
@@ -52,11 +32,48 @@ export default {
   layout: 'tutorial',
   components: {
     TutorialPage,
-    TutorialHeader,
     TutorialHint,
-    TutorialControls,
     TutorialFormLabel,
     TutorialCheckbox
+  },
+  data() {
+    return {
+      hints: [
+        {
+          title: 'Можно с животными',
+          desc: 'Ваши постояльцы смогут взять с собой любое животное'
+        },
+        {
+          title: 'Есть место для курения',
+          desc: 'На территории проживания есть специальное место для курения'
+        },
+        {
+          title: 'Уборка',
+          desc: 'Вы убираете место проживания ваших постояльцев'
+        },
+        {
+          title: 'Услуги прачечной',
+          desc:
+            'Вы предоставляете место стирки или у Вас на территории есть прачечная'
+        },
+        {
+          title: 'Смена постельного белья',
+          desc: 'Вы предоставляете услугу смены постельного белья'
+        },
+        {
+          title: 'Смена полотенец',
+          desc: 'Вы предоставляете услугу смены полотенец'
+        },
+        {
+          title: 'Завтраки',
+          desc: 'На вашей территории есть кухня, кафе или ресторан'
+        },
+        {
+          title: 'Трансфер',
+          desc: 'Вы можете забрать постояльца из аэропорта или вокзала'
+        }
+      ]
+    }
   },
   computed: {
     feature() {
@@ -69,33 +86,10 @@ export default {
       set(payload) {
         this.$store.commit('tutorial/SET_objectFeature', payload)
       }
-    },
-    currentStep() {
-      return this.$store.getters['tutorial/currentStep']
-    },
-    prevStep() {
-      return this.$store.getters['tutorial/prevStep']
-    },
-    nextStep() {
-      return this.$store.getters['tutorial/nextStep']
-    },
-    countSteps() {
-      return this.$store.getters['tutorial/countSteps']
-    },
-    currentStepIndex() {
-      return this.$store.getters['tutorial/currentStepIndex']
     }
   },
   async asyncData({ store }) {
     await store.dispatch('feature/GET_LIST')
-  },
-  methods: {
-    changeStep(type) {
-      this.$store.dispatch('tutorial/CHANGE_STEP', {
-        type,
-        currentStep: this.currentStep
-      })
-    }
   }
 }
 </script>
