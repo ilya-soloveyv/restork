@@ -64,14 +64,14 @@ export default {
       default: true
     }
   },
-  methods: {
-    clickButton(type) {
-      this.$emit('click', type)
-    }
-  },
   computed: {
     number() {
       return this.currentStepIndex + 1
+    }
+  },
+  methods: {
+    clickButton(type) {
+      this.$emit('click', type)
     }
   }
 }

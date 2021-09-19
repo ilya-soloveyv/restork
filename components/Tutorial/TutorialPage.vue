@@ -8,7 +8,7 @@
         @useStep="useStep"
       />
     </div>
-    <div class="tutorial-page__hint" ref="hint">
+    <div ref="hint" class="tutorial-page__hint">
       <slot name="hint" />
     </div>
     <div class="tutorial-page__content">
@@ -49,19 +49,6 @@ export default {
     TutorialHeader,
     TutorialControls
   },
-  created() {
-    this.$store.dispatch('tutorial/GET_OBJECT')
-    this.$store.dispatch('objectType/GET_LIST')
-    this.$store.dispatch('objectTypeGroup/GET_LIST')
-    this.$store.dispatch('roomType/GET_LIST')
-  },
-  mounted() {
-    window.addEventListener('scroll', this.autoHeightHintBlock)
-    this.autoHeightHintBlock()
-  },
-  destroyed() {
-    window.removeEventListener('scroll', this.autoHeightHintBlock)
-  },
   computed: {
     steps() {
       return this.$store.getters['tutorial/currentSteps']
@@ -84,6 +71,19 @@ export default {
     currentStepTitle() {
       return this.$store.getters['tutorial/currentStepTitle']
     }
+  },
+  created() {
+    this.$store.dispatch('tutorial/GET_OBJECT')
+    this.$store.dispatch('objectType/GET_LIST')
+    this.$store.dispatch('objectTypeGroup/GET_LIST')
+    this.$store.dispatch('roomType/GET_LIST')
+  },
+  mounted() {
+    window.addEventListener('scroll', this.autoHeightHintBlock)
+    this.autoHeightHintBlock()
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.autoHeightHintBlock)
   },
   methods: {
     autoHeightHintBlock() {
