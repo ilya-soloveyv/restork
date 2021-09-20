@@ -8,14 +8,52 @@
         title="Загрузите как можно больше ярких и красивых фотографий. Гости большое внимание уделяют качеству изображений и при выборе жилья это может стать решающим фактором."
       />
       <div class="photos">
-        <div v-for="i in 7" :key="i" class="photos__photo"></div>
+        <div
+          v-for="(image, imageIndex) in object.object_images"
+          :key="image.iObjectImageID"
+          class="photos__photo"
+        >
+          <img
+            :src="
+              `${SELECTEL_WEB}/object/${object.iObjectID}/preview/${image.sObjectImage}`
+            "
+            class="photos__photo-img"
+          />
+          <div @click="removeImage(image)" class="photos__remove">
+            <svg width="18" height="18" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+              />
+            </svg>
+          </div>
+          <div class="photos__number">
+            <template v-if="!imageIndex">
+              Обложка
+            </template>
+            <template v-else>
+              {{ imageIndex + 1 }}
+            </template>
+          </div>
+        </div>
       </div>
-      <div class="upload">Выберете файл или перетащите его сюда</div>
+      <div class="upload">
+        <div v-show="dropzoneLoading" class="upload__loading">
+          Ожидайте загрузки...
+        </div>
+        <dropzone
+          v-show="!dropzoneLoading"
+          id="objectDropzone"
+          ref="objectDropzone"
+          :options="objectDropzoneOptions"
+        />
+      </div>
     </template>
   </TutorialPage>
 </template>
 
 <script>
+import Dropzone from 'nuxt-dropzone'
 import TutorialPage from '@/components/Tutorial/TutorialPage.vue'
 import TutorialHint from '@/components/Tutorial/TutorialHint.vue'
 
@@ -24,6 +62,7 @@ import TutorialFormLabel from '@/components/Tutorial/TutorialFormLabel.vue'
 export default {
   layout: 'tutorial',
   components: {
+    Dropzone,
     TutorialPage,
     TutorialHint,
     TutorialFormLabel
@@ -44,7 +83,44 @@ export default {
         {
           desc: 'Снимите все комнаты, доступные для гостей'
         }
-      ]
+      ],
+      dropzoneLoading: false,
+      objectDropzoneOptions: {
+        url: '/api/object/uploadObjectImages',
+        dictDefaultMessage: 'Выберите файл или перетащите его сюда',
+        uploadMultiple: true,
+        parallelUploads: 64,
+        paramName: 'files',
+        timeout: 5 * 60 * 1000,
+        createImageThumbnails: false,
+        addedfile: (file) => {},
+        processingmultiple: () => {
+          console.log('processingmultiple')
+          this.dropzoneLoading = true
+        },
+        sendingmultiple: (file, xhr, formData) => {
+          console.log('sendingmultiple')
+          formData.append('iObjectID', this.object.iObjectID)
+        },
+        successmultiple: (file, data) => {
+          console.log('successmultiple')
+          this.$store.dispatch('tutorial/GET_OBJECT')
+          this.dropzoneLoading = false
+        }
+      }
+    }
+  },
+  computed: {
+    SELECTEL_WEB() {
+      return process.env.SELECTEL_WEB
+    },
+    object() {
+      return this.$store.state.tutorial.object
+    }
+  },
+  methods: {
+    removeImage(image) {
+      this.$store.dispatch('tutorial/REMOVE_objectImage', image)
     }
   }
 }
@@ -62,6 +138,44 @@ export default {
     height: 173px;
     border-radius: 6px;
     background: #eee;
+    overflow: hidden;
+    position: relative;
+  }
+
+  &__photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__remove {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &__number {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    min-width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 12px;
+    padding: 0 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
   }
 }
 .upload {
@@ -72,6 +186,13 @@ export default {
   background: #eee;
   border: 2px dashed #ddd;
   font-size: 14px;
-  padding: 32px 0;
+  cursor: pointer;
+
+  &__loading,
+  ::v-deep .dropzone {
+    width: 100%;
+    padding: 32px 0;
+    text-align: center;
+  }
 }
 </style>

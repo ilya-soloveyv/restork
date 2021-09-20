@@ -91,6 +91,13 @@ const state = () => ({
       title: 'Статус жилья',
       current: false,
       iObjectTypeGroupID: [1, 2, 3]
+    },
+    {
+      id: 'done',
+      url: 'done',
+      title: 'Готово',
+      current: false,
+      iObjectTypeGroupID: [1, 2, 3]
     }
   ]
 })
@@ -234,6 +241,9 @@ const mutations = {
   },
   SET_tObjectDesc(state, payload) {
     state.object.tObjectDesc = payload
+  },
+  SET_objectImages(state, payload) {
+    state.object.object_images = payload
   }
 }
 
@@ -420,6 +430,12 @@ const actions = {
   },
   REMOVE_place_in_places({ commit }, { index }) {
     commit('REMOVE_place_in_places', index)
+  },
+  async REMOVE_objectImage({ commit }, image) {
+    const { data } = await this.$axios.post('/api/object/removeObjectImage', {
+      image
+    })
+    commit('SET_objectImages', data.objectImages)
   }
 }
 

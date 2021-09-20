@@ -13,14 +13,6 @@
     </div>
     <div class="tutorial-page__content">
       <slot name="content" />
-      <!-- <pre>{{ steps }}</pre> -->
-      <!-- <pre>{{ currentStep }}</pre> -->
-      <!-- <pre>{{ currentStep }}</pre> -->
-      <!-- <pre>{{ steps }}</pre> -->
-      <!-- <pre>{{ currentStepIndex }}</pre> -->
-      <!-- <pre>{{ currentStepIndex }}</pre>
-      <pre>{{ checkPrevStep }}</pre>
-      <pre>{{ checkNextStep }}</pre> -->
     </div>
     <div class="tutorial-page__controls">
       <TutorialControls
@@ -30,12 +22,6 @@
         :checkNextStep="checkNextStep"
         @click="changeStep"
       />
-      <!-- <TutorialControls
-        :currentStep="currentStep"
-        :countSteps="countSteps"
-        :currentStepIndex="currentStepIndex"
-        @click="changeStep"
-      /> -->
     </div>
   </div>
 </template>
@@ -97,7 +83,6 @@ export default {
       }
     },
     changeStep(type) {
-      // console.log(type)
       this.$store.dispatch('tutorial/CHANGE_STEP', {
         type
       })

@@ -42,40 +42,40 @@ module.exports = (sequelize, DataTypes) => {
     )
     for (const file of files) {
       const ext = fileExtension(file.originalname)
-      const localPath = 'static/upload/'
-      const localPathOriginal = localPath + file.filename
-      const sObjectImage = file.filename + '.' + ext
-      const localPathPreview = localPath + sObjectImage
-      const localPathInterface = localPath + sObjectImage
+      const localPath = `static/upload/`
+      const sObjectImage = `${file.filename}.${ext}`
+      const localPathOriginal = `${localPath}${file.filename}`
+      const localPathPreview = `${localPath}/preview/${sObjectImage}`
+      const localPathInterface = `${localPath}/interface/${sObjectImage}`
       const container = process.env.SELECTEL_CONTAINER
       const sObjectImagePathOriginal =
-        '/' + container + '/object/' + iObjectID + '/original/' + sObjectImage
+        `/${container}/object/${iObjectID}/original/${sObjectImage}`
       const sObjectImagePathPreview =
-        '/' + container + '/object/' + iObjectID + '/preview/' + sObjectImage
+        `/${container}/object/${iObjectID}/preview/${sObjectImage}`
       const sObjectImagePathInterface =
-        '/' + container + '/object/' + iObjectID + '/interface/' + sObjectImage
+        `/${container}/object/${iObjectID}/interface/${sObjectImage}`
+      await ObjectImage.resize(file, 'preview', 300, 300)
+      await ObjectImage.resize(file, 'interface', 600, 400)
       await selectel.uploadFile(localPathOriginal, sObjectImagePathOriginal)
-      await ObjectImage.resize(file, 300, 300)
       await selectel.uploadFile(localPathPreview, sObjectImagePathPreview)
-      fs.unlinkSync(localPathPreview)
-      await ObjectImage.resize(file, 600, 400)
       await selectel.uploadFile(localPathInterface, sObjectImagePathInterface)
-      fs.unlinkSync(localPathInterface)
       fs.unlinkSync(localPathOriginal)
+      fs.unlinkSync(localPathPreview)
+      fs.unlinkSync(localPathInterface)
       await ObjectImage.create({ iObjectID, sObjectImage })
     }
     return response
   }
 
-  ObjectImage.resize = function(file, width, height) {
+  ObjectImage.resize = async function(file, path, width, height) {
     const ext = fileExtension(file.originalname)
     const sObjectImage = file.filename + '.' + ext
-    return Jimp.read(file.path)
+    await Jimp.read(file.path)
       .then((preview) => {
         return preview
           .cover(width, height)
           .quality(90)
-          .write('static/upload/' + sObjectImage, () => {
+          .write(`static/upload/${path}/${sObjectImage}`, () => {
             return sObjectImage
           })
       })
