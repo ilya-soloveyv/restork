@@ -27,10 +27,12 @@ module.exports = {
   css: [
     '~/assets/scss/fonts.scss',
     '~/assets/scss/main.scss',
-    '~/assets/scss/admin/admin.scss'
+    '~/assets/scss/admin/admin.scss',
+    '@/node_modules/vue-dnd-zone/vue-dnd-zone.css'
   ],
   plugins: [
     { src: '~/plugins/datepicker', ssr: false },
+    { src: '~/plugins/dnd-zone', ssr: false },
     { src: '~/plugins/v-autocomplete', ssr: false },
     { src: '~/plugins/vue-sticky-directive', ssr: false },
     { src: '~/plugins/vue-js-grid', ssr: false }
@@ -112,6 +114,9 @@ module.exports = {
     ]
   },
   build: {
-    extend(config, ctx) {}
+    extend(config, ctx) {},
+    babel: {
+      compact: true
+    }
   }
 }

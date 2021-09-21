@@ -22,6 +22,15 @@ module.exports = {
       sObjectImage: {
         type: Sequelize.STRING,
         allowNull: false
+      },
+      iObjectImageSort: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        defaultValue: 9999
+      },
+      iObjectImageIndex: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       }
     })
   },

@@ -17,6 +17,7 @@
             <TutorialCheckbox
               :value="option.iObjectOptionID"
               :desc="option.sObjectOptionTitle"
+              :icon="option.sObjectOptionIcon"
             />
           </b-col>
         </b-row>
@@ -40,28 +41,6 @@ export default {
     TutorialFormLabel,
     TutorialCheckbox
   },
-  data() {
-    return {
-      hints: [
-        {
-          title: 'Бассейн',
-          desc: 'Там где плавают Там где плавают Там где плавают'
-        },
-        {
-          title: 'Зона мангала',
-          desc: 'Там где жарят Там где жарят Там где жарят'
-        },
-        {
-          title: 'Детская площадка',
-          desc: 'Там где играют Там где играют Там где играют'
-        },
-        {
-          title: 'Парковка',
-          desc: 'Там где паркуют Там где паркуют Там где паркуют'
-        }
-      ]
-    }
-  },
   computed: {
     objectOptions() {
       return this.$store.state.objectOption.list
@@ -73,6 +52,16 @@ export default {
       set(payload) {
         this.$store.commit('tutorial/SET_objectOptions', payload)
       }
+    },
+    hints() {
+      return this.objectOptions
+        .filter((item) => item.sObjectOptionDesc)
+        .map((item) => {
+          item.title = item.sObjectOptionTitle
+          item.desc = item.sObjectOptionDesc
+          item.icon = item.sObjectOptionIcon
+          return item
+        })
     }
   },
   async asyncData({ store }) {

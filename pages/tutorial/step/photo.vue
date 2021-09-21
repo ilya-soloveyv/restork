@@ -11,32 +11,84 @@
         <div
           v-for="(image, imageIndex) in object.object_images"
           :key="image.iObjectImageID"
-          class="photos__photo"
+          class="photos__item"
         >
-          <img
-            :src="
-              `${SELECTEL_WEB}/object/${object.iObjectID}/preview/${image.sObjectImage}`
-            "
-            class="photos__photo-img"
-          />
-          <div @click="removeImage(image)" class="photos__remove">
-            <svg width="18" height="18" viewBox="0 0 24 24">
-              <path
-                fill="currentColor"
-                d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
-              />
-            </svg>
-          </div>
-          <div class="photos__number">
-            <template v-if="!imageIndex">
-              Обложка
-            </template>
-            <template v-else>
-              {{ imageIndex + 1 }}
-            </template>
+          <div class="photos__photo">
+            <img
+              :src="
+                `${SELECTEL_WEB}/object/${object.iObjectID}/preview/${image.sObjectImage}`
+              "
+              class="photos__photo-img"
+            />
+            <div @click="removeImage(image)" class="photos__remove">
+              <svg width="18" height="18" viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                />
+              </svg>
+            </div>
+            <div
+              v-b-tooltip.hover
+              title="Сделать обложкой"
+              @click="setImageIndex(image.iObjectImageID)"
+              class="photos__number"
+            >
+              <template v-if="image.iObjectImageIndex">
+                Обложка
+              </template>
+              <template v-else>
+                {{ imageIndex + 1 }}
+              </template>
+            </div>
           </div>
         </div>
       </div>
+      <!-- <dnd-zone :transition-duration="0.3">
+        <dnd-container
+          :dnd-model="imagesModel"
+          dnd-id="grid-example"
+          class="photos"
+          dense
+        >
+          <dnd-item
+            v-for="(image, imageIndex) in images"
+            :key="image.iObjectImageID"
+            :dnd-id="image.iObjectImageID"
+            :dnd-model="image"
+            class="photos__item"
+          >
+            <div class="photos__photo">
+              <img
+                :src="
+                  `${SELECTEL_WEB}/object/${object.iObjectID}/preview/${image.sObjectImage}`
+                "
+              />
+              <div @click="removeImage(image)" class="photos__remove">
+                <svg width="18" height="18" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                  />
+                </svg>
+              </div>
+              <div
+                v-b-tooltip.hover
+                title="Сделать обложкой"
+                @click="setImageIndex(image.iObjectImageID)"
+                class="photos__number"
+              >
+                <template v-if="image.iObjectImageIndex">
+                  Обложка
+                </template>
+                <template v-else>
+                  {{ imageIndex + 1 }}
+                </template>
+              </div>
+            </div>
+          </dnd-item>
+        </dnd-container>
+      </dnd-zone> -->
       <div class="upload">
         <div v-show="dropzoneLoading" class="upload__loading">
           Ожидайте загрузки...
@@ -84,6 +136,7 @@ export default {
           desc: 'Снимите все комнаты, доступные для гостей'
         }
       ],
+      imagesModel: [],
       dropzoneLoading: false,
       objectDropzoneOptions: {
         url: '/api/object/uploadObjectImages',
@@ -116,11 +169,24 @@ export default {
     },
     object() {
       return this.$store.state.tutorial.object
+    },
+    images: {
+      get() {
+        return this.$store.state.tutorial.object.object_images
+      },
+      set(value) {
+        console.log()
+      }
     }
   },
   methods: {
     removeImage(image) {
       this.$store.dispatch('tutorial/REMOVE_objectImage', image)
+    },
+    setImageIndex(iObjectImageID) {
+      this.$store.dispatch('tutorial/SET_objectImageIndex', {
+        iObjectImageID
+      })
     }
   }
 }
@@ -133,13 +199,14 @@ export default {
   gap: 16px;
   margin-bottom: 32px;
 
-  &__photo {
+  &__item {
     flex-basis: 173px;
     height: 173px;
     border-radius: 6px;
     background: #eee;
     overflow: hidden;
     position: relative;
+    cursor: move;
   }
 
   &__photo-img {
@@ -176,6 +243,7 @@ export default {
     align-items: center;
     font-size: 12px;
     font-weight: 500;
+    cursor: pointer;
   }
 }
 .upload {

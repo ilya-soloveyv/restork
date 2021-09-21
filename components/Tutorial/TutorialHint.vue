@@ -1,7 +1,18 @@
 <template>
   <div class="tutorial-hint">
-    <div v-for="hint in hints" :key="hint.id" class="tutorial-hint__hint">
+    <div
+      v-for="(hint, index) in hints"
+      :key="index"
+      class="tutorial-hint__hint"
+    >
       <img v-if="hint.img" :src="hint.img" class="tutorial-hint__image" />
+      <div v-if="hint.icon" class="tutorial-hint__icon-wrap">
+        <img
+          v-if="hint.icon"
+          :src="`/icon/${hint.icon}`"
+          class="tutorial-hint__icon"
+        />
+      </div>
       <div v-if="hint.title || hint.desc" class="tutorial-hint__data">
         <span v-if="hint.title" class="tutorial-hint__title">
           {{ hint.title }}
@@ -50,6 +61,14 @@ export default {
 
   &__image {
     width: 100%;
+  }
+
+  &__icon-wrap {
+    padding: 12px 16px 0;
+  }
+
+  &__icon {
+    height: 48px;
   }
 
   &__data {

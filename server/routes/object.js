@@ -251,6 +251,8 @@ router.post('/uploadObjectImages', upload.any(), async (req, res, next) => {
 
   await ObjectImage.upload(iObjectID, req.files)
 
+  await ObjectImage.setFirstImageIndex(iObjectID)
+
   response.objectImages = await ObjectImage.findAll({
     where: {
       iObjectID
@@ -264,7 +266,11 @@ router.post('/removeObjectImage', async (req, res, next) => {
   const response = {}
 
   const image = req.body.image
+  const iObjectID = req.body.iObjectID
+  
   await ObjectImage.remove(image)
+
+  await ObjectImage.setFirstImageIndex(iObjectID)
 
   response.objectImages = await ObjectImage.findAll({
     where: {

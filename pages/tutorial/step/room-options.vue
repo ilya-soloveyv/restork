@@ -17,6 +17,7 @@
             <TutorialCheckbox
               :value="option.iRoomOptionID"
               :desc="option.sRoomOptionTitle"
+              :icon="option.sRoomOptionIcon"
             />
           </b-col>
         </b-row>
@@ -40,28 +41,6 @@ export default {
     TutorialFormLabel,
     TutorialCheckbox
   },
-  data() {
-    return {
-      hints: [
-        {
-          title: 'Холодильник',
-          desc: 'Двухкамерный холодильник с отделом под бутылки вина'
-        },
-        {
-          title: 'Кондиционер',
-          desc: 'Без него невозможно прожить в жаркую погоду'
-        },
-        {
-          title: 'Телевизор',
-          desc: 'Где же узнать о последних новостях или посмотреть фильм'
-        },
-        {
-          title: 'Собственная кухня',
-          desc: 'Вы сами сможете приготовить вкусное паэлью'
-        }
-      ]
-    }
-  },
   computed: {
     roomOptions() {
       return this.$store.state.roomOption.list
@@ -73,6 +52,16 @@ export default {
       set(payload) {
         this.$store.commit('tutorial/SET_roomOptions', payload)
       }
+    },
+    hints() {
+      return this.roomOptions
+        .filter((item) => item.sRoomOptionDesc)
+        .map((item) => {
+          item.title = item.sRoomOptionTitle
+          item.desc = item.sRoomOptionDesc
+          item.icon = item.sRoomOptionIcon
+          return item
+        })
     }
   },
   async asyncData({ store }) {

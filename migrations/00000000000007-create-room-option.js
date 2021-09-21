@@ -21,6 +21,14 @@ module.exports = {
       iRoomOptionActive: {
         type: Sequelize.BOOLEAN,
         defaultValue: true
+      },
+      sRoomOptionIcon: {
+        type: Sequelize.STRING,
+        defaultValue: null
+      },
+      sRoomOptionDesc: {
+        type: Sequelize.STRING,
+        defaultValue: null
       }
     })
   },

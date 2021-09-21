@@ -9,7 +9,7 @@ module.exports = {
           iObjectTypeID: 1,
           iObjectTypeGroupID: 1,
           sObjectTypeTitle: 'Коттедж',
-          iObjectTypeSort: 9999,
+          iObjectTypeSort: 1,
           iObjectTypeActive: true,
           iRoomPermission: false
         },
@@ -17,7 +17,7 @@ module.exports = {
           iObjectTypeID: 2,
           iObjectTypeGroupID: 1,
           sObjectTypeTitle: 'Дом',
-          iObjectTypeSort: 1000,
+          iObjectTypeSort: 2,
           iObjectTypeActive: true,
           iRoomPermission: false
         },
@@ -25,55 +25,47 @@ module.exports = {
           iObjectTypeID: 3,
           iObjectTypeGroupID: 1,
           sObjectTypeTitle: 'Вилла',
-          iObjectTypeSort: 9999,
+          iObjectTypeSort: 3,
           iObjectTypeActive: true,
           iRoomPermission: false
         },
         {
           iObjectTypeID: 4,
           iObjectTypeGroupID: 1,
-          sObjectTypeTitle: 'Таунхаус',
-          iObjectTypeSort: 9999,
-          iObjectTypeActive: false,
+          sObjectTypeTitle: 'Апартаменты',
+          iObjectTypeSort: 4,
+          iObjectTypeActive: true,
           iRoomPermission: false
         },
         {
           iObjectTypeID: 5,
           iObjectTypeGroupID: 1,
-          sObjectTypeTitle: 'Апартаменты',
-          iObjectTypeSort: 9999,
+          sObjectTypeTitle: 'Квартира',
+          iObjectTypeSort: 5,
           iObjectTypeActive: true,
           iRoomPermission: false
         },
         {
           iObjectTypeID: 6,
-          iObjectTypeGroupID: 1,
-          sObjectTypeTitle: 'Квартира',
-          iObjectTypeSort: 9999,
+          iObjectTypeGroupID: 2,
+          sObjectTypeTitle: 'Отель',
+          iObjectTypeSort: 6,
           iObjectTypeActive: true,
-          iRoomPermission: false
+          iRoomPermission: true
         },
         {
           iObjectTypeID: 7,
           iObjectTypeGroupID: 2,
-          sObjectTypeTitle: 'Отель',
-          iObjectTypeSort: 9999,
+          sObjectTypeTitle: 'Гостиница',
+          iObjectTypeSort: 7,
           iObjectTypeActive: true,
           iRoomPermission: true
         },
         {
           iObjectTypeID: 8,
-          iObjectTypeGroupID: 2,
-          sObjectTypeTitle: 'Гостиница',
-          iObjectTypeSort: 9999,
-          iObjectTypeActive: true,
-          iRoomPermission: true
-        },
-        {
-          iObjectTypeID: 9,
           iObjectTypeGroupID: 3,
           sObjectTypeTitle: 'Хостел',
-          iObjectTypeSort: 9999,
+          iObjectTypeSort: 8,
           iObjectTypeActive: true,
           iRoomPermission: true
         }

@@ -21,6 +21,14 @@ module.exports = {
       iFeatureActive: {
         type: Sequelize.BOOLEAN,
         defaultValue: true
+      },
+      sFeatureOptionIcon: {
+        type: Sequelize.STRING,
+        defaultValue: null
+      },
+      sFeatureOptionDesc: {
+        type: Sequelize.STRING,
+        defaultValue: null
       }
     })
   },

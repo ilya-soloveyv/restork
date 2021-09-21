@@ -1,6 +1,6 @@
 <template>
   <div class="tutorial-page" sticky-container>
-    <div class="tutorial-page__header">
+    <div v-if="currentStep.id" class="tutorial-page__header">
       <TutorialHeader
         :currentStepIndex="currentStepIndex"
         :currentStepTitle="currentStepTitle"
@@ -14,7 +14,7 @@
     <div class="tutorial-page__content">
       <slot name="content" />
     </div>
-    <div class="tutorial-page__controls">
+    <div v-if="currentStep.id" class="tutorial-page__controls">
       <TutorialControls
         :countSteps="countSteps"
         :currentStepIndex="currentStepIndex"
@@ -111,6 +111,7 @@ export default {
     top: 0;
     left: 0;
     z-index: 100;
+    height: auto !important;
   }
 
   &__hint {
@@ -141,6 +142,7 @@ export default {
     position: sticky;
     left: 0;
     bottom: 0;
+    z-index: 100;
 
     @media (max-width: 1199px) {
       grid-column: 1/3;

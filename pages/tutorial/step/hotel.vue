@@ -4,24 +4,24 @@
       <TutorialHint :hints="hints" />
     </template>
     <template slot="content">
-      <TutorialFormLabel title="Напишите название отеля" />
+      <TutorialFormLabel :title="formLabel1" />
       <b-row>
         <b-col xl="12">
           <div class="form-group-wrap">
-            <b-form-group label="Напишите название отеля">
+            <b-form-group label="Название">
               <b-form-input
                 v-model="sObjectTitle"
                 :state="sObjectTitleValid"
-                placeholder="Напишите название отеля"
+                placeholder="Название"
               />
               <b-form-invalid-feedback class="error-message">
-                Укажите Напишите название отеля
+                Укажите Название
               </b-form-invalid-feedback>
             </b-form-group>
           </div>
         </b-col>
       </b-row>
-      <TutorialFormLabel title="Укажите сколько всего номеров в гостинице" />
+      <TutorialFormLabel :title="formLabel2" />
       <b-row>
         <b-col xl="4">
           <div class="form-group-wrap">
@@ -38,9 +38,7 @@
           </div>
         </b-col>
       </b-row>
-      <TutorialFormLabel
-        title="Напишите какое общее колличество этажей строения"
-      />
+      <TutorialFormLabel :title="formLabel3" />
       <b-row>
         <b-col xl="4">
           <div class="form-group-wrap">
@@ -87,6 +85,9 @@ export default {
     }
   },
   computed: {
+    iObjectTypeID() {
+      return this.$store.state.tutorial.object.iObjectTypeID
+    },
     sObjectTitle: {
       get() {
         return this.$store.state.tutorial.object.sObjectTitle
@@ -109,6 +110,36 @@ export default {
       },
       set(value) {
         this.$store.commit('tutorial/SET_iObjectFloorAll', value)
+      }
+    },
+    formLabel1() {
+      switch (this.iObjectTypeID) {
+        case 6:
+          return 'Укажите название Вашего отеля'
+        case 7:
+          return 'Укажите название Вашей гостиницы'
+        default:
+          return null
+      }
+    },
+    formLabel2() {
+      switch (this.iObjectTypeID) {
+        case 6:
+          return 'Укажите сколько всего номеров в отеле'
+        case 7:
+          return 'Укажите сколько всего номеров в гостинице'
+        default:
+          return null
+      }
+    },
+    formLabel3() {
+      switch (this.iObjectTypeID) {
+        case 6:
+          return 'Напишите какое общее колличество этажей здания'
+        case 7:
+          return 'Напишите какое общее колличество этажей здания'
+        default:
+          return null
       }
     }
   }

@@ -22,6 +22,14 @@ module.exports = (sequelize, DataTypes) => {
       iObjectOptionActive: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
+      },
+      sObjectOptionIcon: {
+        type: DataTypes.STRING,
+        defaultValue: null
+      },
+      sObjectOptionDesc: {
+        type: DataTypes.STRING,
+        defaultValue: null
       }
     },
     {

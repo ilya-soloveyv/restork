@@ -156,17 +156,19 @@ const mutations = {
   SET_object(state, payload) {
     state.object = payload
     state.object_object_options = []
-    state.object.object_object_options.forEach((option) => {
-      state.object_object_options.push(option.iObjectOptionID)
-    })
-    state.object_room_options = []
-    state.object.object_room_options.forEach((option) => {
-      state.object_room_options.push(option.iRoomOptionID)
-    })
-    state.object_feature = []
-    state.object.object_features.forEach((option) => {
-      state.object_feature.push(option.iFeatureID)
-    })
+    if (state.object) {
+      state.object.object_object_options.forEach((option) => {
+        state.object_object_options.push(option.iObjectOptionID)
+      })
+      state.object_room_options = []
+      state.object.object_room_options.forEach((option) => {
+        state.object_room_options.push(option.iRoomOptionID)
+      })
+      state.object_feature = []
+      state.object.object_features.forEach((option) => {
+        state.object_feature.push(option.iFeatureID)
+      })
+    }
   },
   SET_iObjectID(state, payload) {
     state.object.iObjectID = payload
@@ -263,14 +265,14 @@ const actions = {
       this.$router.push(`/tutorial/step/${firstStepURL.url}`)
     }
   },
-  async GET_OBJECT({ state, commit, actions }) {
+  async GET_OBJECT({ state, commit, getters, actions }) {
     if (state.object.iObjectID) {
       const response = await this.$axios.$post('/api/tutorial/get_object', {
         iObjectID: state.object.iObjectID
       })
       // console.log(response.object)
       commit('SET_object', response.object)
-    } else {
+    } else if (getters.currentStep.id !== 'done') {
       const response = await this.$axios.$post('/api/tutorial/check_object')
       if (response.object) {
         commit('SET_object', response.object)
@@ -431,11 +433,32 @@ const actions = {
   REMOVE_place_in_places({ commit }, { index }) {
     commit('REMOVE_place_in_places', index)
   },
-  async REMOVE_objectImage({ commit }, image) {
+  async REMOVE_objectImage({ state, commit }, image) {
     const { data } = await this.$axios.post('/api/object/removeObjectImage', {
+      iObjectID: state.object.iObjectID,
       image
     })
     commit('SET_objectImages', data.objectImages)
+  },
+  async SET_object_done({ state, commit }) {
+    await this.$axios.$post('/api/tutorial/object_done', {
+      iObjectID: state.object.iObjectID
+    })
+    commit('SET_object', {
+      iObjectID: undefined,
+      iObjectTypeID: null,
+      iRoomTypeID: null
+    })
+  },
+  async SET_objectImageIndex({ state, commit }, { iObjectImageID }) {
+    const response = await this.$axios.$post(
+      '/api/tutorial/set_object_image_index',
+      {
+        iObjectID: state.object.iObjectID,
+        iObjectImageID
+      }
+    )
+    commit('SET_objectImages', response)
   }
 }
 

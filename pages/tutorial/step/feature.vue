@@ -13,6 +13,7 @@
             <TutorialCheckbox
               :value="item.iFeatureID"
               :desc="item.sFeatureTitle"
+              :icon="item.sFeatureOptionIcon"
             />
           </b-col>
         </b-row>
@@ -36,45 +37,6 @@ export default {
     TutorialFormLabel,
     TutorialCheckbox
   },
-  data() {
-    return {
-      hints: [
-        {
-          title: 'Можно с животными',
-          desc: 'Ваши постояльцы смогут взять с собой любое животное'
-        },
-        {
-          title: 'Есть место для курения',
-          desc: 'На территории проживания есть специальное место для курения'
-        },
-        {
-          title: 'Уборка',
-          desc: 'Вы убираете место проживания ваших постояльцев'
-        },
-        {
-          title: 'Услуги прачечной',
-          desc:
-            'Вы предоставляете место стирки или у Вас на территории есть прачечная'
-        },
-        {
-          title: 'Смена постельного белья',
-          desc: 'Вы предоставляете услугу смены постельного белья'
-        },
-        {
-          title: 'Смена полотенец',
-          desc: 'Вы предоставляете услугу смены полотенец'
-        },
-        {
-          title: 'Завтраки',
-          desc: 'На вашей территории есть кухня, кафе или ресторан'
-        },
-        {
-          title: 'Трансфер',
-          desc: 'Вы можете забрать постояльца из аэропорта или вокзала'
-        }
-      ]
-    }
-  },
   computed: {
     feature() {
       return this.$store.state.feature.list
@@ -86,6 +48,16 @@ export default {
       set(payload) {
         this.$store.commit('tutorial/SET_objectFeature', payload)
       }
+    },
+    hints() {
+      return this.feature
+        .filter((item) => item.sFeatureOptionDesc)
+        .map((item) => {
+          item.title = item.sFeatureTitle
+          item.desc = item.sFeatureOptionDesc
+          item.icon = item.sFeatureOptionIcon
+          return item
+        })
     }
   },
   async asyncData({ store }) {

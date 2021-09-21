@@ -4,9 +4,7 @@
       <TutorialHint :hints="hints" />
     </template>
     <template slot="content">
-      <TutorialFormLabel
-        title="Напишите общую площадь номера, с учётом прихожей и балкона"
-      />
+      <TutorialFormLabel :title="formLabel1" />
       <b-row>
         <b-col xl="4">
           <div class="form-group-wrap">
@@ -23,7 +21,7 @@
           </div>
         </b-col>
       </b-row>
-      <TutorialFormLabel title="Укажите количество комнат в номере" />
+      <TutorialFormLabel :title="formLabel2" />
       <b-row>
         <b-col xl="4">
           <div class="form-group-wrap">
@@ -40,9 +38,7 @@
           </div>
         </b-col>
       </b-row>
-      <TutorialFormLabel
-        title="Напишите сколько в общем спальных мест в номере"
-      />
+      <TutorialFormLabel :title="formLabel3" />
       <b-row>
         <b-col xl="4">
           <div class="form-group-wrap">
@@ -89,6 +85,9 @@ export default {
     }
   },
   computed: {
+    iObjectTypeID() {
+      return this.$store.state.tutorial.object.iObjectTypeID
+    },
     iObjectArea: {
       get() {
         return this.$store.state.tutorial.object.iObjectArea
@@ -111,6 +110,36 @@ export default {
       },
       set(value) {
         this.$store.commit('tutorial/SET_iObjectPlace', value)
+      }
+    },
+    formLabel1() {
+      switch (this.iObjectTypeID) {
+        case 6:
+          return 'Напишите общую площадь номера, с учётом прихожей и балкона'
+        case 7:
+          return 'Напишите общую площадь номера, с учётом прихожей и балкона'
+        default:
+          return null
+      }
+    },
+    formLabel2() {
+      switch (this.iObjectTypeID) {
+        case 6:
+          return 'Укажите количество комнат в номере'
+        case 7:
+          return 'Укажите количество комнат в номере'
+        default:
+          return null
+      }
+    },
+    formLabel3() {
+      switch (this.iObjectTypeID) {
+        case 6:
+          return 'Напишите сколько в общем спальных мест в номере'
+        case 7:
+          return 'Напишите сколько в общем спальных мест в номере'
+        default:
+          return null
       }
     }
   }

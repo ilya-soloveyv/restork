@@ -1,26 +1,18 @@
 <template>
-  <b-form-checkbox :value="value">
-    <div class="wrapContent">
-      <div class="image-checkbox">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="25"
-          height="25"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#000000"
-          stroke-width="1"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <circle cx="10" cy="20.5" r="1" />
-          <circle cx="18" cy="20.5" r="1" />
-          <path
-            d="M2.5 2.5h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6l1.6-8.4H7.1"
-          />
-        </svg>
+  <b-form-checkbox
+    :value="value"
+    :class="{ 'tutorial-checkbox_without-icon': !icon }"
+    class="tutorial-checkbox"
+  >
+    <div class="tutorial-checkbox__wrap">
+      <div class="tutorial-checkbox__icon">
+        <img
+          v-if="icon"
+          :src="`/icon/${icon}`"
+          class="tutorial-checkbox__image"
+        />
       </div>
-      <div class="desc">
+      <div class="tutorial-checkbox__title">
         {{ desc }}
       </div>
     </div>
@@ -32,29 +24,62 @@ export default {
   props: {
     value: {
       type: Number,
-      default: null
+      default: undefined
     },
     desc: {
       type: String,
-      default: null
+      default: undefined
+    },
+    icon: {
+      type: String,
+      default: undefined
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.custom-control {
+.tutorial-checkbox {
+  // background: red;
+  display: flex;
   margin: 0 0 32px;
-  display: flex !important;
   padding: 0;
-  background-color: white;
+
+  &__wrap {
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 16px 16px 50px;
+  }
+
+  &__icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__title {
+    // color: orange;
+  }
+}
+.custom-control {
+  // margin: 0 0 32px;
+  // display: flex !important;
+  // padding: 0;
+  // background-color: white;
   /deep/ .custom-control-input {
     &:checked {
       & ~ .custom-control-label {
         opacity: 1;
         border: 1px solid #000000;
         &::after {
-          left: 20px;
+          left: 15px;
           background-image: url('/tutorial/tick.svg');
           width: 25px;
           height: 25px;
@@ -65,12 +90,12 @@ export default {
     }
   }
   /deep/ .custom-control-label {
-    padding: 29px 0;
+    padding: 0;
     border: 1px solid #eaeaea;
     border-radius: 8px;
     width: 100%;
-    font-size: 16px;
-    line-height: 18px;
+    font-size: 14px;
+    line-height: 16px;
     font-weight: 500;
     opacity: 0.7;
     @media (max-width: 767px) {

@@ -4,9 +4,7 @@
       <TutorialHint :hints="hints" />
     </template>
     <template slot="content">
-      <TutorialFormLabel
-        title="Укажите общую площадь, сколько жилых комнат и спальных мест"
-      />
+      <TutorialFormLabel :title="formLabel1" />
       <b-row>
         <b-col v-if="is_iObjectArea" xl="4">
           <div class="form-group-wrap">
@@ -79,9 +77,7 @@
           </div>
         </b-col>
       </b-row>
-      <TutorialFormLabel
-        title="Укажите на каком этаже располагается объект и сколько всего этажей"
-      />
+      <TutorialFormLabel :title="formLabel2" />
       <b-row>
         <b-col v-if="is_iObjectFloorAll" xl="4">
           <div class="form-group-wrap">
@@ -146,6 +142,42 @@ export default {
     }
   },
   computed: {
+    formLabel1() {
+      switch (this.iObjectTypeID) {
+        case 1:
+          return 'Укажите какова площадь участка и коттеджа, сколько в нем жилых комнат и спальных мест'
+        case 2:
+          return 'Укажите какова площадь участка и дома, сколько в нем жилых комнат и спальных мест'
+        case 3:
+          return 'Укажите какова площадь участка и виллы, сколько в ней жилых комнат и спальных мест'
+        case 4:
+          return 'Укажите какова площадь апартаментов, сколько в ней жилых комнат и спальных мест'
+        case 5:
+          return 'Укажите какова площадь квартиры, сколько в ней жилых комнат и спальных мест'
+        case 8:
+          return 'Укажите количество спальных мест в Вашем хостеле'
+        default:
+          return null
+      }
+    },
+    formLabel2() {
+      switch (this.iObjectTypeID) {
+        case 1:
+          return 'Укажите какова этажность Вашего коттеджа'
+        case 2:
+          return 'Укажите какова этажность Вашего дома'
+        case 3:
+          return 'Укажите какова этажность Вашей виллы'
+        case 4:
+          return 'Укажите на каком этаже распологаются апартаменты и какое общее количество этажей у здания'
+        case 5:
+          return 'Укажите на каком этаже распологается квартира и какое общее количество этажей у здания'
+        case 8:
+          return 'Укажите на каком этаже располагается Ваш хостел'
+        default:
+          return null
+      }
+    },
     iObjectTypeID() {
       return this.$store.state.tutorial.object.iObjectTypeID
     },
@@ -158,7 +190,7 @@ export default {
       }
     },
     is_iObjectArea() {
-      const is = [1, 2, 3, 4, 5, 6]
+      const is = [1, 2, 3, 4, 5]
       return is.includes(this.iObjectTypeID)
     },
     iObjectAreaLocation: {
@@ -170,7 +202,7 @@ export default {
       }
     },
     is_iObjectAreaLocation() {
-      const is = [1, 2, 3, 4]
+      const is = [1, 2, 3]
       return is.includes(this.iObjectTypeID)
     },
     iObjectFloorAll: {
@@ -182,7 +214,7 @@ export default {
       }
     },
     is_iObjectFloorAll() {
-      const is = [1, 2, 3, 4, 5, 6, 7, 8]
+      const is = [1, 2, 3, 4, 5, 6, 7]
       return is.includes(this.iObjectTypeID)
     },
     iObjectFloor: {
@@ -194,7 +226,7 @@ export default {
       }
     },
     is_iObjectFloor() {
-      const is = [5, 6, 9]
+      const is = [4, 5, 8]
       return is.includes(this.iObjectTypeID)
     },
     iObjectRoomCount: {
@@ -206,7 +238,7 @@ export default {
       }
     },
     is_iObjectRoomCount() {
-      const is = [1, 2, 3, 4, 5, 6]
+      const is = [1, 2, 3, 4, 5]
       return is.includes(this.iObjectTypeID)
     },
     iObjectRoomHotelCount: {
@@ -218,7 +250,7 @@ export default {
       }
     },
     is_iObjectRoomHotelCount() {
-      const is = [7, 8]
+      const is = [6, 7]
       return is.includes(this.iObjectTypeID)
     },
     iObjectPlace: {
@@ -230,7 +262,7 @@ export default {
       }
     },
     is_iObjectPlace() {
-      const is = [1, 2, 3, 4, 5, 6, 9]
+      const is = [1, 2, 3, 4, 5, 8]
       return is.includes(this.iObjectTypeID)
     }
   }

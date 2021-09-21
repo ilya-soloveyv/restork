@@ -22,6 +22,15 @@ module.exports = (sequelize, DataTypes) => {
       sObjectImage: {
         type: DataTypes.STRING,
         allowNull: false
+      },
+      iObjectImageSort: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        defaultValue: 9999
+      },
+      iObjectImageIndex: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
       }
     },
     {
@@ -107,6 +116,54 @@ module.exports = (sequelize, DataTypes) => {
     await selectel.deleteFile(sObjectImagePathOriginal)
     await selectel.deleteFile(sObjectImagePathPreview)
     await selectel.deleteFile(sObjectImagePathInterface)
+    return true
+  }
+
+  ObjectImage.setFirstImageIndex = async function(iObjectID) {
+    const images = await ObjectImage.findAll({
+      where: {
+        iObjectID
+      }
+    })
+    if (images.length) {
+      const checkIndex = images.find((image) => image.iObjectImageIndex)
+      if (!checkIndex) {
+        const iObjectImageID = images[0].iObjectImageID
+        await ObjectImage.update(
+          {
+            iObjectImageIndex: true
+          },
+          {
+            where: {
+              iObjectImageID
+            }
+          }
+        )
+      }
+    }
+  }
+
+  ObjectImage.setImageIndex = async function(iObjectID, iObjectImageID) {
+    await ObjectImage.update(
+      {
+        iObjectImageIndex: false
+      },
+      {
+        where: {
+          iObjectID
+        }
+      }
+    )
+    await ObjectImage.update(
+      {
+        iObjectImageIndex: true
+      },
+      {
+        where: {
+          iObjectImageID
+        }
+      }
+    )
     return true
   }
 

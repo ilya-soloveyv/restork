@@ -21,6 +21,14 @@ module.exports = {
       iObjectOptionActive: {
         type: Sequelize.BOOLEAN,
         defaultValue: true
+      },
+      sObjectOptionIcon: {
+        type: Sequelize.STRING,
+        defaultValue: null
+      },
+      sObjectOptionDesc: {
+        type: Sequelize.STRING,
+        defaultValue: null
       }
     })
   },

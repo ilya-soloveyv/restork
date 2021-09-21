@@ -44,6 +44,9 @@ export default {
         }
       ]
     }
+  },
+  mounted() {
+    this.$store.dispatch('tutorial/SET_object_done')
   }
 }
 </script>
