@@ -46,7 +46,7 @@
       </div>
       <!-- <dnd-zone :transition-duration="0.3">
         <dnd-container
-          :dnd-model="imagesModel"
+          :dnd-model="images"
           dnd-id="grid-example"
           class="photos"
           dense

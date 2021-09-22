@@ -105,9 +105,10 @@ const state = () => ({
 const getters = {
   currentSteps: (state, getters, rootState, rootGetters) => {
     const iObjectTypeID = state.object.iObjectTypeID
+    const objectTypes = rootGetters['objectType/list']
     let iObjectTypeGroupID = null
-    if (iObjectTypeID > 0) {
-      iObjectTypeGroupID = rootState.objectType.list.find((type) => {
+    if (iObjectTypeID > 0 && objectTypes.length) {
+      iObjectTypeGroupID = objectTypes.find((type) => {
         return type.iObjectTypeID === iObjectTypeID
       }).iObjectTypeGroupID
     }
@@ -144,8 +145,6 @@ const getters = {
   },
   countSteps: (state, getters) => {
     return getters.currentSteps.length
-    // console.log(state.steps)
-    // return state.steps.length
   },
   currentStepTitle: (state, getters) => {
     return getters.currentStep.title

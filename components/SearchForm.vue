@@ -1,6 +1,6 @@
 <template>
   <div id="search">
-    <div class="form-group-wrap">
+    <!-- <div class="form-group-wrap">
       <b-form-group
         id="label-sObjectTitle"
         label="Категорию жилья"
@@ -46,7 +46,7 @@
           required
         ></b-form-input>
       </b-form-group>
-    </div>
+    </div> -->
     <b-form @submit.prevent="searchResult" class="form" autocomplete="off">
       <div class="sApplicationAddress">
         <SmartAutocomplete

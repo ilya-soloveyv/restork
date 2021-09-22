@@ -2,7 +2,11 @@ const state = () => ({
   list: []
 })
 
-const getters = {}
+const getters = {
+  list: (state) => {
+    return state.list
+  }
+}
 
 const mutations = {
   SET_LIST(state, objectType) {
