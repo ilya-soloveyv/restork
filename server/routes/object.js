@@ -267,7 +267,7 @@ router.post('/removeObjectImage', async (req, res, next) => {
 
   const image = req.body.image
   const iObjectID = req.body.iObjectID
-  
+
   await ObjectImage.remove(image)
 
   await ObjectImage.setFirstImageIndex(iObjectID)

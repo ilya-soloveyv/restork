@@ -30,8 +30,8 @@
             </div>
             <div
               v-b-tooltip.hover
-              title="Сделать обложкой"
               @click="setImageIndex(image.iObjectImageID)"
+              title="Сделать обложкой"
               class="photos__number"
             >
               <template v-if="image.iObjectImageIndex">
@@ -94,9 +94,9 @@
           Ожидайте загрузки...
         </div>
         <dropzone
-          v-show="!dropzoneLoading"
           id="objectDropzone"
           ref="objectDropzone"
+          v-show="!dropzoneLoading"
           :options="objectDropzoneOptions"
         />
       </div>
@@ -148,15 +148,12 @@ export default {
         createImageThumbnails: false,
         addedfile: (file) => {},
         processingmultiple: () => {
-          console.log('processingmultiple')
           this.dropzoneLoading = true
         },
         sendingmultiple: (file, xhr, formData) => {
-          console.log('sendingmultiple')
           formData.append('iObjectID', this.object.iObjectID)
         },
         successmultiple: (file, data) => {
-          console.log('successmultiple')
           this.$store.dispatch('tutorial/GET_OBJECT')
           this.dropzoneLoading = false
         }
@@ -173,9 +170,6 @@ export default {
     images: {
       get() {
         return this.$store.state.tutorial.object.object_images
-      },
-      set(value) {
-        console.log()
       }
     }
   },

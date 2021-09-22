@@ -57,12 +57,9 @@ module.exports = (sequelize, DataTypes) => {
       const localPathPreview = `${localPath}/preview/${sObjectImage}`
       const localPathInterface = `${localPath}/interface/${sObjectImage}`
       const container = process.env.SELECTEL_CONTAINER
-      const sObjectImagePathOriginal =
-        `/${container}/object/${iObjectID}/original/${sObjectImage}`
-      const sObjectImagePathPreview =
-        `/${container}/object/${iObjectID}/preview/${sObjectImage}`
-      const sObjectImagePathInterface =
-        `/${container}/object/${iObjectID}/interface/${sObjectImage}`
+      const sObjectImagePathOriginal = `/${container}/object/${iObjectID}/original/${sObjectImage}`
+      const sObjectImagePathPreview = `/${container}/object/${iObjectID}/preview/${sObjectImage}`
+      const sObjectImagePathInterface = `/${container}/object/${iObjectID}/interface/${sObjectImage}`
       await ObjectImage.resize(file, 'preview', 300, 300)
       await ObjectImage.resize(file, 'interface', 600, 400)
       await selectel.uploadFile(localPathOriginal, sObjectImagePathOriginal)

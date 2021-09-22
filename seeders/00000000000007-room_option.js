@@ -11,7 +11,8 @@ module.exports = {
           iRoomOptionSort: 9999,
           iRoomOptionActive: true,
           sRoomOptionIcon: 'sleep.svg',
-          sRoomOptionDesc: 'для размещения гостей дополнительно можно предоставить раскладушку или надувной матрас'
+          sRoomOptionDesc:
+            'для размещения гостей дополнительно можно предоставить раскладушку или надувной матрас'
         },
         {
           iRoomOptionID: 2,
@@ -99,7 +100,8 @@ module.exports = {
           iRoomOptionSort: 9999,
           iRoomOptionActive: true,
           sRoomOptionIcon: 'hanger.svg',
-          sRoomOptionDesc: 'гостям удобно брать с собой меньше вещей. Предоставьте в пользование гостей полотенца'
+          sRoomOptionDesc:
+            'гостям удобно брать с собой меньше вещей. Предоставьте в пользование гостей полотенца'
         },
         {
           iRoomOptionID: 13,
@@ -115,7 +117,8 @@ module.exports = {
           iRoomOptionSort: 9999,
           iRoomOptionActive: true,
           sRoomOptionIcon: 'toiletries.svg',
-          sRoomOptionDesc: 'гости могут отметить, если Вы предоставите им мыло, шампунь, туалетную бумагу'
+          sRoomOptionDesc:
+            'гости могут отметить, если Вы предоставите им мыло, шампунь, туалетную бумагу'
         },
         {
           iRoomOptionID: 15,
@@ -155,7 +158,8 @@ module.exports = {
           iRoomOptionSort: 9999,
           iRoomOptionActive: true,
           sRoomOptionIcon: 'fork.svg',
-          sRoomOptionDesc: 'предоставьте в распоряжение гостей кухонные принадлежности (посуду, столовые приборы и т.п.)'
+          sRoomOptionDesc:
+            'предоставьте в распоряжение гостей кухонные принадлежности (посуду, столовые приборы и т.п.)'
         },
         {
           iRoomOptionID: 20,
@@ -179,7 +183,8 @@ module.exports = {
           iRoomOptionSort: 9999,
           iRoomOptionActive: true,
           sRoomOptionIcon: 'desk.svg',
-          sRoomOptionDesc: 'иногда гости нуждаются в рабочем столе. Укажите, есть ли у Вас в объекте место, которое может стать рабочим'
+          sRoomOptionDesc:
+            'иногда гости нуждаются в рабочем столе. Укажите, есть ли у Вас в объекте место, которое может стать рабочим'
         },
         {
           iRoomOptionID: 23,
@@ -195,7 +200,8 @@ module.exports = {
           iRoomOptionSort: 9999,
           iRoomOptionActive: true,
           sRoomOptionIcon: 'bed.svg',
-          sRoomOptionDesc: 'гости с маленькими детьми иногда предпочитают пользоваться детской кроваткой. Держите ее для таких случаев'
+          sRoomOptionDesc:
+            'гости с маленькими детьми иногда предпочитают пользоваться детской кроваткой. Держите ее для таких случаев'
         }
       ],
       {}

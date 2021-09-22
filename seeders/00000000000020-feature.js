@@ -27,7 +27,8 @@ module.exports = {
           iFeatureSort: 9999,
           iFeatureActive: true,
           sFeatureOptionIcon: 'cleaning.svg',
-          sFeatureOptionDesc: 'вы можете платно или бесплатно предоставлять гостям услугу уборки жилья в течении их отдыха'
+          sFeatureOptionDesc:
+            'вы можете платно или бесплатно предоставлять гостям услугу уборки жилья в течении их отдыха'
         },
         {
           iFeatureID: 4,

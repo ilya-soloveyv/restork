@@ -390,7 +390,6 @@ router.post('/object_done', async (req, res, next) => {
 router.post('/set_object_image_index', async (req, res, next) => {
   const ObjectImage = require('../../models').object_image
 
-  const iUserID = req.user.iUserID
   const iObjectID = req.body.iObjectID
   const iObjectImageID = req.body.iObjectImageID
 

@@ -27,7 +27,8 @@ module.exports = {
           iObjectOptionSort: 9999,
           iObjectOptionActive: true,
           sObjectOptionIcon: 'playground.svg',
-          sObjectOptionDesc: 'гости будут рады наличию места где будут проводить время их дети'
+          sObjectOptionDesc:
+            'гости будут рады наличию места где будут проводить время их дети'
         },
         {
           iObjectOptionID: 4,
@@ -35,7 +36,8 @@ module.exports = {
           iObjectOptionSort: 9999,
           iObjectOptionActive: true,
           sObjectOptionIcon: 'bicycle-parking.svg',
-          sObjectOptionDesc: 'предоставьте гостям, путешествующим на автомобиле, парковочное место'
+          sObjectOptionDesc:
+            'предоставьте гостям, путешествующим на автомобиле, парковочное место'
         },
         {
           iObjectOptionID: 5,
