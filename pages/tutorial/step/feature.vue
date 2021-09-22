@@ -9,7 +9,7 @@
       />
       <b-form-checkbox-group v-model="selectedFeature">
         <b-row>
-          <b-col v-for="item in feature" :key="item.iFeatureID" xl="6">
+          <b-col v-for="item in feature" :key="item.iFeatureID" sm="6">
             <TutorialCheckbox
               :value="item.iFeatureID"
               :desc="item.sFeatureTitle"

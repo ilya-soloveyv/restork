@@ -23,7 +23,7 @@
       </b-row>
       <TutorialFormLabel :title="formLabel2" />
       <b-row>
-        <b-col xl="4">
+        <b-col sm="4">
           <div class="form-group-wrap">
             <b-form-group label="Кол-во номеров">
               <b-form-input
@@ -40,7 +40,7 @@
       </b-row>
       <TutorialFormLabel :title="formLabel3" />
       <b-row>
-        <b-col xl="4">
+        <b-col sm="4">
           <div class="form-group-wrap">
             <b-form-group label="Кол-во этажей">
               <b-form-input

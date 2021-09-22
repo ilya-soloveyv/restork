@@ -109,6 +109,9 @@ export default {
 .tutorial-place-item {
   margin-bottom: 16px;
   display: flex;
+  @media (max-width: 767px) {
+    flex-wrap: wrap;
+  }
 
   &__wrapper {
     display: flex;
@@ -123,6 +126,10 @@ export default {
     text-transform: uppercase;
     margin: 0;
     padding: 0 0 6px 0;
+
+    @media (max-width: 767px) {
+      font-size: 9px;
+    }
   }
 
   &__place {
@@ -131,6 +138,11 @@ export default {
     border-radius: 6px 0 0 6px;
     flex-grow: 1;
     padding: 16px 0 16px 16px;
+
+    @media (max-width: 767px) {
+      flex-grow: 0;
+      flex-basis: 40%;
+    }
   }
 
   &__title {
@@ -140,6 +152,11 @@ export default {
     flex-shrink: 0;
     flex-basis: 180px;
     padding: 16px 0 16px 16px;
+
+    @media (max-width: 767px) {
+      flex-grow: 0;
+      flex-basis: 30%;
+    }
   }
 
   &__distance {
@@ -149,6 +166,11 @@ export default {
     flex-shrink: 0;
     flex-basis: 180px;
     padding: 16px 0 16px 16px;
+
+    @media (max-width: 767px) {
+      flex-grow: 0;
+      flex-basis: 30%;
+    }
 
     .tutorial-place-item__wrapper {
       border: none;
@@ -162,6 +184,11 @@ export default {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+
+    @media (max-width: 767px) {
+      flex-basis: 100%;
+      padding: 4px 0 0 16px;
+    }
   }
 
   &__remove-link {
@@ -187,6 +214,12 @@ export default {
     margin: -37px -16px -16px -16px;
     padding: 37px 16px 16px 16px;
     cursor: pointer;
+    width: 100%;
+
+    @media (max-width: 767px) {
+      margin: -30px -10px -10px -10px;
+      padding: 30px 10px 10px 10px;
+    }
   }
 
   &__input {

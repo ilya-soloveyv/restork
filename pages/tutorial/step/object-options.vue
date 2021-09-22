@@ -12,7 +12,7 @@
           <b-col
             v-for="option in objectOptions"
             :key="option.iObjectOptionID"
-            xl="6"
+            sm="6"
           >
             <TutorialCheckbox
               :value="option.iObjectOptionID"

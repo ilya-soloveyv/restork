@@ -6,7 +6,7 @@
     <template slot="content">
       <TutorialFormLabel :title="formLabel1" />
       <b-row>
-        <b-col v-if="is_iObjectArea" xl="4">
+        <b-col v-if="is_iObjectArea" sm="4">
           <div class="form-group-wrap">
             <b-form-group label="Площадь объекта">
               <b-form-input
@@ -20,7 +20,7 @@
             </b-form-group>
           </div>
         </b-col>
-        <b-col v-if="is_iObjectAreaLocation" xl="4">
+        <b-col v-if="is_iObjectAreaLocation" sm="4">
           <div class="form-group-wrap">
             <b-form-group label="Площадь участка">
               <b-form-input
@@ -34,7 +34,7 @@
             </b-form-group>
           </div>
         </b-col>
-        <b-col v-if="is_iObjectRoomCount" xl="4">
+        <b-col v-if="is_iObjectRoomCount" sm="4">
           <div class="form-group-wrap">
             <b-form-group label="Колличество комнат">
               <b-form-input
@@ -48,7 +48,7 @@
             </b-form-group>
           </div>
         </b-col>
-        <b-col v-if="is_iObjectRoomHotelCount" xl="4">
+        <b-col v-if="is_iObjectRoomHotelCount" sm="4">
           <div class="form-group-wrap">
             <b-form-group label="Количество номеров">
               <b-form-input
@@ -62,7 +62,7 @@
             </b-form-group>
           </div>
         </b-col>
-        <b-col v-if="is_iObjectPlace" xl="4">
+        <b-col v-if="is_iObjectPlace" sm="4">
           <div class="form-group-wrap">
             <b-form-group label="Кол-во спальных мест">
               <b-form-input
@@ -79,7 +79,7 @@
       </b-row>
       <TutorialFormLabel :title="formLabel2" />
       <b-row>
-        <b-col v-if="is_iObjectFloorAll" xl="4">
+        <b-col v-if="is_iObjectFloorAll" sm="4">
           <div class="form-group-wrap">
             <b-form-group label="Этажность строения">
               <b-form-input
@@ -93,7 +93,7 @@
             </b-form-group>
           </div>
         </b-col>
-        <b-col v-if="is_iObjectFloor" xl="4">
+        <b-col v-if="is_iObjectFloor" sm="4">
           <div class="form-group-wrap">
             <b-form-group label="Этаж">
               <b-form-input

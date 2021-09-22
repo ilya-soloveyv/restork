@@ -104,6 +104,10 @@ export default {
   grid-template-rows: 100px 1fr 100px;
   min-height: calc(100vh - 79px);
 
+  @media (max-width: 1199px) {
+    grid-template-columns: 1fr auto;
+  }
+
   &__header {
     grid-column: 1/2;
     grid-row: 1/2;
@@ -121,9 +125,14 @@ export default {
     left: 0;
     top: 0;
     overflow: auto;
+    height: auto !important;
+    z-index: 101;
 
     @media (max-width: 1199px) {
       grid-row: 1/2;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
     }
   }
 

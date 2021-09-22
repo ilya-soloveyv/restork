@@ -110,6 +110,10 @@ export default {
   &__button {
     flex-shrink: 0;
     flex-basis: 160px;
+
+    @media (max-width: 767px) {
+      flex-grow: 1;
+    }
   }
 
   &__info {
@@ -117,6 +121,10 @@ export default {
     font-size: 14px;
     color: #999;
     text-align: center;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
   }
 }
 </style>

@@ -201,6 +201,16 @@ export default {
     overflow: hidden;
     position: relative;
     cursor: move;
+
+    @media (max-width: 1199px) {
+      flex-basis: calc(25% - 12px);
+      height: calc(25% - 12px);
+    }
+
+    @media (max-width: 767px) {
+      flex-basis: calc(50% - 12px);
+      height: calc(50% - 12px);
+    }
   }
 
   &__photo-img {
