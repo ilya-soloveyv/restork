@@ -38,6 +38,7 @@
           :value="iPlaceDistance"
           class="tutorial-place-item__input"
           type="text"
+          placeholder="в метрах"
         />
       </div>
     </div>

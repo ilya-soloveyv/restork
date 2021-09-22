@@ -62,7 +62,7 @@ export default {
         },
         {
           iObjectStatusID: 2,
-          sObjectStatusTitle: 'Освобождается сегодня'
+          sObjectStatusTitle: 'Свободен'
         },
         {
           iObjectStatusID: 3,

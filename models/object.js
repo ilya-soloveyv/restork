@@ -126,8 +126,16 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
 
-  Object.getObject = async function(iObjectID) {
-    let object = await Object.findByPk(iObjectID, {
+  Object.getObject = async function(iObjectID, iUserID) {
+    const where = {}
+    if (iObjectID) {
+      where.iObjectID = iObjectID
+    }
+    if (iUserID) {
+      where.iUserID = iUserID
+    }
+    let object = await Object.findOne({
+      where,
       include: [
         {
           model: sequelize.models.user,

@@ -12,7 +12,7 @@ router.post('/check_object', async (req, res, next) => {
     (object) => !!object.sTutorialStepActive
   )
   response.object = isTutorialObject
-    ? await Object.getObject(isTutorialObject.iObjectID)
+    ? await Object.getObject(isTutorialObject.iObjectID, iUserID)
     : null
 
   res.json(response)
@@ -20,8 +20,9 @@ router.post('/check_object', async (req, res, next) => {
 
 router.post('/get_object', async (req, res, next) => {
   const response = {}
+  const iUserID = req.user.iUserID
 
-  response.object = await Object.getObject(req.body.iObjectID)
+  response.object = await Object.getObject(req.body.iObjectID, iUserID)
 
   res.json(response)
 })
