@@ -250,6 +250,11 @@ const mutations = {
 
 const actions = {
   async CHECK_OBJECT({ state, commit }) {
+    commit('SET_object', {
+      iObjectID: undefined,
+      iObjectTypeID: null,
+      iRoomTypeID: null
+    })
     const response = await this.$axios.$post('/api/tutorial/check_object')
     if (response.object) {
       commit('SET_object', response.object)

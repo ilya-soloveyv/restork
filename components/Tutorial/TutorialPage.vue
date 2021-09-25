@@ -139,6 +139,7 @@ export default {
   &__content {
     grid-column: 1/2;
     grid-row: 2/3;
+    padding-bottom: 32px;
 
     @media (max-width: 1199px) {
       grid-column: 1/3;

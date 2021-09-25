@@ -399,7 +399,12 @@ router.post('/set_object_image_index', async (req, res, next) => {
   const response = await ObjectImage.findAll({
     where: {
       iObjectID
-    }
+    },
+    order: [
+      ['iObjectImageIndex', 'DESC'],
+      ['iObjectImageSort', 'ASC'],
+      ['iObjectImageID', 'ASC']
+    ]
   })
 
   res.json(response)

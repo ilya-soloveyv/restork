@@ -228,7 +228,11 @@ module.exports = (sequelize, DataTypes) => {
         //   ]
         // }
       ],
-      order: [[sequelize.models.room, 'iRoomID', 'ASC']]
+      order: [
+        [sequelize.models.object_image, 'iObjectImageIndex', 'DESC'],
+        [sequelize.models.object_image, 'iObjectImageSort', 'ASC'],
+        [sequelize.models.object_image, 'iObjectImageID', 'ASC']
+      ]
     })
 
     object = object || {}
