@@ -1,9 +1,11 @@
+const stateObjectDefault = {
+  iObjectID: undefined,
+  iObjectTypeID: null,
+  iRoomTypeID: null
+}
+
 const state = () => ({
-  object: {
-    iObjectID: undefined,
-    iObjectTypeID: null,
-    iRoomTypeID: null
-  },
+  object: stateObjectDefault,
   object_object_options: [],
   object_room_options: [],
   object_feature: [],
@@ -153,17 +155,17 @@ const getters = {
 
 const mutations = {
   SET_object(state, payload) {
-    state.object = payload
+    state.object = payload.sTutorialStepActive ? payload : stateObjectDefault
     state.object_object_options = []
-    if (state.object) {
+    state.object_room_options = []
+    state.object_feature = []
+    if (state.object.iObjectID) {
       state.object.object_object_options.forEach((option) => {
         state.object_object_options.push(option.iObjectOptionID)
       })
-      state.object_room_options = []
       state.object.object_room_options.forEach((option) => {
         state.object_room_options.push(option.iRoomOptionID)
       })
-      state.object_feature = []
       state.object.object_features.forEach((option) => {
         state.object_feature.push(option.iFeatureID)
       })
@@ -250,11 +252,7 @@ const mutations = {
 
 const actions = {
   async CHECK_OBJECT({ state, commit }) {
-    commit('SET_object', {
-      iObjectID: undefined,
-      iObjectTypeID: null,
-      iRoomTypeID: null
-    })
+    commit('SET_object', stateObjectDefault)
     const response = await this.$axios.$post('/api/tutorial/check_object')
     if (response.object) {
       commit('SET_object', response.object)
@@ -448,11 +446,7 @@ const actions = {
     await this.$axios.$post('/api/tutorial/object_done', {
       iObjectID: state.object.iObjectID
     })
-    commit('SET_object', {
-      iObjectID: undefined,
-      iObjectTypeID: null,
-      iRoomTypeID: null
-    })
+    commit('SET_object', stateObjectDefault)
   },
   async SET_objectImageIndex({ state, commit }, { iObjectImageID }) {
     const response = await this.$axios.$post(
