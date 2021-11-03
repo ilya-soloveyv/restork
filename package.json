@@ -51,7 +51,7 @@
     "urlencode": "^1.1.0",
     "v-autocomplete": "^1.8.2",
     "v-suggestions": "^1.1.1",
-    "validator": "^12.2.0",
+    "validator": "^13.7.0",
     "vue-dnd-zone": "^0.4.0",
     "vue-js-grid": "^1.0.1",
     "vue-slick-carousel": "^1.0.6",
