@@ -46,7 +46,7 @@
     "selectel-storage-promise": "^1.0.4",
     "sequelize": "^5.21.10",
     "sequelize-paginate": "^1.1.6",
-    "sharp": "^0.25.4",
+    "sharp": "^0.30.5",
     "typeface-montserrat": "0.0.75",
     "urlencode": "^1.1.0",
     "v-autocomplete": "^1.8.2",
