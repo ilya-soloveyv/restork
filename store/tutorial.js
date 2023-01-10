@@ -251,6 +251,9 @@ const mutations = {
 }
 
 const actions = {
+  SET_object({ state, commit }, object) {
+    commit('SET_object', object)
+  },
   async CHECK_OBJECT({ state, commit }) {
     commit('SET_object', stateObjectDefault)
     const response = await this.$axios.$post('/api/tutorial/check_object')

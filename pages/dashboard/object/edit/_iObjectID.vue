@@ -7,300 +7,7 @@
       </div>
     </div>
     <div class="wrapBody">
-      <div class="form-group-wrap form-group-wrap-line1">
-        <b-form-group
-          id="label-sObjectTitle"
-          label="Название объекта"
-          label-for="input-sObjectTitle"
-        >
-          <b-form-input
-            id="input-sObjectTitle"
-            v-model="object.sObjectTitle"
-            type="text"
-            required
-          ></b-form-input>
-        </b-form-group>
-      </div>
-      <div class="form-group-wrap form-group-wrap-line2">
-        <b-form-group
-          id="label-sObjectTypeTitle"
-          label="Категорию жилья"
-          label-for="input-sObjectTypeTitle"
-        >
-          <b-select v-model="iObjectTypeID" disabled>
-            <option value="1">{{ object.object_type.sObjectTypeTitle }}</option>
-          </b-select>
-        </b-form-group>
-        <b-form-group
-          id="label-iObjectRoomCount"
-          label="Комнат"
-          label-for="input-iObjectRoomCount"
-        >
-          <b-form-input
-            id="input-iObjectRoomCount"
-            v-model="object.iObjectRoomCount"
-            type="text"
-            required
-          ></b-form-input>
-        </b-form-group>
-        <b-form-group
-          id="label-iObjectBed"
-          label="Спальных мест"
-          label-for="input-iObjectBed"
-        >
-          <b-form-input
-            id="input-iObjectBed"
-            v-model="object.iObjectBed"
-            type="text"
-            required
-          ></b-form-input>
-        </b-form-group>
-      </div>
-      <div class="form-group-wrap form-group-wrap-line3">
-        <b-form-group
-          id="label-iObjectPlace"
-          label="Площадь участка"
-          label-for="input-iObjectPlace"
-        >
-          <b-form-input
-            id="input-iObjectPlace"
-            v-model="object.iObjectPlace"
-            type="text"
-            required
-          ></b-form-input>
-        </b-form-group>
-        <b-form-group
-          id="label-iObjectPlace"
-          label="Площадь дома"
-          label-for="input-iObjectPlace"
-        >
-          <b-form-input
-            id="input-iObjectPlace"
-            v-model="object.iObjectPlace"
-            type="text"
-            required
-          ></b-form-input>
-        </b-form-group>
-        <b-form-group
-          id="label-iObjectPlaceDop"
-          label="Этаж"
-          label-for="input-iObjectPlaceDop"
-        >
-          <b-form-input
-            id="input-iObjectPlaceDop"
-            v-model="object.iObjectPlaceDop"
-            type="text"
-            required
-          ></b-form-input>
-        </b-form-group>
-        <b-form-group
-          id="label-iObjectPlaceDop"
-          label="Этажность"
-          label-for="input-iObjectPlaceDop"
-        >
-          <b-form-input
-            id="input-iObjectPlaceDop"
-            v-model="object.iObjectPlaceDop"
-            type="text"
-            required
-          ></b-form-input>
-        </b-form-group>
-      </div>
-      <div class="form-group-wrap form-group-wrap-line1">
-        <b-form-group
-          id="label-tObjectDesc"
-          label="Описание"
-          label-for="input-tObjectDesc"
-        >
-          <b-form-textarea
-            id="input-tObjectDesc"
-            v-model="object.tObjectDesc"
-            rows="5"
-            max-rows="10"
-          ></b-form-textarea>
-        </b-form-group>
-      </div>
-      <h2>Удобства отеля</h2>
-      <b-form-checkbox-group v-model="objectObjectOptionsArray">
-        <ul class="optionsCheckboxList">
-          <li v-for="(option, index) in objectOptions" :key="index">
-            <b-form-checkbox :value="option.iObjectOptionID">
-              {{ option.sObjectOptionTitle }}
-            </b-form-checkbox>
-          </li>
-        </ul>
-      </b-form-checkbox-group>
-      <h2>Удобства комнат</h2>
-      <b-form-checkbox-group v-model="objectObjectOptionsArray">
-        <ul class="optionsCheckboxList">
-          <li v-for="(option, index) in roomOptions" :key="index">
-            <b-form-checkbox :value="option.iRoomOptionID">
-              {{ option.sRoomOptionTitle }}
-            </b-form-checkbox>
-          </li>
-        </ul>
-      </b-form-checkbox-group>
-      <h2>Местоположение</h2>
-      <div class="form-group-wrap form-group-wrap-line1">
-        <b-form-group
-          id="label-sObjectAddress"
-          label="Адрес"
-          label-for="input-sObjectAddress"
-        >
-          <b-form-input
-            id="input-1"
-            v-model="object.sObjectAddress"
-            type="text"
-            required
-          ></b-form-input>
-        </b-form-group>
-      </div>
-      <div id="map">
-        <client-only>
-          <yandex-map
-            :coords="object.aObjectCoordinate.coordinates"
-            :controls="[]"
-            :zoom="14"
-            :draggable="true"
-          >
-            <ymap-marker
-              :coords="object.aObjectCoordinate.coordinates"
-              marker-id="123"
-              hint-content="Расположение объекта"
-            />
-          </yandex-map>
-        </client-only>
-      </div>
-      <pre>{{ object.aObjectCoordinate }}</pre>
-      <h2>Основные места рядом</h2>
-      <div class="places">
-        <div class="item">
-          <div class="form">
-            <div class="form-group-wrap form-group-wrap-line2">
-              <b-form-group
-                id="label-sObjectTypeTitle"
-                label="Место"
-                label-for="input-sObjectTypeTitle"
-              >
-                <b-form-input
-                  id="input-sObjectTypeTitle"
-                  type="text"
-                  value="Море"
-                  required
-                ></b-form-input>
-              </b-form-group>
-              <b-form-group
-                id="label-iObjectRoomCount"
-                label="Название"
-                label-for="input-iObjectRoomCount"
-              >
-                <b-form-input
-                  id="input-iObjectRoomCount"
-                  type="text"
-                  value="Пешком"
-                  required
-                ></b-form-input>
-              </b-form-group>
-              <b-form-group
-                id="label-iObjectBed"
-                label="Расстояние"
-                label-for="input-iObjectBed"
-              >
-                <b-form-input
-                  id="input-iObjectBed"
-                  type="text"
-                  value="100 м"
-                  required
-                ></b-form-input>
-              </b-form-group>
-            </div>
-          </div>
-          <div class="remove">
-            <a href="">- Удалить</a>
-          </div>
-        </div>
-        <div class="item">
-          <div class="form">
-            <div class="form-group-wrap form-group-wrap-line2">
-              <b-form-group
-                id="label-sObjectTypeTitle"
-                label="Место"
-                label-for="input-sObjectTypeTitle"
-              >
-                <b-form-input
-                  id="input-sObjectTypeTitle"
-                  type="text"
-                  value="Море"
-                  required
-                ></b-form-input>
-              </b-form-group>
-              <b-form-group
-                id="label-iObjectRoomCount"
-                label="Название"
-                label-for="input-iObjectRoomCount"
-              >
-                <b-form-input
-                  id="input-iObjectRoomCount"
-                  type="text"
-                  value="Пешком"
-                  required
-                ></b-form-input>
-              </b-form-group>
-              <b-form-group
-                id="label-iObjectBed"
-                label="Расстояние"
-                label-for="input-iObjectBed"
-              >
-                <b-form-input
-                  id="input-iObjectBed"
-                  type="text"
-                  value="100 м"
-                  required
-                ></b-form-input>
-              </b-form-group>
-            </div>
-          </div>
-          <div class="remove">
-            <a href="">- Удалить</a>
-          </div>
-        </div>
-        <b-button>+ Добавить</b-button>
-      </div>
-      <h2>Фотографии</h2>
-      <div class="images">
-        <div
-          v-for="(image, index) in object.object_images"
-          :key="index"
-          class="item"
-        >
-          <div class="num">
-            <template v-if="index === 0">
-              Обложка
-            </template>
-            <template v-else>
-              {{ index + 1 }}
-            </template>
-          </div>
-          <img
-            :src="
-              SELECTEL_WEB +
-                '/object/' +
-                image.iObjectID +
-                '/preview/' +
-                image.sObjectImage
-            "
-            alt=""
-          />
-        </div>
-      </div>
-      <div class="uploadImage">
-        <span>Выберете файл</span> или перетащите его сюда
-      </div>
-      <!-- <pre>{{ objectOptions }}</pre>
-      <pre>{{ roomOptions }}</pre>
-      <pre>{{ objectObjectOptionsArray }}</pre>
-      <pre>{{ objectRoomOptionsArray }}</pre> -->
-      <!-- <pre>{{ object }}</pre> -->
+      <ObjectEditObjectType :object="object" :objectType="objectType" />
     </div>
     <div class="wrapStatusTop">
       <ObjectEditStatus />
@@ -320,5 +27,195 @@
   </div>
 </template>
 
-<script src="./_iObjectID.js"></script>
-<style src="./_iObjectID.scss" scoped lang="scss"></style>
+<script>
+import ObjectEditObjectType from '@/components/Dashboard/object/edit/ObjectEditObjectType.vue'
+import ObjectEditStatus from '@/components/Dashboard/object/ObjectEditStatus'
+
+export default {
+  middleware: 'auth',
+  layout: 'dashboardV2Fluid',
+  components: {
+    ObjectEditObjectType,
+    ObjectEditStatus
+  },
+  head() {
+    return {
+      title: 'Редактирование объекта'
+    }
+  },
+  data() {
+    // return {
+    //   iObjectTypeID: 1
+    // }
+  },
+  computed: {
+    object() {
+      return this.$store.state.object.item
+    },
+    objectType() {
+      return this.$store.state.objectType.list
+    }
+    // SELECTEL_WEB() {
+    //   return process.env.SELECTEL_WEB
+    // },
+    // objectOptions({ $store }) {
+    //   return $store.state.objectOption.list
+    // },
+    // objectObjectOptionsArray: {
+    //   get() {
+    //     // this.$set(this, 'loadingDisabledCheckbox', false)
+    //     return this.$store.state.object.item.object_object_options_array
+    //   },
+    //   set(objectObjectOptionsArray) {
+    //     // console.log(objectObjectOptionsArray)
+    //   }
+    // },
+    // roomOptions({ $store }) {
+    //   return $store.state.roomOption.list
+    // },
+    // objectRoomOptionsArray: {
+    //   get() {
+    //     return this.$store.state.object.item.object_room_options_array
+    //   },
+    //   set(objectRoomOptionsArray) {
+    //     // console.log(objectRoomOptionsArray)
+    //   }
+    // }
+  },
+  async asyncData({ store, $axios, params }) {
+    await store.dispatch('object/GET_ITEM', {
+      iObjectID: params.iObjectID
+    })
+    // await store.dispatch('objectOption/GET_LIST')
+    // await store.dispatch('roomOption/GET_LIST')
+  },
+  created() {
+    this.$store.dispatch('tutorial/GET_OBJECT')
+    this.$store.dispatch('objectType/GET_LIST')
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.editObject {
+  background: #c1c1c1;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 730px 355px auto;
+  grid-column-gap: 25px;
+  @media (max-width: 1199px) {
+    grid-template-rows: auto 1fr;
+    grid-template-columns: auto 600px 305px auto;
+  }
+  @media (max-width: 991px) {
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: auto 690px auto;
+  }
+  @media (max-width: 767px) {
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: auto 510px auto;
+  }
+  @media (max-width: 575px) {
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+  }
+  .wrapTitle {
+    grid-row: 1/2;
+    grid-column: 2/4;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr;
+    @media (max-width: 991px) {
+      grid-row: 1/2;
+      grid-column: 2/3;
+    }
+    @media (max-width: 575px) {
+      grid-row: 1/2;
+      grid-column: 1/2;
+    }
+    h1 {
+      grid-column: 1/2;
+      grid-row: 1/2;
+      margin: 0;
+      padding: 50px 0;
+      // @media (max-width: 767px) {
+      //   padding: 40px 0 20px;
+      // }
+    }
+    .titleBtn {
+      grid-column: 2/3;
+      grid-row: 1/2;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      @media (max-width: 767px) {
+        display: none;
+      }
+      a {
+        font-size: 14px;
+        line-height: 18px;
+        color: #818181;
+        text-decoration: underline;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .wrapBody {
+    grid-row: 2/3;
+    grid-column: 2/3;
+    @media (max-width: 991px) {
+      grid-row: 3/4;
+      grid-column: 2/3;
+    }
+    @media (max-width: 575px) {
+      grid-row: 3/4;
+      grid-column: 1/2;
+    }
+  }
+  .wrapStatusTop {
+    display: none;
+    @media (max-width: 991px) {
+      display: grid;
+      grid-row: 2/3;
+      grid-column: 2/3;
+      margin-bottom: 25px;
+    }
+    @media (max-width: 575px) {
+      grid-row: 2/3;
+      grid-column: 1/2;
+    }
+  }
+  .wrapStatus {
+    grid-row: 2/3;
+    grid-column: 3/4;
+    margin-bottom: 32px;
+    @media (max-width: 991px) {
+      display: none;
+    }
+  }
+  .wrapStatusBottom {
+    display: none;
+    @media (max-width: 991px) {
+      display: grid;
+      grid-row: 4/5;
+      grid-column: 1/4;
+    }
+    @media (max-width: 575px) {
+      grid-row: 4/5;
+      grid-column: 1/2;
+      margin: 0 -15px;
+    }
+    .bottomStatus {
+      background-color: white;
+      box-shadow: 0 3px 10px rgba($color: #000000, $alpha: 0.16);
+      padding: 25px;
+      @media (max-width: 575px) {
+      }
+    }
+  }
+}
+</style>
