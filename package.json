@@ -23,7 +23,7 @@
     "core-js": "^2.6.5",
     "cron": "^1.8.2",
     "cross-env": "^5.2.0",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-jwt": "^5.3.3",
     "file-extension": "^4.0.5",
     "hamburgers": "^1.1.3",
