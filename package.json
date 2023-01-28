@@ -39,7 +39,7 @@
     "nuxt": "^2.12.2",
     "nuxt-dropzone": "^1.0.4",
     "nuxt-socket-io": "^1.1.0",
-    "qs": "^6.9.4",
+    "qs": "^6.10.3",
     "randomstring": "^1.1.5",
     "request": "^2.88.2",
     "selectel-storage": "^1.0.2",
