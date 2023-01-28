@@ -30,6 +30,10 @@ npx sequelize db:migrate
 npx sequelize db:seed:all
 ```
 
+## Проверка
+* Перейти на http://localhost:3000 (если в файле .env переменные HOST и PORT не были изменены)
+* Войти в личный кабинет под аккаунтов +79031111111 c паролем qwerty
+
 ## Запуск
 ```
 npm run dev
