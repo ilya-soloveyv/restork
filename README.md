@@ -1,22 +1,42 @@
-# restork
+# Restork
 
-> My stunning Nuxt.js project
+## Перед началом установки
 
-## Build Setup
+* Рекомендуемая версия Node.js - 14.19.1
+* Рекомендуемая версия npm - 6.14.16
+* Зарегистрировать аккаунт в облачном хранилище [Selectel](https://selectel.ru/)
+* Зарегистрировать аккаунт у СМС провайдера [Stream Telecom](https://stream-telecom.ru/)
+* База данных MySQL
 
-``` bash
-# install dependencies
-$ npm run install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
+## Клонирование
+```
+git clone https://github.com/ilya-soloveyv/restork.git
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## Настройка
+* Скопировать файл ```.env.example``` и переименовать его в ```.env```
+* Заменить в файле ```.env``` значения переменных на ваши
+* Создать папку ```./static/upload``` и дать ей полные права
+
+## Установка
+> Установка пакетов
+```
+npm install
+```
+> Создание базы данных, накатывание миграций и заполнение тестовыми данными
+```
+npx sequelize db:create
+npx sequelize db:migrate
+npx sequelize db:seed:all
+```
+
+## Запуск
+```
+npm run dev
+```
+
+## Билд
+```
+npm run build
+npm run start
+```
