@@ -44,7 +44,7 @@
     "request": "^2.88.2",
     "selectel-storage": "^1.0.2",
     "selectel-storage-promise": "^1.0.4",
-    "sequelize": "^5.21.10",
+    "sequelize": "^6.29.0",
     "sequelize-paginate": "^1.1.6",
     "sharp": "^0.25.4",
     "typeface-montserrat": "0.0.75",
